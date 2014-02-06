@@ -589,16 +589,16 @@ public class Main_Study extends Activity implements OnClickListener,
 			sub_back.setVisibility(View.GONE);
 			break;
 
-//		case R.id.game1:
-//			Intent activityIntent2 = new Intent(Main_Study.this,
-//					LockScreenAppActivity.class);
-//			startActivity(activityIntent2);
-//			break;
-//		case R.id.game2:
-//			Intent activityIntent3 = new Intent(Main_Study.this,
-//					Act3.class);
-//			startActivity(activityIntent3);
-//			break;
+		// case R.id.game1:
+		// Intent activityIntent2 = new Intent(Main_Study.this,
+		// LockScreenAppActivity.class);
+		// startActivity(activityIntent2);
+		// break;
+		// case R.id.game2:
+		// Intent activityIntent3 = new Intent(Main_Study.this,
+		// Act3.class);
+		// startActivity(activityIntent3);
+		// break;
 
 		case R.id.play1:
 			Intent activityIntent = new Intent(Main_Study.this, M1.class);
@@ -691,10 +691,9 @@ public class Main_Study extends Activity implements OnClickListener,
 
 			public boolean onTouch(View v, MotionEvent event) {
 				if (MotionEvent.ACTION_DOWN == event.getAction()) {
-					game1.setColorFilter(0xffffff55, Mode.MULTIPLY);
-
+					
 				} else if (MotionEvent.ACTION_UP == event.getAction()) {
-					game1.setColorFilter(0xffffffff, Mode.MULTIPLY);
+					game1.setColorFilter(0xffffff55, Mode.MULTIPLY);
 					Intent activityIntent = new Intent(Main_Study.this,
 							LockScreenAppActivity.class);
 					startActivity(activityIntent);
@@ -704,18 +703,17 @@ public class Main_Study extends Activity implements OnClickListener,
 			}
 		});
 		game2.setOnTouchListener(new OnTouchListener() {
-			
+
 			public boolean onTouch(View v, MotionEvent event) {
 				if (MotionEvent.ACTION_DOWN == event.getAction()) {
-					game2.setColorFilter(0xffffff55, Mode.MULTIPLY);
 					
 				} else if (MotionEvent.ACTION_UP == event.getAction()) {
-					game2.setColorFilter(0xffffffff, Mode.MULTIPLY);
+					game2.setColorFilter(0xffffff55, Mode.MULTIPLY);
 					Intent activityIntent = new Intent(Main_Study.this,
 							Act3.class);
 					startActivity(activityIntent);
 				}
-				
+
 				return true;
 			}
 		});
@@ -743,5 +741,16 @@ public class Main_Study extends Activity implements OnClickListener,
 			return super.onKeyUp(keyCode, event);
 		}
 		return true;
+	}
+
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+
+		ImageView game1 = (ImageView) findViewById(R.id.game1);
+		ImageView game2 = (ImageView) findViewById(R.id.game2);
+		game1.setColorFilter(0xffffffff, Mode.MULTIPLY);
+		game2.setColorFilter(0xffffffff, Mode.MULTIPLY);
 	}
 }
