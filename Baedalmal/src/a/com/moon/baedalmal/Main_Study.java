@@ -122,7 +122,6 @@ public class Main_Study extends Activity implements OnClickListener,
 		ImageView btn1, btn2, btn3, btn4, quiz_Image, speakImage, helpBtn;
 		Button playBtn1, playBtn2;
 		cal = Calendar.getInstance();
-		tv = (TextView) findViewById(R.id.status2);
 
 		sub_menu = (LinearLayout) findViewById(R.id.sub_menu);
 		sub1 = (TextView) findViewById(R.id.sub1);
@@ -212,39 +211,6 @@ public class Main_Study extends Activity implements OnClickListener,
 		wv.setWebViewClient(wvclient);
 
 		tab2();
-	}
-
-	public void share(String editName, String ment) {
-		if (isPlayed) {
-			pause();
-		}
-
-		uri = Uri.fromFile(new File(Environment.getExternalStorageDirectory()
-				.getAbsolutePath() + File.separator + "loup", "record.m4a"));
-		mediaPlayer = MediaPlayer.create(this, uri);
-		if (mediaPlayer != null) {
-			// 업로드
-			Log.d("cc", "업로드");
-			pb.setVisibility(View.VISIBLE);
-			String format = new String("yyyyMMddHHmmss");
-			SimpleDateFormat sdf = new SimpleDateFormat(format, Locale.KOREA);
-			dateName = sdf.format(new Date())
-					+ String.valueOf((int) Math.random() * 10);
-			File file1 = new File(Environment.getExternalStorageDirectory()
-					.getAbsolutePath() + File.separator + "loup", "record.m4a");
-			File file2 = new File(Environment.getExternalStorageDirectory()
-					.getAbsolutePath() + File.separator + "loup", dateName
-					+ ".m4a");
-			file1.renameTo(file2);
-
-			Log.d("업로드파일명", dateName);
-			new MyAsyncTask().execute(editName);
-
-		} else {
-			Toast.makeText(this, "RecordFile doesn't exist.",
-					Toast.LENGTH_SHORT).show();
-		}
-
 	}
 
 	private class MyAsyncTask extends AsyncTask<String, Integer, Double> {
@@ -345,49 +311,6 @@ public class Main_Study extends Activity implements OnClickListener,
 		// mp.release();
 	}
 
-	private void initialize() {
-		recordImageButton = (ImageButton) findViewById(R.id.ib_record);
-		playImageButton = (ImageButton) findViewById(R.id.ib_play);
-		btn_share = (ImageButton) findViewById(R.id.share);
-		btn_share.setOnClickListener(this);
-		playImageButton.setOnClickListener(this);
-		recordImageButton.setOnTouchListener(this);
-	}
-
-	private void playHandler() {
-		if (isPlayed) {
-			pause();
-		} else {
-			uri = Uri.fromFile(new File(Environment
-					.getExternalStorageDirectory().getAbsolutePath()
-					+ File.separator + "loup", "record.m4a"));
-			mediaPlayer = MediaPlayer.create(this, uri);
-			if (mediaPlayer != null) {
-				isPlayed = true;
-				mediaPlayer
-						.setOnCompletionListener(mediaPlayerOnCompletionListener);
-				mediaPlayer.start();
-				playImageButton.setImageResource(R.drawable.btn_pause);
-			} else {
-				Toast.makeText(this, "RecordFile doesn't exist.",
-						Toast.LENGTH_SHORT).show();
-			}
-		}
-	}
-
-	private void pause() {
-		isPlayed = false;
-		mediaPlayer.reset();
-		playImageButton.setImageResource(R.drawable.btn_play);
-	}
-
-	private MediaPlayer.OnCompletionListener mediaPlayerOnCompletionListener = new MediaPlayer.OnCompletionListener() {
-		@Override
-		public void onCompletion(MediaPlayer mp) {
-			pause();
-		}
-	};
-
 	@Override
 	public boolean onTouch(View v, MotionEvent event) {
 
@@ -405,46 +328,6 @@ public class Main_Study extends Activity implements OnClickListener,
 			tv.setText("녹음");
 		}
 		return false;
-	}
-
-	public void blankName() {
-		showDialog();
-	}
-
-	public void showDialog() {
-		Context mContext = getApplicationContext();
-		LayoutInflater inflater = (LayoutInflater) mContext
-				.getSystemService(LAYOUT_INFLATER_SERVICE);
-		final View layout = inflater.inflate(R.layout.custom_dialog,
-				(ViewGroup) findViewById(R.id.layout_root));
-
-		AlertDialog.Builder aDialog = new AlertDialog.Builder(Main_Study.this);// 여기서buttontest는
-																				// 패키지이름
-		aDialog.setTitle("녹음 파일 업로드에 사용할 닉네임과 한마디를 입력하시오.");
-		aDialog.setView(layout);
-
-		aDialog.setPositiveButton("확인", new DialogInterface.OnClickListener() {
-			public void onClick(DialogInterface dialog, int which) {
-
-				EditText editText = (EditText) layout
-						.findViewById(R.id.inputText);
-				dateName = editText.getText().toString();
-				onlyName = editText.getText().toString();
-				if (onlyName.equals("") || ment.equals("")) {
-					Toast.makeText(Main_Study.this, "닉네임과 한마디를 입력하세요!",
-							Toast.LENGTH_SHORT).show();
-					blankName();
-				} else {
-					share(dateName, ment);
-				}
-			}
-		});
-		aDialog.setNegativeButton("취소", new DialogInterface.OnClickListener() {
-			public void onClick(DialogInterface dialog, int which) {
-			}
-		});
-		AlertDialog ad = aDialog.create();
-		ad.show();
 	}
 
 	public class RecordAsyncTask extends AsyncTask<Void, Integer, Void> {
@@ -635,11 +518,6 @@ public class Main_Study extends Activity implements OnClickListener,
 			share();
 			break;
 
-		case R.id.ib_play: {
-			playHandler();
-			break;
-		}
-
 		default:
 			break;
 		}
@@ -691,7 +569,7 @@ public class Main_Study extends Activity implements OnClickListener,
 
 			public boolean onTouch(View v, MotionEvent event) {
 				if (MotionEvent.ACTION_DOWN == event.getAction()) {
-					
+
 				} else if (MotionEvent.ACTION_UP == event.getAction()) {
 					game1.setColorFilter(0xffffff55, Mode.MULTIPLY);
 					Intent activityIntent = new Intent(Main_Study.this,
@@ -706,7 +584,7 @@ public class Main_Study extends Activity implements OnClickListener,
 
 			public boolean onTouch(View v, MotionEvent event) {
 				if (MotionEvent.ACTION_DOWN == event.getAction()) {
-					
+
 				} else if (MotionEvent.ACTION_UP == event.getAction()) {
 					game2.setColorFilter(0xffffff55, Mode.MULTIPLY);
 					Intent activityIntent = new Intent(Main_Study.this,
