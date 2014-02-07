@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/quiz2"
+    android:orientation="vertical"
+    android:scaleType="fitXY" >
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="0px"
+        android:layout_weight="35" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0px"
+        android:layout_weight="60" >
+
+        <LinearLayout
+            android:layout_width="0px"
+            android:layout_height="match_parent"
+            android:layout_weight="20"
+            android:orientation="vertical"
+            android:padding="35dip" >
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="0px"
+                android:layout_weight="1" />
+
+            <Button
+                android:id="@+id/imageButton1"
+                android:layout_width="fill_parent"
+                android:layout_height="0px"
+                android:layout_weight="10"
+                android:background="@drawable/answer"
+                android:text="1번"
+                android:textColor="#ffffff"
+                android:textSize="50dip"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="0px"
+                android:layout_weight="1" />
+
+            <Button
+                android:id="@+id/imageButton2"
+                android:layout_width="fill_parent"
+                android:layout_height="0px"
+                android:layout_weight="10"
+                android:background="@drawable/answer"
+                android:text="2번"
+                android:textColor="#ffffff"
+                android:textSize="50dip"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="0px"
+                android:layout_weight="1" />
+
+            <Button
+                android:id="@+id/imageButton3"
+                android:layout_width="fill_parent"
+                android:layout_height="0px"
+                android:layout_weight="10"
+                android:background="@drawable/answer"
+                android:text="3번"
+                android:textColor="#ffffff"
+                android:textSize="50dip"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="0px"
+                android:layout_weight="1" />
+
+            <Button
+                android:id="@+id/imageButton4"
+                android:layout_width="fill_parent"
+                android:layout_height="0px"
+                android:layout_weight="10"
+                android:background="@drawable/answer"
+                android:text="4번"
+                android:textColor="#ffffff"
+                android:textSize="50dip"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="0px"
+                android:layout_weight="1" />
+
+            <Button
+                android:id="@+id/imageButton5"
+                android:layout_width="fill_parent"
+                android:layout_height="0px"
+                android:layout_weight="10"
+                android:background="@drawable/answer"
+                android:text="5번"
+                android:textColor="#ffffff"
+                android:textSize="50dip"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="0px"
+                android:layout_weight="1" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/textView1"
+            android:layout_width="0px"
+            android:layout_height="wrap_content"
+            android:layout_weight="67"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="0px"
+                android:layout_weight="10" >
+
+                <VideoView
+                    android:minHeight="10dp"
+                    android:minWidth="10dp"
+                    android:scrollbarStyle="insideInset"
+                    android:id="@+id/surface"
+                    android:layout_width="600dip"
+                    android:layout_height="350dip"
+                    android:layout_marginTop="20dip"
+                    android:layout_marginBottom="60dip"
+                    android:layout_marginLeft="150dip"
+                    android:layout_marginRight="50dip"
+                    android:layout_gravity="center"
+                    android:keepScreenOn="true" >
+                </VideoView>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="0px"
+                android:layout_weight="3" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

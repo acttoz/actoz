@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/quiz3"
+    android:orientation="vertical"
+    android:scaleType="fitXY" >
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="0px"
+        android:layout_weight="35" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0px"
+        android:layout_weight="60" >
+
+        <LinearLayout
+            android:layout_width="0px"
+            android:layout_height="match_parent"
+            android:layout_weight="20"
+            android:orientation="vertical"
+            android:padding="35dip" >
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="20dip" />
+
+            <Button
+                android:id="@+id/imageButton1"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/buttonaction1"
+                android:text="독도교육"
+                android:textColor="#ffffff"
+                android:textStyle="bold"
+                android:textSize="50dip"
+                 />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="30dip" />
+
+            <Button
+                android:id="@+id/imageButton2"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/buttonaction1"
+                 android:text="경제교육"
+                android:textColor="#ffffff"
+                android:textStyle="bold"
+                android:textSize="50dip" />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="30dip" />
+
+            <Button
+                android:id="@+id/imageButton3"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/buttonaction1"
+                 android:text="진로교육"
+                android:textColor="#ffffff"
+                android:textStyle="bold"
+                android:textSize="50dip" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="0px"
+            android:layout_height="wrap_content"
+            android:layout_weight="65"
+            android:text="" />
+    </LinearLayout>
+
+</LinearLayout>

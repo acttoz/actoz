@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout_root"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:padding="5dp" >
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="청크를 책으로도 만나볼 수 있습니다." />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="5dip"
+        android:layout_gravity="center" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="의미단위 청크영어 학습을 위해 최적화된 교재 best!" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="5dip"
+        android:layout_gravity="center" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="초,중급자(초,중학교 포험)를 위한 필수 영어 교재로 점수 UP!" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="5dip"
+        android:layout_gravity="center" />
+
+</LinearLayout>
