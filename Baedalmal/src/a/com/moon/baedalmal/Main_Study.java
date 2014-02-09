@@ -61,8 +61,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class Main_Study extends Activity implements OnClickListener,
-		OnTouchListener {
+public class Main_Study extends Activity implements OnClickListener {
 	String dateName, onlyName, ment;
 	TextView tv, instruction;
 	View tab1, tab2, tab3;
@@ -74,6 +73,7 @@ public class Main_Study extends Activity implements OnClickListener,
 	TextView sub5;
 	TextView sub6;
 	TextView sub7;
+	int flag_tab;
 	TextView sub_back;
 	Drawable alpha1;
 	Drawable alpha2;
@@ -93,8 +93,6 @@ public class Main_Study extends Activity implements OnClickListener,
 	private int currentRecordTimeMs = 0;
 	private boolean isPlayed = false;
 
-	private RecordManager recordManager = null;
-	private RecordAsyncTask recordAsyncTask = null;
 	private MediaPlayer mediaPlayer = null;
 	private Uri uri = null;
 
@@ -312,65 +310,6 @@ public class Main_Study extends Activity implements OnClickListener,
 	}
 
 	@Override
-	public boolean onTouch(View v, MotionEvent event) {
-
-		if (event.getAction() == MotionEvent.ACTION_DOWN) {
-			currentRecordTimeMs = 0;
-			recordAsyncTask = new RecordAsyncTask();
-			recordAsyncTask.execute();
-			tv.setText("≥Ï¿Ω¡ﬂ..");
-
-		}
-		if (event.getAction() == MotionEvent.ACTION_UP) {
-			if (recordAsyncTask != null)
-				recordAsyncTask.cancel(true);
-			Toast.makeText(this, "Record Success!", Toast.LENGTH_SHORT).show();
-			tv.setText("≥Ï¿Ω");
-		}
-		return false;
-	}
-
-	public class RecordAsyncTask extends AsyncTask<Void, Integer, Void> {
-		@Override
-		protected void onPreExecute() {
-			super.onPreExecute();
-		}
-
-		@Override
-		protected Void doInBackground(Void... params) {
-			recordManager = new RecordManager();
-			recordManager.start();
-			while (true) {
-				if (!recordManager.isRecorded()
-						|| currentRecordTimeMs > MAX_RECORD_TIME) {
-					recordManager.stop();
-					return null;
-				}
-				try {
-					currentRecordTimeMs += 100;
-					publishProgress(currentRecordTimeMs);
-					Thread.sleep(100);
-				} catch (InterruptedException e) {
-					recordManager.stop();
-					return null;
-				}
-			}
-		}
-
-		@Override
-		protected void onPostExecute(Void result) {
-			super.onPostExecute(result);
-		}
-
-		@Override
-		protected void onCancelled() {
-			super.onCancelled();
-			if (recordManager != null)
-				recordManager.stop();
-		}
-	}
-
-	@Override
 	public void onClick(View arg0) {
 		// TODO Auto-generated method stub
 		switch (arg0.getId()) {
@@ -483,13 +422,6 @@ public class Main_Study extends Activity implements OnClickListener,
 		// startActivity(activityIntent3);
 		// break;
 
-		case R.id.play1:
-			Intent activityIntent = new Intent(Main_Study.this, M1.class);
-			activityIntent.putExtra("CHUNK", "1");
-			activityIntent.putExtra("CHAPTER", chapter);
-			startActivity(activityIntent);
-			break;
-
 		case R.id.quiz:
 
 			if (!mp.isPlaying()) {
@@ -543,6 +475,7 @@ public class Main_Study extends Activity implements OnClickListener,
 	}
 
 	private void tab1() {
+		flag_tab=1;
 		tab2.setVisibility(View.GONE);
 		tab1.setVisibility(View.VISIBLE);
 		tab3.setVisibility(View.GONE);
@@ -553,6 +486,7 @@ public class Main_Study extends Activity implements OnClickListener,
 	}
 
 	private void tab2() {
+		flag_tab=2;
 		tab1.setVisibility(View.GONE);
 		tab2.setVisibility(View.VISIBLE);
 		tab3.setVisibility(View.GONE);
@@ -563,6 +497,7 @@ public class Main_Study extends Activity implements OnClickListener,
 	}
 
 	private void tab3() {
+		flag_tab=3;
 		final ImageView game1 = (ImageView) findViewById(R.id.game1);
 		final ImageView game2 = (ImageView) findViewById(R.id.game2);
 		game1.setOnTouchListener(new OnTouchListener() {
@@ -608,13 +543,12 @@ public class Main_Study extends Activity implements OnClickListener,
 	@Override
 	public boolean onKeyUp(int keyCode, KeyEvent event) {
 
-		if ((keyCode == KeyEvent.KEYCODE_BACK) && (wv.canGoBack())) {
+		if ((keyCode == KeyEvent.KEYCODE_BACK) && (wv.canGoBack())&& flag_tab==2) {
 			wv.goBack();
 			return true;
 			// TODO Auto-generated method stub
 
 		} else if ((keyCode == KeyEvent.KEYCODE_BACK)) {
-			wv.loadUrl("about:blank");
 			finish();
 			return super.onKeyUp(keyCode, event);
 		}

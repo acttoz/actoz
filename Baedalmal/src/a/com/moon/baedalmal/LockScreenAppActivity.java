@@ -98,7 +98,7 @@ public class LockScreenAppActivity extends Activity {
 		popup = idPrefs.getBoolean("POPUP", true);
 
 		// level = "1"; // 테스트
-		toast = Toast.makeText(LockScreenAppActivity.this, "정답~!",
+		toast = Toast.makeText(LockScreenAppActivity.this, "딩동댕",
 				Toast.LENGTH_SHORT);
 		// 날짜
 
@@ -166,7 +166,7 @@ public class LockScreenAppActivity extends Activity {
 								// v.setVisibility(View.GONE);
 								playing = false;
 								scoreSet(true);
-								toast.setText("정답~!");
+								toast.setText("딩동댕");
 								toast.show();
 								layoutParams.leftMargin = ((windowwidth) / 2 - imageW / 2);
 								v.setLayoutParams(layoutParams);
@@ -177,7 +177,7 @@ public class LockScreenAppActivity extends Activity {
 								// 정답
 								// v.setVisibility(View.GONE);
 								scoreSet(true);
-								toast.setText("정답~!");
+								toast.setText("딩동댕");
 								toast.show();
 								layoutParams.leftMargin = ((windowwidth) / 2 - imageW / 2);
 								v.setLayoutParams(layoutParams);

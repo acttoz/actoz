@@ -196,7 +196,7 @@ public class Act3 extends Activity {
 		loadCards();
 
 		turns = 0;
-		((TextView) findViewById(R.id.tv1)).setText("Tries: " + turns);
+		((TextView) findViewById(R.id.tv1)).setText(turns+"µ¹");
 
 	}
 
@@ -379,9 +379,9 @@ public class Act3 extends Activity {
 					AlertDialog.Builder alertdlg = new AlertDialog.Builder(
 							Act3.this);
 					alertdlg.setIcon(R.drawable.trophy);
-					alertdlg.setTitle("ÃàÇÏÇÕ´Ï´Ù." + turns + "È¸¸¸¿¡ ¼º°ø!!");
-					alertdlg.setMessage(message[temp]);
-					alertdlg.setPositiveButton("OK",
+					alertdlg.setTitle("³îÀÌ ³¡");
+					alertdlg.setMessage("Â¦Â¦Â¦~~~ "+turns+"µ¹ ¸¸¿¡ ´Ù ¸ÂÃè½À´Ï´Ù.");
+					alertdlg.setPositiveButton("È®ÀÎ",
 							new DialogInterface.OnClickListener() {
 								public void onClick(DialogInterface dialog,
 										int whichButton) {
@@ -394,7 +394,7 @@ public class Act3 extends Activity {
 
 				} else {
 					mPool.play(mIntro, 1, 1, 0, 0, 1);
-					Toast.makeText(Act3.this, "ºù°í!!", Toast.LENGTH_SHORT)
+					Toast.makeText(Act3.this, "µùµ¿´ó", Toast.LENGTH_SHORT)
 							.show();
 				}
 

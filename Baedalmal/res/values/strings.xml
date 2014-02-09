@@ -4,11 +4,11 @@
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
     <string-array name="type">
-        <item>New Game</item>
+        <item>새 놀이</item>
         <item>4 X 4</item>
         <item>5 X 4</item>
         <item>6 X 4</item>
     
     </string-array>
-    <string name="game_notice">게임방법 소개</string>
+    <string name="game_notice">놀이방법 소개</string>
 </resources>
