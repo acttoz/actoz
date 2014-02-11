@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res/a.com.kr.moon.math.phone"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#ffffff"
+    android:orientation="vertical" >
+
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:background="#ffffff"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="0px"
+                android:layout_gravity="center"
+                android:layout_weight="2"
+                android:background="#625548"
+                android:gravity="center"
+                android:orientation="horizontal" >
+
+                <LinearLayout
+                    android:layout_width="0px"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="9"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:id="@+id/title1"
+                        android:layout_width="0px"
+                        android:layout_height="fill_parent"
+                        android:layout_weight="2"
+                        android:gravity="right|center_vertical"
+                        android:textColor="#ffffff"
+                        android:textSize="50dip" />
+
+                    <TextView
+                        android:id="@+id/title2"
+                        android:layout_width="0px"
+                        android:layout_height="fill_parent"
+                        android:layout_weight="1"
+                        android:gravity="right|center_vertical"
+                        android:text="학년"
+                        android:textColor="#ffffff"
+                        android:textSize="20dp" />
+
+                    <TextView
+                        android:id="@+id/title3"
+                        android:layout_width="0px"
+                        android:layout_height="fill_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:textColor="#ffffff"
+                        android:textSize="50dip" />
+
+                    <TextView
+                        android:id="@+id/title4"
+                        android:layout_width="0px"
+                        android:layout_height="fill_parent"
+                        android:layout_weight="2"
+                        android:gravity="left|center_vertical"
+                        android:text="반"
+                        android:textColor="#ffffff"
+                        android:textSize="20dp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <ListView
+                android:id="@+id/dateList"
+                android:layout_width="fill_parent"
+                android:layout_height="0px"
+                android:layout_weight="13"
+                android:cacheColorHint="#00000000"
+                android:divider="#cdcdcd"
+                android:dividerHeight="1dip"
+                android:drawSelectorOnTop="false"
+                android:listSelector="#cdcdcd" />
+        </LinearLayout>
+
+        <ImageButton
+            android:id="@+id/firstLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right|bottom"
+            android:background="@drawable/settingbtn" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="0" >
+
+        <net.daum.adam.publisher.AdView
+            android:id="@+id/adview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            clientId="4a00Z0LT13de76a2366"
+            requestInterval="60"
+            android:gravity="bottom|center"
+            android:visibility="visible" />
+    </FrameLayout>
+
+</LinearLayout>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- daum adam -->
+    <declare-styleable name="net.daum.mobilead.MobileAdView">
+        <attr name="adbgcolor" format="color" />
+        <attr name="adTextColor" format="color" />
+        <attr name="subTextColor" format="color" />
+        <attr name="keywords" format="string" />
+        <attr name="refreshInterval" format="integer" />
+    </declare-styleable>
+
+</resources>
