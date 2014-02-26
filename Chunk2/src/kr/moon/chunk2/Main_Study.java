@@ -67,7 +67,7 @@ public class Main_Study extends Activity implements OnClickListener,
 	private final int MAX_RECORD_TIME = 30000;
 	private int currentRecordTimeMs = 0;
 	private boolean isPlayed = false;
-
+	boolean isRecording = false;
 	private RecordManager recordManager = null;
 	private RecordAsyncTask recordAsyncTask = null;
 	private MediaPlayer mediaPlayer = null;
@@ -344,7 +344,7 @@ public class Main_Study extends Activity implements OnClickListener,
 		btn_share = (ImageButton) findViewById(R.id.share);
 		btn_share.setOnClickListener(this);
 		playImageButton.setOnClickListener(this);
-		recordImageButton.setOnTouchListener(this);
+		recordImageButton.setOnClickListener(this);
 	}
 
 	private void playHandler() {
@@ -380,25 +380,6 @@ public class Main_Study extends Activity implements OnClickListener,
 			pause();
 		}
 	};
-
-	@Override
-	public boolean onTouch(View v, MotionEvent event) {
-
-		if (event.getAction() == MotionEvent.ACTION_DOWN) {
-			currentRecordTimeMs = 0;
-			recordAsyncTask = new RecordAsyncTask();
-			recordAsyncTask.execute();
-			tv.setText("≥Ï¿Ω¡ﬂ..");
-
-		}
-		if (event.getAction() == MotionEvent.ACTION_UP) {
-			if (recordAsyncTask != null)
-				recordAsyncTask.cancel(true);
-			Toast.makeText(this, "Record Success!", Toast.LENGTH_SHORT).show();
-			tv.setText("≥Ï¿Ω");
-		}
-		return false;
-	}
 
 	public void blankName() {
 		showDialog();
@@ -597,6 +578,27 @@ public class Main_Study extends Activity implements OnClickListener,
 			startActivity(activityIntent3);
 			break;
 
+		case R.id.ib_record:
+
+			if (!isRecording) {
+				isRecording = true;
+				recordImageButton.setImageResource(R.drawable.btn_pause);
+				currentRecordTimeMs = 0;
+				recordAsyncTask = new RecordAsyncTask();
+				recordAsyncTask.execute();
+				tv.setText("≥Ï¿Ω¡ﬂ..");
+			} else {
+				isRecording = false;
+				recordImageButton.setImageResource(R.drawable.btn_rec);
+				if (recordAsyncTask != null)
+					recordAsyncTask.cancel(true);
+				Toast.makeText(this, "Record Success!", Toast.LENGTH_SHORT)
+						.show();
+				tv.setText("≥Ï¿Ω");
+			}
+
+			break;
+
 		case R.id.quiz:
 
 			if (!mp.isPlaying()) {
@@ -699,18 +701,24 @@ public class Main_Study extends Activity implements OnClickListener,
 		super.onResume();
 		int check1 = idPrefs.getInt("CHECK" + chapter + "1", 0);
 		Log.d("resume", "CHECK" + chapter + "1");
-		Log.d("resume", "CHECK1"+check1 );
+		Log.d("resume", "CHECK1" + check1);
 		int check2 = idPrefs.getInt("CHECK" + chapter + "2", 0);
 		int chunkId1 = this.getResources().getIdentifier(
 				"check" + String.valueOf(check1), "drawable",
 				this.getPackageName());
-		Log.d("resume", "image"+"check" + String.valueOf(check1) );
+		Log.d("resume", "image" + "check" + String.valueOf(check1));
 		int chunkId2 = this.getResources().getIdentifier(
 				"check" + String.valueOf(check2), "drawable",
 				this.getPackageName());
 		this.check1.setImageResource(chunkId1);
 		this.check2.setImageResource(chunkId2);
 
+	}
+
+	@Override
+	public boolean onTouch(View v, MotionEvent event) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }
