@@ -1,5 +1,8 @@
 package kr.co.moon.speedalim;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 
 import net.daum.adam.publisher.AdView;
@@ -16,15 +19,23 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
+import android.media.AudioManager;
+import android.media.SoundPool;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.webkit.MimeTypeMap;
 import android.widget.AdapterView;
 import android.widget.CheckBox;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -49,10 +60,12 @@ public class DailyList extends Activity {
 	TextView title2;
 	TextView title3;
 	TextView title4;
-
+	SoundPool mPool;
+	int sRight;
 	DayHelper mDailyHelper;
 	SQLiteDatabase dailyDb;
 	ContentValues dailyRow;
+	LinearLayout container;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -62,7 +75,8 @@ public class DailyList extends Activity {
 		dailyRow = new ContentValues();
 
 		// isCheck = new boolean[100];
-
+		mPool = new SoundPool(1, AudioManager.STREAM_MUSIC, 0);
+		sRight = mPool.load(this, R.raw.shutter, 1);
 		// 날짜 받아오기
 		Intent intent = getIntent();
 		mDay = intent.getStringExtra("day");
@@ -72,7 +86,7 @@ public class DailyList extends Activity {
 		mBan = intent.getStringExtra("ban");
 		mGrade = intent.getStringExtra("grade");
 		// 인텐트 추가 끝
-
+		container = (LinearLayout) findViewById(R.id.linear);
 		// dayTag = String.format("a%s", mDay);
 		int month = ((Integer.parseInt(mDay)) / 10000) / 100;
 		int day = (Integer.parseInt(mDay) / 10000) - (month * 100);
@@ -130,12 +144,77 @@ public class DailyList extends Activity {
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
 
-				finish();
+				mPool.play(sRight, 1, 1, 0, 0, 1);
+				
+				final FrameLayout shotBack=(FrameLayout)findViewById(R.id.shot_back);
+				shotBack.setBackgroundColor(Color.parseColor("#bbbbbb"));
+				new Handler().postDelayed(new Runnable() {// 1 초 후에 실행
+				    @Override
+				    public void run() {
+				        // 실행할 동작 코딩
+				    	shotBack.setBackgroundColor(Color.parseColor("#ffffff"));
+				    	capture();
+				    }
+				}, 200);   
+				
 			}
 		});
 
 		loadDailyDB();
 
+	}
+
+	public void capture() {
+		String folder = "Test_Directory"; // 폴더 이름
+
+		try {
+			// 현재 날짜로 파일을 저장하기
+			// 년월일시분초
+			File sdCardPath = Environment.getExternalStorageDirectory();
+			File dirs = new File(Environment.getExternalStorageDirectory(),
+					folder);
+
+			if (!dirs.exists()) { // 원하는 경로에 폴더가 있는지 확인
+				dirs.mkdirs(); // Test 폴더 생성
+				Log.d("CAMERA_TEST", "Directory Created");
+			}
+			container.buildDrawingCache();
+			Bitmap captureView = container.getDrawingCache();
+			FileOutputStream fos;
+			String save;
+
+			try {
+				save = sdCardPath.getPath() + "/" + folder + "/" + "shot"
+						+ ".jpg";
+				// 저장 경로
+				fos = new FileOutputStream(save);
+				captureView.compress(Bitmap.CompressFormat.JPEG, 100, fos); // 캡쳐
+
+				// 미디어 스캐너를 통해 모든 미디어 리스트를 갱신시킨다.
+//				sendBroadcast(new Intent(Intent.ACTION_MEDIA_MOUNTED,
+//						Uri.parse("file://"
+//								+ Environment.getExternalStorageDirectory())));
+				Intent intent = new Intent(Intent.ACTION_SEND);
+
+				MimeTypeMap type = MimeTypeMap.getSingleton();
+				intent.setType(type.getMimeTypeFromExtension(MimeTypeMap
+						.getFileExtensionFromUrl(save)));
+				File file1 = new File(save);
+				intent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(file1));
+				intent.putExtra(Intent.EXTRA_TEXT, "스피드 알림장");
+				startActivity(intent);
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			}
+			// Toast.makeText(getApplicationContext(), "shot" + ".jpg 저장",
+			// Toast.LENGTH_SHORT).show();
+
+			// 보내기
+
+		} catch (Exception e) {
+			// TODO: handle exception
+			Log.e("Screen", "" + e.toString());
+		}
 	}
 
 	// cursor = db.rawQuery("SELECT title, memo  FROM library", null);
