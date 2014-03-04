@@ -42,6 +42,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
+import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -53,9 +54,8 @@ import android.widget.Toast;
 public class Main_Study extends Activity implements OnClickListener,
 		OnTouchListener {
 	String dateName, onlyName, ment, nickName;
-	String[] answer_list = new String[] { "1번 cell phone", "4번 cake",
-			"2번 cell phone", "3번 whale", "2번", "3번" };
-	TextView tv, instruction;
+	String[] answer_list = new String[] { "5번", "3번", "5번", "5번", "4번" };
+	TextView  instruction;
 	View tab1, tab2, tab3;
 	Drawable alpha1;
 	Drawable alpha2;
@@ -90,12 +90,12 @@ public class Main_Study extends Activity implements OnClickListener,
 		idPrefs = getSharedPreferences("id", MODE_PRIVATE);
 		editor = idPrefs.edit();
 
-		ImageView btn1, btn2, btn3, btn4, quiz_Image, speakImage;
+		ImageView btn1, btn2, btn3,  quiz_Image, speakImage;
 		final ImageView playBtn1;
 		final ImageView playBtn2;
 		// Button playBtn1, playBtn2;
 		cal = Calendar.getInstance();
-		tv = (TextView) findViewById(R.id.status2);
+//		tv = (TextView) findViewById(R.id.status2);
 		// 테스트용
 		Intent i = getIntent();
 		String header_title = i.getStringExtra("TITLE");
@@ -112,7 +112,7 @@ public class Main_Study extends Activity implements OnClickListener,
 		btn1 = (ImageView) findViewById(R.id.btn1);
 		btn2 = (ImageView) findViewById(R.id.btn2);
 		btn3 = (ImageView) findViewById(R.id.btn3);
-		btn4 = (ImageView) findViewById(R.id.btn4);
+//		btn4 = (ImageView) findViewById(R.id.btn4);
 		playBtn1 = (ImageView) findViewById(R.id.play1);
 		playBtn2 = (ImageView) findViewById(R.id.play2);
 		check1 = (ImageView) findViewById(R.id.check1);
@@ -121,7 +121,7 @@ public class Main_Study extends Activity implements OnClickListener,
 		btn1.setOnClickListener(this);
 		btn2.setOnClickListener(this);
 		btn3.setOnClickListener(this);
-		btn4.setOnClickListener(this);
+//		btn4.setOnClickListener(this);
 		playBtn1.setOnClickListener(this);
 		playBtn2.setOnClickListener(this);
 		playBtn1.setOnTouchListener(new OnTouchListener() {
@@ -193,7 +193,7 @@ public class Main_Study extends Activity implements OnClickListener,
 		tab1();
 	}
 
-	public void share(String editName, String ment) {
+	public void share() {
 		if (isPlayed) {
 			pause();
 		}
@@ -204,20 +204,32 @@ public class Main_Study extends Activity implements OnClickListener,
 		if (mediaPlayer != null) {
 			// 업로드
 			Log.d("cc", "업로드");
-			pb.setVisibility(View.VISIBLE);
+//			pb.setVisibility(View.VISIBLE);
 			String format = new String("yyyyMMddHHmmss");
 			SimpleDateFormat sdf = new SimpleDateFormat(format, Locale.KOREA);
 			dateName = sdf.format(new Date())
 					+ String.valueOf((int) Math.random() * 10);
 			File file1 = new File(Environment.getExternalStorageDirectory()
 					.getAbsolutePath() + File.separator + "loup", "record.m4a");
-			File file2 = new File(Environment.getExternalStorageDirectory()
-					.getAbsolutePath() + File.separator + "loup", dateName
-					+ ".m4a");
-			file1.renameTo(file2);
 
-			Log.d("업로드파일명", dateName);
-			new MyAsyncTask().execute(editName);
+			Intent intent = new Intent(Intent.ACTION_SEND);
+
+			MimeTypeMap type = MimeTypeMap.getSingleton();
+			intent.setType(type.getMimeTypeFromExtension(MimeTypeMap
+					.getFileExtensionFromUrl(Environment.getExternalStorageDirectory()
+							.getAbsolutePath() + File.separator + "loup/record.m4a")));
+
+			intent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(file1));
+			intent.putExtra(Intent.EXTRA_TEXT, "청크 녹음 파일");
+			startActivity(intent);
+			Log.d("cc", "업로드끝");
+			// File file2 = new File(Environment.getExternalStorageDirectory()
+			// .getAbsolutePath() + File.separator + "loup", dateName
+			// + ".m4a");
+			// file1.renameTo(file2);
+
+			// Log.d("업로드파일명", dateName);
+			// new MyAsyncTask().execute(editName);
 
 		} else {
 			Toast.makeText(this, "RecordFile doesn't exist.",
@@ -413,7 +425,7 @@ public class Main_Study extends Activity implements OnClickListener,
 				} else {
 					editor.putString("NICK", onlyName);
 					editor.commit();
-					share(dateName, ment);
+//					share(dateName, ment);
 				}
 			}
 		});
@@ -453,7 +465,7 @@ public class Main_Study extends Activity implements OnClickListener,
 				} else {
 					editor.putString("NICK", onlyName);
 					editor.commit();
-					share(dateName, ment);
+//					share(dateName, ment);
 				}
 			}
 		});
@@ -571,12 +583,12 @@ public class Main_Study extends Activity implements OnClickListener,
 
 			tab3();
 			break;
-		case R.id.btn4:
-			flagTab = false;
-			Intent activityIntent3 = new Intent(Main_Study.this,
-					MainActivity.class);
-			startActivity(activityIntent3);
-			break;
+//		case R.id.btn4:
+//			flagTab = false;
+//			Intent activityIntent3 = new Intent(Main_Study.this,
+//					MainActivity.class);
+//			startActivity(activityIntent3);
+//			break;
 
 		case R.id.ib_record:
 
@@ -586,7 +598,7 @@ public class Main_Study extends Activity implements OnClickListener,
 				currentRecordTimeMs = 0;
 				recordAsyncTask = new RecordAsyncTask();
 				recordAsyncTask.execute();
-				tv.setText("녹음중..");
+//				tv.setText("녹음중..");
 			} else {
 				isRecording = false;
 				recordImageButton.setImageResource(R.drawable.btn_rec);
@@ -594,7 +606,7 @@ public class Main_Study extends Activity implements OnClickListener,
 					recordAsyncTask.cancel(true);
 				Toast.makeText(this, "Record Success!", Toast.LENGTH_SHORT)
 						.show();
-				tv.setText("녹음");
+//				tv.setText("녹음");
 			}
 
 			break;
@@ -624,7 +636,8 @@ public class Main_Study extends Activity implements OnClickListener,
 			break;
 
 		case R.id.share:
-			showDialog();
+//			showDialog();
+			share();
 			break;
 
 		case R.id.ib_play: {
@@ -685,7 +698,7 @@ public class Main_Study extends Activity implements OnClickListener,
 	}
 
 	private void tab3() {
-		instruction.setText("녹음 버튼을 누르고 있으면 \n 녹음이 됩니다.");
+		instruction.setText("카톡이나 메일로\n스피킹을 보내보세요!");
 		tab2.setVisibility(View.GONE);
 		tab3.setVisibility(View.VISIBLE);
 		tab1.setVisibility(View.GONE);

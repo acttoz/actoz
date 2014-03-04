@@ -99,14 +99,14 @@
                 android:adjustViewBounds="true"
                 android:gravity="left"
                 android:src="@drawable/btn3" />
-            <ImageView
+        <!--    <ImageView
                 android:id="@+id/btn4"
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
                 android:layout_gravity="left"
                 android:adjustViewBounds="true"
                 android:gravity="left"
-                android:src="@drawable/btn4" />
+                android:src="@drawable/btn4" /> -->
         </LinearLayout>
     </LinearLayout>
 

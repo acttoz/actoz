@@ -107,7 +107,7 @@ public class List extends Activity implements OnClickListener {
 					public void onClick(DialogInterface dialog, int which) {
 						Intent intent = new Intent(
 								Intent.ACTION_VIEW,
-								Uri.parse("http://m.book.naver.com/bookdb/book_detail.nhn?biblio.bid=6735393"));
+								Uri.parse("http://m.book.naver.com/bookdb/book_detail.nhn?biblio.bid=6735394"));
 						startActivity(intent);
 					}
 				});
