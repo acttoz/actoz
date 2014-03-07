@@ -752,8 +752,9 @@ public class Math_Quiz_Main extends Activity implements OnClickListener {
 							tempPrd, tempCht, tempTim, isRight1, isRight2,
 							isRight3);
 			Log.d("dd", submitUrl);
-			if (solvedQ > 2)
-				callUrl(submitUrl);
+			//서버 전송
+//			if (solvedQ > 2)
+//				callUrl(submitUrl);
 			return null;
 		}
 

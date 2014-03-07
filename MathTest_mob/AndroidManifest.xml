@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="a.com.kr.moon.math.phone"
-    android:versionCode="60"
-    android:versionName="60" >
+    android:versionCode="61"
+    android:versionName="61" >
 
     <uses-sdk android:minSdkVersion="8" />
 
@@ -86,6 +86,11 @@
             android:clearTaskOnLaunch="true"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait" >
+             <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name="Math_Quiz_Main"
@@ -110,11 +115,7 @@
             android:clearTaskOnLaunch="true"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+           
         </activity>
         <activity android:name="AndroidImageView" >
         </activity>
