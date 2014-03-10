@@ -7,6 +7,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -20,6 +21,9 @@ import android.widget.ListView;
 
 public class List extends Activity implements OnClickListener {
 	ListView listView1;
+	boolean popup = true;
+	SharedPreferences idPrefs;
+	SharedPreferences.Editor editor;
 	Custom_List_Data data;
 	Custom_List_Adapter listAdapter1;
 	ArrayList<Custom_List_Data> dateList1;
@@ -36,7 +40,9 @@ public class List extends Activity implements OnClickListener {
 		// TODO Auto-generated method stub
 
 		listView1 = (ListView) findViewById(R.id.listview);
-
+		idPrefs = getSharedPreferences("id", MODE_PRIVATE);
+		editor = idPrefs.edit();
+		popup = idPrefs.getBoolean("POPUP", true);
 		dateList1 = new ArrayList<Custom_List_Data>();
 		for (int i = 0; i < chapter_list.length; i++) {
 			data = new Custom_List_Data();
@@ -66,6 +72,33 @@ public class List extends Activity implements OnClickListener {
 		});
 		listAdapter1.notifyDataSetChanged();
 		listView1.invalidate();
+		showNotice();
+	}
+
+	public void showNotice() {
+		Context mContext = getApplicationContext();
+		LayoutInflater inflater = (LayoutInflater) mContext
+				.getSystemService(LAYOUT_INFLATER_SERVICE);
+		final View layout = inflater.inflate(R.layout.notice_dialog,
+				(ViewGroup) findViewById(R.id.layout_root));
+		AlertDialog.Builder aDialog = new AlertDialog.Builder(List.this);// 여기서buttontest는
+		// 패키지이름
+		aDialog.setTitle("청크");
+		aDialog.setView(layout);
+
+		aDialog.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int which) {
+			}
+		});
+		aDialog.setNegativeButton("다시 안보기",
+				new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int which) {
+						editor.putBoolean("POPUP", false);
+						editor.commit();
+					}
+				});
+		AlertDialog ad = aDialog.create();
+		ad.show();
 	}
 
 	@Override
@@ -82,8 +115,7 @@ public class List extends Activity implements OnClickListener {
 
 			msg.putExtra(Intent.EXTRA_SUBJECT, "청크로 원어민 되기");
 
-			msg.putExtra(Intent.EXTRA_TEXT,
-					"http://m.site.naver.com/094c3");
+			msg.putExtra(Intent.EXTRA_TEXT, "http://m.site.naver.com/094c3");
 
 			msg.putExtra(Intent.EXTRA_TITLE, "제목");
 
