@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="hello">Hello World, MainActivity!</string>
+    <string name="app_name">Web과 함께하는 미술교실</string>
+    <string name="copyright_define">  저작권은 사람의 생각이나 감정을 표현한 결과물에 대하여 그 표현한 사람에게 주는 권리입니다. 마치 물건의 주인이 갖게되는 소유권처럼 자신이 만들어 낸 표현에 대해 가지는 권리이지요. 그리고 그러한 표현의 결과물을 ‘저작물’이라고 합니다.
+    </string>
+    <string-array name="type">
+        <item>New Game</item>
+        <item>4 X 4</item>
+        <item>5 X 4</item>
+        <item>6 X 4</item>
+    
+    </string-array>
+    <string name="game_notice">게임방법 소개</string>
+
+</resources>
