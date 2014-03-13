@@ -42,7 +42,7 @@ public class MainActivity extends Activity {
 		wv.getSettings().setLoadWithOverviewMode(true);
 		wv.getSettings().setUseWideViewPort(true);
 		// wv.setInitialScale(26);
-		wv.getSettings().setUserAgent(0);
+//		wv.getSettings().setUserAgent(0);
 		wv.setBackgroundColor(0); // 배경색
 		// wv.addJavascriptInterface(new AndroidBridge(), "HybridApp"); //스크립트
 		// 확장
@@ -55,7 +55,7 @@ public class MainActivity extends Activity {
 		// wv.getSettings().setSupportZoom(true);
 
 		// 웹플러그인 허용
-		wv.getSettings().setPluginsEnabled(true);
+//		wv.getSettings().setPluginsEnabled(true);
 
 		// javascript의 window.open 허용
 		wv.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
