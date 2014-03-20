@@ -1,0 +1,153 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!74 &7400000
+AnimationClip:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: anim_balloon
+  serializedVersion: 4
+  m_AnimationType: 2
+  m_Compressed: 0
+  m_UseHighQualityCurve: 1
+  m_RotationCurves: []
+  m_CompressedRotationCurves: []
+  m_PositionCurves: []
+  m_ScaleCurves:
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: {x: .0618293881, y: .0618289486, z: 1}
+        inSlope: {x: 4.3363328, y: 4.37467289, z: -1.1920929e-07}
+        outSlope: {x: 4.3363328, y: 4.37467289, z: -1.1920929e-07}
+        tangentMode: 1106247681
+      - time: .0499999896
+        value: {x: .278645992, y: .28056255, z: 1}
+        inSlope: {x: 1.8849318, y: 1.90442109, z: -1.1920929e-07}
+        outSlope: {x: 1.8849318, y: 1.90442109, z: -1.1920929e-07}
+        tangentMode: 0
+      - time: .266666681
+        value: {x: .155910999, y: .157965869, z: .99999994}
+        inSlope: {x: -.0557726175, y: -.0560483336, z: -1.1920929e-07}
+        outSlope: {x: -.0557726175, y: -.0560483336, z: -1.1920929e-07}
+        tangentMode: 0
+      - time: 2
+        value: {x: .944445729, y: .944438338, z: .999999762}
+        inSlope: {x: .454923898, y: .4537341, z: -1.1920929e-07}
+        outSlope: {x: .454923898, y: .4537341, z: -1.1920929e-07}
+        tangentMode: 3145779
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    path: 
+  m_FloatCurves: []
+  m_PPtrCurves: []
+  m_SampleRate: 60
+  m_WrapMode: 0
+  m_Bounds:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0, y: 0, z: 0}
+  m_AnimationClipSettings:
+    serializedVersion: 2
+    m_StartTime: 0
+    m_StopTime: 2
+    m_OrientationOffsetY: 0
+    m_Level: 0
+    m_CycleOffset: 0
+    m_LoopTime: 0
+    m_LoopBlend: 0
+    m_LoopBlendOrientation: 0
+    m_LoopBlendPositionY: 0
+    m_LoopBlendPositionXZ: 0
+    m_KeepOriginalOrientation: 0
+    m_KeepOriginalPositionY: 1
+    m_KeepOriginalPositionXZ: 0
+    m_HeightFromFeet: 0
+    m_Mirror: 0
+  m_EditorCurves:
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: .0618293881
+        inSlope: 4.3363328
+        outSlope: 4.3363328
+        tangentMode: 10
+      - time: .0499999896
+        value: .278645992
+        inSlope: 1.8849318
+        outSlope: 1.8849318
+        tangentMode: 10
+      - time: .266666681
+        value: .155910999
+        inSlope: -.0557726175
+        outSlope: -.0557726175
+        tangentMode: 10
+      - time: 2
+        value: .944445729
+        inSlope: .454923898
+        outSlope: .454923898
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_LocalScale.x
+    path: 
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: .0618289486
+        inSlope: 4.37467289
+        outSlope: 4.37467289
+        tangentMode: 10
+      - time: .0499999896
+        value: .28056255
+        inSlope: 1.90442109
+        outSlope: 1.90442109
+        tangentMode: 10
+      - time: .266666681
+        value: .157965869
+        inSlope: -.0560483336
+        outSlope: -.0560483336
+        tangentMode: 10
+      - time: 2
+        value: .944438338
+        inSlope: .4537341
+        outSlope: .4537341
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_LocalScale.y
+    path: 
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: 1
+        inSlope: -1.1920929e-07
+        outSlope: -1.1920929e-07
+        tangentMode: 10
+      - time: 2
+        value: .999999762
+        inSlope: -1.1920929e-07
+        outSlope: -1.1920929e-07
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_LocalScale.z
+    path: 
+    classID: 4
+    script: {fileID: 0}
+  m_EulerEditorCurves: []
+  m_Events:
+  - time: 2
+    functionName: success
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
