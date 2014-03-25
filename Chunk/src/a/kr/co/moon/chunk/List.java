@@ -72,7 +72,8 @@ public class List extends Activity implements OnClickListener {
 		});
 		listAdapter1.notifyDataSetChanged();
 		listView1.invalidate();
-		showNotice();
+		if (popup)
+			showNotice();
 	}
 
 	public void showNotice() {
@@ -83,7 +84,7 @@ public class List extends Activity implements OnClickListener {
 				(ViewGroup) findViewById(R.id.layout_root));
 		AlertDialog.Builder aDialog = new AlertDialog.Builder(List.this);// 여기서buttontest는
 		// 패키지이름
-		aDialog.setTitle("청크");
+		aDialog.setTitle("");
 		aDialog.setView(layout);
 
 		aDialog.setPositiveButton("확인", new DialogInterface.OnClickListener() {
