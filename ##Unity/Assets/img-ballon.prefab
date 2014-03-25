@@ -11,7 +11,7 @@ GameObject:
   - 212: {fileID: 21200000}
   - 95: {fileID: 9500000}
   - 114: {fileID: 11400000}
-  - 64: {fileID: 6400000}
+  - 135: {fileID: 13500000}
   m_Layer: 0
   m_Name: img-ballon
   m_TagString: balloon
@@ -26,23 +26,10 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.2798363, y: -2.39376807, z: 0}
-  m_LocalScale: {x: .489002019, y: .490103871, z: .999999821}
+  m_LocalPosition: {x: 1.76864505, y: -2.76091242, z: 0}
+  m_LocalScale: {x: 1.15047288, y: 1.15046668, z: .999999881}
   m_Children: []
   m_Father: {fileID: 0}
---- !u!64 &6400000
-MeshCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100000}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_SmoothSphereCollisions: 0
-  m_Convex: 0
-  m_Mesh: {fileID: 0}
 --- !u!95 &9500000
 Animator:
   serializedVersion: 2
@@ -68,6 +55,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8f80c8a039a75a4bac8ce58bed97728, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!135 &13500000
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1.60492516
+  m_Center: {x: 0, y: .209999993, z: 0}
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1

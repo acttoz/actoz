@@ -7,7 +7,7 @@ public class src_enemy : MonoBehaviour
 		// Use this for initialization
 		void Awake ()
 		{
-				//rigidbody.velocity = new Vector3 (-100, -100, -100);
+				rigidbody.velocity = new Vector3 (-5, -5, 0);
 		}
 
 		void Start ()
