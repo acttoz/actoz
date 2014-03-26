@@ -4,7 +4,7 @@ using System.Collections;
 public class scr_manager : MonoBehaviour
 {
 		public GameObject dragObject;
-		public GameObject back;
+		public GameObject back, startManager;
 		public Vector3 backSize;
 		public Vector3 balloonSize;
 		
@@ -27,7 +27,7 @@ public class scr_manager : MonoBehaviour
 
 		void balloonSuccess ()
 		{
-				existBalloon = false;
+//				existBalloon = false;
 				Debug.Log ("balloonSuccess");
 		}
 
@@ -40,6 +40,17 @@ public class scr_manager : MonoBehaviour
 						existBalloon = false;
 				}
 				Debug.Log ("balloonFail");
+		}
+
+		void gameOver ()
+		{
+				GameObject balloon = GameObject.FindGameObjectWithTag ("balloon");
+		
+				if (balloon != null) {
+						balloon.SendMessage ("destroySelf");
+						existBalloon = false;
+				}
+				startManager.SendMessage ("gameOver");
 		}
 
 		int dragFingerIndex = -1;

@@ -19,8 +19,10 @@ public class src_balloon : MonoBehaviour
 		void success ()
 		{
 				GameObject.Find ("GAMEMANAGER").SendMessage ("balloonSuccess");
+				Animator anim = GetComponent<Animator> ();
+				anim.SetBool ("charged", true);
 
-				Destroy (this.gameObject);
+				 
 		}
 
 		void destroySelf ()
@@ -28,12 +30,14 @@ public class src_balloon : MonoBehaviour
 				Destroy (this.gameObject);
 		}
 
-		void OnCollisionEnter (Collision other)
-		{
-				if (other.transform.tag == "enemy") {
-				GameObject.Find ("GAMEMANAGER").SendMessage ("balloonFail");
-						
-				}
-
+	void OnTriggerEnter (Collider myTrigger)
+	{
+		if (myTrigger.transform.tag == "enemy") {
+			
+			GameObject.Find ("GAMEMANAGER").SendMessage ("gameOver");
 		}
+		
+		 
+	}
+
 }
