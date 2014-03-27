@@ -16,28 +16,29 @@ public class src_balloon : MonoBehaviour
 	
 		}
 
-		void success ()
+		void superMode (int num)
 		{
-				GameObject.Find ("GAMEMANAGER").SendMessage ("balloonSuccess");
-				Animator anim = GetComponent<Animator> ();
-				anim.SetBool ("charged", true);
-
+				GameObject.Find ("GAMEMANAGER").SendMessage ("superMode", num);
+		                                             
+				Debug.Log ("super" + num);
 				 
 		}
 
-		void destroySelf ()
+		void destroy ()
 		{
+				superMode (0);
 				Destroy (this.gameObject);
 		}
 
-	void OnTriggerEnter (Collider myTrigger)
-	{
-		if (myTrigger.transform.tag == "enemy") {
+		void OnTriggerEnter (Collider myTrigger)
+		{
+				if (myTrigger.transform.tag == "enemy") {
 			
-			GameObject.Find ("GAMEMANAGER").SendMessage ("gameOver");
-		}
+						GameObject.Find ("GAMEMANAGER").SendMessage ("gameOver");
+						destroy ();
+				}
 		
 		 
-	}
+		}
 
 }

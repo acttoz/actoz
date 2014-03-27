@@ -37,7 +37,6 @@ public class src_enemy : MonoBehaviour
 						rigidbody.velocity = new Vector3 (rigidbody.velocity.x, -rigidbody.velocity.y, 0);
 						
 
-						Debug.Log ("wall trigger");
 				}
 
 				if (myTrigger.gameObject.name == "up") {
@@ -45,21 +44,18 @@ public class src_enemy : MonoBehaviour
 						rigidbody.velocity = new Vector3 (rigidbody.velocity.x, -rigidbody.velocity.y, 0);
 			
 			
-						Debug.Log ("wall trigger");
 				}
 				if (myTrigger.gameObject.name == "left") {
 			
 						rigidbody.velocity = new Vector3 (-rigidbody.velocity.x, rigidbody.velocity.y, 0);
 			
 			
-						Debug.Log ("wall trigger");
 				}
 				if (myTrigger.gameObject.name == "right") {
 			
 						rigidbody.velocity = new Vector3 (-rigidbody.velocity.x, rigidbody.velocity.y, 0);
 			
 			
-						Debug.Log ("wall trigger");
 				}
 		}
  

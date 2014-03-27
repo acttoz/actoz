@@ -25,9 +25,10 @@ public class scr_manager : MonoBehaviour
 //				Debug.Log (balloonSize);
 		}
 
-		void balloonSuccess ()
+		void superMode (int num)
 		{
 //				existBalloon = false;
+				back.SendMessage ("superMode", num);
 				Debug.Log ("balloonSuccess");
 		}
 
@@ -44,12 +45,7 @@ public class scr_manager : MonoBehaviour
 
 		void gameOver ()
 		{
-				GameObject balloon = GameObject.FindGameObjectWithTag ("balloon");
-		
-				if (balloon != null) {
-						balloon.SendMessage ("destroySelf");
-						existBalloon = false;
-				}
+				existBalloon = false;
 				startManager.SendMessage ("gameOver");
 		}
 
@@ -83,7 +79,8 @@ public class scr_manager : MonoBehaviour
 //										float touchX = touchXY.x;
 //										float touchY = touchXY.y;
 //
-//										if (touchX > -2 && touchX < 2 && touchY < 4.4 && touchY > -4.4)							
+//										if (touchX > -2 && touchX < 2 && touchY < 4.4 && touchY > -4.4)		
+										Debug.Log ("dragging");
 										balloon.transform.position = touchXY;
 								} else {
 										Debug.Log ("Stopped dragging with finger " + finger);
@@ -110,10 +107,28 @@ public class scr_manager : MonoBehaviour
 
 		void OnFingerUp (FingerUpEvent e)
 		{
-				GameObject balloon = GameObject.FindGameObjectWithTag ("balloon");
+//				GameObject[] balloon = GameObject.FindGameObjectsWithTag ("balloon");
+//
+//				if (balloon.Length!=0) {
+//						Debug.Log ("ballonnExist");
+//						foreach (GameObject element in balloon) {
+//								element.SendMessage ("destroySelf");
+//						}
+//						
+//						existBalloon = false;
+//				}
+//				Debug.Log ("release");
+				if (existBalloon) {
+						
+						GameObject[] balloon = GameObject.FindGameObjectsWithTag ("balloon");
 
-				if (balloon != null) {
-						balloon.SendMessage ("destroySelf");
+						foreach (GameObject element in balloon) {
+
+								Debug.Log (element);
+								Debug.Log ("ballonnExist");
+								element.SendMessage ("destroy");
+						}
+										
 						existBalloon = false;
 				}
 				Debug.Log ("release");
