@@ -5,6 +5,8 @@ public class src_balloon : MonoBehaviour
 {
 		Animator anim;
 		bool exist = false;
+		public GameObject GAMEMANAGER;
+		public Sprite crash, balloon;
 		// Use this for initialization
 		void Start ()
 		{
@@ -20,7 +22,8 @@ public class src_balloon : MonoBehaviour
 		void create ()
 		{
 				exist = true;
-				Debug.Log ("OnEnable()");
+				GetComponent<SpriteRenderer> ().sprite = balloon;
+//				Debug.Log ("OnEnable()");
 				anim = GetComponent<Animator> ();
 				anim.SetBool ("balloonExist", true);
 		}
@@ -36,7 +39,7 @@ public class src_balloon : MonoBehaviour
 				anim.SetBool ("balloonExist", false);
 				anim.SetInteger ("super", 0);
 				superBack (0);
-				Debug.Log ("cancel()");
+//				Debug.Log ("cancel()");
 				StartCoroutine ("removeTimer");
 				anim.SetInteger ("cancel", num);
 		}
@@ -45,8 +48,8 @@ public class src_balloon : MonoBehaviour
 		{
 				yield return new WaitForSeconds (0.2f);
 				cancel (0);
-				Debug.Log ("removeTimer");
-				GameObject.Find ("GAMEMANAGER").SendMessage ("balloonRemove");
+//				Debug.Log ("removeTimer");
+				GAMEMANAGER.SendMessage ("balloonRemove");
 		}
 
 		void superMode (int num)
@@ -59,19 +62,30 @@ public class src_balloon : MonoBehaviour
 		{
 				GameObject.Find ("back").SendMessage ("superMode", num);
 		                                             
-				Debug.Log ("super" + num);
+//				Debug.Log ("super" + num);
 				 
 		}
 		 
 		void OnTriggerEnter (Collider myTrigger)
 		{
 				if (myTrigger.transform.tag == "enemy" && exist) {
-			
-						GameObject.Find ("GAMEMANAGER").SendMessage ("gameOver");
+						GetComponent<SpriteRenderer> ().sprite = crash;
+						Debug.Log ("onTrigger");
+						exist = false;
+						StartCoroutine ("gameOver");
+						
 						
 				}
 		
 		 
+		}
+
+		IEnumerator gameOver ()
+		{
+				yield return new WaitForSeconds (0.5f);
+				transform.localScale = new Vector3 (0, 0, 0);
+				Debug.Log ("coroutine");
+				GAMEMANAGER.SendMessage ("gameOver");
 		}
 
 }

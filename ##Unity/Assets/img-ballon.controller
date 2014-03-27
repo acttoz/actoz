@@ -285,7 +285,7 @@ Transition:
   m_Conditions:
   - m_ConditionMode: 6
     m_ConditionEvent: super
-    m_EventTreshold: 2
+    m_EventTreshold: 3
     m_ExitTime: 0
   m_Atomic: 1
   m_Solo: 0
@@ -303,7 +303,7 @@ Transition:
   m_Conditions:
   - m_ConditionMode: 6
     m_ConditionEvent: super
-    m_EventTreshold: 1
+    m_EventTreshold: 2
     m_ExitTime: 0
   m_Atomic: 1
   m_Solo: 0
