@@ -3,16 +3,20 @@ using System.Collections;
 
 public class scr_manager : MonoBehaviour
 {
-		public GameObject dragObject;
+		public GameObject balloon;
 		public GameObject back, startManager;
 		public Vector3 backSize;
 		public Vector3 balloonSize;
-		
+		public int superTime;
+		int superTimer;
+		public int normalTimer;
+		int superLevel = 0;
 		// Use this for initialization
 		bool existBalloon = false;
 
 		void Start ()
 		{
+				superTimer = superTime;
 //				backSize = back.renderer.bounds.size; 
 //				Debug.Log (backSize);	
 		}
@@ -20,32 +24,85 @@ public class scr_manager : MonoBehaviour
 		// Update is called once per frame
 		void Update ()
 		{
+		 
 //				GameObject balloon = GameObject.FindGameObjectWithTag ("balloon");
 //				balloonSize = balloon.renderer.bounds.size;
 //				Debug.Log (balloonSize);
 		}
 
-		void superMode (int num)
+		void normalModeCount ()
 		{
-//				existBalloon = false;
-				back.SendMessage ("superMode", num);
-				Debug.Log ("balloonSuccess");
+				normalTimer--;
+				
+				if (normalTimer < 1) {
+			
+			
+			
+						CancelInvoke ("normalModeCount");
+						
+						superMode (superLevel);
+			
+			
+				}
+		
+		}
+	
+		void superModeCount ()
+		{
+				superTimer--;
+				GameObject.Find ("second").guiText.text = "" + superTimer;
+//				Debug.Log ("superTimer" + superTimer);
+				if (superTimer < 0) {
+			
+						
+						
+						CancelInvoke ("superModeCount");
+						superLevel++;
+						superMode (superLevel);
+						
+			
+				}
+		
 		}
 
-		void balloonFail ()
+		void superMode (int num)
 		{
-				GameObject balloon = GameObject.FindGameObjectWithTag ("balloon");
-		
-				if (balloon != null) {
-						balloon.SendMessage ("destroySelf");
+				superTimer = superTime;
+//				existBalloon = false;
+				InvokeRepeating ("superModeCount", 0.1f, 1f);
+				balloon.SendMessage ("superMode", num);
+				Debug.Log ("super:" + num);
+		}
+
+		void balloonCreate (Vector3 touch)
+		{
+				balloon.SetActive (true);
+				balloon.SendMessage ("create");
+				InvokeRepeating ("normalModeCount", 0.1f, 1f);
+				balloon.transform.position = touch;
+		}
+
+		void balloonRemove ()
+		{
+				superLevel = 0;
+				if (existBalloon) {
+					
+						balloon.SetActive (false);
+			
 						existBalloon = false;
 				}
-				Debug.Log ("balloonFail");
+		}
+
+		void balloonCancle (int num)
+		{
+				CancelInvoke ("superModeCount");
+				superLevel = 0;
+				balloon.SendMessage ("cancel", num);
 		}
 
 		void gameOver ()
 		{
-				existBalloon = false;
+				balloonRemove ();
 				startManager.SendMessage ("gameOver");
 		}
 
@@ -55,33 +112,37 @@ public class scr_manager : MonoBehaviour
 		{
 				// first finger
 				FingerGestures.Finger finger = gesture.Fingers [0];
-				GameObject balloon = GameObject.FindGameObjectWithTag ("balloon");
+			 
 		
 				if (existBalloon) {
 						if (gesture.Phase == ContinuousGesturePhase.Started) {
 								// dismiss this event if we're not interacting with our drag object
-//				 if (gesture.Selection != dragObject)
+//				 if (gesture.Selection != balloon)
 //						return;
 			
 								Debug.Log ("Started dragging with finger " + finger);
 			
-								// remember which finger is dragging dragObject
+								// remember which finger is dragging balloon
 								dragFingerIndex = finger.Index;
 
 				 
 			
 								// spawn some particles because it's cool.
-//				 SpawnParticles (dragObject);
-						} else if (finger.Index == dragFingerIndex) {  // gesture in progress, make sure that this event comes from the finger that is dragging our dragObject
+//				 SpawnParticles (balloon);
+						} else if (finger.Index == dragFingerIndex) {  // gesture in progress, make sure that this event comes from the finger that is dragging our balloon
 								if (gesture.Phase == ContinuousGesturePhase.Updated) {
 										// update the position by converting the current screen position of the finger to a world position on the Z = 0 plane
 										Vector3 touchXY = GetWorldPos (gesture.Position);
+					
+										
+										balloon.transform.position = touchXY;
+						
+									
 //										float touchX = touchXY.x;
 //										float touchY = touchXY.y;
 //
 //										if (touchX > -2 && touchX < 2 && touchY < 4.4 && touchY > -4.4)		
-										Debug.Log ("dragging");
-										balloon.transform.position = touchXY;
+//										Debug.Log ("dragging" + touchXY);
 								} else {
 										Debug.Log ("Stopped dragging with finger " + finger);
 				
@@ -89,7 +150,7 @@ public class scr_manager : MonoBehaviour
 										dragFingerIndex = -1;
 				
 										// spawn some particles because it's cool.
-//						SpawnParticles (dragObject);
+//						SpawnParticles (balloon);
 				
 								}
 						}
@@ -100,8 +161,11 @@ public class scr_manager : MonoBehaviour
 		{
 		 
 
-				Instantiate (dragObject, GetWorldPos (e.Position), Quaternion.identity);
-				existBalloon = true;
+//				Instantiate (balloon, GetWorldPos (e.Position), Quaternion.identity);
+				if (!existBalloon) {
+						balloonCreate (GetWorldPos (e.Position));
+						existBalloon = true;
+				}
 				Debug.Log ("click");
 		}
 
@@ -118,19 +182,9 @@ public class scr_manager : MonoBehaviour
 //						existBalloon = false;
 //				}
 //				Debug.Log ("release");
-				if (existBalloon) {
-						
-						GameObject[] balloon = GameObject.FindGameObjectsWithTag ("balloon");
-
-						foreach (GameObject element in balloon) {
-
-								Debug.Log (element);
-								Debug.Log ("ballonnExist");
-								element.SendMessage ("destroy");
-						}
-										
-						existBalloon = false;
-				}
+				if (existBalloon)
+						balloonCancle (1);		
+//		balloonRemove ();
 				Debug.Log ("release");
 		}
 
