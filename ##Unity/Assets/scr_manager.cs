@@ -4,12 +4,13 @@ using System.Collections;
 public class scr_manager : MonoBehaviour
 {
 		public GameObject balloon;
-		public GameObject back, startManager;
+		public GameObject back, backStart;
 		public Vector3 backSize;
 		public Vector3 balloonSize;
+		GameObject[] enemy;
 		public int superTime;
 		int superTimer;
-		public int normalTimer;
+		public AudioClip create, remove, pop;
 		TextMesh scoreText;
 		long score = 0;
 		int superLevel = 0;
@@ -18,6 +19,7 @@ public class scr_manager : MonoBehaviour
 
 		void Start ()
 		{
+				enemy = GameObject.FindGameObjectsWithTag ("enemy");
 				scoreText = GameObject.Find ("score").GetComponent<TextMesh> ();
 				superTimer = superTime;
 				InvokeRepeating ("scoreCount", 0, 0.1f);
@@ -33,6 +35,113 @@ public class scr_manager : MonoBehaviour
 //				balloonSize = balloon.renderer.bounds.size;
 //				Debug.Log (balloonSize);
 				
+		}
+
+		void Create (Vector3 touch)
+		{
+				balloon.GetComponent<SpriteRenderer> ().color = Color.red;
+				balloon.SetActive (true);
+				balloon.SendMessage ("create");
+				balloon.transform.position = touch;
+				superMode (0);
+				audio.PlayOneShot (create);
+
+		}
+
+		IEnumerator Remove (int num)
+		{
+				CancelInvoke ("superModeCount");
+				switch (num) {
+				case 1:
+			
+						balloon.SendMessage ("cancel", 1);
+//						if (audio.isPlaying)
+								audio.Stop ();
+						audio.PlayOneShot (remove);
+			
+						break;
+			
+				case 2:
+						score = 0;
+						disableTouch ();
+//						if (audio.isPlaying)
+								audio.Stop ();
+						audio.PlayOneShot (pop);
+			
+						
+						break;
+				}
+		
+		
+				
+				yield return new WaitForSeconds (0.2f);
+				Debug.Log ("remove" + existBalloon);
+				superLevel = 0;
+				if (existBalloon) {
+						Debug.Log ("remove" + existBalloon);
+						balloon.transform.localScale = new Vector3 (0, 0, 0);
+						balloon.SetActive (false);
+						int i = 0;
+
+						// back & enemy reset
+						back.SendMessage ("superMode", i);
+
+//						foreach (GameObject element in enemy) {
+//								element.SendMessage ("superMode", 1);
+//						}
+
+						//---------------
+
+						existBalloon = false;
+			
+						superTimer = superTime;
+						superLevel = 0;
+				}
+
+				if (num == 2)
+						backStart.SetActive (true);
+
+				//				Debug.Log ("removeTimer");
+				
+		}
+
+		void superModeCount ()
+		{
+				superTimer--;
+				GameObject.Find ("second").guiText.text = "" + superTimer;
+				//				Debug.Log ("superTimer" + superTimer);
+				if (superTimer < 0) {
+			
+			
+			
+						CancelInvoke ("superModeCount");
+						superLevel++;
+						if (superLevel < 4)
+								superMode (superLevel);
+						
+			
+			
+				}
+		
+		}
+	
+		void superMode (int num)
+		{
+
+				superTimer = superTime;
+				if (num == 0) {
+						superTimer = 3;
+						superLevel = 0;
+				}
+				InvokeRepeating ("superModeCount", 0.1f, 1f);
+
+				balloon.SendMessage ("superMode", num);
+//				foreach (GameObject element in enemy) {
+//						element.SendMessage ("superMode", num);
+//				}
+//				
+				back.SendMessage ("superMode", num);
+				Debug.Log ("super:" + num);
 		}
 
 		void scoreCount ()
@@ -56,96 +165,51 @@ public class scr_manager : MonoBehaviour
 				}
 				scoreText.text = "Score: " + score;
 		}
-	
-		void normalModeCount ()
+		 
+		void enableTouch ()
 		{
-				normalTimer--;
-				
-				if (normalTimer < 1) {
-					
-//						Debug.Log ("" + normalTimer);
+				GetComponent<FingerDownDetector> ().enabled = true;
+				GetComponent<FingerUpDetector> ().enabled = true;
+				GetComponent<DragRecognizer> ().enabled = true;
+		}
+
+		void disableTouch ()
+		{
+				GetComponent<FingerDownDetector> ().enabled = false;
+				GetComponent<FingerUpDetector> ().enabled = false;
+				GetComponent<DragRecognizer> ().enabled = false;
+		}
+
+		void gameStart ()
+		{
+				backStart.SetActive (false);
+				enableTouch ();
+		}
+
+		void getBalloonMSG (int num)
+		{
+				switch (num) {
 			
+				case 1:
+						StartCoroutine (Remove (2));
+						break;
+				case 2:
+						score += 10;
+						break;
+				case 3:
+						score += 50;
+						break;
 			
-						CancelInvoke ("normalModeCount");
-						normalTimer = 3;
-						superLevel++;
-						superMode (superLevel);
-					
+				default:
+						break;
+			
 			
 				}
-		
 		}
-	
-		void superModeCount ()
-		{
-				superTimer--;
-				GameObject.Find ("second").guiText.text = "" + superTimer;
-//				Debug.Log ("superTimer" + superTimer);
-				if (superTimer < 0) {
-			
-						
-						
-						CancelInvoke ("superModeCount");
-						superLevel++;
-						superMode (superLevel);
-						superTimer = superTime;
-						
-			
-				}
-		
-		}
+		/************************ Control **********************/
 
-		void superMode (int num)
-		{
-				superTimer = superTime;s
-//				existBalloon = false;
-				InvokeRepeating ("superModeCount", 0.1f, 1f);
-				balloon.SendMessage ("superMode", num);
-				Debug.Log ("super:" + num);
-		}
 
-		void balloonCreate (Vector3 touch)
-		{
-				balloon.SetActive (true);
-				balloon.SendMessage ("create");
-				InvokeRepeating ("normalModeCount", 0.1f, 1f);
-				balloon.transform.position = touch;
-		}
 
-		void balloonRemove ()
-		{
-				superLevel = 0;
-				if (existBalloon) {
-					
-						balloon.SetActive (false);
-			
-						existBalloon = false;
-
-						superTimer = superTime;
-						normalTimer = 3;
-						superLevel = 0;
-				}
-		}
-
-		void balloonCancle (int num)
-		{
-				CancelInvoke ("superModeCount");
-				CancelInvoke ("normalModeCount");
-			
-				balloon.SendMessage ("cancel", num);
-		}
-
-		void gameOver ()
-		{
-				Debug.Log ("gameOver");
-				CancelInvoke ("superModeCount");
-				CancelInvoke ("normalModeCount");
-
-				balloonRemove ();
-				score = 0;
-				startManager.SendMessage ("gameOver");
-	
-		}
 
 		int dragFingerIndex = -1;
 
@@ -204,8 +268,8 @@ public class scr_manager : MonoBehaviour
 
 //				Instantiate (balloon, GetWorldPos (e.Position), Quaternion.identity);
 				if (!existBalloon) {
-						balloonCreate (GetWorldPos (e.Position));
 						existBalloon = true;
+						Create (GetWorldPos (e.Position));
 				}
 //				Debug.Log ("click");
 		}
@@ -223,8 +287,10 @@ public class scr_manager : MonoBehaviour
 //						existBalloon = false;
 //				}
 //				Debug.Log ("release");
-				if (existBalloon)
-						balloonCancle (1);		
+				if (existBalloon) {
+						StartCoroutine (Remove (1));			
+		
+				}
 //		balloonRemove ();
 //				Debug.Log ("release");
 		}
