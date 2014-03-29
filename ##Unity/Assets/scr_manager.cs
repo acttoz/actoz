@@ -19,7 +19,7 @@ public class scr_manager : MonoBehaviour
 
 		void Start ()
 		{
-				enemy = GameObject.FindGameObjectsWithTag ("enemy");
+//				enemy = GameObject.FindGameObjectsWithTag ("enemy");
 				scoreText = GameObject.Find ("score").GetComponent<TextMesh> ();
 				superTimer = superTime;
 				InvokeRepeating ("scoreCount", 0, 0.1f);
