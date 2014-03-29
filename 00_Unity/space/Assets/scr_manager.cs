@@ -5,12 +5,13 @@ public class scr_manager : MonoBehaviour
 {
 		public GameObject balloon;
 		public GameObject back, backStart, bgm;
+		public GameObject effectSuper1, effectSuper2, effectPop;
 		public Vector3 backSize;
 		public Vector3 balloonSize;
 		GameObject[] enemy;
 		public int superTime;
 		int superTimer;
-		public AudioClip create, remove, pop, bing;
+		public AudioClip create, remove, pop, bing, levelUp;
 		TextMesh scoreText;
 		float score = 0;
 		int superLevel = 0;
@@ -64,25 +65,31 @@ public class scr_manager : MonoBehaviour
 						break;
 			
 				case 2:
+						balloon.SendMessage ("cancel", 2);
 						score = 0;
 						disableTouch ();
 //						if (audio.isPlaying)
 						audio.Stop ();
 						audio.PlayOneShot (pop);
-			
+						Instantiate (effectPop, balloon.transform.position, Quaternion.identity);
+						balloon.SetActive (false);
 						
 						break;
 				}
 		
 		
-				
-				yield return new WaitForSeconds (0.2f);
+				if (num == 1) {
+						yield return new WaitForSeconds (0.2f);
+				} else {
+						yield return new WaitForSeconds (1f);
+				}
 				Debug.Log ("remove" + existBalloon);
 				superLevel = 0;
 				if (existBalloon) {
 						Debug.Log ("remove" + existBalloon);
 						balloon.transform.localScale = new Vector3 (0, 0, 0);
-						balloon.SetActive (false);
+						if (num == 1)
+								balloon.SetActive (false);
 						int i = 0;
 
 						// back & enemy reset
@@ -104,6 +111,7 @@ public class scr_manager : MonoBehaviour
 				if (num == 2) {
 						backStart.SetActive (true);
 						score = 0;
+						scoreText.text = "Score: " + score;
 				}
 
 				//				Debug.Log ("removeTimer");
@@ -113,7 +121,7 @@ public class scr_manager : MonoBehaviour
 		void superModeCount ()
 		{
 				superTimer--;
-				GameObject.Find ("second").guiText.text = "" + superTimer;
+				 
 				//				Debug.Log ("superTimer" + superTimer);
 				if (superTimer < 0) {
 			
@@ -156,9 +164,15 @@ public class scr_manager : MonoBehaviour
 						InvokeRepeating ("scoreCount", 0.1f, 0.7f);
 						break;
 				case 2:
+						audio.PlayOneShot (levelUp);
+						Instantiate (effectSuper1, new Vector2 (0, 0), Quaternion.identity);
+						Instantiate (effectSuper2, new Vector2 (0, 0), Quaternion.identity);
 						InvokeRepeating ("scoreCount", 0.1f, 0.3f);
 						break;
 				case 3:
+						audio.PlayOneShot (levelUp);
+						Instantiate (effectSuper1, new Vector2 (0, 0), Quaternion.identity);
+						Instantiate (effectSuper2, new Vector2 (0, 0), Quaternion.identity);
 						InvokeRepeating ("scoreCount", 0.1f, 0.1f);
 						
 						break;

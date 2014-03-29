@@ -5,7 +5,7 @@ public class src_balloon : MonoBehaviour
 {
 		Animator anim;
 		bool exist = false;
-		public GameObject GAMEMANAGER;
+		public GameObject GAMEMANAGER, pop;
 		public Sprite crash, balloon;
 		// Use this for initialization
 		void Start ()
@@ -46,7 +46,7 @@ public class src_balloon : MonoBehaviour
 		void OnTriggerEnter (Collider myTrigger)
 		{
 				if (myTrigger.transform.tag == "enemy" && exist) {
-						GetComponent<SpriteRenderer> ().sprite = crash;
+						
 						Debug.Log ("onTrigger");
 						exist = false;
 						GAMEMANAGER.SendMessage ("getBalloonMSG", 1);
