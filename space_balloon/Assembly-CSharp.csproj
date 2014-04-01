@@ -136,6 +136,10 @@
      <Compile Include="Assets\ToonEffect_V2\Plugins\HTSpriteSequencer.cs" />
      <Compile Include="Assets\ToonEffect_V2\Plugins\HTSpriteSheet.cs" />
      <Compile Include="Assets\scr_bgm.cs" />
+     <Compile Include="Assets\scr_button.cs" />
+     <Compile Include="Assets\scr_button1.cs" />
+     <Compile Include="Assets\scr_logo.cs" />
+     <Compile Include="Assets\scr_logo_back.cs" />
      <Compile Include="Assets\scr_manager.cs" />
      <Compile Include="Assets\scr_num5.cs" />
      <Compile Include="Assets\scr_startManager.cs" />
