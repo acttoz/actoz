@@ -140,7 +140,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &116749739
 Transform:
   m_ObjectHideFlags: 0
@@ -166,6 +166,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   menu: {fileID: 701585728}
+  mainCam: {fileID: 2132151359}
 --- !u!95 &116749741
 Animator:
   serializedVersion: 2
@@ -437,7 +438,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 655387746}
   - 212: {fileID: 655387745}
-  - 65: {fileID: 655387747}
+  - 136: {fileID: 655387747}
   m_Layer: 0
   m_Name: img_ButtonRectYellow
   m_TagString: Untagged
@@ -480,8 +481,8 @@ Transform:
   m_Children:
   - {fileID: 726178757}
   m_Father: {fileID: 428975328}
---- !u!65 &655387747
-BoxCollider:
+--- !u!136 &655387747
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
@@ -489,8 +490,9 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 2.1400001, y: .680000007, z: 1.34000003}
+  m_Radius: 1.04999995
+  m_Height: .689999938
+  m_Direction: 1
   m_Center: {x: 0, y: -1.1920929e-07, z: 0}
 --- !u!1 &701585728
 GameObject:
@@ -500,8 +502,8 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 701585729}
-  - 114: {fileID: 701585731}
   - 114: {fileID: 701585730}
+  - 114: {fileID: 701585731}
   - 114: {fileID: 701585732}
   m_Layer: 0
   m_Name: UI_MENU
@@ -509,7 +511,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &701585729
 Transform:
   m_ObjectHideFlags: 0
@@ -550,7 +552,7 @@ MonoBehaviour:
   requiredFingerCount: 1
   DistanceUnit: 2
   MaxSimultaneousGestures: 1
-  ResetMode: 0
+  ResetMode: 2
   Raycaster: {fileID: 0}
   ClusterManager: {fileID: 0}
   Delegate: {fileID: 0}
@@ -560,7 +562,7 @@ MonoBehaviour:
   SendMessageToSelection: 0
   IsExclusive: 0
   RequiredTaps: 1
-  MoveTolerance: .5
+  MoveTolerance: .75
   MaxDuration: 0
   MaxDelayBetweenTaps: .5
 --- !u!114 &701585732
@@ -571,15 +573,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 701585728}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 06c71470e58dece45a990c1eaafbd474, type: 3}
+  m_Script: {fileID: 11500000, guid: bf945d278a7402a4cb9cd26aec5c0fe7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FingerIndexFilter: -1
-  Raycaster: {fileID: 0}
-  UseSendMessage: 1
-  SendMessageToSelection: 1
-  MessageTarget: {fileID: 0}
-  MessageName: OnFingerDown
+  Cameras: []
+  IgnoreLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
+  RayThickness: 0
+  VisualizeRaycasts: 1
+  UsePhysics2D: 1
 --- !u!1 &726178753
 GameObject:
   m_ObjectHideFlags: 0
@@ -1307,8 +1310,8 @@ AudioSource:
   m_GameObject: {fileID: 2132151359}
   m_Enabled: 1
   serializedVersion: 3
-  m_audioClip: {fileID: 8300000, guid: 1b86d96cbf9c6624692fa961177de66a, type: 3}
-  m_PlayOnAwake: 1
+  m_audioClip: {fileID: 8300000, guid: 582789087ced2e1469372e2f1004540b, type: 3}
+  m_PlayOnAwake: 0
   m_Volume: .407999992
   m_Pitch: 1
   Loop: 1

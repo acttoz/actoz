@@ -16,6 +16,11 @@ public class scr_bgm : MonoBehaviour
 	
 		}
 
+		void playAfterLogo ()
+		{
+				audio.Play ();
+		}
+
 		void superMode (int num)
 		{
 		

@@ -42,7 +42,7 @@ MonoBehaviour:
   spriteCount: 32
   uvAnimationTileX: 8
   uvAnimationTileY: 4
-  framesPerSecond: 44
+  framesPerSecond: 31
   sizeStart: {x: 7, y: 7, z: 0}
   sizeEnd: {x: 7, y: 7, z: 0}
   randomRotation: 0

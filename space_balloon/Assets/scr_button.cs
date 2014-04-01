@@ -19,8 +19,7 @@ public class scr_button : MonoBehaviour
 
 		void OnTap (TapGesture gesture)
 		{
-
-				Debug.Log ("ontap");
+				 
 				if (gesture.Selection == btn1) {
 						Debug.Log ("ontapbtn1");			
 						btn1.GetComponent<SpriteRenderer> ().color = Color.yellow;

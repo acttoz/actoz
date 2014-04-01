@@ -3,7 +3,7 @@ using System.Collections;
 
 public class scr_logo_back : MonoBehaviour
 {
-		public GameObject menu;
+		public GameObject menu, mainCam;
 		// Use this for initialization
 		void Start ()
 		{
@@ -13,6 +13,7 @@ public class scr_logo_back : MonoBehaviour
 		void destroy ()
 		{
 				menu.SetActive (true);
+				mainCam.SendMessage ("playAfterLogo");
 				Destroy (this.gameObject);
 		}
 

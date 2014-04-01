@@ -4,6 +4,7 @@ using System.Collections;
 public class scr_toStart : MonoBehaviour
 {
 		public GameObject manager;
+		
 		// Use this for initialization
 		void Start ()
 		{
@@ -18,6 +19,7 @@ public class scr_toStart : MonoBehaviour
 
 		void OnTap ()
 		{
+				
 				manager.SendMessage ("gameStart");
 		}
 }
