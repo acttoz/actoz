@@ -66,6 +66,10 @@ public class DailyList extends Activity {
 	SQLiteDatabase dailyDb;
 	ContentValues dailyRow;
 	LinearLayout container;
+	public static int fontSize;
+	SharedPreferences idPrefs;
+	SharedPreferences firstRun = null;
+	SharedPreferences.Editor editor;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -73,7 +77,9 @@ public class DailyList extends Activity {
 		setContentView(R.layout.dailylist);
 		initAdam();
 		dailyRow = new ContentValues();
-
+		idPrefs = getSharedPreferences("id", MODE_PRIVATE);
+		editor = idPrefs.edit();
+		fontSize = idPrefs.getInt("FONT", 2);
 		// isCheck = new boolean[100];
 		mPool = new SoundPool(1, AudioManager.STREAM_MUSIC, 0);
 		sRight = mPool.load(this, R.raw.shutter, 1);
@@ -145,18 +151,19 @@ public class DailyList extends Activity {
 				// TODO Auto-generated method stub
 
 				mPool.play(sRight, 1, 1, 0, 0, 1);
-				
-				final FrameLayout shotBack=(FrameLayout)findViewById(R.id.shot_back);
+
+				final FrameLayout shotBack = (FrameLayout) findViewById(R.id.shot_back);
 				shotBack.setBackgroundColor(Color.parseColor("#bbbbbb"));
 				new Handler().postDelayed(new Runnable() {// 1 초 후에 실행
-				    @Override
-				    public void run() {
-				        // 실행할 동작 코딩
-				    	shotBack.setBackgroundColor(Color.parseColor("#ffffff"));
-				    	capture();
-				    }
-				}, 200);   
-				
+							@Override
+							public void run() {
+								// 실행할 동작 코딩
+								shotBack.setBackgroundColor(Color
+										.parseColor("#ffffff"));
+								capture();
+							}
+						}, 200);
+
 			}
 		});
 
@@ -191,9 +198,9 @@ public class DailyList extends Activity {
 				captureView.compress(Bitmap.CompressFormat.JPEG, 100, fos); // 캡쳐
 
 				// 미디어 스캐너를 통해 모든 미디어 리스트를 갱신시킨다.
-//				sendBroadcast(new Intent(Intent.ACTION_MEDIA_MOUNTED,
-//						Uri.parse("file://"
-//								+ Environment.getExternalStorageDirectory())));
+				// sendBroadcast(new Intent(Intent.ACTION_MEDIA_MOUNTED,
+				// Uri.parse("file://"
+				// + Environment.getExternalStorageDirectory())));
 				Intent intent = new Intent(Intent.ACTION_SEND);
 
 				MimeTypeMap type = MimeTypeMap.getSingleton();

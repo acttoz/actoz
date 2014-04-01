@@ -61,6 +61,12 @@ public class DailyNoticeAdapter extends BaseAdapter {
 			TextView tv_contents = (TextView) v.findViewById(R.id.contents);
 			tv_contents.setTypeface(SpeedAlimActivity.mTypeface);
 			tv_contents.setText(arrayList.get(position).getContents());
+
+			if (DailyList.fontSize == 2) {
+				tv_contents.setTextSize(20);
+			} else {
+				tv_contents.setTextSize(15);
+			}
 			CheckBox ckb = (CheckBox) v.findViewById(R.id.ckb);
 			ckb.setChecked(arrayList.get(position).getBoolean());
 			ckb.setFocusable(false);

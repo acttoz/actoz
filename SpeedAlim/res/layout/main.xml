@@ -92,17 +92,34 @@
             android:layout_gravity="right|bottom"
             android:background="@drawable/settingbtn" />
 
-        <ImageButton
-            android:id="@+id/refresh"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right|top"
-            android:background="@drawable/refresh"
-            android:layout_margin="1dip" />
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="0px"
+                android:layout_weight="2"
+                android:orientation="vertical" >
+
+                <ImageButton
+                    android:id="@+id/refresh"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right|center_vertical"
+                    android:layout_margin="2dip"
+                    android:background="@drawable/refresh" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="0px"
+                android:layout_weight="13" />
+        </LinearLayout>
     </FrameLayout>
 
     <FrameLayout
-        
         android:id="@+id/layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
