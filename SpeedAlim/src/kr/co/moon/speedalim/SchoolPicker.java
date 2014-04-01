@@ -26,6 +26,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 public class SchoolPicker extends Activity {
 	private static final String LOGTAG = "BannerTypeXML1";
@@ -34,7 +35,7 @@ public class SchoolPicker extends Activity {
 	SharedPreferences schoolPrefs;
 	SharedPreferences.Editor editor;
 	ArrayList<String> schoolList;
-
+	TextView title;
 	ArrayList<String> schoolID;
 	static ArrayAdapter<String> schoolAdapter;
 
@@ -46,6 +47,7 @@ public class SchoolPicker extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.school_list);
 		initAdam();
+		title = (TextView) findViewById(R.id.textView1);
 		schoolPrefs = getSharedPreferences("id", MODE_PRIVATE);
 		editor = schoolPrefs.edit();
 
@@ -53,6 +55,7 @@ public class SchoolPicker extends Activity {
 		schoolID = new ArrayList<String>();
 
 		threadParse();
+		title.setText("학교목록 다운중..");
 
 		// TODO Auto-generated method stub
 	}
@@ -148,9 +151,9 @@ public class SchoolPicker extends Activity {
 
 										}
 									});
-							// schoolAdapter.notifyDataSetChanged();
-							// schoolListView.invalidate();
-
+							schoolAdapter.notifyDataSetChanged();
+							schoolListView.invalidate();
+							title.setText("학교를 고르시오.");
 							// if (progressDialog.isShowing()) {
 							// try {
 							// progressDialog.dismiss();

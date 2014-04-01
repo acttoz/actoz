@@ -91,9 +91,18 @@
             android:layout_height="wrap_content"
             android:layout_gravity="right|bottom"
             android:background="@drawable/settingbtn" />
+
+        <ImageButton
+            android:id="@+id/refresh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right|top"
+            android:background="@drawable/refresh"
+            android:layout_margin="1dip" />
     </FrameLayout>
 
     <FrameLayout
+        
         android:id="@+id/layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

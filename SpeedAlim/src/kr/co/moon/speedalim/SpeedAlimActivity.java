@@ -5,6 +5,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import net.daum.adam.publisher.AdView;
 import net.daum.adam.publisher.AdView.AnimationType;
@@ -41,6 +42,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.os.SystemClock;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -74,7 +76,7 @@ public class SpeedAlimActivity extends Activity {
 	static int syncTime;
 	int newVer;
 	static int curVer;
-
+	private AlertDialog mDialog = null;
 	private FrameLayout main_layout;
 
 	static PendingIntent sender;
@@ -118,6 +120,7 @@ public class SpeedAlimActivity extends Activity {
 	Window window;
 	String title;
 	public static String schoolId;
+	int refreshDay;
 
 	// static final String TYPEFACE_NAME = "nanum_pen.ttf.mp3";
 	static Typeface mTypeface = null;
@@ -144,7 +147,7 @@ public class SpeedAlimActivity extends Activity {
 		idPrefs = getSharedPreferences("id", MODE_PRIVATE);
 		editor = idPrefs.edit();
 
-		curVer = 51;
+		curVer = 55;
 
 		if (SpeedAlimActivity.mTypeface == null) {
 			SpeedAlimActivity.mTypeface = Typeface.createFromAsset(getAssets(),
@@ -163,6 +166,7 @@ public class SpeedAlimActivity extends Activity {
 		grade = idPrefs.getString("GRADE", "null");
 		ban = idPrefs.getString("BAN", "null");
 		mSchool = idPrefs.getString("SCHOOLID", "null");
+		refreshDay = idPrefs.getInt("REFRESH", 0);
 
 		// 아이디 유무 확인
 
@@ -334,7 +338,87 @@ public class SpeedAlimActivity extends Activity {
 				openOptionsMenu();
 			}
 		});
+		final ImageButton refresh = (ImageButton) findViewById(R.id.refresh);
+		refresh.setOnClickListener(new OnClickListener() {
 
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				mDialog = createDialog();
+				mDialog.show();
+				mDialog.getWindow().getAttributes();
+				TextView textView = (TextView) mDialog
+						.findViewById(android.R.id.message);
+				// TextView text2View = (TextView) mDialog
+				// .findViewById(android.R.id.title);
+				textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+				// text2View.setTextSize(40);
+				Button btn1 = mDialog
+						.getButton(DialogInterface.BUTTON_NEGATIVE);
+				Button btn2 = mDialog
+						.getButton(DialogInterface.BUTTON_POSITIVE);
+				btn1.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+				btn2.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+			}
+		});
+
+	}
+
+	private AlertDialog createDialog() {
+
+		AlertDialog.Builder ab = new AlertDialog.Builder(this);
+		ab.setTitle("알림");
+		Calendar c = Calendar.getInstance();
+		final int day = c.get(Calendar.DAY_OF_MONTH);
+		if (refreshDay != day) {
+			String alert1 = "선생님이 올리신 알림장을 강제로 가져옵니다.";
+			String alert2 = "알림장이 제대로 동작하지 않을 경우 눌러주세요.";
+			String alert3 = "인터넷이 가능할때만 눌러주세요!";
+			String alert4 = "하루에 한번만 동작합니다.";
+			ab.setMessage(alert1 + "\n" + alert2 + "\n" + alert3 + "\n"
+					+ alert4);
+			ab.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface arg0, int arg1) {
+
+					editor.putInt("REFRESH", day);
+					editor.commit();
+					refreshDay = day;
+					Log.d("day", "" + day);
+
+					dateList.clear();
+					listAdapter.notifyDataSetChanged();
+					openDb();
+					db.delete("daytemp", null, null);
+					threadparse = new MyThread();
+					threadparse.setPriority(Thread.MIN_PRIORITY);
+					threadparse.start();
+				}
+
+			});
+			ab.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface arg0, int arg1) {
+
+				}
+
+			});
+		} else {
+			String alert = "오늘은 이미 새로고침을 했습니다.";
+			ab.setMessage(alert);
+			ab.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface arg0, int arg1) {
+
+				}
+
+			});
+		}
+
+		ab.setCancelable(false);
+		ab.setIcon(getResources().getDrawable(R.drawable.ic_launcher));
+
+		return ab.create();
 	}
 
 	public void loadDb() {
@@ -441,7 +525,7 @@ public class SpeedAlimActivity extends Activity {
 
 		menu.add(0, 1, 0, "커뮤니티").setIcon(android.R.drawable.ic_menu_help);
 		menu.add(0, 2, 0, "별점주기").setIcon(android.R.drawable.star_off);
-		menu.add(0, 3, 0, "광고제거(유료)").setIcon(
+		menu.add(0, 3, 0, "동생용 설치").setIcon(
 				android.R.drawable.stat_sys_download);
 
 		// menu.add(0, 2, 0, "알림 설정").setIcon(
