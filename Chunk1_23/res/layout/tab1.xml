@@ -12,10 +12,10 @@
 
         <ImageView
             android:id="@+id/quiz"
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:adjustViewBounds="true"
-            android:background="#999990"
+            android:scaleType="fitCenter"
             android:padding="2dp" />
 
         <ImageView
