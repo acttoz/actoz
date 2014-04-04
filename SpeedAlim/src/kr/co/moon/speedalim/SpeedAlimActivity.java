@@ -527,13 +527,7 @@ public class SpeedAlimActivity extends Activity {
 		menu.add(0, 2, 0, "별점주기").setIcon(android.R.drawable.star_off);
 		menu.add(0, 3, 0, "동생용 설치").setIcon(
 				android.R.drawable.stat_sys_download);
-		if (idPrefs.getInt("FONT", 2) == 2) {
-			menu.add(0, 4, 0, "글자 크기 작게").setIcon(android.R.drawable.btn_minus);
-
-		} else {
-			menu.add(0, 4, 0, "글자 크기 크게").setIcon(android.R.drawable.btn_plus);
-
-		}
+		menu.add(0, 4, 0, "글자 크기 조정").setIcon(R.drawable.icon_font);
 
 		return true;
 
@@ -588,13 +582,13 @@ public class SpeedAlimActivity extends Activity {
 		case 4:
 			// 처리할 이벤트
 			if (idPrefs.getInt("FONT", 2) == 2) {
-				Toast.makeText(SpeedAlimActivity.this, "알림장 내용이 작아집니다.",
+				Toast.makeText(SpeedAlimActivity.this, "알림장 내용 글자가 작아집니다.",
 						Toast.LENGTH_LONG).show();
 				editor.putInt("FONT", 1);
 				editor.commit();
 
 			} else {
-				Toast.makeText(SpeedAlimActivity.this, "알림장 내용이 커집니다.",
+				Toast.makeText(SpeedAlimActivity.this, "알림장 내용 글자가 커집니다.",
 						Toast.LENGTH_LONG).show();
 				editor.putInt("FONT", 2);
 				editor.commit();
