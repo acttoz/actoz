@@ -3,8 +3,28 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:gravity="center"
-    android:padding="5dip"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:padding="5dip" >
+
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+
+        <ImageView
+            android:id="@+id/quiz"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:adjustViewBounds="true"
+            android:background="#999990"
+            android:padding="2dp" />
+
+        <ImageView
+            android:src="@drawable/btn_play"
+            android:layout_width="50dip"
+            android:layout_height="50dip"
+            android:adjustViewBounds="true"
+            android:layout_gravity="right|top" />
+    </FrameLayout>
 
     <ImageView
         android:id="@+id/quiz"

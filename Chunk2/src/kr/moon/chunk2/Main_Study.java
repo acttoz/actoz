@@ -1,7 +1,11 @@
 package kr.moon.chunk2;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -30,10 +34,14 @@ import android.content.SharedPreferences;
 import android.graphics.PorterDuff.Mode;
 import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Debug;
 import android.os.Environment;
+import android.os.Handler;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -75,6 +83,7 @@ public class Main_Study extends Activity implements OnClickListener,
 	private AlertDialog mDialog = null;
 	private ImageButton changeBtn, recordImageButton, playImageButton,
 			btn_share;
+	int appVer, newVer;
 	private ProgressBar pb;
 	// upload
 	String selectedPath = "";
@@ -90,7 +99,7 @@ public class Main_Study extends Activity implements OnClickListener,
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main_study);
-
+		appVer = 55;
 		idPrefs = getSharedPreferences("id", MODE_PRIVATE);
 		editor = idPrefs.edit();
 
@@ -197,6 +206,88 @@ public class Main_Study extends Activity implements OnClickListener,
 
 		initialize();
 		tab1();
+	}
+
+	public void checkVer() {
+
+		// WIFI, 3G 어느곳에도 연결되지 않았을때
+		Log.d("dd", "Network connect success");
+		DownloadText checkVer = new DownloadText();
+		checkVer.start();
+
+	}
+
+	private class DownloadText extends Thread {
+		final Handler mHandler = new Handler();
+		StringBuilder text;
+
+		public void run() {
+			try {
+				text = new StringBuilder();
+				text.append("");
+				URL url = new URL(
+						"http://actoz.dothome.co.kr/13chunk/ver2_1.txt");
+				HttpURLConnection conn = (HttpURLConnection) url
+						.openConnection();
+				if (conn != null) {
+					conn.setConnectTimeout(1000); // 1초 동안 인터넷 연결을 실패할경우 Fall 처리
+					conn.setUseCaches(false);
+					if (conn.getResponseCode() == HttpURLConnection.HTTP_OK) {
+						BufferedReader br = new BufferedReader(
+								new InputStreamReader(conn.getInputStream()));
+						// for (;;) {
+						String line = br.readLine();
+						// if (line == null)
+						// break;
+						text.append(line);
+						// }
+						br.close();
+					}
+					conn.disconnect();
+				}
+
+				mHandler.post(new Runnable() {
+					public void run() {
+						try {
+							newVer = Integer.parseInt((text.toString()));
+
+							Log.d("checkver", "" + newVer);
+							if (appVer < newVer) {
+
+								AlertDialog.Builder dlg = new AlertDialog.Builder(
+										Main_Study.this);
+								dlg.setTitle("업데이트 알림");
+								dlg.setMessage("새버전이 있습니다. 업데이트를 해주세요!");
+								dlg.setIcon(R.drawable.ic_launcher);
+								dlg.setNegativeButton("업데이트 바로 가기",
+										new DialogInterface.OnClickListener() {
+											public void onClick(
+													DialogInterface dialog,
+													int whichButton) {
+
+												Uri uri = Uri
+														.parse("market://details?id="
+																+ getApplicationContext()
+																		.getPackageName());
+												Intent intent = new Intent(
+														Intent.ACTION_VIEW, uri);
+												intent.addCategory(Intent.CATEGORY_BROWSABLE);
+												startActivity(intent);
+												finish();
+											}
+										});
+								dlg.setCancelable(true);
+								dlg.show();
+							}
+						} catch (NumberFormatException nfe) {
+							// TODO: handle exception
+						}
+					}
+				});
+			} catch (Exception ex) {
+			}
+
+		}
 	}
 
 	public void share() {

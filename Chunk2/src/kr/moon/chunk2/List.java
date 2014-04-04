@@ -114,7 +114,7 @@ public class List extends Activity implements OnClickListener {
 
 			msg.putExtra(Intent.EXTRA_SUBJECT, "청크로 원어민 되기");
 
-			msg.putExtra(Intent.EXTRA_TEXT, "http://m.site.naver.com/094c3");
+			msg.putExtra(Intent.EXTRA_TEXT, this.getResources().getString(R.string.link));
 
 			msg.putExtra(Intent.EXTRA_TITLE, "제목");
 
