@@ -62,7 +62,7 @@
             android:orientation="vertical" >
 
             <ImageButton
-                android:id="@+id/ib_change2" 
+                android:id="@+id/ib_change" 
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"

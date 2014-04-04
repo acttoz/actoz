@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.lang.reflect.Array;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
@@ -34,9 +35,12 @@ import android.content.SharedPreferences;
 import android.graphics.PorterDuff.Mode;
 import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Debug;
 import android.os.Environment;
 import android.os.Handler;
 import android.util.Log;
@@ -59,8 +63,7 @@ import android.widget.Toast;
 public class Main_Study extends Activity implements OnClickListener,
 		OnTouchListener {
 	String dateName, onlyName, ment, nickName;
-	String[] answer_list = new String[] { "1번 cell phone", "4번 cake",
-			"2번 cell phone", "3번 whale", "2번", "3번" };
+	String[] answer_list = new String[] { "5번", "3번", "5번", "5번", "4번" };
 	TextView instruction;
 	View tab1, tab2, tab3;
 	Drawable alpha1;
@@ -83,6 +86,7 @@ public class Main_Study extends Activity implements OnClickListener,
 			btn_share;
 	int appVer, newVer;
 	private ProgressBar pb;
+	String APPNAME;
 	// upload
 	String selectedPath = "";
 	SharedPreferences idPrefs;
@@ -113,6 +117,15 @@ public class Main_Study extends Activity implements OnClickListener,
 		chapter = i.getStringExtra("CHAPTER");
 		Log.d("packageName:", getApplicationContext()
 				.getPackageName());
+		String str=getApplicationContext()
+				.getPackageName();
+		String[] tempPack=str.split("\\.");
+		Log.d("packArray", tempPack[0]);
+		APPNAME=tempPack[tempPack.length-1];
+		Log.d("packageName:", APPNAME);
+		editor.putString("APP", APPNAME);
+		editor.commit();
+		
 		TextView header = (TextView) findViewById(R.id.title);
 		instruction = (TextView) findViewById(R.id.instruction);
 		instruction.setOnClickListener(this);
@@ -225,7 +238,7 @@ public class Main_Study extends Activity implements OnClickListener,
 				text = new StringBuilder();
 				text.append("");
 				URL url = new URL(
-						"http://actoz.dothome.co.kr/13chunk/ver1_1.txt");
+						"http://actoz.dothome.co.kr/13chunk/"+APPNAME+".txt");
 				HttpURLConnection conn = (HttpURLConnection) url
 						.openConnection();
 				if (conn != null) {
@@ -449,7 +462,7 @@ public class Main_Study extends Activity implements OnClickListener,
 
 	private void initialize() {
 		recordImageButton = (ImageButton) findViewById(R.id.ib_record);
-		changeBtn = (ImageButton) findViewById(R.id.ib_change2);
+		changeBtn = (ImageButton) findViewById(R.id.ib_change);
 		playImageButton = (ImageButton) findViewById(R.id.ib_play);
 		btn_share = (ImageButton) findViewById(R.id.share);
 		btn_share.setOnClickListener(this);
@@ -689,7 +702,7 @@ public class Main_Study extends Activity implements OnClickListener,
 		// startActivity(activityIntent3);
 		// break;
 
-		case R.id.ib_change2:
+		case R.id.ib_change:
 			// showDialog();
 			if (speak_flag == 0) {
 				speak_img = this.getResources().getIdentifier(speak_korean,
