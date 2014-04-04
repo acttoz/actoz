@@ -10,15 +10,7 @@
         android:layout_height="fill_parent"
         android:layout_weight="8" >
 
-        <ProgressBar
-            android:id="@+id/progressBar1"
-            style="?android:attr/progressBarStyleLarge"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/editText1"
-            android:layout_centerHorizontal="true"
-            android:layout_gravity="center"
-            android:layout_marginTop="24dp" />
+      
 
         <ScrollView
             android:layout_width="fill_parent"
@@ -31,7 +23,7 @@
             <ImageView
                 android:id="@+id/speak"
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
+                android:layout_height="wrap_content"
                 android:scaleType="fitCenter"
                 android:adjustViewBounds="true"
                 android:gravity="center" />

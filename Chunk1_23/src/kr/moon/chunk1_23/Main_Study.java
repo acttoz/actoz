@@ -61,7 +61,8 @@ import android.widget.Toast;
 public class Main_Study extends Activity implements OnClickListener,
 		OnTouchListener {
 	String dateName, onlyName, ment, nickName;
-	String[] answer_list = new String[] { "5번", "3번", "5번", "5번", "4번" };
+	String[] answer_list = new String[] { "5번", "3번", "5번", "5번", "4번", "5번",
+			"3번", "5번", "5번", "4번", "5번" };
 	TextView instruction;
 	View tab1, tab2, tab3;
 	Drawable alpha1;
@@ -83,7 +84,6 @@ public class Main_Study extends Activity implements OnClickListener,
 	private ImageButton changeBtn, recordImageButton, playImageButton,
 			btn_share;
 	int appVer, newVer;
-	private ProgressBar pb;
 	String APPNAME;
 	// upload
 	String selectedPath = "";
@@ -124,7 +124,7 @@ public class Main_Study extends Activity implements OnClickListener,
 		try {
 			PackageInfo pInfo;
 			pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
-			Log.d("ver", ""+pInfo.versionCode);
+			Log.d("ver", "" + pInfo.versionCode);
 			appVer = pInfo.versionCode;
 			checkVer();
 		} catch (NameNotFoundException e) {
@@ -219,8 +219,6 @@ public class Main_Study extends Activity implements OnClickListener,
 		int lid2 = this.getResources().getIdentifier(tmp_Sound, "raw",
 				this.getPackageName());
 		mp = MediaPlayer.create(this, lid2);
-		pb = (ProgressBar) findViewById(R.id.progressBar1);
-		pb.setVisibility(View.GONE);
 
 		initialize();
 		tab1();
@@ -364,7 +362,6 @@ public class Main_Study extends Activity implements OnClickListener,
 		}
 
 		protected void onPostExecute(Double result) {
-			pb.setVisibility(View.GONE);
 			Toast.makeText(getApplicationContext(), "command sent",
 					Toast.LENGTH_LONG).show();
 
@@ -377,7 +374,6 @@ public class Main_Study extends Activity implements OnClickListener,
 		}
 
 		protected void onProgressUpdate(Integer... progress) {
-			pb.setProgress(progress[0]);
 		}
 
 		public void postData(String valueIWantToSend) {
