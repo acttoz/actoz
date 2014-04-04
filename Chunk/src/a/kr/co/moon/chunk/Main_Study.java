@@ -1,7 +1,11 @@
 package a.kr.co.moon.chunk;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -34,6 +38,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -56,7 +61,7 @@ public class Main_Study extends Activity implements OnClickListener,
 	String dateName, onlyName, ment, nickName;
 	String[] answer_list = new String[] { "1번 cell phone", "4번 cake",
 			"2번 cell phone", "3번 whale", "2번", "3번" };
-	TextView  instruction;
+	TextView instruction;
 	View tab1, tab2, tab3;
 	Drawable alpha1;
 	Drawable alpha2;
@@ -74,29 +79,34 @@ public class Main_Study extends Activity implements OnClickListener,
 	private MediaPlayer mediaPlayer = null;
 	private Uri uri = null;
 	private AlertDialog mDialog = null;
-	private ImageButton recordImageButton, playImageButton, btn_share;
+	private ImageButton changeBtn, recordImageButton, playImageButton,
+			btn_share;
+	int appVer, newVer;
 	private ProgressBar pb;
 	// upload
 	String selectedPath = "";
 	SharedPreferences idPrefs;
 	SharedPreferences.Editor editor;
-	ImageView check1, check2;
+	ImageView check1, check2, speakImage;
+	String speak_eng;
+	String speak_korean;
+	int speak_img, speak_flag;
 
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main_study);
-
+		appVer = 55;
 		idPrefs = getSharedPreferences("id", MODE_PRIVATE);
 		editor = idPrefs.edit();
 
-		ImageView btn1, btn2, btn3,  quiz_Image, speakImage;
+		ImageView btn1, btn2, btn3, quiz_Image;
 		final ImageView playBtn1;
 		final ImageView playBtn2;
 		// Button playBtn1, playBtn2;
 		cal = Calendar.getInstance();
-//		tv = (TextView) findViewById(R.id.status2);
+		// tv = (TextView) findViewById(R.id.status2);
 		// 테스트용
 		Intent i = getIntent();
 		String header_title = i.getStringExtra("TITLE");
@@ -108,12 +118,13 @@ public class Main_Study extends Activity implements OnClickListener,
 		header.setText(header_title);
 		// chapter = "1";
 		String tmpSign = "q" + chapter;
-		String tmpSign3 = "speak" + chapter;
+		speak_eng = "speak" + chapter;
+		speak_korean = "korean" + chapter;
 
 		btn1 = (ImageView) findViewById(R.id.btn1);
 		btn2 = (ImageView) findViewById(R.id.btn2);
 		btn3 = (ImageView) findViewById(R.id.btn3);
-//		btn4 = (ImageView) findViewById(R.id.btn4);
+		// btn4 = (ImageView) findViewById(R.id.btn4);
 		playBtn1 = (ImageView) findViewById(R.id.play1);
 		playBtn2 = (ImageView) findViewById(R.id.play2);
 		check1 = (ImageView) findViewById(R.id.check1);
@@ -122,7 +133,7 @@ public class Main_Study extends Activity implements OnClickListener,
 		btn1.setOnClickListener(this);
 		btn2.setOnClickListener(this);
 		btn3.setOnClickListener(this);
-//		btn4.setOnClickListener(this);
+		// btn4.setOnClickListener(this);
 		playBtn1.setOnClickListener(this);
 		playBtn2.setOnClickListener(this);
 		playBtn1.setOnTouchListener(new OnTouchListener() {
@@ -176,10 +187,11 @@ public class Main_Study extends Activity implements OnClickListener,
 		int lid = this.getResources().getIdentifier(tmpSign, "drawable",
 				this.getPackageName());
 
-		int lid3 = this.getResources().getIdentifier(tmpSign3, "drawable",
+		speak_img = this.getResources().getIdentifier(speak_eng, "drawable",
 				this.getPackageName());
+		speak_flag = 0;
 
-		speakImage.setImageResource(lid3);
+		speakImage.setImageResource(speak_img);
 		quiz_Image = (ImageView) findViewById(R.id.quiz);
 		quiz_Image.setImageResource(lid);
 		quiz_Image.setOnClickListener(this);
@@ -194,6 +206,88 @@ public class Main_Study extends Activity implements OnClickListener,
 		tab1();
 	}
 
+	public void checkVer() {
+
+		// WIFI, 3G 어느곳에도 연결되지 않았을때
+		Log.d("dd", "Network connect success");
+		DownloadText checkVer = new DownloadText();
+		checkVer.start();
+
+	}
+
+	private class DownloadText extends Thread {
+		final Handler mHandler = new Handler();
+		StringBuilder text;
+
+		public void run() {
+			try {
+				text = new StringBuilder();
+				text.append("");
+				URL url = new URL(
+						"http://actoz.dothome.co.kr/13chunk/ver2_1.txt");
+				HttpURLConnection conn = (HttpURLConnection) url
+						.openConnection();
+				if (conn != null) {
+					conn.setConnectTimeout(1000); // 1초 동안 인터넷 연결을 실패할경우 Fall 처리
+					conn.setUseCaches(false);
+					if (conn.getResponseCode() == HttpURLConnection.HTTP_OK) {
+						BufferedReader br = new BufferedReader(
+								new InputStreamReader(conn.getInputStream()));
+						// for (;;) {
+						String line = br.readLine();
+						// if (line == null)
+						// break;
+						text.append(line);
+						// }
+						br.close();
+					}
+					conn.disconnect();
+				}
+
+				mHandler.post(new Runnable() {
+					public void run() {
+						try {
+							newVer = Integer.parseInt((text.toString()));
+
+							Log.d("checkver", "" + newVer);
+							if (appVer < newVer) {
+
+								AlertDialog.Builder dlg = new AlertDialog.Builder(
+										Main_Study.this);
+								dlg.setTitle("업데이트 알림");
+								dlg.setMessage("새버전이 있습니다. 업데이트를 해주세요!");
+								dlg.setIcon(R.drawable.ic_launcher);
+								dlg.setNegativeButton("업데이트 바로 가기",
+										new DialogInterface.OnClickListener() {
+											public void onClick(
+													DialogInterface dialog,
+													int whichButton) {
+
+												Uri uri = Uri
+														.parse("market://details?id="
+																+ getApplicationContext()
+																		.getPackageName());
+												Intent intent = new Intent(
+														Intent.ACTION_VIEW, uri);
+												intent.addCategory(Intent.CATEGORY_BROWSABLE);
+												startActivity(intent);
+												finish();
+											}
+										});
+								dlg.setCancelable(true);
+								dlg.show();
+							}
+						} catch (NumberFormatException nfe) {
+							// TODO: handle exception
+						}
+					}
+				});
+			} catch (Exception ex) {
+			}
+
+		}
+	}
+
 	public void share() {
 		if (isPlayed) {
 			pause();
@@ -205,7 +299,7 @@ public class Main_Study extends Activity implements OnClickListener,
 		if (mediaPlayer != null) {
 			// 업로드
 			Log.d("cc", "업로드");
-//			pb.setVisibility(View.VISIBLE);
+			// pb.setVisibility(View.VISIBLE);
 			String format = new String("yyyyMMddHHmmss");
 			SimpleDateFormat sdf = new SimpleDateFormat(format, Locale.KOREA);
 			dateName = sdf.format(new Date())
@@ -217,8 +311,9 @@ public class Main_Study extends Activity implements OnClickListener,
 
 			MimeTypeMap type = MimeTypeMap.getSingleton();
 			intent.setType(type.getMimeTypeFromExtension(MimeTypeMap
-					.getFileExtensionFromUrl(Environment.getExternalStorageDirectory()
-							.getAbsolutePath() + File.separator + "loup/record.m4a")));
+					.getFileExtensionFromUrl(Environment
+							.getExternalStorageDirectory().getAbsolutePath()
+							+ File.separator + "loup/record.m4a")));
 
 			intent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(file1));
 			intent.putExtra(Intent.EXTRA_TEXT, "청크 녹음 파일");
@@ -353,11 +448,13 @@ public class Main_Study extends Activity implements OnClickListener,
 
 	private void initialize() {
 		recordImageButton = (ImageButton) findViewById(R.id.ib_record);
+		changeBtn = (ImageButton) findViewById(R.id.ib_change2);
 		playImageButton = (ImageButton) findViewById(R.id.ib_play);
 		btn_share = (ImageButton) findViewById(R.id.share);
 		btn_share.setOnClickListener(this);
 		playImageButton.setOnClickListener(this);
 		recordImageButton.setOnClickListener(this);
+		changeBtn.setOnClickListener(this);
 	}
 
 	private void playHandler() {
@@ -426,7 +523,7 @@ public class Main_Study extends Activity implements OnClickListener,
 				} else {
 					editor.putString("NICK", onlyName);
 					editor.commit();
-//					share(dateName, ment);
+					// share(dateName, ment);
 				}
 			}
 		});
@@ -466,7 +563,7 @@ public class Main_Study extends Activity implements OnClickListener,
 				} else {
 					editor.putString("NICK", onlyName);
 					editor.commit();
-//					share(dateName, ment);
+					// share(dateName, ment);
 				}
 			}
 		});
@@ -584,12 +681,28 @@ public class Main_Study extends Activity implements OnClickListener,
 
 			tab3();
 			break;
-//		case R.id.btn4:
-//			flagTab = false;
-//			Intent activityIntent3 = new Intent(Main_Study.this,
-//					MainActivity.class);
-//			startActivity(activityIntent3);
-//			break;
+		// case R.id.btn4:
+		// flagTab = false;
+		// Intent activityIntent3 = new Intent(Main_Study.this,
+		// MainActivity.class);
+		// startActivity(activityIntent3);
+		// break;
+
+		case R.id.ib_change2:
+			// showDialog();
+			if (speak_flag == 0) {
+				speak_img = this.getResources().getIdentifier(speak_korean,
+						"drawable", this.getPackageName());
+				speak_flag = 1;
+
+			} else {
+				speak_img = this.getResources().getIdentifier(speak_eng,
+						"drawable", this.getPackageName());
+				speak_flag = 0;
+			}
+
+			speakImage.setImageResource(speak_img);
+			break;
 
 		case R.id.ib_record:
 
@@ -599,7 +712,7 @@ public class Main_Study extends Activity implements OnClickListener,
 				currentRecordTimeMs = 0;
 				recordAsyncTask = new RecordAsyncTask();
 				recordAsyncTask.execute();
-//				tv.setText("녹음중..");
+				// tv.setText("녹음중..");
 			} else {
 				isRecording = false;
 				recordImageButton.setImageResource(R.drawable.btn_rec);
@@ -607,7 +720,7 @@ public class Main_Study extends Activity implements OnClickListener,
 					recordAsyncTask.cancel(true);
 				Toast.makeText(this, "Record Success!", Toast.LENGTH_SHORT)
 						.show();
-//				tv.setText("녹음");
+				// tv.setText("녹음");
 			}
 
 			break;
@@ -637,7 +750,7 @@ public class Main_Study extends Activity implements OnClickListener,
 			break;
 
 		case R.id.share:
-//			showDialog();
+			// showDialog();
 			share();
 			break;
 
