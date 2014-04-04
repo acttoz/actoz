@@ -31,6 +31,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Typeface;
@@ -146,8 +148,16 @@ public class SpeedAlimActivity extends Activity {
 
 		idPrefs = getSharedPreferences("id", MODE_PRIVATE);
 		editor = idPrefs.edit();
-
-		curVer = 55;
+		try {
+			PackageInfo pInfo;
+			pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
+			Log.d("ver", ""+pInfo.versionCode);
+			curVer = pInfo.versionCode;
+		} catch (NameNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 
 		if (SpeedAlimActivity.mTypeface == null) {
 			SpeedAlimActivity.mTypeface = Typeface.createFromAsset(getAssets(),
