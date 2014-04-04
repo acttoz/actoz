@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.lang.reflect.Array;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
@@ -85,6 +86,7 @@ public class Main_Study extends Activity implements OnClickListener,
 			btn_share;
 	int appVer, newVer;
 	private ProgressBar pb;
+	String APPNAME;
 	// upload
 	String selectedPath = "";
 	SharedPreferences idPrefs;
@@ -102,7 +104,7 @@ public class Main_Study extends Activity implements OnClickListener,
 		appVer = 55;
 		idPrefs = getSharedPreferences("id", MODE_PRIVATE);
 		editor = idPrefs.edit();
-
+		checkVer();
 		ImageView btn1, btn2, btn3, quiz_Image;
 		final ImageView playBtn1;
 		final ImageView playBtn2;
@@ -113,7 +115,17 @@ public class Main_Study extends Activity implements OnClickListener,
 		Intent i = getIntent();
 		String header_title = i.getStringExtra("TITLE");
 		chapter = i.getStringExtra("CHAPTER");
-		Log.d("√©≈Õ∑ŒµÂ", header_title + chapter);
+		Log.d("packageName:", getApplicationContext()
+				.getPackageName());
+		String str=getApplicationContext()
+				.getPackageName();
+		String[] tempPack=str.split("\\.");
+		Log.d("packArray", tempPack[0]);
+		APPNAME=tempPack[tempPack.length-1];
+		Log.d("packageName:", APPNAME);
+		editor.putString("APP", APPNAME);
+		editor.commit();
+		
 		TextView header = (TextView) findViewById(R.id.title);
 		instruction = (TextView) findViewById(R.id.instruction);
 		instruction.setOnClickListener(this);
@@ -226,7 +238,7 @@ public class Main_Study extends Activity implements OnClickListener,
 				text = new StringBuilder();
 				text.append("");
 				URL url = new URL(
-						"http://actoz.dothome.co.kr/13chunk/ver2_1.txt");
+						"http://actoz.dothome.co.kr/13chunk/"+APPNAME+".txt");
 				HttpURLConnection conn = (HttpURLConnection) url
 						.openConnection();
 				if (conn != null) {
