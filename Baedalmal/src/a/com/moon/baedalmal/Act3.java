@@ -51,7 +51,7 @@ public class Act3 extends Activity {
 	private int mIntro;
 	private int mSuccess;
 
-	int goal= 0;
+	int goal = 0;
 	int count = 0;
 
 	private static Object lock = new Object();
@@ -98,7 +98,7 @@ public class Act3 extends Activity {
 				.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
 		mDisplay_width = display.getWidth();
 		mDisplay_height = display.getHeight();
-		Log.d("height", ""+mDisplay_height);
+		Log.d("height", "" + mDisplay_height);
 
 		mPool = new SoundPool(1, AudioManager.STREAM_MUSIC, 0);
 		mTouch = mPool.load(this, R.raw.touch, 1);
@@ -106,8 +106,8 @@ public class Act3 extends Activity {
 		mSuccess = mPool.load(this, R.raw.success, 1);
 
 		Spinner s = (Spinner) findViewById(R.id.new_btn);
-		ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-				R.array.type, android.R.layout.simple_spinner_item);
+		ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
+				this, R.array.type, android.R.layout.simple_spinner_item);
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		s.setAdapter(adapter);
 
@@ -172,10 +172,10 @@ public class Act3 extends Activity {
 	// }
 
 	private void newGame(int c, int r) {
-		goal = (c*2);
+		goal = (c * 2);
 		ROW_COUNT = r;
 		COL_COUNT = c;
-		Log.d("newgame", c+" "+r);
+		Log.d("newgame", c + " " + r);
 
 		cards = new int[COL_COUNT][ROW_COUNT];
 
@@ -196,7 +196,7 @@ public class Act3 extends Activity {
 		loadCards();
 
 		turns = 0;
-		((TextView) findViewById(R.id.tv1)).setText(turns+"µ¹");
+		((TextView) findViewById(R.id.tv1)).setText(turns + "µ¹");
 
 	}
 
@@ -270,8 +270,8 @@ public class Act3 extends Activity {
 		Button button = new Button(context);
 		button.setMinWidth(0);
 		button.setMinHeight(0);
-		button.setWidth(mDisplay_width/6);
-		button.setWidth(mDisplay_height/6);
+		button.setWidth(mDisplay_width / 6);
+		button.setWidth(mDisplay_height / 6);
 		button.setBackgroundDrawable(backImage);
 		button.setId(100 * x + y);
 
@@ -312,7 +312,7 @@ public class Act3 extends Activity {
 				seconedCard = new Card(button, x, y);
 
 				turns++;
-				((TextView) findViewById(R.id.tv1)).setText("Tries: " + turns);
+				((TextView) findViewById(R.id.tv1)).setText(turns + "µ¹");
 
 				TimerTask tt = new TimerTask() {
 
@@ -349,8 +349,6 @@ public class Act3 extends Activity {
 
 			if (cards[seconedCard.x][seconedCard.y] == cards[firstCard.x][firstCard.y]) {
 
-				
-				
 				firstCard.button.setVisibility(View.INVISIBLE);
 				seconedCard.button.setVisibility(View.INVISIBLE);
 				count = count + 1;
@@ -380,7 +378,7 @@ public class Act3 extends Activity {
 							Act3.this);
 					alertdlg.setIcon(R.drawable.trophy);
 					alertdlg.setTitle("³îÀÌ ³¡");
-					alertdlg.setMessage("Â¦Â¦Â¦~~~ "+turns+"µ¹ ¸¸¿¡ ´Ù ¸ÂÃè½À´Ï´Ù.");
+					alertdlg.setMessage("Â¦Â¦Â¦~~~ " + turns + "µ¹ ¸¸¿¡ ´Ù ¸ÂÃè½À´Ï´Ù.");
 					alertdlg.setPositiveButton("È®ÀÎ",
 							new DialogInterface.OnClickListener() {
 								public void onClick(DialogInterface dialog,
@@ -389,13 +387,12 @@ public class Act3 extends Activity {
 								}
 							});
 					alertdlg.show();
-					count= 0;
-					goal= 0;
+					count = 0;
+					goal = 0;
 
 				} else {
 					mPool.play(mIntro, 1, 1, 0, 0, 1);
-					Toast.makeText(Act3.this, "µùµ¿´ó", Toast.LENGTH_SHORT)
-							.show();
+					Toast.makeText(Act3.this, "µùµ¿´ó", Toast.LENGTH_SHORT).show();
 				}
 
 			} else {

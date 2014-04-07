@@ -39,8 +39,8 @@
                     android:layout_width="0px"
                     android:layout_height="wrap_content"
                     android:layout_weight="3"
-                    android:text="그림 놀이"
                     android:gravity="center"
+                    android:text="그림 놀이"
                     android:textColor="#ffffff"
                     android:textSize="20sp" />
 
@@ -51,17 +51,16 @@
 
                 <TextView
                     android:id="@+id/score"
-                    android:textColor="#ffffff"
                     android:layout_width="0px"
                     android:layout_height="wrap_content"
                     android:layout_weight="3"
-                    android:text="정답 : 0/0"
                     android:gravity="right"
                     android:paddingRight="20dip"
+                    android:text="정답 : 0/0"
+                    android:textColor="#ffffff"
                     android:textSize="15sp" />
             </LinearLayout>
         </FrameLayout>
-
 
         <TextView
             android:layout_width="fill_parent"
@@ -75,13 +74,24 @@
 
             <ImageView
                 android:id="@+id/quiz"
-                android:padding="5dip"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:layout_margin="20dip"
                 android:adjustViewBounds="true"
+                android:padding="5dip"
                 android:scaleType="fitCenter"
                 android:src="@drawable/i50" />
+
+            <TextView
+                android:id="@+id/quizNum"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="left|top"
+                android:paddingLeft="10dp"
+                android:text="돌 : 0/75"
+                android:textColor="#3b3b3b"
+                android:textSize="20sp" />
+
         </FrameLayout>
 
         <TextView

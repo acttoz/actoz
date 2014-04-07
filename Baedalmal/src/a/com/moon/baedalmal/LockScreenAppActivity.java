@@ -7,6 +7,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Random;
 
@@ -29,7 +30,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -61,6 +61,7 @@ public class LockScreenAppActivity extends Activity {
 	TextView home;
 	TextView left;
 	TextView right;
+	TextView T_quizNum;
 	// int phone_x,phone_y;
 	int home_x, home_y;
 	int[] droidpos;
@@ -77,6 +78,8 @@ public class LockScreenAppActivity extends Activity {
 	Toast toast;
 	int score = 0;
 	int tryNum = 0;
+	int[] quizList = new int[75];
+	int quizNum = 70;
 
 	public void onCreate(Bundle savedInstanceState) {
 
@@ -85,7 +88,8 @@ public class LockScreenAppActivity extends Activity {
 		setContentView(R.layout.main);
 		idPrefs = getSharedPreferences("id", MODE_PRIVATE);
 		editor = idPrefs.edit();
-
+		quizList = getRandomArray(75);
+		Log.d("this is my array", "arr: " + Arrays.toString(quizList));
 		dbCopied = idPrefs.getBoolean("DBCOPY", false);
 
 		if (!dbCopied) {
@@ -96,14 +100,14 @@ public class LockScreenAppActivity extends Activity {
 
 		level = idPrefs.getString("LEVEL", "1");
 		popup = idPrefs.getBoolean("POPUP", true);
-
+		T_quizNum = (TextView) findViewById(R.id.quizNum);
 		// level = "1"; // 테스트
 		toast = Toast.makeText(LockScreenAppActivity.this, "딩동댕",
 				Toast.LENGTH_SHORT);
 		// 날짜
 
-		MyThread threadparse = new MyThread();
-		threadparse.setDaemon(true);
+		// MyThread threadparse = new MyThread();
+		// threadparse.setDaemon(true);
 		// threadparse.start(); // 테스트
 		droid = (ImageView) findViewById(R.id.droid);
 		try {
@@ -160,6 +164,7 @@ public class LockScreenAppActivity extends Activity {
 							}
 							droid.getLocationOnScreen(droidpos);
 							v.setLayoutParams(layoutParams);
+							Log.d("answer", answer);
 							if (answer.equals("left")
 									&& x_cord <= (windowwidth / 4)) {
 								// 정답
@@ -170,6 +175,10 @@ public class LockScreenAppActivity extends Activity {
 								toast.show();
 								layoutParams.leftMargin = ((windowwidth) / 2 - imageW / 2);
 								v.setLayoutParams(layoutParams);
+								if (quizNum > 75) {
+									gameEnd();
+									break;
+								}
 								initQuiz();
 							} else if (answer.equals("right")
 									&& x_cord >= (windowwidth / 4) * 3) {
@@ -181,10 +190,13 @@ public class LockScreenAppActivity extends Activity {
 								toast.show();
 								layoutParams.leftMargin = ((windowwidth) / 2 - imageW / 2);
 								v.setLayoutParams(layoutParams);
+								if (quizNum > 75) {
+									gameEnd();
+									break;
+								}
 								initQuiz();
 								// finish();
-							}
-							if (answer.equals("right")
+							} else if (answer.equals("right")
 									&& x_cord <= (windowwidth / 4)) {
 								playing = false;
 								scoreSet(false);
@@ -194,6 +206,10 @@ public class LockScreenAppActivity extends Activity {
 								toast.show();
 								layoutParams.leftMargin = ((windowwidth) / 2 - imageW / 2);
 								v.setLayoutParams(layoutParams);
+								if (quizNum > 75) {
+									gameEnd();
+									break;
+								}
 								initQuiz();
 							} else if (answer.equals("left")
 									&& x_cord >= (windowwidth / 4) * 3) {
@@ -205,13 +221,16 @@ public class LockScreenAppActivity extends Activity {
 								toast.show();
 								layoutParams.leftMargin = ((windowwidth) / 2 - imageW / 2);
 								v.setLayoutParams(layoutParams);
+								if (quizNum > 75) {
+									gameEnd();
+									break;
+								}
 								initQuiz();
 								// finish();
 							}
 						}
 						break;
 					case MotionEvent.ACTION_UP:
-
 
 						layoutParams.leftMargin = ((windowwidth) / 2 - imageW / 2);
 
@@ -220,6 +239,24 @@ public class LockScreenAppActivity extends Activity {
 					}
 
 					return true;
+				}
+
+				private void gameEnd() {
+					// TODO Auto-generated method stub
+					AlertDialog.Builder alertdlg = new AlertDialog.Builder(
+							LockScreenAppActivity.this);
+					alertdlg.setIcon(R.drawable.trophy);
+					alertdlg.setTitle("놀이 끝");
+					alertdlg.setMessage("짝짝짝~~~ 점수는 " + score + "점입니다!!");
+					alertdlg.setPositiveButton("확인",
+							new DialogInterface.OnClickListener() {
+								public void onClick(DialogInterface dialog,
+										int whichButton) {
+									dialog.cancel();
+								}
+							});
+					alertdlg.show();
+
 				}
 			});
 
@@ -231,14 +268,14 @@ public class LockScreenAppActivity extends Activity {
 	}
 
 	public void scoreSet(boolean right) {
-		TextView scoreText = (TextView)findViewById(R.id.score);
+		TextView scoreText = (TextView) findViewById(R.id.score);
 		if (right) {
 			tryNum++;
 			score++;
 		} else {
 			tryNum++;
 		}
-		scoreText.setText("정답 : "+score+"/"+tryNum);
+		scoreText.setText("정답 : " + score);
 	}
 
 	public void showDialog() {
@@ -278,8 +315,7 @@ public class LockScreenAppActivity extends Activity {
 
 	public void initQuiz() {
 		int n = (int) (Math.random() * 10) + 1;
-		Log.d("정답 난수", String.valueOf(n));
-
+		T_quizNum.setText("돌:" + quizNum + "/75");
 		if (n > 5) {
 			answer = "left";
 		} else {
@@ -291,7 +327,7 @@ public class LockScreenAppActivity extends Activity {
 		right = (TextView) findViewById(R.id.right);
 
 		Random rnd = new Random();
-		int r = rnd.nextInt(75) + 1; // 정답 난수
+		int r = quizList[quizNum - 1] + 1; // 정답 난수
 		int w = rnd.nextInt(75) + 1; // 오답 난수
 
 		if (r == w) {
@@ -302,7 +338,7 @@ public class LockScreenAppActivity extends Activity {
 			}
 		}
 
-		Log.d("initquiz", answer + r + " " + w);
+		Log.d("initquiz", "num=" + quizNum + " " + answer + " " + r + " " + w);
 		mHelper = new DayHelper(LockScreenAppActivity.this);
 
 		db = mHelper.getReadableDatabase();
@@ -335,6 +371,29 @@ public class LockScreenAppActivity extends Activity {
 
 		quiz.setImageResource(lid3);
 
+		quizNum++;
+
+	}
+
+	public int[] getRandomArray(int length) {
+		int[] randArray = new int[length];
+
+		for (int i = 0; i < length; i++)
+			// 순서대로 숫자를 집어넣고
+			randArray[i] = i;
+
+		for (int i = 0; i < length; i++) {
+			int rnd = (int) (Math.random() * length); // 배열 범위 안의 난수를 두개 뽑아서..
+			int rndT = (int) (Math.random() * length);
+			swap(randArray, rnd, rndT); // 두 주소에 있는 값을 바꾼다.
+		}
+		return randArray;
+	}
+
+	public void swap(int[] arr, int x, int y) {
+		int temp = arr[x];
+		arr[x] = arr[y];
+		arr[y] = temp;
 	}
 
 	class MyThread extends Thread {
@@ -403,8 +462,6 @@ public class LockScreenAppActivity extends Activity {
 		}// while
 	}
 
-	
-	
 	public void openDb() {
 
 		mHelper = new DayHelper(LockScreenAppActivity.this);
