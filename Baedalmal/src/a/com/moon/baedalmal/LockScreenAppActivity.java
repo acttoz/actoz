@@ -79,7 +79,8 @@ public class LockScreenAppActivity extends Activity {
 	int score = 0;
 	int tryNum = 0;
 	int[] quizList = new int[75];
-	int quizNum = 70;
+	int quizNum = 1;
+	int endNum = 20;
 
 	public void onCreate(Bundle savedInstanceState) {
 
@@ -175,7 +176,7 @@ public class LockScreenAppActivity extends Activity {
 								toast.show();
 								layoutParams.leftMargin = ((windowwidth) / 2 - imageW / 2);
 								v.setLayoutParams(layoutParams);
-								if (quizNum > 75) {
+								if (quizNum > endNum) {
 									gameEnd();
 									break;
 								}
@@ -190,7 +191,7 @@ public class LockScreenAppActivity extends Activity {
 								toast.show();
 								layoutParams.leftMargin = ((windowwidth) / 2 - imageW / 2);
 								v.setLayoutParams(layoutParams);
-								if (quizNum > 75) {
+								if (quizNum > endNum) {
 									gameEnd();
 									break;
 								}
@@ -206,7 +207,7 @@ public class LockScreenAppActivity extends Activity {
 								toast.show();
 								layoutParams.leftMargin = ((windowwidth) / 2 - imageW / 2);
 								v.setLayoutParams(layoutParams);
-								if (quizNum > 75) {
+								if (quizNum > endNum) {
 									gameEnd();
 									break;
 								}
@@ -221,7 +222,7 @@ public class LockScreenAppActivity extends Activity {
 								toast.show();
 								layoutParams.leftMargin = ((windowwidth) / 2 - imageW / 2);
 								v.setLayoutParams(layoutParams);
-								if (quizNum > 75) {
+								if (quizNum > endNum) {
 									gameEnd();
 									break;
 								}
@@ -253,6 +254,7 @@ public class LockScreenAppActivity extends Activity {
 								public void onClick(DialogInterface dialog,
 										int whichButton) {
 									dialog.cancel();
+									finish();
 								}
 							});
 					alertdlg.show();
@@ -315,7 +317,7 @@ public class LockScreenAppActivity extends Activity {
 
 	public void initQuiz() {
 		int n = (int) (Math.random() * 10) + 1;
-		T_quizNum.setText("µ¹:" + quizNum + "/75");
+		T_quizNum.setText("µ¹:" + quizNum + "/"+endNum);
 		if (n > 5) {
 			answer = "left";
 		} else {
