@@ -7,23 +7,19 @@ public class scr_item : MonoBehaviour
 		void Start ()
 		{
 		}
-	
+
+		void Awake ()
+		{
+		
+				rigidbody.velocity = new Vector3 (0, 0.02f, 0);
+
+		}
 		// Update is called once per frame
 		void Update ()
 		{
 	
 		}
 
-		void OnTriggerEnter (Collider myTrigger)
-		{
-				Destroy (this.gameObject);
-				Debug.Log ("itemGet");
-				if (myTrigger.transform.tag == "balloon") {
-			
-			
-				}
 		
-		
-		}
 
 }

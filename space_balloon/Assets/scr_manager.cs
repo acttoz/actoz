@@ -3,13 +3,17 @@ using System.Collections;
 
 public class scr_manager : MonoBehaviour
 {
-		public GameObject balloon;
+		public GameObject balloon, itemBlue, itemOrange, itemPurple;
+		public Sprite bStar, oStar, pStar, eStar;
+		Sprite tempStar;
+		SpriteRenderer star1, star2, star3;
+		GameObject existItem, createItem;
 		public GameObject back, backStart, bgm, gauge, lv;
 		public GameObject effectSuper1, effectSuper2, effectPop, effectPoint, effectPointBack;
 		public Vector3 backSize;
 		public Vector3 balloonSize;
-		string colHave="n", colGet="n";
-		int numHave=0, numGet=0;
+		string colHave = "n", colCreate = "n";//b;o,p
+		int numHave = 0;
 		GameObject[] enemy;
 		public int superTime;
 		int superTimer;
@@ -24,16 +28,19 @@ public class scr_manager : MonoBehaviour
 	
 		void Start ()
 		{
+				star1 = GameObject.Find ("star1").GetComponent<SpriteRenderer> ();
+				star2 = GameObject.Find ("star2").GetComponent<SpriteRenderer> ();
+				star3 = GameObject.Find ("star3").GetComponent<SpriteRenderer> ();
 				enemy = GameObject.FindGameObjectsWithTag ("enemy");
 				scoreText = GameObject.Find ("score").GetComponent<tk2dTextMesh> ();
 				lvText = GameObject.Find ("lv").GetComponent<tk2dTextMesh> ();
 				superTimer = superTime;
-				mUp = GameObject.Find ("up").transform.position.y;
+				mUp = 5.5f;
 				mDown = mUp * -1;
-				mLeft = GameObject.Find ("left").transform.position.x;
+				mLeft = GameObject.Find ("lv").transform.position.x;
 				mRight = mLeft * -1;
 				Debug.Log ("screenSize=" + mUp + " " + mDown + " " + mLeft + " " + mRight + " ");
-				InvokeRepeating ("itemCreate", 1f, 2f);
+				InvokeRepeating ("itemCreate", 1f, 3f);
 		
 				//				backSize = back.renderer.bounds.size; 
 				//				Debug.Log (backSize);	
@@ -47,6 +54,76 @@ public class scr_manager : MonoBehaviour
 				//				balloonSize = balloon.renderer.bounds.size;
 				//				Debug.Log (balloonSize);
 		
+		}
+
+		void itemCreate ()
+		{
+				int tempCol = Random.Range (1, 4);
+				switch (tempCol) {
+				case 1:
+						colCreate = "b";
+						createItem = itemBlue;
+						tempStar = bStar;
+						break;
+
+				case 2:
+						createItem = itemOrange;
+						colCreate = "o";
+						tempStar = oStar;
+						break;
+
+				case 3:
+						createItem = itemPurple;
+						colCreate = "p";
+						tempStar = pStar;
+						break;
+				}
+
+				if (existItem != null)
+						Destroy (existItem);
+				float tempX = (Random.Range (mLeft * 100, mRight * 100)) / 100;
+				float tempY = (Random.Range (mDown * 100, mUp * 100)) / 100;
+				existItem = Instantiate (createItem, new Vector3 (tempX, tempY, 0), Quaternion.identity) as GameObject;
+		}
+
+		void getItem ()
+		{
+				switch (numHave) {
+				case 0:
+						colHave = colCreate;
+						star1.sprite = tempStar;
+						numHave++;
+						break;
+			
+				case 1:
+						if (colHave == colCreate) {
+								numHave++;
+								star2.sprite = tempStar;
+						} else {
+								resetStar ();
+						}
+						break;
+			
+				case 2:
+			 
+						if (colHave == colCreate) {
+								numHave++;
+								star3.sprite = tempStar;
+						} else {
+								resetStar ();
+						}
+						break;
+				}
+				 
+
+		}
+
+		void resetStar ()
+		{
+				star1.sprite = eStar;
+				star2.sprite = eStar;
+				star3.sprite = eStar;
+				numHave = 0;
 		}
 	
 		void Create (Vector3 touch)
@@ -98,12 +175,14 @@ public class scr_manager : MonoBehaviour
 						yield return new WaitForSeconds (0.2f);
 				} else {
 						yield return new WaitForSeconds (1f);
+						resetStar ();
 				}
 				Debug.Log ("remove" + existBalloon);
 				superLevel = 0;
 				if (existBalloon) {
 						Debug.Log ("remove" + existBalloon);
 						balloon.transform.localScale = new Vector3 (0, 0, 0);
+						
 						lvText.text = "Lv.1";
 						gauge.transform.localScale = new Vector3 (1.75f, 0.3f, 1);
 						if (num == 1)

@@ -53,9 +53,14 @@ public class src_balloon : MonoBehaviour
 			                        
 						
 				}
-		
+				if (myTrigger.transform.tag == "item") {
+						Debug.Log ("itemGet");
+						GAMEMANAGER.SendMessage ("getItem");
+						Destroy (myTrigger.gameObject);
+			
+			
+				}
 		 
 		}
-
-
+	 
 }
