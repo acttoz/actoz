@@ -726,7 +726,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &396401355
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1227,7 +1227,7 @@ MonoBehaviour:
   effectPointBack: {fileID: 100000, guid: f3750ae4bd4776246a1aca6f3b1e69db, type: 2}
   backSize: {x: 0, y: 0, z: 0}
   balloonSize: {x: 0, y: 0, z: 0}
-  superTime: 1000
+  superTime: 100
   create: {fileID: 8300000, guid: d6a626961503e5d448c1924f28322421, type: 3}
   remove: {fileID: 8300000, guid: a86e94a695d566e49ba6a01f8de63476, type: 3}
   pop: {fileID: 8300000, guid: 3205df71ebdee8d48942897e1a9ba792, type: 3}
@@ -1820,7 +1820,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1116373673
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2155,7 +2155,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &1448311155
 SpriteRenderer:
   m_ObjectHideFlags: 0
