@@ -1,28 +1,39 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class scr_manager : MonoBehaviour
 {
 		public GameObject balloon;
-		public GameObject back, backStart, bgm;
+		public GameObject back, backStart, bgm, gauge, lv;
 		public GameObject effectSuper1, effectSuper2, effectPop, effectPoint, effectPointBack;
 		public Vector3 backSize;
 		public Vector3 balloonSize;
+		string colHave="n", colGet="n";
+		int numHave=0, numGet=0;
 		GameObject[] enemy;
 		public int superTime;
 		int superTimer;
 		public AudioClip create, remove, pop, bing, levelUp, go;
-		TextMesh scoreText;
+		tk2dTextMesh scoreText;
+		tk2dTextMesh lvText;
 		float score = 0;
 		int superLevel = 0;
+		float mUp, mDown, mLeft, mRight;
 		// Use this for initialization
 		bool existBalloon = false;
 	
 		void Start ()
 		{
 				enemy = GameObject.FindGameObjectsWithTag ("enemy");
-				scoreText = GameObject.Find ("score").GetComponent<TextMesh> ();
+				scoreText = GameObject.Find ("score").GetComponent<tk2dTextMesh> ();
+				lvText = GameObject.Find ("lv").GetComponent<tk2dTextMesh> ();
 				superTimer = superTime;
+				mUp = GameObject.Find ("up").transform.position.y;
+				mDown = mUp * -1;
+				mLeft = GameObject.Find ("left").transform.position.x;
+				mRight = mLeft * -1;
+				Debug.Log ("screenSize=" + mUp + " " + mDown + " " + mLeft + " " + mRight + " ");
+				InvokeRepeating ("itemCreate", 1f, 2f);
 		
 				//				backSize = back.renderer.bounds.size; 
 				//				Debug.Log (backSize);	
@@ -54,6 +65,7 @@ public class scr_manager : MonoBehaviour
 				CancelInvoke ("scoreCount");
 		
 				CancelInvoke ("superModeCount");
+				CancelInvoke ("normalModeCount");
 				switch (num) {
 				case 1:
 			
@@ -92,6 +104,8 @@ public class scr_manager : MonoBehaviour
 				if (existBalloon) {
 						Debug.Log ("remove" + existBalloon);
 						balloon.transform.localScale = new Vector3 (0, 0, 0);
+						lvText.text = "Lv.1";
+						gauge.transform.localScale = new Vector3 (1.75f, 0.3f, 1);
 						if (num == 1)
 								balloon.SetActive (false);
 						int i = 0;
@@ -124,33 +138,54 @@ public class scr_manager : MonoBehaviour
 	
 		void superModeCount ()
 		{
+				if (gauge.transform.localScale.y > 1.75f) {
+						CancelInvoke ("superModeCount");
+						superLevel++;
+						if (superLevel < 4) {
+								gauge.transform.localScale = new Vector3 (1.75f, 0.3f, 1);
+								Debug.Log ("supermode(" + superLevel);
+								superMode (superLevel);
+						}
+				} else {
+
+						gauge.transform.localScale += new Vector3 (0, superTimer / 10000f, 0);
+				}
+		
+		}
+	
+		void normalModeCount ()
+		{
 				superTimer--;
 		
-				//				Debug.Log ("superTimer" + superTimer);
+				Debug.Log ("superTimer" + superTimer);
 				if (superTimer < 0) {
-			
-			
-			
-						CancelInvoke ("superModeCount");
+							
+							
+						Debug.Log ("normalCancel");
+						CancelInvoke ("normalModeCount");
 						superLevel++;
 						if (superLevel < 4)
 								superMode (superLevel);
-			
-			
-			
+							
+		
+		
+		
 				}
+		
 		
 		}
 	
 		void superMode (int num)
 		{
 		
-				superTimer = superTime;
 				if (num == 0) {
 						superTimer = 3;
 						superLevel = 0;
+						InvokeRepeating ("normalModeCount", 0.1f, 1f);
+				} else {
+						superTimer = superTime;
+						InvokeRepeating ("superModeCount", 0.1f, 0.1f);
 				}
-				InvokeRepeating ("superModeCount", 0.1f, 1f);
 		
 				balloon.SendMessage ("superMode", num);
 				foreach (GameObject element in enemy) {
@@ -168,6 +203,8 @@ public class scr_manager : MonoBehaviour
 						InvokeRepeating ("scoreCount", 0.1f, 0.7f);
 						break;
 				case 2:
+						lv.SendMessage ("levelUp");
+						lvText.text = "Lv.2";
 						audio.PlayOneShot (levelUp);
 						GameObject ps = (GameObject)GameObject.Instantiate (effectSuper1);
 						ps.transform.position = new Vector2 (0, 0);
@@ -179,6 +216,8 @@ public class scr_manager : MonoBehaviour
 						InvokeRepeating ("scoreCount", 0.1f, 0.3f);
 						break;
 				case 3:
+						lv.SendMessage ("levelUp");
+						lvText.text = "Lv.3";
 						audio.PlayOneShot (levelUp);
 						GameObject ps3 = (GameObject)GameObject.Instantiate (effectSuper1);
 						ps3.transform.position = new Vector2 (0, 0);
@@ -204,7 +243,6 @@ public class scr_manager : MonoBehaviour
 				Instantiate (effectPoint, balloon.transform.position, Quaternion.identity);
 				Instantiate (effectPointBack, balloon.transform.position, Quaternion.identity);
 				scoreText.text = "Score: " + score;
-				Debug.Log (score);
 		}
 	
 		void enableTouch ()

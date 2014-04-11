@@ -20,7 +20,6 @@ public class src_enemy : MonoBehaviour
 				if (Random.Range (0, 2) == 0) {
 						yTemp = -1;
 				}
-				Debug.Log (xTemp + " " + yTemp);
 				rigidbody.velocity = new Vector3 (xTemp * speed, yTemp * speed, 0);
 		}
 
@@ -50,12 +49,12 @@ public class src_enemy : MonoBehaviour
 				case 2:
 						superLevel = 2;
 						rigidbody.velocity = rigidbody.velocity + rigidbody.velocity.normalized / 10 * 20 * increaseRate;
-						Debug.Log ("enemy_superlevel2");
+//						Debug.Log ("enemy_superlevel2");
 						break;
 				case 3:
 						superLevel = 3;
 						rigidbody.velocity += rigidbody.velocity.normalized / 10 * 30 * increaseRate;
-						Debug.Log ("enemy_superlevel3");
+//						Debug.Log ("enemy_superlevel3");
 						break;
 				
 				default:
@@ -64,7 +63,7 @@ public class src_enemy : MonoBehaviour
 				
 				}
 				
-				Debug.Log ("enemy_velocity" + rigidbody.velocity.normalized);
+//				Debug.Log ("enemy_velocity" + rigidbody.velocity.normalized);
 			
 		}
 		
