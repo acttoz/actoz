@@ -11,7 +11,7 @@ public class scr_item : MonoBehaviour
 		void Awake ()
 		{
 		
-				rigidbody.velocity = new Vector3 (0, 0.02f, 0);
+				rigidbody.velocity = new Vector3 (0, -5f, 0);
 
 		}
 		// Update is called once per frame

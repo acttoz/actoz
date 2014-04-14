@@ -14,7 +14,7 @@ public class scr_manager : MonoBehaviour
 		public Vector3 balloonSize;
 		string colHave = "n", colCreate = "n";//b;o,p
 		int numHave = 0;
-		GameObject[] enemy;
+		GameObject[] enemy, realEnemy;
 		public int superTime;
 		int superTimer;
 		public AudioClip create, remove, pop, bing, levelUp, go;
@@ -32,6 +32,7 @@ public class scr_manager : MonoBehaviour
 				star2 = GameObject.Find ("star2").GetComponent<SpriteRenderer> ();
 				star3 = GameObject.Find ("star3").GetComponent<SpriteRenderer> ();
 				enemy = GameObject.FindGameObjectsWithTag ("enemy");
+				realEnemy = GameObject.FindGameObjectsWithTag ("realenemy");
 				scoreText = GameObject.Find ("score").GetComponent<tk2dTextMesh> ();
 				lvText = GameObject.Find ("lv").GetComponent<tk2dTextMesh> ();
 				superTimer = superTime;
@@ -82,8 +83,8 @@ public class scr_manager : MonoBehaviour
 				if (existItem != null)
 						Destroy (existItem);
 				float tempX = (Random.Range (mLeft * 100, mRight * 100)) / 100;
-				float tempY = (Random.Range (mDown * 100, mUp * 100)) / 100;
-				existItem = Instantiate (createItem, new Vector3 (tempX, tempY, 0), Quaternion.identity) as GameObject;
+//				float tempY = (Random.Range (mDown * 100, mUp * 100)) / 100;
+				existItem = Instantiate (createItem, new Vector3 (tempX, 7, 0), Quaternion.identity) as GameObject;
 		}
 
 		void getItem ()
@@ -92,15 +93,20 @@ public class scr_manager : MonoBehaviour
 				case 0:
 						colHave = colCreate;
 						star1.sprite = tempStar;
+						StartCoroutine ("getAnim", GameObject.Find ("star1"));
 						numHave++;
+						StartCoroutine ("monster", colHave);
 						break;
 			
 				case 1:
 						if (colHave == colCreate) {
 								numHave++;
+								StartCoroutine ("getAnim", GameObject.Find ("star2"));
+						
 								star2.sprite = tempStar;
 						} else {
 								resetStar ();
+								getItem ();
 						}
 						break;
 			
@@ -108,14 +114,48 @@ public class scr_manager : MonoBehaviour
 			 
 						if (colHave == colCreate) {
 								numHave++;
+								StartCoroutine ("getAnim", GameObject.Find ("star3"));
+								
 								star3.sprite = tempStar;
+
+								//moster
+								
+
 						} else {
 								resetStar ();
+								getItem ();
 						}
 						break;
 				}
 				 
 
+		}
+
+		IEnumerator monster (string mColHave)
+		{
+				//Stop item Create
+				//stop enemyTrigger
+				//enemy alpha
+				foreach (GameObject element in realEnemy) {
+						element.GetComponent<SpriteRenderer> ().color = new Color (1, 1, 1, 0.5f);
+				}
+				CancelInvoke ("itemCreate");
+				balloon.GetComponent<SphereCollider> ().enabled = false;
+				yield return new WaitForSeconds (3f);
+				foreach (GameObject element in realEnemy) {
+						element.GetComponent<SpriteRenderer> ().color = new Color (1, 1, 1, 1f);
+				}
+				InvokeRepeating ("itemCreate", 0.1f, 3f);
+		
+				balloon.GetComponent<SphereCollider> ().enabled = true;
+		}
+
+		IEnumerator getAnim (GameObject star)
+		{
+				star.GetComponent<Animator> ().SetInteger ("item", 1);
+				yield return new WaitForSeconds (0.5f);
+				star.GetComponent<Animator> ().SetInteger ("item", 0);
+				
 		}
 
 		void resetStar ()
@@ -183,7 +223,7 @@ public class scr_manager : MonoBehaviour
 						Debug.Log ("remove" + existBalloon);
 						balloon.transform.localScale = new Vector3 (0, 0, 0);
 						
-						lvText.text = "Lv.1";
+						lvText.text = "L\tv.1";
 						gauge.transform.localScale = new Vector3 (1.75f, 0.3f, 1);
 						if (num == 1)
 								balloon.SetActive (false);

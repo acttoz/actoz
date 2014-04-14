@@ -4,9 +4,11 @@ using System.Collections;
 public class src_balloon : MonoBehaviour
 {
 		Animator anim;
+		public AudioClip itemSound;
 		bool exist = false;
-		public GameObject GAMEMANAGER, pop;
+		public GameObject GAMEMANAGER, pop, item;
 		public Sprite crash, balloon;
+		public Color tempCol;
 		// Use this for initialization
 		void Start ()
 		{
@@ -56,6 +58,8 @@ public class src_balloon : MonoBehaviour
 				if (myTrigger.transform.tag == "item") {
 						Debug.Log ("itemGet");
 						GAMEMANAGER.SendMessage ("getItem");
+						audio.PlayOneShot (itemSound);
+						Instantiate (item, myTrigger.gameObject.transform.position, Quaternion.identity);
 						Destroy (myTrigger.gameObject);
 			
 			

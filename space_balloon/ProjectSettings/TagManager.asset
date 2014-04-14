@@ -8,6 +8,7 @@ TagManager:
   - enemy
   - wall
   - item
+  - realenemy
   - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX
@@ -49,6 +50,10 @@ TagManager:
   - name: ui
     userID: 1
     uniqueID: 686569627
+    locked: 0
+  - name: monster
+    userID: 3
+    uniqueID: 3884596643
     locked: 0
   - name: ready
     userID: 2
