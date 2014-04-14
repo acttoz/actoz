@@ -3,7 +3,7 @@ using System.Collections;
 
 public class scr_manager : MonoBehaviour
 {
-		public GameObject balloon, itemBlue, itemOrange, itemPurple;
+		public GameObject balloon, itemBlue, itemOrange, itemPurple, monsterB, monsterO, monsterP, monsterEffect;
 		public Sprite bStar, oStar, pStar, eStar;
 		Sprite tempStar;
 		SpriteRenderer star1, star2, star3;
@@ -17,7 +17,7 @@ public class scr_manager : MonoBehaviour
 		GameObject[] enemy, realEnemy;
 		public int superTime;
 		int superTimer;
-		public AudioClip create, remove, pop, bing, levelUp, go;
+		public AudioClip create, remove, pop, bing, levelUp, go, itemSound;
 		tk2dTextMesh scoreText;
 		tk2dTextMesh lvText;
 		float score = 0;
@@ -95,7 +95,8 @@ public class scr_manager : MonoBehaviour
 						star1.sprite = tempStar;
 						StartCoroutine ("getAnim", GameObject.Find ("star1"));
 						numHave++;
-						StartCoroutine ("monster", colHave);
+						audio.PlayOneShot (itemSound);
+						
 						break;
 			
 				case 1:
@@ -103,6 +104,7 @@ public class scr_manager : MonoBehaviour
 								numHave++;
 								StartCoroutine ("getAnim", GameObject.Find ("star2"));
 						
+								audio.PlayOneShot (itemSound);
 								star2.sprite = tempStar;
 						} else {
 								resetStar ();
@@ -117,7 +119,7 @@ public class scr_manager : MonoBehaviour
 								StartCoroutine ("getAnim", GameObject.Find ("star3"));
 								
 								star3.sprite = tempStar;
-
+								StartCoroutine ("monster", colHave);
 								//moster
 								
 
@@ -136,17 +138,31 @@ public class scr_manager : MonoBehaviour
 				//Stop item Create
 				//stop enemyTrigger
 				//enemy alpha
+				Debug.Log (mColHave);
+				if (mColHave.Equals ("b"))
+						Instantiate (monsterB, new Vector2 (0, 0), Quaternion.identity);
+				if (mColHave.Equals ("o"))
+						Instantiate (monsterO, new Vector2 (0, 0), Quaternion.identity);
+				if (mColHave.Equals ("p"))
+						Instantiate (monsterP, new Vector2 (0, 0), Quaternion.identity);
+				Instantiate (monsterEffect, new Vector2 (0, 0), Quaternion.identity);
+		
+		
 				foreach (GameObject element in realEnemy) {
 						element.GetComponent<SpriteRenderer> ().color = new Color (1, 1, 1, 0.5f);
 				}
 				CancelInvoke ("itemCreate");
+								
 				balloon.GetComponent<SphereCollider> ().enabled = false;
+
+				yield return new WaitForSeconds (1.5f);
+				audio.PlayOneShot (itemSound);
 				yield return new WaitForSeconds (3f);
 				foreach (GameObject element in realEnemy) {
 						element.GetComponent<SpriteRenderer> ().color = new Color (1, 1, 1, 1f);
 				}
 				InvokeRepeating ("itemCreate", 0.1f, 3f);
-		
+				resetStar ();
 				balloon.GetComponent<SphereCollider> ().enabled = true;
 		}
 

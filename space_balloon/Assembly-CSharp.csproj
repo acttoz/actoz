@@ -138,6 +138,7 @@
      <Compile Include="Assets\scr_bgm.cs" />
      <Compile Include="Assets\scr_button.cs" />
      <Compile Include="Assets\scr_button1.cs" />
+     <Compile Include="Assets\scr_destroy.cs" />
      <Compile Include="Assets\scr_item.cs" />
      <Compile Include="Assets\scr_logo.cs" />
      <Compile Include="Assets\scr_logo_back.cs" />
