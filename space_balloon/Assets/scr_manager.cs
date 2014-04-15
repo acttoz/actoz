@@ -3,7 +3,7 @@ using System.Collections;
 
 public class scr_manager : MonoBehaviour
 {
-		public GameObject balloon, itemBlue, itemOrange, itemPurple, monsterB, monsterO, monsterP, monsterEffect;
+		public GameObject balloon, itemBlue, itemOrange, itemPurple, monsterB, monsterO, monsterP, monsterEffect, super_back1, super_back2;
 		public Sprite bStar, oStar, pStar, eStar;
 		Sprite tempStar;
 		SpriteRenderer star1, star2, star3;
@@ -56,7 +56,9 @@ public class scr_manager : MonoBehaviour
 				//				Debug.Log (balloonSize);
 		
 		}
-
+		/// <summary>
+		/// Items the create.
+		/// </summary>
 		void itemCreate ()
 		{
 				int tempCol = Random.Range (1, 4);
@@ -120,6 +122,8 @@ public class scr_manager : MonoBehaviour
 								
 								star3.sprite = tempStar;
 								StartCoroutine ("monster", colHave);
+								StopCoroutine ("undead");
+								StartCoroutine ("undead");
 								//moster
 								
 
@@ -148,21 +152,29 @@ public class scr_manager : MonoBehaviour
 				Instantiate (monsterEffect, new Vector2 (0, 0), Quaternion.identity);
 		
 		
+				 
+			
+		
+		
+				yield return new WaitForSeconds (3f);
+				resetStar ();
+		}
+
+		IEnumerator  undead ()
+		{
+				CancelInvoke ("itemCreate");
+				balloon.GetComponent<SphereCollider> ().enabled = false;
 				foreach (GameObject element in realEnemy) {
 						element.GetComponent<SpriteRenderer> ().color = new Color (1, 1, 1, 0.5f);
 				}
-				CancelInvoke ("itemCreate");
 								
-				balloon.GetComponent<SphereCollider> ().enabled = false;
 
-				yield return new WaitForSeconds (1.5f);
-				audio.PlayOneShot (itemSound);
-				yield return new WaitForSeconds (3f);
+				yield return new WaitForSeconds (4f);
+
 				foreach (GameObject element in realEnemy) {
 						element.GetComponent<SpriteRenderer> ().color = new Color (1, 1, 1, 1f);
 				}
 				InvokeRepeating ("itemCreate", 0.1f, 3f);
-				resetStar ();
 				balloon.GetComponent<SphereCollider> ().enabled = true;
 		}
 
@@ -181,7 +193,11 @@ public class scr_manager : MonoBehaviour
 				star3.sprite = eStar;
 				numHave = 0;
 		}
-	
+
+		/// <summary>
+		/// Create & Remove	/// </summary>
+		/// <param name="touch">Touch.</param>
+
 		void Create (Vector3 touch)
 		{
 				balloon.GetComponent<SpriteRenderer> ().color = Color.red;
@@ -270,7 +286,10 @@ public class scr_manager : MonoBehaviour
 				//				Debug.Log ("removeTimer");
 		
 		}
-	
+		/// <summary>
+		/// Supers the mode count.
+		/// </summary>
+		/// 
 		void superModeCount ()
 		{
 				if (gauge.transform.localScale.y > 1.75f) {
@@ -338,19 +357,21 @@ public class scr_manager : MonoBehaviour
 						InvokeRepeating ("scoreCount", 0.1f, 0.7f);
 						break;
 				case 2:
+						StopCoroutine ("undead");
+						StartCoroutine ("undead");
 						lv.SendMessage ("levelUp");
 						lvText.text = "Lv.2";
 						audio.PlayOneShot (levelUp);
 						GameObject ps = (GameObject)GameObject.Instantiate (effectSuper1);
 						ps.transform.position = new Vector2 (0, 0);
-						ps.renderer.sortingLayerName = "ui";
 						GameObject ps2 = (GameObject)GameObject.Instantiate (effectSuper2);
 						ps2.transform.position = new Vector2 (0, 0);
-						ps2.renderer.sortingLayerName = "ui";
-			
+						Instantiate (super_back1, new Vector2 (0, 0), Quaternion.identity);
 						InvokeRepeating ("scoreCount", 0.1f, 0.3f);
 						break;
 				case 3:
+						StopCoroutine ("undead");
+						StartCoroutine ("undead");
 						lv.SendMessage ("levelUp");
 						lvText.text = "Lv.3";
 						audio.PlayOneShot (levelUp);
@@ -361,7 +382,7 @@ public class scr_manager : MonoBehaviour
 						ps4.transform.position = new Vector2 (0, 0);
 						ps4.renderer.sortingLayerName = "ui";
 						InvokeRepeating ("scoreCount", 0.1f, 0.1f);
-			
+						Instantiate (super_back2, new Vector2 (0, 0), Quaternion.identity);
 						break;
 			
 				default:
