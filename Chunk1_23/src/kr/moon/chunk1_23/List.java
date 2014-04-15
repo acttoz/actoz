@@ -38,10 +38,10 @@ public class List extends Activity implements OnClickListener {
 	Custom_List_Data data;
 	Custom_List_Adapter listAdapter1;
 	ArrayList<Custom_List_Data> dateList1;
-	String[] chapter_list = new String[] { "Chapter2-1", "Chapter2-2",
-			"Chapter2-3", "Chapter2-4", "Chapter2-5", "Chapter3-1",
-			"Chapter3-2", "Chapter3-3", "Chapter3-4", "Chapter3-5",
-			"Chapter3-6" };
+	String[] chapter_list = new String[] { "Chapter 2-1", "Chapter 2-2",
+			"Chapter 2-3", "Chapter 2-4", "Chapter 2-5", "Chapter 3-1",
+			"Chapter 3-2", "Chapter 3-3", "Chapter 3-4", "Chapter 3-5",
+			"Chapter 3-6" };
 
 	/** Called when the activity is first created. */
 	@Override
