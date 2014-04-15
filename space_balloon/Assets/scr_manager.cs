@@ -5,6 +5,7 @@ public class scr_manager : MonoBehaviour
 {
 		public GameObject balloon, itemBlue, itemOrange, itemPurple, monsterB, monsterO, monsterP, monsterEffect, super_back1, super_back2;
 		public Sprite bStar, oStar, pStar, eStar;
+		public float timer;
 		Sprite tempStar;
 		SpriteRenderer star1, star2, star3;
 		GameObject existItem, createItem;
@@ -25,6 +26,7 @@ public class scr_manager : MonoBehaviour
 		float mUp, mDown, mLeft, mRight;
 		// Use this for initialization
 		bool existBalloon = false;
+		bool timeStarted = true;
 	
 		void Start ()
 		{
@@ -51,11 +53,18 @@ public class scr_manager : MonoBehaviour
 		void Update ()
 		{
 		
-				//				GameObject balloon = GameObject.FindGameObjectWithTag ("balloon");
-				//				balloonSize = balloon.renderer.bounds.size;
-				//				Debug.Log (balloonSize);
+//				if (timeStarted == true) {
+//						timer -= Time.deltaTime;
+//						if (timer < 0)
+//								StartCoroutine ("timesUp");
+//				}   
 		
 		}
+
+//		IEnumerator timesUp ()
+//		{
+//
+//		}
 		/// <summary>
 		/// Items the create.
 		/// </summary>
