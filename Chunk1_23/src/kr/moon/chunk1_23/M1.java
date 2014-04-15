@@ -70,6 +70,7 @@ public class M1 extends Activity implements SurfaceHolder.Callback,
 
 	public void surfaceCreated(SurfaceHolder holder) {
 		// TODO Auto-generated method stub
+		mHolder = holder;
 		if (mPlayer == null) {
 			mPlayer = MediaPlayer.create(this, lid);
 		} else {
@@ -108,18 +109,11 @@ public class M1 extends Activity implements SurfaceHolder.Callback,
 					new DialogInterface.OnClickListener() {
 						public void onClick(DialogInterface dialog,
 								int whichButton) {
-							mPlayer.reset();
-							mPlayer = MediaPlayer.create(M1.this, lid);
-							try {
-								mPlayer.prepare();
-							} catch (IllegalStateException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							} catch (IOException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}
-							mPlayer.start();
+							// mPlayer.reset();
+							Intent intent = getIntent();
+							mPlayer.release();
+							finish();
+							startActivity(intent);
 						}
 					});
 
@@ -163,6 +157,7 @@ public class M1 extends Activity implements SurfaceHolder.Callback,
 	public void onClick(View arg0) {
 		// TODO Auto-generated method stub
 		if (arg0.getId() == R.id.back) {
+			mPlayer.release();
 			finish();
 		}
 	}

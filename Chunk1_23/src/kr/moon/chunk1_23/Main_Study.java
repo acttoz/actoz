@@ -61,7 +61,8 @@ import android.widget.Toast;
 public class Main_Study extends Activity implements OnClickListener,
 		OnTouchListener {
 	String dateName, onlyName, ment, nickName;
-	String[] answer_list = new String[] { "3번","4번","4번","3번","1번","4번","1번","3번","1번","2번","2번"};//2-2 생략
+	String[] answer_list = new String[] { "3번", "4번", "4번", "3번", "1번", "4번",
+			"1번", "3번", "1번", "2번", "2번" };// 2-2 생략
 	TextView instruction;
 	View tab1, tab2, tab3;
 	Drawable alpha1;
@@ -91,6 +92,7 @@ public class Main_Study extends Activity implements OnClickListener,
 	ImageView check1, check2, speakImage;
 	String speak_eng;
 	String speak_korean;
+	String speak_koreanN;
 	int speak_img, speak_flag;
 
 	/** Called when the activity is first created. */
@@ -139,6 +141,7 @@ public class Main_Study extends Activity implements OnClickListener,
 		String tmpSign = "q" + chapter;
 		speak_eng = "speak" + chapter;
 		speak_korean = "korean" + chapter;
+		speak_koreanN = "koreann" + chapter;
 
 		btn1 = (ImageView) findViewById(R.id.btn1);
 		btn2 = (ImageView) findViewById(R.id.btn2);
@@ -710,12 +713,15 @@ public class Main_Study extends Activity implements OnClickListener,
 						"drawable", this.getPackageName());
 				speak_flag = 1;
 
-			} else {
+			} else if (speak_flag == 1) {
+				speak_img = this.getResources().getIdentifier(speak_koreanN,
+						"drawable", this.getPackageName());
+				speak_flag = 2;
+			} else if (speak_flag == 2) {
 				speak_img = this.getResources().getIdentifier(speak_eng,
 						"drawable", this.getPackageName());
 				speak_flag = 0;
 			}
-
 			speakImage.setImageResource(speak_img);
 			break;
 
@@ -816,7 +822,7 @@ public class Main_Study extends Activity implements OnClickListener,
 	}
 
 	private void tab2() {
-		instruction.setText("동영상을 보고 청크듣기, 읽기를 해보세요.");
+		instruction.setText("동영상을 보고 청크듣기, 말하기를 해보세요.");
 		tab1.setVisibility(View.GONE);
 		tab2.setVisibility(View.VISIBLE);
 		tab3.setVisibility(View.GONE);
