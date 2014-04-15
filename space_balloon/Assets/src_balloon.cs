@@ -21,20 +21,20 @@ public class src_balloon : MonoBehaviour
 	
 		}
 
-		void create ()
+		void create (int num)
 		{
 				exist = true;
 				GetComponent<SpriteRenderer> ().sprite = balloon;
 //				Debug.Log ("OnEnable()");
 				anim = GetComponent<Animator> ();
 				anim.SetBool ("balloonExist", true);
+				anim.SetInteger ("super", num);
 		}
 
 		void cancel (int num)
 		{
 				exist = false;
 				anim.SetBool ("balloonExist", false);
-				anim.SetInteger ("super", 0);
 				anim.SetInteger ("cancel", num);
 				
 		}

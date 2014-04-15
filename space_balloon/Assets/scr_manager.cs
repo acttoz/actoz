@@ -6,10 +6,12 @@ public class scr_manager : MonoBehaviour
 		public GameObject balloon, itemBlue, itemOrange, itemPurple, monsterB, monsterO, monsterP, monsterEffect, super_back1, super_back2;
 		public Sprite bStar, oStar, pStar, eStar;
 		public float timer;
+		public int leftTime;
+		int min, sec, countScore = 0, countGem = 0;
 		Sprite tempStar;
 		SpriteRenderer star1, star2, star3;
 		GameObject existItem, createItem;
-		public GameObject back, backStart, bgm, gauge, lv;
+		public GameObject back, backStart, bgm, gauge, lv, oTimeUp;
 		public GameObject effectSuper1, effectSuper2, effectPop, effectPoint, effectPointBack;
 		public Vector3 backSize;
 		public Vector3 balloonSize;
@@ -18,16 +20,18 @@ public class scr_manager : MonoBehaviour
 		GameObject[] enemy, realEnemy;
 		public int superTime;
 		int superTimer;
-		public AudioClip create, remove, pop, bing, levelUp, go, itemSound;
+		public AudioClip create, remove, pop, bing, levelUp, go, itemSound, timesup;
 		tk2dTextMesh scoreText;
 		tk2dTextMesh lvText;
-		float score = 0;
+		tk2dTextMesh timeText, resultText, gemText;
+		int score = 0;
 		int superLevel = 0;
 		float mUp, mDown, mLeft, mRight;
 		// Use this for initialization
 		bool existBalloon = false;
 		bool timeStarted = true;
-	
+		bool isScoreUp = false;
+
 		void Start ()
 		{
 				star1 = GameObject.Find ("star1").GetComponent<SpriteRenderer> ();
@@ -37,6 +41,8 @@ public class scr_manager : MonoBehaviour
 				realEnemy = GameObject.FindGameObjectsWithTag ("realenemy");
 				scoreText = GameObject.Find ("score").GetComponent<tk2dTextMesh> ();
 				lvText = GameObject.Find ("lv").GetComponent<tk2dTextMesh> ();
+				timeText = GameObject.Find ("time").GetComponent<tk2dTextMesh> ();
+				
 				superTimer = superTime;
 				mUp = 5.5f;
 				mDown = mUp * -1;
@@ -53,23 +59,78 @@ public class scr_manager : MonoBehaviour
 		void Update ()
 		{
 		
-//				if (timeStarted == true) {
-//						timer -= Time.deltaTime;
-//						if (timer < 0)
-//								StartCoroutine ("timesUp");
-//				}   
+				if (timeStarted == true) {
+						timer -= Time.deltaTime;
+						leftTime = (int)timer;
+						min = Mathf.FloorToInt (timer / 60F);
+						sec = Mathf.FloorToInt (timer - min * 60);
+						if (sec < 10) {
+								timeText.text = min + " : 0" + sec;
+						} else {
+								timeText.text = min + " : " + sec;
+						}
+
+						
+						if (leftTime == 0) {
+								timeStarted = false;
+				
+								StartCoroutine ("timesUp");
+						}
+				}   
 		
 		}
 
-//		IEnumerator timesUp ()
-//		{
-//
-//		}
+		void gameStart ()
+		{
+				audio.PlayOneShot (go);
+				backStart.SetActive (false);
+				enableTouch ();
+		}
+
+		IEnumerator timesUp ()
+		{
+				StopCoroutine ("undead");
+				CancelInvoke ("itemCreate");
+				CancelInvoke ("scoreCount");
+				back.SendMessage ("superMode", 2);
+				CancelInvoke ("superModeCount");
+				CancelInvoke ("normalModeCount");
+				balloon.SetActive (false);
+				GameObject.Find ("wall").SetActive (false);
+				disableTouch ();
+				audio.PlayOneShot (timesup);
+				Instantiate (oTimeUp, new Vector2 (0, 0), Quaternion.identity);
+
+				yield return new WaitForSeconds (1f);
+				countGem = 0;
+				countScore = 0;
+				resultText = GameObject.Find ("numscore").GetComponent<tk2dTextMesh> ();
+				gemText = GameObject.Find ("numgem").GetComponent<tk2dTextMesh> ();
+				InvokeRepeating ("resultCount", 0f, 0.05f);
+		
+		}
+
+		void resultCount ()
+		{
+				if (score == countScore) {
+						audio.PlayOneShot (itemSound);
+			
+						CancelInvoke ("resultCount");
+						resultText.text = "" + score;
+				} else {
+						audio.PlayOneShot (bing);
+						resultText.text = "" + countScore;
+						countScore++;
+				}
+				
+
+		}
 		/// <summary>
 		/// Items the create.
 		/// </summary>
 		void itemCreate ()
 		{
+				Debug.Log ("itemCreate");
 				int tempCol = Random.Range (1, 4);
 				switch (tempCol) {
 				case 1:
@@ -90,7 +151,6 @@ public class scr_manager : MonoBehaviour
 						tempStar = pStar;
 						break;
 				}
-
 				if (existItem != null)
 						Destroy (existItem);
 				float tempX = (Random.Range (mLeft * 100, mRight * 100)) / 100;
@@ -144,6 +204,36 @@ public class scr_manager : MonoBehaviour
 				}
 				 
 
+		}
+
+		void itemUse (string col)
+		{
+				if (col.Equals ("b"))
+						timer += 20;
+				if (col.Equals ("o"))
+						StartCoroutine ("scoreUp");
+				if (col.Equals ("p")) {
+						if (gauge.transform.localScale.y > 1.3) {
+								CancelInvoke ("superModeCount");
+								
+								if (superLevel < 3) {
+										superLevel++;
+										gauge.transform.localScale = new Vector3 (1.75f, 0.3f, 1);
+										Debug.Log ("supermode(" + superLevel);
+										superMode (superLevel);
+								}
+						} else {
+								gauge.transform.localScale += new Vector3 (0, 0.5f, 0);
+						}
+						
+				}
+		}
+
+		IEnumerator scoreUp ()
+		{
+				isScoreUp = true;
+				yield return new WaitForSeconds (5f);
+				isScoreUp = false;
 		}
 
 		IEnumerator monster (string mColHave)
@@ -211,9 +301,21 @@ public class scr_manager : MonoBehaviour
 		{
 				balloon.GetComponent<SpriteRenderer> ().color = Color.red;
 				balloon.SetActive (true);
-				balloon.SendMessage ("create");
+				
 				balloon.transform.position = touch;
-				superMode (0);
+				if (superLevel < 2) {
+						superMode (superLevel);
+				} else {
+						superTimer = superTime;
+						InvokeRepeating ("superModeCount", 0.1f, 0.1f);
+						if (superLevel == 2)
+								InvokeRepeating ("scoreCount", 0.1f, 0.3f);
+						if (superLevel == 3)
+								InvokeRepeating ("scoreCount", 0.1f, 0.1f);
+				}
+				balloon.SendMessage ("create", superLevel);
+				Debug.Log ("create Level" + superLevel);
+
 				audio.PlayOneShot (create);
 		
 		}
@@ -240,7 +342,18 @@ public class scr_manager : MonoBehaviour
 						balloon.SendMessage ("cancel", 2);
 						score = 0;
 						disableTouch ();
-			//						if (audio.isPlaying)
+			///level reset
+						lvText.text = "Lv.1";
+						gauge.transform.localScale = new Vector3 (1.75f, 0.3f, 1);
+						superTimer = superTime;
+						superLevel = 0;
+						bgm.SendMessage ("superMode", 1);
+
+			// back & enemy reset
+			
+						foreach (GameObject element in enemy) {
+								element.SendMessage ("superMode", 1);
+						}
 						
 						GameObject ep = (GameObject)GameObject.Instantiate (effectPop);
 						ep.transform.position = balloon.transform.position;
@@ -258,39 +371,30 @@ public class scr_manager : MonoBehaviour
 						yield return new WaitForSeconds (1f);
 						resetStar ();
 				}
-				Debug.Log ("remove" + existBalloon);
-				superLevel = 0;
 				if (existBalloon) {
-						Debug.Log ("remove" + existBalloon);
 						balloon.transform.localScale = new Vector3 (0, 0, 0);
 						
-						lvText.text = "L\tv.1";
-						gauge.transform.localScale = new Vector3 (1.75f, 0.3f, 1);
+						
+
 						if (num == 1)
 								balloon.SetActive (false);
-						int i = 0;
+						
 			
-						// back & enemy reset
-						back.SendMessage ("superMode", i);
-			
-						foreach (GameObject element in enemy) {
-								element.SendMessage ("superMode", 1);
+						
+					
+						if (num == 2) {
+								backStart.SetActive (true);
+								score = 0;
+								scoreText.text = "Score: " + score;
 						}
-						bgm.SendMessage ("superMode", 1);
-			
 						//---------------
 			
 						existBalloon = false;
 			
-						superTimer = superTime;
-						superLevel = 0;
+						
 				}
 		
-				if (num == 2) {
-						backStart.SetActive (true);
-						score = 0;
-						scoreText.text = "Score: " + score;
-				}
+				
 		
 				//				Debug.Log ("removeTimer");
 		
@@ -303,8 +407,8 @@ public class scr_manager : MonoBehaviour
 		{
 				if (gauge.transform.localScale.y > 1.75f) {
 						CancelInvoke ("superModeCount");
-						superLevel++;
-						if (superLevel < 4) {
+						if (superLevel < 3) {
+								superLevel++;
 								gauge.transform.localScale = new Vector3 (1.75f, 0.3f, 1);
 								Debug.Log ("supermode(" + superLevel);
 								superMode (superLevel);
@@ -403,7 +507,11 @@ public class scr_manager : MonoBehaviour
 	
 		void scoreCount ()
 		{
-				score += 5;
+				if (isScoreUp) {
+						score += 10;
+				} else {
+						score += 5;
+				}
 				audio.PlayOneShot (bing);
 				Instantiate (effectPoint, balloon.transform.position, Quaternion.identity);
 				Instantiate (effectPointBack, balloon.transform.position, Quaternion.identity);
@@ -422,13 +530,6 @@ public class scr_manager : MonoBehaviour
 				GetComponent<FingerDownDetector> ().enabled = false;
 				GetComponent<FingerUpDetector> ().enabled = false;
 				GetComponent<DragRecognizer> ().enabled = false;
-		}
-	
-		void gameStart ()
-		{
-				audio.PlayOneShot (go);
-				backStart.SetActive (false);
-				enableTouch ();
 		}
 	
 		void getBalloonMSG (int num)

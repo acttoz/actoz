@@ -73,6 +73,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 400008}
   - 95: {fileID: 9500000}
+  - 114: {fileID: 11400000}
   m_Layer: 0
   m_Name: prf_mon_blue
   m_TagString: Untagged
@@ -181,6 +182,18 @@ Animator:
   m_ApplyRootMotion: 1
   m_AnimatePhysics: 0
   m_HasTransformHierarchy: 1
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e22b1baa8823e994981f1f8ff7c7447b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  monsterColor: b
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1
