@@ -61,8 +61,7 @@ import android.widget.Toast;
 public class Main_Study extends Activity implements OnClickListener,
 		OnTouchListener {
 	String dateName, onlyName, ment, nickName;
-	String[] answer_list = new String[] { "5번", "3번", "5번", "5번", "4번", "5번",
-			"3번", "5번", "5번", "4번", "5번" };
+	String[] answer_list = new String[] { "3번","4번","4번","3번","1번","4번","1번","3번","1번","2번","2번"};//2-2 생략
 	TextView instruction;
 	View tab1, tab2, tab3;
 	Drawable alpha1;
