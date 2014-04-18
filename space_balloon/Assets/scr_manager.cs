@@ -3,8 +3,9 @@ using System.Collections;
 
 public class scr_manager : MonoBehaviour
 {
-		public GameObject balloon, itemBlue, itemOrange, itemPurple, monsterB, monsterO, monsterP, monsterEffect, super_back1, super_back2;
+		public GameObject btnRestart, balloon, itemBlue, itemOrange, itemPurple, monsterB, monsterO, monsterP, monsterEffect, super_back1, super_back2;
 		public Sprite bStar, oStar, pStar, eStar;
+		public GameObject itemEffectO, itemEffectB, itemEffectP,itemEffectBack;
 		public float timer;
 		public int leftTime;
 		int min, sec, countScore = 0, countGem = 0;
@@ -106,7 +107,7 @@ public class scr_manager : MonoBehaviour
 				countScore = 0;
 				resultText = GameObject.Find ("numscore").GetComponent<tk2dTextMesh> ();
 				gemText = GameObject.Find ("numgem").GetComponent<tk2dTextMesh> ();
-				InvokeRepeating ("resultCount", 0f, 0.05f);
+				InvokeRepeating ("resultCount", 0f, 0.01f);
 		
 		}
 
@@ -120,7 +121,7 @@ public class scr_manager : MonoBehaviour
 				} else {
 						audio.PlayOneShot (bing);
 						resultText.text = "" + countScore;
-						countScore++;
+						countScore += 10;
 				}
 				
 
@@ -167,7 +168,9 @@ public class scr_manager : MonoBehaviour
 						StartCoroutine ("getAnim", GameObject.Find ("star1"));
 						numHave++;
 						audio.PlayOneShot (itemSound);
-						
+						StartCoroutine ("monster", colHave);
+						StopCoroutine ("undead");
+						StartCoroutine ("undead");
 						break;
 			
 				case 1:
@@ -214,14 +217,8 @@ public class scr_manager : MonoBehaviour
 						StartCoroutine ("scoreUp");
 				if (col.Equals ("p")) {
 						if (gauge.transform.localScale.y > 1.3) {
-								CancelInvoke ("superModeCount");
-								
-								if (superLevel < 3) {
-										superLevel++;
-										gauge.transform.localScale = new Vector3 (1.75f, 0.3f, 1);
-										Debug.Log ("supermode(" + superLevel);
-										superMode (superLevel);
-								}
+								float temp = 1.74f - gauge.transform.localScale.y;
+								gauge.transform.localScale += new Vector3 (0, temp, 0);
 						} else {
 								gauge.transform.localScale += new Vector3 (0, 0.5f, 0);
 						}
@@ -340,8 +337,6 @@ public class scr_manager : MonoBehaviour
 						audio.Stop ();
 						audio.PlayOneShot (pop);
 						balloon.SendMessage ("cancel", 2);
-						score = 0;
-						disableTouch ();
 			///level reset
 						lvText.text = "Lv.1";
 						gauge.transform.localScale = new Vector3 (1.75f, 0.3f, 1);
@@ -355,6 +350,7 @@ public class scr_manager : MonoBehaviour
 								element.SendMessage ("superMode", 1);
 						}
 						
+						
 						GameObject ep = (GameObject)GameObject.Instantiate (effectPop);
 						ep.transform.position = balloon.transform.position;
 //			ep.renderer.sortingLayerName = "ui";
@@ -365,28 +361,23 @@ public class scr_manager : MonoBehaviour
 				}
 		
 		
-				if (num == 1) {
-						yield return new WaitForSeconds (0.2f);
-				} else {
-						yield return new WaitForSeconds (1f);
-						resetStar ();
-				}
+				yield return new WaitForSeconds (0.2f);
 				if (existBalloon) {
 						balloon.transform.localScale = new Vector3 (0, 0, 0);
 						
 						
 
-						if (num == 1)
-								balloon.SetActive (false);
+//						if (num == 1)
+						balloon.SetActive (false);
 						
 			
 						
 					
-						if (num == 2) {
-								backStart.SetActive (true);
-								score = 0;
-								scoreText.text = "Score: " + score;
-						}
+//						if (num == 2) {
+//								backStart.SetActive (true);
+//								score = 0;
+//								scoreText.text = "Score: " + score;
+//						}
 						//---------------
 			
 						existBalloon = false;
