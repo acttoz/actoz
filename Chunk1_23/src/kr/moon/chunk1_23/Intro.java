@@ -38,11 +38,27 @@ public class Intro extends Activity {
 						// TODO Auto-generated method stub
 						logo.startAnimation(fade_Out);
 
+						logo.setImageResource(R.drawable.john);
+						logo.startAnimation(fade_In);
+					}
+				});
+				try {
+					Thread.sleep(2500);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+				runOnUiThread(new Runnable() {
+
+					public void run() {
+						// TODO Auto-generated method stub
+						logo.startAnimation(fade_Out);
+
 						logo.setImageResource(R.drawable.moon_logo);
 						logo.startAnimation(fade_In);
 					}
 				});
-
 				try {
 					Thread.sleep(2000);
 				} catch (InterruptedException e) {
