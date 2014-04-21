@@ -5,7 +5,7 @@ public class scr_manager : MonoBehaviour
 {
 		public GameObject btnRestart, balloon, itemBlue, itemOrange, itemPurple, monsterB, monsterO, monsterP, monsterEffect, super_back1, super_back2;
 		public Sprite bStar, oStar, pStar, eStar;
-		public GameObject itemEffectO, itemEffectB, itemEffectP,itemEffectBack;
+		public GameObject itemEffectO, itemEffectB, itemEffectP, itemEffectBack;
 		public float timer;
 		public int leftTime;
 		int min, sec, countScore = 0, countGem = 0;
@@ -168,9 +168,9 @@ public class scr_manager : MonoBehaviour
 						StartCoroutine ("getAnim", GameObject.Find ("star1"));
 						numHave++;
 						audio.PlayOneShot (itemSound);
-						StartCoroutine ("monster", colHave);
-						StopCoroutine ("undead");
-						StartCoroutine ("undead");
+//						StartCoroutine ("monster", colHave);
+//						StopCoroutine ("undead");
+//						StartCoroutine ("undead");
 						break;
 			
 				case 1:
@@ -211,11 +211,22 @@ public class scr_manager : MonoBehaviour
 
 		void itemUse (string col)
 		{
-				if (col.Equals ("b"))
+				if (col.Equals ("b")) {
 						timer += 20;
-				if (col.Equals ("o"))
+						audio.PlayOneShot (levelUp);
+						itemEffectB.animation.Play ();
+						Instantiate (itemEffectBack, itemEffectB.transform.position, Quaternion.identity);
+				}
+				if (col.Equals ("o")) {
+						audio.PlayOneShot (levelUp);
+						itemEffectO.animation.Play ();
 						StartCoroutine ("scoreUp");
+						Instantiate (itemEffectBack, itemEffectO.transform.position, Quaternion.identity);
+				}
 				if (col.Equals ("p")) {
+						audio.PlayOneShot (levelUp);
+						itemEffectP.animation.Play ();
+						Instantiate (itemEffectBack, itemEffectP.transform.position, Quaternion.identity);
 						if (gauge.transform.localScale.y > 1.3) {
 								float temp = 1.74f - gauge.transform.localScale.y;
 								gauge.transform.localScale += new Vector3 (0, temp, 0);
