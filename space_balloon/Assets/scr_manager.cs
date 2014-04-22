@@ -5,14 +5,15 @@ public class scr_manager : MonoBehaviour
 {
 		public GameObject btnRestart, balloon, itemBlue, itemOrange, itemPurple, monsterB, monsterO, monsterP, monsterEffect, super_back1, super_back2;
 		public Sprite bStar, oStar, pStar, eStar;
-		public GameObject itemEffectO, itemEffectB, itemEffectP, itemEffectBack, btn_menu, btn_replay;
-		public float timer;
+		public GameObject itemEffectO, itemEffectB, itemEffectP, itemEffectBack, walls;
+		float timer;
+		public float gameTime;
 		public int leftTime;
 		bool onPlay;
 		int min, sec, countScore = 0, countGem = 0;
 		Sprite tempStar;
 		SpriteRenderer star1, star2, star3;
-		GameObject existItem, createItem;
+		GameObject existItem, createItem, btn_menu, btn_replay;
 		public GameObject back, backStart, bgm, gauge, lv, oTimeUp;
 		public GameObject effectSuper1, effectSuper2, effectPop, effectPoint, effectPointBack;
 		public Vector3 backSize;
@@ -32,11 +33,12 @@ public class scr_manager : MonoBehaviour
 		float mUp, mDown, mLeft, mRight;
 		// Use this for initialization
 		bool existBalloon = false;
-		bool timeStarted = true;
+		bool timeStarted = false;
 		bool isScoreUp = false;
 
 		void Start ()
 		{
+				timer = gameTime;
 				star1 = GameObject.Find ("star1").GetComponent<SpriteRenderer> ();
 				star2 = GameObject.Find ("star2").GetComponent<SpriteRenderer> ();
 				star3 = GameObject.Find ("star3").GetComponent<SpriteRenderer> ();
@@ -45,17 +47,21 @@ public class scr_manager : MonoBehaviour
 				scoreText = GameObject.Find ("score").GetComponent<tk2dTextMesh> ();
 				lvText = GameObject.Find ("lv").GetComponent<tk2dTextMesh> ();
 				timeText = GameObject.Find ("time").GetComponent<tk2dTextMesh> ();
-		onPlay=true;
+				onPlay = true;
 				superTimer = superTime;
 				mUp = 5.5f;
 				mDown = mUp * -1;
 				mLeft = GameObject.Find ("lv").transform.position.x;
 				mRight = mLeft * -1;
 				Debug.Log ("screenSize=" + mUp + " " + mDown + " " + mLeft + " " + mRight + " ");
-				InvokeRepeating ("itemCreate", 1f, 2.3f);
+				
 		
 				//				backSize = back.renderer.bounds.size; 
 				//				Debug.Log (backSize);	
+
+				//test
+//				btn_menu = GameObject.Find ("btn_menu");
+//				btn_replay = GameObject.Find ("btn_replay");
 		}
 	
 		// Update is called once per frame
@@ -88,7 +94,48 @@ public class scr_manager : MonoBehaviour
 				audio.PlayOneShot (go);
 				backStart.SetActive (false);
 				enableTouch ();
+				timeStarted = true;
 				onPlay = true;
+				InvokeRepeating ("itemCreate", 1f, 2.3f);
+				int i = 0;
+				back.SendMessage ("superMode", i);
+				foreach (GameObject element in enemy) {
+						float tempX = (Random.Range (mLeft * 100, mRight * 100)) / 100;
+						float tempY = (Random.Range (mDown * 100, mUp * 100)) / 100;
+
+						element.transform.position = new Vector2 (tempX, tempY);
+				}
+		}
+
+		void gameReset ()
+		{
+				CancelInvoke ("itemCreate");
+				gauge.transform.localScale = new Vector3 (1.75f, 0.3f, 1);
+				backStart.SetActive (true);
+				onPlay = false;
+				score = 0;
+				walls.SetActive (true);
+				timeStarted = false;
+				disableTouch ();
+				resetStar ();
+				timer = gameTime;
+				///level reset
+				lvText.text = "Lv.1";
+				superTimer = superTime;
+				superLevel = 0;
+				bgm.SendMessage ("superMode", 1);
+		
+				// back & enemy reset
+				balloon.transform.localScale = new Vector3 (0, 0, 0);
+				existBalloon = false;
+				foreach (GameObject element in enemy) {
+						element.SendMessage ("superMode", 1);
+				}
+				foreach (GameObject element in realEnemy) {
+						element.GetComponent<SpriteRenderer> ().color = new Color (1, 1, 1, 1f);
+				}
+				balloon.GetComponent<SphereCollider> ().enabled = true;
+
 		}
 
 		IEnumerator timesUp ()
@@ -101,7 +148,7 @@ public class scr_manager : MonoBehaviour
 				CancelInvoke ("superModeCount");
 				CancelInvoke ("normalModeCount");
 				balloon.SetActive (false);
-				GameObject.Find ("wall").SetActive (false);
+				walls.SetActive (false);
 				disableTouch ();
 				audio.PlayOneShot (timesup);
 				Instantiate (oTimeUp, new Vector2 (0, 0), Quaternion.identity);
@@ -127,7 +174,9 @@ public class scr_manager : MonoBehaviour
 						resultText.text = "" + score;
 						if (score > 1000) {
 								gem = score / 1000;
-								InvokeRepeating ("resultGemCount", 0.1f, 0.5f);
+								InvokeRepeating ("resultGemCount", 0.5f, 1f);
+						} else {
+								enableTouch ();
 						}
 				} else {
 						audio.PlayOneShot (bing);
@@ -672,43 +721,36 @@ public class scr_manager : MonoBehaviour
 		void OnFingerDown (FingerDownEvent e)
 		{
 		
-				//				Instantiate (effectSuper1, new Vector2 (0, 0), Quaternion.identity);
-				//				Instantiate (effectSuper2, new Vector2 (0, 0), Quaternion.identity);
-				//				effectSuper1.renderer.sortingLayerName = "Foreground";
-		
-				//				Instantiate (balloon, GetWorldPos (e.Position), Quaternion.identity);
+				 
+				if (e.Selection == btn_menu) {
+						btn_menu.GetComponent<SpriteRenderer> ().color = Color.yellow;
+				}
+				if (e.Selection == btn_replay) {
+						btn_replay.GetComponent<SpriteRenderer> ().color = Color.yellow;
+//												Application.LoadLevel (0);
+				}
 				if (!existBalloon && onPlay) {
 						existBalloon = true;
 						Create (GetWorldPos (e.Position));
 				}
-				if (e.Selection == btn_menu) {
-						Debug.Log ("ontapbtn1");			
-//						btn1.GetComponent<SpriteRenderer> ().color = Color.yellow;
-//						Application.LoadLevel (0);
-				}
-				if (e.Selection == btn_replay) {
-						Debug.Log ("ontapbtn2");			
-//						btn1.GetComponent<SpriteRenderer> ().color = Color.yellow;
-//						Application.LoadLevel (0);
-				}
+				
 
 				//				Debug.Log ("click");
 		}
-	
+	 
 		void OnFingerUp (FingerUpEvent e)
 		{
-				//				GameObject[] balloon = GameObject.FindGameObjectsWithTag ("balloon");
-				//
-				//				if (balloon.Length!=0) {
-				//						Debug.Log ("ballonnExist");
-				//						foreach (GameObject element in balloon) {
-				//								element.SendMessage ("destroySelf");
-				//						}
-				//						
-				//						existBalloon = false;
-				//				}
-				//				Debug.Log ("release");
-		if (existBalloon&& onPlay) {
+				if (e.Selection == btn_menu) {
+						btn_menu.GetComponent<SpriteRenderer> ().color = Color.white;
+						Application.LoadLevel (0);
+				}
+				if (e.Selection == btn_replay) {
+						btn_replay.GetComponent<SpriteRenderer> ().color = Color.white;
+						Destroy (GameObject.Find ("prf_timesup(Clone)"));
+						gameReset ();
+						//												Application.LoadLevel (0);
+				}
+				if (existBalloon && onPlay) {
 						StartCoroutine (Remove (1));			
 			
 				}

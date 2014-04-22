@@ -2,8 +2,8 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\scr_manager.cs">
     <Files>
-      <File FileName="Assets\scr_manager.cs" Line="711" Column="28" />
-      <File FileName="Assets\scr_button.cs" Line="27" Column="6" />
+      <File FileName="Assets\scr_manager.cs" Line="137" Column="1" />
+      <File FileName="Assets\src_back.cs" Line="24" Column="4" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
