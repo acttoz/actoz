@@ -5,7 +5,7 @@ public class scr_manager : MonoBehaviour
 {
 		public GameObject btnRestart, balloon, itemBlue, itemOrange, itemPurple, monsterB, monsterO, monsterP, monsterEffect, super_back1, super_back2;
 		public Sprite bStar, oStar, pStar, eStar;
-		public GameObject itemEffectO, itemEffectB, itemEffectP, itemEffectBack, walls;
+		public GameObject itemEffectO, itemEffectB, effectPoint2, itemEffectP, itemEffectBack, walls, btn_pause, prf_pause, btn_resume;
 		float timer;
 		public float gameTime;
 		public int leftTime;
@@ -38,7 +38,8 @@ public class scr_manager : MonoBehaviour
 
 		void Start ()
 		{
-				timer = gameTime;
+				backStart.SetActive (true);
+				timer = gameTime+1;
 				star1 = GameObject.Find ("star1").GetComponent<SpriteRenderer> ();
 				star2 = GameObject.Find ("star2").GetComponent<SpriteRenderer> ();
 				star3 = GameObject.Find ("star3").GetComponent<SpriteRenderer> ();
@@ -47,7 +48,6 @@ public class scr_manager : MonoBehaviour
 				scoreText = GameObject.Find ("score").GetComponent<tk2dTextMesh> ();
 				lvText = GameObject.Find ("lv").GetComponent<tk2dTextMesh> ();
 				timeText = GameObject.Find ("time").GetComponent<tk2dTextMesh> ();
-				onPlay = true;
 				superTimer = superTime;
 				mUp = 5.5f;
 				mDown = mUp * -1;
@@ -114,6 +114,7 @@ public class scr_manager : MonoBehaviour
 				backStart.SetActive (true);
 				onPlay = false;
 				score = 0;
+				scoreText.text = "Score: " + score;
 				walls.SetActive (true);
 				timeStarted = false;
 				disableTouch ();
@@ -135,6 +136,21 @@ public class scr_manager : MonoBehaviour
 						element.GetComponent<SpriteRenderer> ().color = new Color (1, 1, 1, 1f);
 				}
 				balloon.GetComponent<SphereCollider> ().enabled = true;
+
+		}
+
+		IEnumerator pauseGame ()
+		{
+				onPlay = false;
+				Instantiate (prf_pause, new Vector2 (0, 0), Quaternion.identity);
+				
+				btn_menu = GameObject.Find ("btn_menu");
+				btn_replay = GameObject.Find ("btn_replay");
+				btn_resume = GameObject.Find ("btn_resume");
+				disableTouch ();
+				yield return new WaitForSeconds (0.5f);
+				enableTouch ();
+				Time.timeScale = 0;
 
 		}
 
@@ -192,7 +208,7 @@ public class scr_manager : MonoBehaviour
 				audio.PlayOneShot (itemSound);
 				countGem++;
 				gemText.text = "" + countGem;
-				resultText.text = "" + (score - 1000);
+				resultText.text = "" + (score -= 1000);
 				
 				if (gem == countGem) {
 
@@ -247,7 +263,7 @@ public class scr_manager : MonoBehaviour
 						StartCoroutine ("getAnim", GameObject.Find ("star1"));
 						numHave++;
 						audio.PlayOneShot (itemSound);
-//						StartCoroutine ("monster", colHave);
+//						StartCoroutine ("monster", colHave1);
 //						StopCoroutine ("undead");
 //						StartCoroutine ("undead");
 						break;
@@ -306,6 +322,8 @@ public class scr_manager : MonoBehaviour
 				Instantiate (itemEffectBack, itemEffectO.transform.position, Quaternion.identity);
 				yield return new WaitForSeconds (0.2f);
 				int i = 500;
+				if (isScoreUp) 
+						i = 1000;
 				while (i>0) {
 						yield return new WaitForSeconds (0.04f);
 						i -= 10;
@@ -327,6 +345,7 @@ public class scr_manager : MonoBehaviour
 				if (col.Equals ("o")) {
 						audio.PlayOneShot (levelUp);
 						itemEffectO.animation.Play ();
+						StopCoroutine ("scoreUp");
 						StartCoroutine ("scoreUp");
 						Instantiate (itemEffectBack, itemEffectO.transform.position, Quaternion.identity);
 				}
@@ -347,7 +366,15 @@ public class scr_manager : MonoBehaviour
 		IEnumerator scoreUp ()
 		{
 				isScoreUp = true;
+				itemEffectO.animation.wrapMode = WrapMode.Loop;
+				itemEffectO.animation.Play ();
+
+				GameObject.Find ("score").GetComponent<tk2dTextMesh> ().color = new Color (1, 0.5f, 0);
+
 				yield return new WaitForSeconds (5f);
+				itemEffectO.animation.wrapMode = WrapMode.Once;
+				GameObject.Find ("score").GetComponent<tk2dTextMesh> ().color = new Color (1, 1, 1);
+				itemEffectO.animation.Stop ();
 				isScoreUp = false;
 		}
 
@@ -618,14 +645,16 @@ public class scr_manager : MonoBehaviour
 		void scoreCount ()
 		{
 				if (isScoreUp) {
+						Instantiate (effectPoint2, balloon.transform.position, Quaternion.identity);
 						score += 10;
+						scoreText.text = "Score: " + score + " x2";
 				} else {
+						Instantiate (effectPoint, balloon.transform.position, Quaternion.identity);
 						score += 5;
+						scoreText.text = "Score: " + score;
 				}
 				audio.PlayOneShot (bing);
-				Instantiate (effectPoint, balloon.transform.position, Quaternion.identity);
 				Instantiate (effectPointBack, balloon.transform.position, Quaternion.identity);
-				scoreText.text = "Score: " + score;
 		}
 	
 		void enableTouch ()
@@ -677,16 +706,8 @@ public class scr_manager : MonoBehaviour
 		
 				if (existBalloon) {
 						if (gesture.Phase == ContinuousGesturePhase.Started) {
-								// dismiss this event if we're not interacting with our drag object
-								//				 if (gesture.Selection != balloon)
-								//						return;
-				
-								//								Debug.Log ("Started dragging with finger " + finger);
-				
 								// remember which finger is dragging balloon
 								dragFingerIndex = finger.Index;
-				
-				
 				
 								// spawn some particles because it's cool.
 								//				 SpawnParticles (balloon);
@@ -694,25 +715,10 @@ public class scr_manager : MonoBehaviour
 								if (gesture.Phase == ContinuousGesturePhase.Updated) {
 										// update the position by converting the current screen position of the finger to a world position on the Z = 0 plane
 										Vector3 touchXY = GetWorldPos (gesture.Position);
-					
-					
 										balloon.transform.position = touchXY;
-					
-					
-										//										float touchX = touchXY.x;
-										//										float touchY = touchXY.y;
-										//
-										//										if (touchX > -2 && touchX < 2 && touchY < 4.4 && touchY > -4.4)		
-										//										Debug.Log ("dragging" + touchXY);
 								} else {
-										//										Debug.Log ("Stopped dragging with finger " + finger);
-					
 										// reset our drag finger index
 										dragFingerIndex = -1;
-					
-										// spawn some particles because it's cool.
-										//						SpawnParticles (balloon);
-					
 								}
 						}
 				}
@@ -729,9 +735,20 @@ public class scr_manager : MonoBehaviour
 						btn_replay.GetComponent<SpriteRenderer> ().color = Color.yellow;
 //												Application.LoadLevel (0);
 				}
-				if (!existBalloon && onPlay) {
+				if (!existBalloon && onPlay && e.Selection != btn_pause) {
 						existBalloon = true;
 						Create (GetWorldPos (e.Position));
+				}
+
+				if (e.Selection == btn_pause && onPlay) {
+						btn_pause.GetComponent<SpriteRenderer> ().color = Color.yellow;
+						//												Application.LoadLevel (0);
+				}
+
+				if (e.Selection == btn_resume) {
+						btn_resume.GetComponent<SpriteRenderer> ().color = Color.yellow;
+
+						//												Application.LoadLevel (0);
 				}
 				
 
@@ -742,12 +759,28 @@ public class scr_manager : MonoBehaviour
 		{
 				if (e.Selection == btn_menu) {
 						btn_menu.GetComponent<SpriteRenderer> ().color = Color.white;
-						Application.LoadLevel (0);
+						Time.timeScale = 1.0f;
+//						gameReset ();
+						Application.LoadLevel (1);
+				}
+				if (e.Selection == btn_resume) {
+						btn_resume.GetComponent<SpriteRenderer> ().color = Color.white;
+						Destroy (GameObject.Find ("prf_pause(Clone)"));
+						onPlay = true;
+						Time.timeScale = 1.0f;
 				}
 				if (e.Selection == btn_replay) {
 						btn_replay.GetComponent<SpriteRenderer> ().color = Color.white;
 						Destroy (GameObject.Find ("prf_timesup(Clone)"));
+						Destroy (GameObject.Find ("prf_pause(Clone)"));
+						Time.timeScale = 1.0f;
 						gameReset ();
+						//												Application.LoadLevel (0);
+				}
+				if (e.Selection == btn_pause && onPlay) {
+						btn_pause.GetComponent<SpriteRenderer> ().color = Color.white;
+						StartCoroutine (pauseGame ());
+
 						//												Application.LoadLevel (0);
 				}
 				if (existBalloon && onPlay) {

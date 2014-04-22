@@ -8,4 +8,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/sce_menu.unity
   - enabled: 1
+    path: Assets/sce_menu2.unity
+  - enabled: 1
     path: Assets/sce_game3.unity
+  - enabled: 1
+    path: Assets/sce_tutorial.unity

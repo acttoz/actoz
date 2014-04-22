@@ -3,7 +3,7 @@ using System.Collections;
 
 public class scr_button : MonoBehaviour
 {
-		public GameObject btn1, btn2;
+		public GameObject btn1, btn2, loading;
 		// Use this for initialization
 		void Start ()
 		{
@@ -21,15 +21,23 @@ public class scr_button : MonoBehaviour
 		{
 				 
 				if (gesture.Selection == btn1) {
-						Debug.Log ("ontapbtn1");			
 						btn1.GetComponent<SpriteRenderer> ().color = Color.yellow;
-						Application.LoadLevel (1);
+						StartCoroutine ("loadLV", 2);
+					
 				}
 				if (gesture.Selection == btn2) {
 						btn2.gameObject.GetComponent<SpriteRenderer> ().color = Color.yellow;
+						StartCoroutine ("loadLV", 3);
 //						Application.LoadLevel (1);
 				}
 		}
 
+		IEnumerator loadLV (int num)
+		{
+				loading.SetActive (true);
+				animation.Play ("anim_menu2");
+				yield return new WaitForSeconds (1.5f);
+				Application.LoadLevel (num);
+		}
 		 
 }

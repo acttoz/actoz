@@ -13,6 +13,7 @@ public class scr_logo_back : MonoBehaviour
 		void destroy ()
 		{
 				menu.SetActive (true);
+				menu.animation.Play ();
 				mainCam.SendMessage ("playAfterLogo");
 				Destroy (this.gameObject);
 		}
