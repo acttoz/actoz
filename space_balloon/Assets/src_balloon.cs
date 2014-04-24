@@ -7,8 +7,7 @@ public class src_balloon : MonoBehaviour
 //		public AudioClip itemSound;
 		bool exist = false;
 		public GameObject GAMEMANAGER, pop, item;
-		public Sprite crash, balloon;
-		public Color tempCol;
+		public Sprite   balloon;
 		// Use this for initialization
 		void Start ()
 		{
@@ -24,7 +23,8 @@ public class src_balloon : MonoBehaviour
 		void create (int num)
 		{
 				exist = true;
-				GetComponent<SpriteRenderer> ().sprite = balloon;
+				if (num < 4)
+						GetComponent<SpriteRenderer> ().sprite = balloon;
 //				Debug.Log ("OnEnable()");
 				anim = GetComponent<Animator> ();
 				anim.SetBool ("balloonExist", true);
@@ -44,7 +44,13 @@ public class src_balloon : MonoBehaviour
 				anim.SetInteger ("super", num);
 		
 		}
-		 
+
+		void stopBalloon (bool stop)
+		{
+				anim.SetBool ("stop", stop);
+	
+		}
+
 		void OnTriggerEnter (Collider myTrigger)
 		{
 				if (myTrigger.transform.tag == "enemy" && exist) {

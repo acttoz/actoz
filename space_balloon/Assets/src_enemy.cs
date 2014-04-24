@@ -43,7 +43,7 @@ public class src_enemy : MonoBehaviour
 						if (superLevel == 2)
 								rigidbody.velocity -= rigidbody.velocity.normalized / 10 * 20 * increaseRate;
 						if (superLevel == 3)
-								rigidbody.velocity -= rigidbody.velocity.normalized / 10 * 50 * increaseRate;
+								rigidbody.velocity -= rigidbody.velocity.normalized / 10 * 40 * increaseRate;
 						superLevel = 1;
 						break;
 				case 2:
@@ -53,7 +53,7 @@ public class src_enemy : MonoBehaviour
 						break;
 				case 3:
 						superLevel = 3;
-						rigidbody.velocity += rigidbody.velocity.normalized / 10 * 30 * increaseRate;
+						rigidbody.velocity += rigidbody.velocity.normalized / 10 * 20 * increaseRate;
 //						Debug.Log ("enemy_superlevel3");
 						break;
 				

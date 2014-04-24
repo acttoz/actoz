@@ -37,6 +37,14 @@ public class scr_bgm : MonoBehaviour
 						audio.pitch = 1.5f;
 						
 						break;
+				case 4:
+						audio.pitch = 1.7f;
+			
+						break;
+				case 5:
+						audio.pitch = 2f;
+			
+						break;
 			
 				default:
 						break;

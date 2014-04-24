@@ -3,22 +3,27 @@ using System.Collections;
 
 public class scr_manager : MonoBehaviour
 {
+		public bool test;
 		public GameObject btnRestart, balloon, itemBlue, itemOrange, itemPurple, monsterB, monsterO, monsterP, monsterEffect, super_back1, super_back2;
-		public Sprite bStar, oStar, pStar, eStar;
-		public GameObject itemEffectO, itemEffectB, effectPoint2, itemEffectP, itemEffectBack, walls, btn_pause, prf_pause, btn_resume;
+		public Sprite bStar, oStar, pStar, eStar, superBalloon4, superBalloon5;
+		public float stopRateControl;
+		public float[] levelRate = new float[4];
+		float stopRate = 0;
+		public GameObject itemEffectO, itemEffectB, effectPoint2, effectStop, itemEffectP, itemEffectBack, walls, btn_pause, prf_pause, btn_resume;
 		float timer;
+		Vector2 previousBalloon, currentBalloon;
 		public float gameTime;
 		public int leftTime;
 		bool onPlay;
 		int min, sec, countScore = 0, countGem = 0;
 		Sprite tempStar;
-		SpriteRenderer star1, star2, star3;
+		SpriteRenderer star1, star2, star3, balloonSprite;
 		GameObject existItem, createItem, btn_menu, btn_replay;
 		public GameObject back, backStart, bgm, gauge, lv, oTimeUp;
 		public GameObject effectSuper1, effectSuper2, effectPop, effectPoint, effectPointBack;
 		public Vector3 backSize;
 		public Vector3 balloonSize;
-		string colHave1 = "n", colHave2 = "n", colHave3 = "n", colCreate = "n";//b;o,p
+		string colHave1 = "n", colHave2 = "n", colCreate = "n";//b;o,p
 		int numHave = 0;
 		GameObject[] enemy, realEnemy;
 		public int superTime;
@@ -38,11 +43,13 @@ public class scr_manager : MonoBehaviour
 
 		void Start ()
 		{
-				backStart.SetActive (true);
-				timer = gameTime+1;
+				if (!test)
+						backStart.SetActive (true);
+				timer = gameTime + 1;
 				star1 = GameObject.Find ("star1").GetComponent<SpriteRenderer> ();
 				star2 = GameObject.Find ("star2").GetComponent<SpriteRenderer> ();
 				star3 = GameObject.Find ("star3").GetComponent<SpriteRenderer> ();
+				balloonSprite = balloon.GetComponent<SpriteRenderer> ();
 				enemy = GameObject.FindGameObjectsWithTag ("enemy");
 				realEnemy = GameObject.FindGameObjectsWithTag ("realenemy");
 				scoreText = GameObject.Find ("score").GetComponent<tk2dTextMesh> ();
@@ -51,10 +58,12 @@ public class scr_manager : MonoBehaviour
 				superTimer = superTime;
 				mUp = 5.5f;
 				mDown = mUp * -1;
+				existBalloon = false;
 				mLeft = GameObject.Find ("lv").transform.position.x;
 				mRight = mLeft * -1;
-				Debug.Log ("screenSize=" + mUp + " " + mDown + " " + mLeft + " " + mRight + " ");
 				
+				Debug.Log ("screenSize=" + mUp + " " + mDown + " " + mLeft + " " + mRight + " ");
+				currentBalloon = new Vector2 (20, 20);
 		
 				//				backSize = back.renderer.bounds.size; 
 				//				Debug.Log (backSize);	
@@ -86,9 +95,28 @@ public class scr_manager : MonoBehaviour
 								StartCoroutine ("timesUp");
 						}
 				}   
+
+				 
 		
 		}
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		/// <summary>
+		/////////////////////////////////////// Games the start.//////////////////////////////////////////////
+		/// </summary>
 		void gameStart ()
 		{
 				audio.PlayOneShot (go);
@@ -125,16 +153,17 @@ public class scr_manager : MonoBehaviour
 				superTimer = superTime;
 				superLevel = 0;
 				bgm.SendMessage ("superMode", 1);
-		
+				existBalloon = false;
 				// back & enemy reset
 				balloon.transform.localScale = new Vector3 (0, 0, 0);
 				existBalloon = false;
-				foreach (GameObject element in enemy) {
-						element.SendMessage ("superMode", 1);
-				}
-				foreach (GameObject element in realEnemy) {
-						element.GetComponent<SpriteRenderer> ().color = new Color (1, 1, 1, 1f);
-				}
+			 
+				enemy [0].SendMessage ("superMode", 1);
+				enemy [1].SendMessage ("superMode", 1);
+				enemy [2].SendMessage ("superMode", 1);
+				realEnemy [0].GetComponent<SpriteRenderer> ().color = new Color (1, 1, 1, 1);
+				realEnemy [1].GetComponent<SpriteRenderer> ().color = new Color (1, 1, 1, 1);
+				realEnemy [2].GetComponent<SpriteRenderer> ().color = new Color (1, 1, 1, 1);
 				balloon.GetComponent<SphereCollider> ().enabled = true;
 
 		}
@@ -151,7 +180,7 @@ public class scr_manager : MonoBehaviour
 				yield return new WaitForSeconds (0.5f);
 				enableTouch ();
 				Time.timeScale = 0;
-
+				existBalloon = false;
 		}
 
 		IEnumerator timesUp ()
@@ -190,14 +219,14 @@ public class scr_manager : MonoBehaviour
 						resultText.text = "" + score;
 						if (score > 1000) {
 								gem = score / 1000;
-								InvokeRepeating ("resultGemCount", 0.5f, 1f);
+								InvokeRepeating ("resultGemCount", 0.5f, 0.3f);
 						} else {
 								enableTouch ();
 						}
 				} else {
 						audio.PlayOneShot (bing);
 						resultText.text = "" + countScore;
-						countScore += 10;
+						countScore += 50;
 				}
 				
 
@@ -219,8 +248,25 @@ public class scr_manager : MonoBehaviour
 		
 		
 		}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 		/// <summary>
-		/// Items the create.
+		/////////////////////////////// Items the create.////////////////////////////////////
 		/// </summary>
 		void itemCreate ()
 		{
@@ -375,6 +421,7 @@ public class scr_manager : MonoBehaviour
 				itemEffectO.animation.wrapMode = WrapMode.Once;
 				GameObject.Find ("score").GetComponent<tk2dTextMesh> ().color = new Color (1, 1, 1);
 				itemEffectO.animation.Stop ();
+				scoreText.text = "Score: " + score;
 				isScoreUp = false;
 		}
 
@@ -405,16 +452,17 @@ public class scr_manager : MonoBehaviour
 		{
 				CancelInvoke ("itemCreate");
 				balloon.GetComponent<SphereCollider> ().enabled = false;
-				foreach (GameObject element in realEnemy) {
-						element.GetComponent<SpriteRenderer> ().color = new Color (1, 1, 1, 0.5f);
-				}
+				realEnemy [0].GetComponent<SpriteRenderer> ().color = new Color (1, 1, 1, 0.5f);
+				realEnemy [1].GetComponent<SpriteRenderer> ().color = new Color (1, 1, 1, 0.5f);
+				realEnemy [2].GetComponent<SpriteRenderer> ().color = new Color (1, 1, 1, 0.5f);
 								
 
 				yield return new WaitForSeconds (4f);
 
-				foreach (GameObject element in realEnemy) {
-						element.GetComponent<SpriteRenderer> ().color = new Color (1, 1, 1, 1f);
-				}
+				realEnemy [0].GetComponent<SpriteRenderer> ().color = new Color (1, 1, 1, 1);
+				realEnemy [1].GetComponent<SpriteRenderer> ().color = new Color (1, 1, 1, 1);
+				realEnemy [2].GetComponent<SpriteRenderer> ().color = new Color (1, 1, 1, 1);
+
 				InvokeRepeating ("itemCreate", 0.1f, 3f);
 				balloon.GetComponent<SphereCollider> ().enabled = true;
 		}
@@ -427,14 +475,29 @@ public class scr_manager : MonoBehaviour
 				numHave = 0;
 		}
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 		/// <summary>
-		/// Create & Remove	/// </summary>
+		///////////////////////////////////////////////// Create & Remove	/// </summary>////////////////////////////////////////////////////////////////////
 		/// <param name="touch">Touch.</param>
 
 		void Create (Vector3 touch)
 		{
+				balloon.transform.localRotation = new Quaternion (0, 0, 0, 0);
 				balloon.GetComponent<SpriteRenderer> ().color = Color.red;
 				balloon.SetActive (true);
+				InvokeRepeating ("balloonStop", 0.1f, 0.1f);
 				CancelInvoke ("decreaseEnergy");
 				balloon.transform.position = touch;
 				if (superLevel < 2) {
@@ -442,37 +505,40 @@ public class scr_manager : MonoBehaviour
 				} else {
 						superTimer = superTime;
 						InvokeRepeating ("superModeCount", 0.1f, 0.1f);
-						if (superLevel == 2)
-								InvokeRepeating ("scoreCount", 0.1f, 0.3f);
-						if (superLevel == 3)
-								InvokeRepeating ("scoreCount", 0.1f, 0.1f);
+						InvokeRepeating ("scoreCount", 0.1f, levelRate [superLevel - 2] / 10);
 				}
 				balloon.SendMessage ("create", superLevel);
 				Debug.Log ("create Level" + superLevel);
-
+				existBalloon = true;
 				audio.PlayOneShot (create);
 		
 		}
 	
 		IEnumerator Remove (int num)
 		{
+			
 				CancelInvoke ("scoreCount");
 		
 				CancelInvoke ("superModeCount");
 				CancelInvoke ("normalModeCount");
+				stopRate = stopRateControl;
+		
 				switch (num) {
 				case 1:
 			
 						balloon.SendMessage ("cancel", 1);
+
 			//						if (audio.isPlaying)
 						audio.Stop ();
 						audio.PlayOneShot (remove);
 			//decrease energy
 						InvokeRepeating ("decreaseEnergy", 0.2f, 0.2f);
-			
+						
 						break;
 			
 				case 2:
+						existBalloon = false;
+						balloon.transform.localScale = new Vector3 (0, 0, 0);
 						audio.Stop ();
 						audio.PlayOneShot (pop);
 						balloon.SendMessage ("cancel", 2);
@@ -485,15 +551,16 @@ public class scr_manager : MonoBehaviour
 
 			// back & enemy reset
 			
-						foreach (GameObject element in enemy) {
-								element.SendMessage ("superMode", 1);
-						}
-						
-						
+						 
+						enemy [0].SendMessage ("superMode", 1);
+						enemy [1].SendMessage ("superMode", 1);
+						enemy [2].SendMessage ("superMode", 1);
+
+			
 						GameObject ep = (GameObject)GameObject.Instantiate (effectPop);
 						ep.transform.position = balloon.transform.position;
 //			ep.renderer.sortingLayerName = "ui";
-			
+					 
 						balloon.SetActive (false);
 			
 						break;
@@ -502,11 +569,13 @@ public class scr_manager : MonoBehaviour
 		
 				yield return new WaitForSeconds (0.2f);
 				if (existBalloon) {
+						existBalloon = false;
 						balloon.transform.localScale = new Vector3 (0, 0, 0);
+			
 						
-						
-
-//						if (num == 1)
+			
+			
+						//						if (num == 1)
 						balloon.SetActive (false);
 						
 			
@@ -519,7 +588,6 @@ public class scr_manager : MonoBehaviour
 //						}
 						//---------------
 			
-						existBalloon = false;
 			
 						
 				}
@@ -537,23 +605,59 @@ public class scr_manager : MonoBehaviour
 			
 				}  
 		}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 		/// <summary>
-		/// Supers the mode count.
+		/////////////////////////////////////////////// Supers the mode count.///////////////////////////////////////////////////////////////////////////
 		/// </summary>
 		/// 
+		/// 
+		/// 
+		void balloonStop ()
+		{
+				if (existBalloon) {
+						
+						previousBalloon = currentBalloon;
+						currentBalloon = balloon.transform.position;
+						if (currentBalloon == previousBalloon) {
+								balloon.SendMessage ("stopBalloon", true);
+//								Instantiate (effectStop, balloon.transform.position, Quaternion.identity);
+								stopRate = stopRateControl;
+								itemEffectP.animation.Play ("anim_stopEffect");
+						} else {
+								balloon.SendMessage ("stopBalloon", false);
+								stopRate = 0;
+						}
+				}  
+		}
+
 		void superModeCount ()
 		{
 				
 				if (gauge.transform.localScale.y > 1.75f) {
 						CancelInvoke ("superModeCount");
-						if (superLevel < 3) {
-								superLevel++;
+						gauge.transform.localScale = new Vector3 (1.75f, 1.75f, 1);
+			
+						if (superLevel < 5) {
 								gauge.transform.localScale = new Vector3 (1.75f, 0.3f, 1);
+								superLevel++;
 								Debug.Log ("supermode(" + superLevel);
 								superMode (superLevel);
 						}
 				} else {
-						gauge.transform.localScale += new Vector3 (0, superTimer / 5000f, 0);
+						gauge.transform.localScale += new Vector3 (0, superTimer / 5000f * stopRate, 0);
 				}
 		}
 	
@@ -581,7 +685,11 @@ public class scr_manager : MonoBehaviour
 	
 		void superMode (int num)
 		{
+				balloon.transform.localRotation = new Quaternion (0, 0, 0, 0);
 		
+				CancelInvoke ("balloonStop");
+				balloon.SendMessage ("stopBalloon", false);
+				stopRate = 0;
 				if (num == 0) {
 						superTimer = 3;
 						superLevel = 0;
@@ -592,9 +700,11 @@ public class scr_manager : MonoBehaviour
 				}
 		
 				balloon.SendMessage ("superMode", num);
-				foreach (GameObject element in enemy) {
-						element.SendMessage ("superMode", num);
-				}
+			 
+
+				enemy [0].SendMessage ("superMode", num);
+				enemy [1].SendMessage ("superMode", num);
+				enemy [2].SendMessage ("superMode", num);
 				bgm.SendMessage ("superMode", num);
 				back.SendMessage ("superMode", num);
 				Debug.Log ("super:" + num);
@@ -611,13 +721,11 @@ public class scr_manager : MonoBehaviour
 						StartCoroutine ("undead");
 						lv.SendMessage ("levelUp");
 						lvText.text = "Lv.2";
+			Instantiate (effectSuper1, new Vector2 (0, 0), Quaternion.identity);
+			Instantiate (effectSuper2, new Vector2 (0, 0), Quaternion.identity);
 						audio.PlayOneShot (levelUp);
-						GameObject ps = (GameObject)GameObject.Instantiate (effectSuper1);
-						ps.transform.position = new Vector2 (0, 0);
-						GameObject ps2 = (GameObject)GameObject.Instantiate (effectSuper2);
-						ps2.transform.position = new Vector2 (0, 0);
 						Instantiate (super_back1, new Vector2 (0, 0), Quaternion.identity);
-						InvokeRepeating ("scoreCount", 0.1f, 0.3f);
+						InvokeRepeating ("scoreCount", 0.1f, levelRate [0] / 10);
 						break;
 				case 3:
 						StopCoroutine ("undead");
@@ -625,14 +733,40 @@ public class scr_manager : MonoBehaviour
 						lv.SendMessage ("levelUp");
 						lvText.text = "Lv.3";
 						audio.PlayOneShot (levelUp);
-						GameObject ps3 = (GameObject)GameObject.Instantiate (effectSuper1);
-						ps3.transform.position = new Vector2 (0, 0);
-						ps3.renderer.sortingLayerName = "ui";
-						GameObject ps4 = (GameObject)GameObject.Instantiate (effectSuper2);
-						ps4.transform.position = new Vector2 (0, 0);
-						ps4.renderer.sortingLayerName = "ui";
-						InvokeRepeating ("scoreCount", 0.1f, 0.1f);
+						Instantiate (effectSuper1, new Vector2 (0, 0), Quaternion.identity);
+						Instantiate (effectSuper2, new Vector2 (0, 0), Quaternion.identity);
+						InvokeRepeating ("scoreCount", 0.1f, levelRate [1] / 10);
 						Instantiate (super_back2, new Vector2 (0, 0), Quaternion.identity);
+						break;
+			
+				 
+
+				case 4:
+						StopCoroutine ("undead");
+						StartCoroutine ("undead");
+						lv.SendMessage ("levelUp");
+						lvText.text = "Lv.4";
+						audio.PlayOneShot (levelUp);
+						Instantiate (effectSuper1, new Vector2 (0, 0), Quaternion.identity);
+						Instantiate (effectSuper2, new Vector2 (0, 0), Quaternion.identity);
+						InvokeRepeating ("scoreCount", 0.1f, levelRate [2] / 10);
+						Instantiate (super_back1, new Vector2 (0, 0), Quaternion.identity);
+						balloonSprite.sprite = superBalloon4;
+						break;
+
+				case 5:
+						StopCoroutine ("undead");
+						StartCoroutine ("undead");
+						lv.SendMessage ("levelUp");
+						lvText.text = "Lv.5";
+						audio.PlayOneShot (levelUp);
+						Instantiate (effectSuper1, new Vector2 (0, 0), Quaternion.identity);
+						Instantiate (effectSuper2, new Vector2 (0, 0), Quaternion.identity);
+						InvokeRepeating ("scoreCount", 0.1f, levelRate [3] / 10);
+						Instantiate (super_back2, new Vector2 (0, 0), Quaternion.identity);
+						balloonSprite.sprite = superBalloon5;
+						int i = 0;
+						back.SendMessage ("superMode", i);
 						break;
 			
 				default:
@@ -640,6 +774,7 @@ public class scr_manager : MonoBehaviour
 			
 			
 				}
+				InvokeRepeating ("balloonStop", 0.5f, 0.1f);
 		}
 	
 		void scoreCount ()
@@ -676,6 +811,7 @@ public class scr_manager : MonoBehaviour
 				switch (num) {
 			
 				case 1:
+						CancelInvoke ("balloonStop");
 						StartCoroutine (Remove (2));
 						break;
 				case 2:
@@ -784,6 +920,7 @@ public class scr_manager : MonoBehaviour
 						//												Application.LoadLevel (0);
 				}
 				if (existBalloon && onPlay) {
+						CancelInvoke ("balloonStop");
 						StartCoroutine (Remove (1));			
 			
 				}
