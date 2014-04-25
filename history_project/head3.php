@@ -57,7 +57,7 @@ img.fullbackground {
 	" height="100" usemap="#Map"  border="0" align="middle" />
     <map name="Map" id="Map">
       <area shape="rect" coords="106,2,232,100" href="#" />
-      <area shape="rect" coords="266,1,396,100" href="main_calendar.php" />
+      <area shape="rect" coords="266,1,396,100" href="<?php echo G5_URL ?>/main_calendar.php" />
       <area shape="rect" coords="430,1,553,100" href="google.com" />
       <area shape="rect" coords="583,3,710,98" href="#" />
       <area shape="rect" coords="741,0,865,101" href="#" />
