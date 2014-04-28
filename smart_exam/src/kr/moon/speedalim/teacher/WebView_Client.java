@@ -1,4 +1,4 @@
-package kr.co.moon.alimy.admin;
+package kr.moon.speedalim.teacher;
 
 import android.app.ProgressDialog;
 import android.graphics.Bitmap;
