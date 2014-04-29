@@ -4,7 +4,7 @@ using System.Collections;
 public class scr_manager : MonoBehaviour
 {
 		public bool test;
-		public GameObject btnRestart, balloon, itemBlue, itemOrange, itemPurple, monsterB, monsterO, monsterP, monsterEffect, super_back1, super_back2;
+		public GameObject oStopSound, btnRestart, balloon, itemBlue, itemOrange, itemPurple, monsterB, monsterO, monsterP, monsterEffect, super_back1, super_back2;
 		public Sprite bStar, oStar, pStar, eStar, superBalloon4, superBalloon5;
 		public float stopRateControl;
 		public float[] levelRate = new float[4];
@@ -62,7 +62,7 @@ public class scr_manager : MonoBehaviour
 				mLeft = GameObject.Find ("lv").transform.position.x;
 				mRight = mLeft * -1;
 				
-				Debug.Log ("screenSize=" + mUp + " " + mDown + " " + mLeft + " " + mRight + " ");
+//				Debug.Log ("screenSize=" + mUp + " " + mDown + " " + mLeft + " " + mRight + " ");
 				currentBalloon = new Vector2 (20, 20);
 		
 				//				backSize = back.renderer.bounds.size; 
@@ -193,6 +193,7 @@ public class scr_manager : MonoBehaviour
 				CancelInvoke ("superModeCount");
 				CancelInvoke ("normalModeCount");
 				balloon.SetActive (false);
+				existBalloon = false;
 				walls.SetActive (false);
 				disableTouch ();
 				audio.PlayOneShot (timesup);
@@ -273,7 +274,7 @@ public class scr_manager : MonoBehaviour
 				float tempX = (Random.Range (mLeft * 100, mRight * 100)) / 100;
 				if (existItem != null)
 						Destroy (existItem);
-				Debug.Log ("itemCreate");
+//				Debug.Log ("itemCreate");
 				int tempCol = Random.Range (1, 4);
 				switch (tempCol) {
 				case 1:
@@ -430,7 +431,7 @@ public class scr_manager : MonoBehaviour
 				//Stop item Create
 				//stop enemyTrigger
 				//enemy alpha
-				Debug.Log (mColHave);
+//				Debug.Log (mColHave);
 				if (mColHave.Equals ("b"))
 						Instantiate (monsterB, new Vector2 (0, 0), Quaternion.identity);
 				if (mColHave.Equals ("o"))
@@ -508,7 +509,7 @@ public class scr_manager : MonoBehaviour
 						InvokeRepeating ("scoreCount", 0.1f, levelRate [superLevel - 2] / 10);
 				}
 				balloon.SendMessage ("create", superLevel);
-				Debug.Log ("create Level" + superLevel);
+//				Debug.Log ("create Level" + superLevel);
 				existBalloon = true;
 				audio.PlayOneShot (create);
 		
@@ -516,6 +517,7 @@ public class scr_manager : MonoBehaviour
 	
 		IEnumerator Remove (int num)
 		{
+				oStopSound.audio.Stop ();
 			
 				CancelInvoke ("scoreCount");
 		
@@ -627,17 +629,22 @@ public class scr_manager : MonoBehaviour
 		/// 
 		void balloonStop ()
 		{
-				if (existBalloon) {
+				if (existBalloon && superLevel > 0) {
 						
 						previousBalloon = currentBalloon;
 						currentBalloon = balloon.transform.position;
-						if (currentBalloon == previousBalloon) {
+						Vector2 tempVector = currentBalloon - previousBalloon;
+						Debug.Log ("" + tempVector);
+						if (-0.1f < tempVector.x && tempVector.x < 0.1f && -0.1f < tempVector.y && tempVector.y < 0.1f) {
 								balloon.SendMessage ("stopBalloon", true);
+								if (!oStopSound.audio.isPlaying)
+										oStopSound.audio.Play ();
 //								Instantiate (effectStop, balloon.transform.position, Quaternion.identity);
 								stopRate = stopRateControl;
 								itemEffectP.animation.Play ("anim_stopEffect");
 						} else {
 								balloon.SendMessage ("stopBalloon", false);
+								oStopSound.audio.Stop ();
 								stopRate = 0;
 						}
 				}  
@@ -653,7 +660,7 @@ public class scr_manager : MonoBehaviour
 						if (superLevel < 5) {
 								gauge.transform.localScale = new Vector3 (1.75f, 0.3f, 1);
 								superLevel++;
-								Debug.Log ("supermode(" + superLevel);
+//								Debug.Log ("supermode(" + superLevel);
 								superMode (superLevel);
 						}
 				} else {
@@ -707,7 +714,6 @@ public class scr_manager : MonoBehaviour
 				enemy [2].SendMessage ("superMode", num);
 				bgm.SendMessage ("superMode", num);
 				back.SendMessage ("superMode", num);
-				Debug.Log ("super:" + num);
 		
 				//********************score
 				CancelInvoke ("scoreCount");
@@ -721,8 +727,8 @@ public class scr_manager : MonoBehaviour
 						StartCoroutine ("undead");
 						lv.SendMessage ("levelUp");
 						lvText.text = "Lv.2";
-			Instantiate (effectSuper1, new Vector2 (0, 0), Quaternion.identity);
-			Instantiate (effectSuper2, new Vector2 (0, 0), Quaternion.identity);
+						Instantiate (effectSuper1, new Vector2 (0, 0), Quaternion.identity);
+						Instantiate (effectSuper2, new Vector2 (0, 0), Quaternion.identity);
 						audio.PlayOneShot (levelUp);
 						Instantiate (super_back1, new Vector2 (0, 0), Quaternion.identity);
 						InvokeRepeating ("scoreCount", 0.1f, levelRate [0] / 10);

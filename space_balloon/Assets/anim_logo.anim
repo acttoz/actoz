@@ -497,7 +497,7 @@ AnimationClip:
     script: {fileID: 0}
   m_EulerEditorCurves: []
   m_Events:
-  - time: 1.5333333
+  - time: 1.06666672
     functionName: destroy
     data: 
     objectReferenceParameter: {fileID: 0}
