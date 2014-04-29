@@ -2061,7 +2061,7 @@ MonoBehaviour:
   effectPointBack: {fileID: 100000, guid: f3750ae4bd4776246a1aca6f3b1e69db, type: 2}
   backSize: {x: 0, y: 0, z: 0}
   balloonSize: {x: 0, y: 0, z: 0}
-  superTime: 80
+  superTime: 180
   create: {fileID: 8300000, guid: d6a626961503e5d448c1924f28322421, type: 3}
   remove: {fileID: 8300000, guid: a86e94a695d566e49ba6a01f8de63476, type: 3}
   pop: {fileID: 8300000, guid: 3205df71ebdee8d48942897e1a9ba792, type: 3}
@@ -2403,7 +2403,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 2
-  increaseRate: .699999988
+  increaseRate: .5
 --- !u!4 &1005143731
 Transform:
   m_ObjectHideFlags: 0
@@ -2412,7 +2412,7 @@ Transform:
   m_GameObject: {fileID: 1005143724}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.52666795, y: 4.16095161, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: .699999988, y: .699999988, z: 1}
   m_Children:
   - {fileID: 221773919}
   m_Father: {fileID: 0}
@@ -2442,7 +2442,7 @@ Transform:
   m_GameObject: {fileID: 1019721821}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2.38017893, y: .478065252, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: .699999988, y: .699999988, z: 1}
   m_Children:
   - {fileID: 1383554217}
   m_Father: {fileID: 0}
@@ -2485,7 +2485,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1
-  increaseRate: .699999988
+  increaseRate: .5
 --- !u!1 &1028380978
 GameObject:
   m_ObjectHideFlags: 0
@@ -2657,15 +2657,15 @@ Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 1911685240}
     m_Modifications:
     - target: {fileID: 400000, guid: 4166c675bad249c46957bfd5f50ca3ca, type: 2}
       propertyPath: m_LocalPosition.x
-      value: .206584513
+      value: .653324962
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 4166c675bad249c46957bfd5f50ca3ca, type: 2}
       propertyPath: m_LocalPosition.y
-      value: .198929787
+      value: -4.57561159
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 4166c675bad249c46957bfd5f50ca3ca, type: 2}
       propertyPath: m_LocalPosition.z
@@ -3702,11 +3702,11 @@ Transform:
   m_PrefabInternal: {fileID: 1076843597}
   m_GameObject: {fileID: 1608268327}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .206584513, y: .198929787, z: -1.68391657}
+  m_LocalPosition: {x: .653324962, y: -4.57561159, z: -1.68391657}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 1172556361}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1911685240}
 --- !u!82 &1608268333
 AudioSource:
   m_ObjectHideFlags: 0
@@ -4559,6 +4559,33 @@ SpriteRenderer:
   m_SortingLayerID: 4158156261
   m_Sprite: {fileID: 21300000, guid: e2e76a03ab9efc145a9147be05cfe874, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
+--- !u!1 &1911685239
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1911685240}
+  m_Layer: 0
+  m_Name: Balloon
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1911685240
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1911685239}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -.446740478, y: 4.77454138, z: 0}
+  m_LocalScale: {x: .710075796, y: .710075796, z: .710075796}
+  m_Children:
+  - {fileID: 1608268332}
+  m_Father: {fileID: 0}
 --- !u!1 &1916187340
 GameObject:
   m_ObjectHideFlags: 0
@@ -4843,7 +4870,7 @@ Transform:
   m_GameObject: {fileID: 2076270624}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.46918797, y: -2.94900703, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: .699999988, y: .699999988, z: 1}
   m_Children:
   - {fileID: 1177709456}
   m_Father: {fileID: 0}
@@ -4886,7 +4913,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1.5
-  increaseRate: .699999988
+  increaseRate: .5
 --- !u!1 &2132151359
 GameObject:
   m_ObjectHideFlags: 0
