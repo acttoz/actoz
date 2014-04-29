@@ -50,7 +50,7 @@ MonoBehaviour:
   - spriteSheet: {fileID: 100000, guid: ad34e427530868b43b2c878898e28ca8, type: 2}
     offset: {x: -0, y: 0, z: .100000001}
     waittingTime: 0
-    foldOut: 0
+    foldOut: 1
     color: {r: .281343997, g: .482888758, b: .462670505, a: 1}
     spriteSheetRef: {fileID: 100000, guid: ad34e427530868b43b2c878898e28ca8, type: 2}
     oldSpriteSheetRef: {fileID: 100000, guid: ad34e427530868b43b2c878898e28ca8, type: 2}

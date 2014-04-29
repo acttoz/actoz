@@ -39,12 +39,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spriteSheetMaterial: {fileID: 2100000, guid: 3cbd1c4cb0cebde4a84699b1843157ae, type: 2}
-  spriteCount: 32
-  uvAnimationTileX: 8
+  spriteCount: 16
+  uvAnimationTileX: 4
   uvAnimationTileY: 4
-  framesPerSecond: 31
-  sizeStart: {x: 7, y: 7, z: 0}
-  sizeEnd: {x: 7, y: 7, z: 0}
+  framesPerSecond: 20
+  sizeStart: {x: 5, y: 5, z: 0}
+  sizeEnd: {x: 5, y: 5, z: 0}
   randomRotation: 0
   rotationStart: 0
   rotationEnd: 0

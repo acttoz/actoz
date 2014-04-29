@@ -39,7 +39,7 @@ Material:
       data:
         first:
           name: _InvFade
-        second: 1
+        second: .893214285
       data:
         first:
           name: _EmissionLM

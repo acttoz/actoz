@@ -4,7 +4,7 @@ using System.Collections;
 public class scr_manager : MonoBehaviour
 {
 		public bool test;
-		public GameObject oStopSound, btnRestart, balloon, itemBlue, itemOrange, itemPurple, monsterB, monsterO, monsterP, monsterEffect, super_back1, super_back2;
+		public GameObject oEnergy, oStopSound, btnRestart, balloon, itemBlue, itemOrange, itemPurple, monsterB, monsterO, monsterP, monsterEffect, super_back1, super_back2;
 		public Sprite bStar, oStar, pStar, eStar, superBalloon4, superBalloon5;
 		public float stopRateControl;
 		public float[] levelRate = new float[4];
@@ -120,7 +120,6 @@ public class scr_manager : MonoBehaviour
 		void gameStart ()
 		{
 				audio.PlayOneShot (go);
-				backStart.SetActive (false);
 				enableTouch ();
 				timeStarted = true;
 				onPlay = true;
@@ -139,7 +138,7 @@ public class scr_manager : MonoBehaviour
 		{
 				CancelInvoke ("itemCreate");
 				gauge.transform.localScale = new Vector3 (1.75f, 0.3f, 1);
-				backStart.SetActive (true);
+				Instantiate (backStart, new Vector2 (0, 0), Quaternion.identity);
 				onPlay = false;
 				score = 0;
 				scoreText.text = "Score: " + score;
@@ -384,7 +383,7 @@ public class scr_manager : MonoBehaviour
 		void itemUse (string col)
 		{
 				if (col.Equals ("b")) {
-						timer += 20;
+						timer += 10;
 						audio.PlayOneShot (levelUp);
 						itemEffectB.animation.Play ();
 						Instantiate (itemEffectBack, itemEffectB.transform.position, Quaternion.identity);
@@ -418,7 +417,7 @@ public class scr_manager : MonoBehaviour
 
 				GameObject.Find ("score").GetComponent<tk2dTextMesh> ().color = new Color (1, 0.5f, 0);
 
-				yield return new WaitForSeconds (5f);
+				yield return new WaitForSeconds (10f);
 				itemEffectO.animation.wrapMode = WrapMode.Once;
 				GameObject.Find ("score").GetComponent<tk2dTextMesh> ().color = new Color (1, 1, 1);
 				itemEffectO.animation.Stop ();
@@ -518,12 +517,14 @@ public class scr_manager : MonoBehaviour
 		IEnumerator Remove (int num)
 		{
 				oStopSound.audio.Stop ();
-			
+				oEnergy.GetComponent<SpriteRenderer> ().color = new Color (1, 1, 1);
 				CancelInvoke ("scoreCount");
 		
 				CancelInvoke ("superModeCount");
 				CancelInvoke ("normalModeCount");
 				stopRate = stopRateControl;
+				oEnergy.animation.Stop ();
+		
 		
 				switch (num) {
 				case 1:
@@ -534,7 +535,8 @@ public class scr_manager : MonoBehaviour
 						audio.Stop ();
 						audio.PlayOneShot (remove);
 			//decrease energy
-						InvokeRepeating ("decreaseEnergy", 0.2f, 0.2f);
+						if (superLevel < 5)
+								InvokeRepeating ("decreaseEnergy", 0.2f, 0.2f);
 						
 						break;
 			
@@ -629,7 +631,7 @@ public class scr_manager : MonoBehaviour
 		/// 
 		void balloonStop ()
 		{
-				if (existBalloon && superLevel > 0) {
+				if (existBalloon && superLevel > 0 && superLevel < 5) {
 						
 						previousBalloon = currentBalloon;
 						currentBalloon = balloon.transform.position;
@@ -637,16 +639,23 @@ public class scr_manager : MonoBehaviour
 						Debug.Log ("" + tempVector);
 						if (-0.1f < tempVector.x && tempVector.x < 0.1f && -0.1f < tempVector.y && tempVector.y < 0.1f) {
 								balloon.SendMessage ("stopBalloon", true);
+								oEnergy.animation.Play ();
 								if (!oStopSound.audio.isPlaying)
 										oStopSound.audio.Play ();
 //								Instantiate (effectStop, balloon.transform.position, Quaternion.identity);
 								stopRate = stopRateControl;
-								itemEffectP.animation.Play ("anim_stopEffect");
 						} else {
 								balloon.SendMessage ("stopBalloon", false);
+								oEnergy.animation.Stop ();
+								oEnergy.GetComponent<SpriteRenderer> ().color = new Color (1, 1, 1);
 								oStopSound.audio.Stop ();
 								stopRate = 0;
 						}
+				} else if (superLevel == 5) {
+						balloon.SendMessage ("stopBalloon", false);
+						oEnergy.animation.Stop ();
+						oStopSound.audio.Stop ();
+						stopRate = 0;
 				}  
 		}
 
@@ -884,7 +893,7 @@ public class scr_manager : MonoBehaviour
 
 				if (e.Selection == btn_pause && onPlay) {
 						btn_pause.GetComponent<SpriteRenderer> ().color = Color.yellow;
-						//												Application.LoadLevel (0);
+						//							 					Application.LoadLevel (0);
 				}
 
 				if (e.Selection == btn_resume) {
