@@ -13,9 +13,12 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,14 +26,39 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class List extends Activity implements OnClickListener {
+	private ImageView login;
+	LinearLayout sub_menu;
+	LinearLayout lay_signIn;
+	TextView sub_back;
+	TextView call_login;
+	private EditText edtid;
+	private EditText edtpass;
+	private String myId;
+	private ImageView mem_regi;
+	private ImageView share;
+	private static final String SERVER_ADDRESS = "http://chunk.dothome.co.kr/php";
+	private static final int SUCESS_ADMIT = 0;
+	private static final int FAIL_ADMIT = 1;
+	public static String USER_ID;
+	private CheckBox checkBoxID;
+	private SharedPreferences mPref;
+	private SharedPreferences.Editor mPrefEdit;
+	Animation slideInT;
+	Animation slideOutT;
 	ListView listView1;
 	boolean popup = true;
 	SharedPreferences idPrefs;
@@ -49,7 +77,14 @@ public class List extends Activity implements OnClickListener {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.list);
 		// TODO Auto-generated method stub
-
+		sub_menu = (LinearLayout) findViewById(R.id.sub_menu);
+		lay_signIn = (LinearLayout) findViewById(R.id.lay_signIn);
+		sub_menu.setDrawingCacheEnabled(true);
+		lay_signIn.setDrawingCacheEnabled(true);
+		sub_back = (TextView) findViewById(R.id.sub_back);
+		call_login = (TextView) findViewById(R.id.call_login);
+		slideInT = AnimationUtils.loadAnimation(this, R.anim.slide_in_top);
+		slideOutT = AnimationUtils.loadAnimation(this, R.anim.slide_out_top);
 		listView1 = (ListView) findViewById(R.id.listview);
 		idPrefs = getSharedPreferences("id", MODE_PRIVATE);
 		editor = idPrefs.edit();
@@ -88,8 +123,144 @@ public class List extends Activity implements OnClickListener {
 			showNotice();
 		} else {
 			checkNotice();
+			show_login();
 		}
+
+		// Login////////////////////////////////////////
+		mPref = getSharedPreferences("Pref1", 0);
+		mPrefEdit = mPref.edit();
+
+		login = (ImageView) findViewById(R.id.button3);
+		edtid = (EditText) findViewById(R.id.edtid);
+		edtpass = (EditText) findViewById(R.id.etdpwd);
+		mem_regi = (ImageView) findViewById(R.id.button1);
+		share = (ImageView) findViewById(R.id.ImageView01);
+
+		checkBoxID = (CheckBox) findViewById(R.id.checkBox1);
+		edtid.setText(mPref.getString("IDKEY", ""));
+		checkBoxID.setChecked(mPref.getBoolean("check", false));
+
+		login.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				if (edtid.getText().toString().equals("")
+						|| edtpass.getText().toString().equals("")) {
+					new AlertDialog.Builder(List.this).setTitle("입력 오류")
+							.setMessage("아이디와 비밀번호를 확인해주세요")
+							.setNeutralButton("OK", null).show();
+					edtid.setText("");
+					edtpass.setText("");
+				} else {
+					ConnectivityManager connect = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
+					if (connect.getNetworkInfo(ConnectivityManager.TYPE_MOBILE)
+							.getState() == NetworkInfo.State.CONNECTED
+							|| connect.getNetworkInfo(
+									ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
+						HttpBuilder hb = new HttpBuilder();
+						hb.loginResponse(edtid.getText().toString(), edtpass
+								.getText().toString(), SERVER_ADDRESS
+								+ "/check_login.php", handler);
+					} else {
+						new AlertDialog.Builder(List.this)
+								.setMessage(
+										"데이터 네트워크 차단 상태입니다. Wi-Fi를 연결해 접속하거나, 데이터 네트워크 설정을 '접속 허용'으로 변경하신 후 사용해 주십시오.")
+								.setNeutralButton("OK", null).show();
+					}
+
+				}
+			}
+		});
+		mem_regi.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				hide_login();
+				show_sign();
+			}
+		});
+		call_login.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				show_login();
+			}
+		});
+		sub_back.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				hide_login();
+				hide_sign();
+			}
+		});
+
 	}
+
+	public void show_login() {
+		sub_menu.setVisibility(View.VISIBLE);
+		sub_menu.startAnimation(slideInT);
+		sub_back.setVisibility(View.VISIBLE);
+	}
+	public void hide_login() {
+		sub_menu.startAnimation(slideOutT);
+		sub_menu.setVisibility(View.GONE);
+		sub_back.setVisibility(View.GONE);
+	}
+	public void show_sign() {
+		lay_signIn.setVisibility(View.VISIBLE);
+		lay_signIn.startAnimation(slideInT);
+		sub_back.setVisibility(View.VISIBLE);
+	}
+	public void hide_sign() {
+		lay_signIn.startAnimation(slideOutT);
+		lay_signIn.setVisibility(View.GONE);
+		sub_back.setVisibility(View.GONE);
+	}
+
+	private Handler handler = new Handler() {
+
+		@Override
+		public void handleMessage(Message msg) {
+			// TODO Auto-generated method stub
+			super.handleMessage(msg);
+			switch (msg.what) {
+			case SUCESS_ADMIT:
+				myId = edtid.getText().toString();
+
+				if (checkBoxID.isChecked() == true) {
+					mPrefEdit.putString("IDKEY", edtid.getText().toString());
+					mPrefEdit.putBoolean("check", checkBoxID.isChecked());
+				} else {
+					mPrefEdit.putString("IDKEY", "");
+					mPrefEdit.putBoolean("check", false);
+				}
+				mPrefEdit.commit();
+				hide_login();
+				Toast.makeText(List.this, "로그인 성공. 10 points Up!",
+						Toast.LENGTH_SHORT).show();
+				// finish();
+				// Intent intent = new Intent(Login.this, Licence.class);
+				// startActivity(intent);
+				break;
+			case FAIL_ADMIT:
+				new AlertDialog.Builder(List.this)
+						.setTitle("로그인 실패")
+						.setMessage("아이디 패스워드를 확인해주세요.")
+						.setNeutralButton(
+								"OK",
+								new android.content.DialogInterface.OnClickListener() {
+									@Override
+									public void onClick(DialogInterface dialog,
+											int which) {
+										edtid.setText("");
+										edtpass.setText("");
+									}
+								}).show();
+				break;
+			}
+		}
+	};
 
 	private void checkNotice() {
 		// TODO Auto-generated method stub
@@ -98,6 +269,7 @@ public class List extends Activity implements OnClickListener {
 
 	}
 
+	// 공지사항 체크///////////////////////////////////////////////////////
 	private class NoticeThread extends Thread {
 		final Handler mHandler = new Handler();
 		StringBuilder text;
@@ -107,7 +279,8 @@ public class List extends Activity implements OnClickListener {
 				text = new StringBuilder();
 				text.append("");
 
-				URL url = new URL("http://actoz.dothome.co.kr/13chunk/notice.txt");
+				URL url = new URL(
+						"http://actoz.dothome.co.kr/13chunk/notice.txt");
 				HttpURLConnection conn = (HttpURLConnection) url
 						.openConnection();
 				if (conn != null) {
@@ -152,8 +325,7 @@ public class List extends Activity implements OnClickListener {
 							// dlg.show();
 
 							// 다이얼로그 생성
-							final Dialog dialog = new Dialog(
-									List.this);
+							final Dialog dialog = new Dialog(List.this);
 							// 다이얼로그의 윈도우 얻기
 							Window window = dialog.getWindow();
 							// 다이얼로그가 가리는 윈도우를 흐릿하게 만든다
@@ -175,7 +347,8 @@ public class List extends Activity implements OnClickListener {
 							 * requestWindowFeature()하고 setContentView()을 한다
 							 */
 							window.setFeatureDrawableResource(
-									Window.FEATURE_LEFT_ICON, R.drawable.ic_launcher);
+									Window.FEATURE_LEFT_ICON,
+									R.drawable.ic_launcher);
 							TextView notice_tv = (TextView) dialog
 									.findViewById(R.id.server_textView);
 							notice_tv.setText(text);
@@ -206,6 +379,7 @@ public class List extends Activity implements OnClickListener {
 		}
 	}
 
+	// 안내
 	public void showNotice() {
 		Context mContext = getApplicationContext();
 		LayoutInflater inflater = (LayoutInflater) mContext
@@ -228,6 +402,7 @@ public class List extends Activity implements OnClickListener {
 						editor.putBoolean("POPUP", false);
 						editor.commit();
 						checkNotice();
+						show_login();
 					}
 				});
 		AlertDialog ad = aDialog.create();
@@ -247,9 +422,8 @@ public class List extends Activity implements OnClickListener {
 			msg.addCategory(Intent.CATEGORY_DEFAULT);
 
 			msg.putExtra(Intent.EXTRA_SUBJECT, "청크로 원어민 되기");
-
 			msg.putExtra(Intent.EXTRA_TEXT,
-					this.getResources().getString(R.string.link));
+					"http://m.site.naver.com/0a5iP");
 
 			msg.putExtra(Intent.EXTRA_TITLE, "제목");
 
@@ -276,7 +450,7 @@ public class List extends Activity implements OnClickListener {
 					public void onClick(DialogInterface dialog, int which) {
 						Intent intent = new Intent(
 								Intent.ACTION_VIEW,
-								Uri.parse("http://m.book.naver.com/bookdb/book_detail.nhn?biblio.bid=6735393"));
+								Uri.parse(getResources().getString(R.string.link)));
 						startActivity(intent);
 					}
 				});
