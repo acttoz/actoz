@@ -43,6 +43,8 @@ public class scr_manager : MonoBehaviour
 
 		void Start ()
 		{
+				score = 1000;
+				countGem = PlayerPrefs.GetInt ("NUMGEM");
 				if (!test)
 						backStart.SetActive (true);
 				timer = gameTime + 1;
@@ -197,12 +199,11 @@ public class scr_manager : MonoBehaviour
 				disableTouch ();
 				audio.PlayOneShot (timesup);
 				Instantiate (oTimeUp, new Vector2 (0, 0), Quaternion.identity);
-
-				yield return new WaitForSeconds (1f);
-				countGem = 0;
-				countScore = 0;
 				resultText = GameObject.Find ("numscore").GetComponent<tk2dTextMesh> ();
 				gemText = GameObject.Find ("numgem").GetComponent<tk2dTextMesh> ();
+				gemText.text = "" + countGem;
+				yield return new WaitForSeconds (1f);
+				countScore = 0;
 				btn_menu = GameObject.Find ("btn_menu");
 				btn_replay = GameObject.Find ("btn_replay");
 				InvokeRepeating ("resultCount", 0f, 0.01f);
@@ -217,7 +218,7 @@ public class scr_manager : MonoBehaviour
 						CancelInvoke ("resultCount");
 
 						resultText.text = "" + score;
-						if (score > 1000) {
+						if (score >= 1000) {
 								gem = score / 1000;
 								InvokeRepeating ("resultGemCount", 0.5f, 0.3f);
 						} else {
@@ -236,13 +237,14 @@ public class scr_manager : MonoBehaviour
 		{
 				audio.PlayOneShot (itemSound);
 				countGem++;
+				gem--;
 				gemText.text = "" + countGem;
 				resultText.text = "" + (score -= 1000);
 				
-				if (gem == countGem) {
+				if (gem < 1) {
 
 						CancelInvoke ("resultGemCount");
-			
+						PlayerPrefs.SetInt ("NUMGEM", countGem);
 						enableTouch ();
 				}  
 		
@@ -651,7 +653,7 @@ public class scr_manager : MonoBehaviour
 								oStopSound.audio.Stop ();
 								stopRate = 0;
 						}
-				} else if (superLevel == 5) {
+				} else if (existBalloon && superLevel == 5) {
 						balloon.SendMessage ("stopBalloon", false);
 						oEnergy.animation.Stop ();
 						oStopSound.audio.Stop ();

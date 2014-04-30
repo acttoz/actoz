@@ -147,6 +147,7 @@
      <Compile Include="Assets\scr_manager.cs" />
      <Compile Include="Assets\scr_monster.cs" />
      <Compile Include="Assets\scr_num5.cs" />
+     <Compile Include="Assets\scr_numGem.cs" />
      <Compile Include="Assets\scr_startManager.cs" />
      <Compile Include="Assets\scr_timesup.cs" />
      <Compile Include="Assets\scr_toStart.cs" />
