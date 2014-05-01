@@ -2000,7 +2000,7 @@ MonoBehaviour:
   btn_pause: {fileID: 1727857732}
   prf_pause: {fileID: 100024, guid: 78aa278fbdd24714c992cdff60f60a8d, type: 2}
   btn_resume: {fileID: 0}
-  gameTime: 5
+  gameTime: 111
   leftTime: 0
   back: {fileID: 587499133}
   backStart: {fileID: 100000, guid: 3ad45b4749773b24eb4fa4816949bb77, type: 2}
