@@ -54,6 +54,7 @@
      <None Include="Assets\TK2DROOT\tk2dUI\Shaders\DepthMask.shader" />
      <None Include="Assets\Plugins\FingerGestures\Readme.txt" />
      <None Include="Assets\tk2dUIExtensions\Fonts\CarterOne.fnt" />
+     <None Include="Assets\Standard Assets\Particles\Sources\Shaders\Particle Alpha Blend (Queue +100).shader" />
      <None Include="Assets\TK2DROOT\tk2d\Shaders\LitPremulVertexColor.shader" />
      <None Include="Assets\TK2DROOT\tk2d\Shaders\PremulVertexColor.shader" />
      <None Include="Assets\TK2DROOT\tk2d\Shaders\goodies\PackedTextMesh.shader" />
@@ -74,6 +75,8 @@
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
       <Project>{F9F82FFE-C09A-CAD9-B018-FAA8503238DD}</Project>      <Name>Assembly-CSharp-firstpass</Name>    </ProjectReference>
+    <ProjectReference Include="Assembly-UnityScript-firstpass.unityproj">
+      <Project>{576415CC-9D40-706D-863C-E2E7FE31673A}</Project>      <Name>Assembly-UnityScript-firstpass</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

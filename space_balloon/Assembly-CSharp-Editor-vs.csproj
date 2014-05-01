@@ -166,6 +166,7 @@
      <None Include="Assets\TK2DROOT\tk2dUI\Shaders\DepthMask.shader" />
      <None Include="Assets\Plugins\FingerGestures\Readme.txt" />
      <None Include="Assets\tk2dUIExtensions\Fonts\CarterOne.fnt" />
+     <None Include="Assets\Standard Assets\Particles\Sources\Shaders\Particle Alpha Blend (Queue +100).shader" />
      <None Include="Assets\TK2DROOT\tk2d\Shaders\LitPremulVertexColor.shader" />
      <None Include="Assets\TK2DROOT\tk2d\Shaders\PremulVertexColor.shader" />
      <None Include="Assets\TK2DROOT\tk2d\Shaders\goodies\PackedTextMesh.shader" />
@@ -182,6 +183,9 @@
      <None Include="Assets\ToonEffect_V2\Documentation\04 - How to create a sequence.txt" />
      <None Include="Assets\ToonEffect_V2\Documentation\02 - How to create an effect.txt" />
      <None Include="Assets\TK2DROOT\tk2d\Shaders\AdditiveVertexColor.shader" />
+ <Reference Include="Assembly-UnityScript-firstpass">
+ <HintPath>Library\ScriptAssemblies\Assembly-UnityScript-firstpass.dll</HintPath>
+ </Reference>
  <Reference Include="Assembly-UnityScript">
  <HintPath>Library\ScriptAssemblies\Assembly-UnityScript.dll</HintPath>
  </Reference>

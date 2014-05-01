@@ -4,15 +4,16 @@ using System.Collections;
 public class scr_selectLevel : MonoBehaviour
 {
 		GameObject[] oLevels = new GameObject[9];
-		public GameObject btn_back, btn_back2, loading, oCart;
+		public GameObject btn_back, btn_back2, oCart, btn_play;
 		public GameObject oItem_time, oItem_shield, oItem_smaller, oItem_star, oSelectedPan1, oSelectedPan2;
 		public Sprite[] items = new Sprite[5] ;
 		int selectedLevel = 5;
+		int numGem;
 		int iSelectedItem = 0;
 		// Use this for initialization
 		void Start ()
 		{
-				loading.SetActive (false);
+				numGem = PlayerPrefs.GetInt ("NUMGEM");
 				for (int i=0; i<9; i++) {
 						oLevels [i] = GameObject.Find ("" + (i + 1));
 				}
@@ -26,6 +27,10 @@ public class scr_selectLevel : MonoBehaviour
 				}
 				if (gesture.Selection == btn_back2) {
 						offCart ();
+						//						Application.LoadLevel (1);
+				}
+				if (gesture.Selection == btn_play) {
+						StartCoroutine ("play", selectedLevel);
 						//						Application.LoadLevel (1);
 				}
 				if (gesture.Selection == oItem_time) {
@@ -88,30 +93,23 @@ public class scr_selectLevel : MonoBehaviour
 
 		void itemSelect (GameObject obj, int num)
 		{
-				obj.SendMessage ("selected");
-				iSelectedItem++;
+				
+				
 				switch (iSelectedItem) {
-				case 1:
+				case 0:
+						iSelectedItem++;
+						obj.SendMessage ("selected");
 						PlayerPrefs.SetInt (obj.transform.name, 1);
 						oSelectedPan1.GetComponent<SpriteRenderer> ().sprite = items [num];
 						break;
-				case 2:
+				case 1:
+						iSelectedItem++;
+						obj.SendMessage ("selected");
 						PlayerPrefs.SetInt (obj.transform.name, 1);
 						oSelectedPan2.GetComponent<SpriteRenderer> ().sprite = items [num];
 						break;
-				case 3:
-						oItem_star.SendMessage ("unselected");
-						oItem_shield.SendMessage ("unselected");
-						oItem_time.SendMessage ("unselected");
-						oItem_smaller.SendMessage ("unselected");
-						PlayerPrefs.SetInt ("item_time", 0);
-						PlayerPrefs.SetInt ("item_shield", 0);
-						PlayerPrefs.SetInt ("item_smaller", 0);
-						PlayerPrefs.SetInt ("item_star", 0);
-						PlayerPrefs.SetInt (obj.transform.name, 1);
-						oSelectedPan2.GetComponent<SpriteRenderer> ().sprite = items [4];
-						oSelectedPan1.GetComponent<SpriteRenderer> ().sprite = items [num];
-						iSelectedItem = 1;
+				case 2:
+						 
 						break;
 				default:
 						break;
@@ -120,8 +118,14 @@ public class scr_selectLevel : MonoBehaviour
 
 		IEnumerator loadLV (int num)
 		{
-				loading.SetActive (true);
-				animation.Play ("anim_menu2");
+//				animation.Play ("anim_menu2");
+				Application.LoadLevel (num);
+				yield return new WaitForSeconds (0f);
+		}
+
+		IEnumerator play (int num)
+		{
+				oCart.animation.Play ("anim_menu2");
 				yield return new WaitForSeconds (1.5f);
 				Application.LoadLevel (num);
 		}
@@ -161,6 +165,12 @@ public class scr_selectLevel : MonoBehaviour
 								Application.LoadLevel (1);
 								return;
 						}
+				}
+				if (numGem < 5) {
+						oItem_star.SendMessage ("selected");
+						oItem_time.SendMessage ("selected");
+						oItem_smaller.SendMessage ("selected");
+						oItem_shield.SendMessage ("selected");
 				}
 	
 		}

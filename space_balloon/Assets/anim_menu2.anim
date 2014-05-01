@@ -20,7 +20,7 @@ AnimationClip:
         value: {x: 0, y: 0, z: 0}
         inSlope: {x: -22.1428356, y: 0, z: 0}
         outSlope: {x: -22.1428356, y: 0, z: 0}
-        tangentMode: -1054867456
+        tangentMode: 1852787969
       - time: .150000006
         value: {x: 3.2203815, y: 0, z: 0}
         inSlope: {x: 0, y: 0, z: 0}
@@ -30,7 +30,7 @@ AnimationClip:
         value: {x: 7.81962824, y: 0, z: 0}
         inSlope: {x: 34.4943542, y: 0, z: 0}
         outSlope: {x: 34.4943542, y: 0, z: 0}
-        tangentMode: 1110441984
+        tangentMode: 103
       m_PreInfinity: 2
       m_PostInfinity: 2
     path: 
@@ -41,17 +41,17 @@ AnimationClip:
         value: {x: -10.9114513, y: .564314544, z: 0}
         inSlope: {x: 26.0763435, y: 0, z: 0}
         outSlope: {x: 26.0763435, y: 0, z: 0}
-        tangentMode: 1
+        tangentMode: 0
       - time: .383333325
         value: {x: -7, y: .564314544, z: 0}
-        inSlope: {x: -9.12794113, y: 0, z: 0}
-        outSlope: {x: -9.12794113, y: 0, z: 0}
+        inSlope: {x: -9.46183014, y: 0, z: 0}
+        outSlope: {x: -9.46183014, y: 0, z: 0}
         tangentMode: 0
       - time: .516666651
-        value: {x: -12.9109631, y: .564314544, z: 0}
-        inSlope: {x: -44.3322258, y: 0, z: 0}
-        outSlope: {x: -44.3322258, y: 0, z: 0}
-        tangentMode: 0
+        value: {x: -13, y: .564314544, z: 0}
+        inSlope: {x: -45.0000038, y: 0, z: 0}
+        outSlope: {x: -45.0000038, y: 0, z: 0}
+        tangentMode: 120568996
       m_PreInfinity: 2
       m_PostInfinity: 2
     path: loading
@@ -139,13 +139,13 @@ AnimationClip:
         tangentMode: 10
       - time: .383333325
         value: -7
-        inSlope: -9.12794113
-        outSlope: -9.12794113
+        inSlope: -9.46183014
+        outSlope: -9.46183014
         tangentMode: 10
       - time: .516666651
-        value: -12.9109631
-        inSlope: -44.3322258
-        outSlope: -44.3322258
+        value: -13
+        inSlope: -45.0000038
+        outSlope: -45.0000038
         tangentMode: 10
       m_PreInfinity: 2
       m_PostInfinity: 2
@@ -199,25 +199,6 @@ AnimationClip:
       m_PostInfinity: 2
     attribute: m_LocalPosition.z
     path: loading
-    classID: 4
-    script: {fileID: 0}
-  - curve:
-      serializedVersion: 2
-      m_Curve:
-      - time: 0
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 10
-      - time: .283333331
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 10
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-    attribute: m_LocalPosition.y
-    path: 
     classID: 4
     script: {fileID: 0}
   m_EulerEditorCurves: []

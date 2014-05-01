@@ -7,6 +7,8 @@ Project("{2FE9E3C0-B84A-0BD1-E964-44954F180169}") = "space_balloon", "Assembly-C
 EndProject
 Project("{2FE9E3C0-B84A-0BD1-E964-44954F180169}") = "space_balloon", "Assembly-CSharp-Editor.csproj", "{5B7DFBE7-75F1-DAB9-A41E-C1A483672AA8}"
 EndProject
+Project("{2FE9E3C0-B84A-0BD1-E964-44954F180169}") = "space_balloon", "Assembly-UnityScript-firstpass.unityproj", "{576415CC-9D40-706D-863C-E2E7FE31673A}"
+EndProject
 Project("{2FE9E3C0-B84A-0BD1-E964-44954F180169}") = "space_balloon", "Assembly-UnityScript.unityproj", "{1858D824-07B4-A41D-2236-A6EFD65A487B}"
 EndProject
 Global
@@ -27,6 +29,10 @@ Global
 		{5B7DFBE7-75F1-DAB9-A41E-C1A483672AA8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5B7DFBE7-75F1-DAB9-A41E-C1A483672AA8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5B7DFBE7-75F1-DAB9-A41E-C1A483672AA8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{576415CC-9D40-706D-863C-E2E7FE31673A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{576415CC-9D40-706D-863C-E2E7FE31673A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{576415CC-9D40-706D-863C-E2E7FE31673A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{576415CC-9D40-706D-863C-E2E7FE31673A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{1858D824-07B4-A41D-2236-A6EFD65A487B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1858D824-07B4-A41D-2236-A6EFD65A487B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1858D824-07B4-A41D-2236-A6EFD65A487B}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -35,7 +41,7 @@ Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-																																																																	GlobalSection(MonoDevelopProperties) = preSolution
+																																																																					GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = Assembly-CSharp.csproj
 		Policies = $0
 		$0.TextStylePolicy = $1

@@ -153,7 +153,7 @@ public class scr_manager : MonoBehaviour
 				Instantiate (backStart, new Vector2 (0, 0), Quaternion.identity);
 				onPlay = false;
 				score = 0;
-				scoreText.text = "Score: " + score;
+				scoreText.text = ": " + score;
 				walls.SetActive (true);
 				timeStarted = false;
 				disableTouch ();
@@ -386,7 +386,7 @@ public class scr_manager : MonoBehaviour
 						yield return new WaitForSeconds (0.04f);
 						i -= 10;
 						score += 10;
-						scoreText.text = "Score: " + score;
+						scoreText.text = ": " + score;
 						audio.PlayOneShot (bing);
 						
 				}
@@ -433,7 +433,7 @@ public class scr_manager : MonoBehaviour
 				itemEffectO.animation.wrapMode = WrapMode.Once;
 				GameObject.Find ("score").GetComponent<tk2dTextMesh> ().color = new Color (1, 1, 1);
 				itemEffectO.animation.Stop ();
-				scoreText.text = "Score: " + score;
+				scoreText.text = ": " + score;
 				isScoreUp = false;
 		}
 
@@ -809,11 +809,11 @@ public class scr_manager : MonoBehaviour
 				if (isScoreUp) {
 						Instantiate (effectPoint2, balloon.transform.position, Quaternion.identity);
 						score += 10;
-						scoreText.text = "Score: " + score + " x2";
+						scoreText.text = ": " + score + " x2";
 				} else {
 						Instantiate (effectPoint, balloon.transform.position, Quaternion.identity);
 						score += 5;
-						scoreText.text = "Score: " + score;
+						scoreText.text = ": " + score;
 				}
 				audio.PlayOneShot (bing);
 				Instantiate (effectPointBack, balloon.transform.position, Quaternion.identity);

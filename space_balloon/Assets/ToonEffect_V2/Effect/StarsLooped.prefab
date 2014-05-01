@@ -43,8 +43,8 @@ MonoBehaviour:
   uvAnimationTileX: 2
   uvAnimationTileY: 1
   framesPerSecond: 24
-  sizeStart: {x: 7, y: 7, z: 0}
-  sizeEnd: {x: 7, y: 7, z: 0}
+  sizeStart: {x: 4, y: 4, z: 0}
+  sizeEnd: {x: 4, y: 4, z: 0}
   randomRotation: 1
   rotationStart: 0
   rotationEnd: 0

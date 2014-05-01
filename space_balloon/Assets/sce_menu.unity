@@ -848,7 +848,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   btn1: {fileID: 655387744}
   btn2: {fileID: 861185474}
-  btn_back: {fileID: 0}
   loading: {fileID: 976700621}
 --- !u!114 &701585731
 MonoBehaviour:

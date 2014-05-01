@@ -11,10 +11,11 @@ public class scr_level : MonoBehaviour
 				level = gameObject.transform.name;
 				GetComponentInChildren<tk2dTextMesh> ().text = level;
 
-//				PlayerPrefs.SetInt (level, 1);
+				PlayerPrefs.SetInt ("1", 1);
 
 				if (PlayerPrefs.GetInt (level, 0) == 1) {
 						//Cleared/////////////////////////////////////////
+						GetComponent<BoxCollider> ().enabled = true;
 						SpriteRenderer[] componentArray = GetComponentsInChildren<SpriteRenderer> ();
 						GetComponentInChildren<tk2dTextMesh> ().color = Color.white;
 						componentArray [0].sprite = unlockedIcon;
