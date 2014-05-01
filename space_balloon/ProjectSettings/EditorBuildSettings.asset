@@ -6,12 +6,16 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/sce_intro.unity
+  - enabled: 1
     path: Assets/sce_menu.unity
   - enabled: 1
-    path: Assets/sce_menu2.unity
+    path: Assets/sce_level.unity
   - enabled: 1
-    path: Assets/tk2dUIExtensions/Demo/Scenes/DemoMenu.unity
-  - enabled: 1
-    path: Assets/sce_game3.unity
+    path: Assets/sce_store.unity
   - enabled: 1
     path: Assets/sce_tutorial.unity
+  - enabled: 1
+    path: Assets/1.unity
+  - enabled: 1
+    path: Assets/2.unity

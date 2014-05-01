@@ -43,6 +43,7 @@ public class scr_manager : MonoBehaviour
 
 		void Start ()
 		{
+				back = GameObject.Find ("back");
 				score = 1000;
 				countGem = PlayerPrefs.GetInt ("NUMGEM");
 				if (!test)
@@ -98,22 +99,31 @@ public class scr_manager : MonoBehaviour
 						}
 				}   
 
-				 
+				if (Application.platform == RuntimePlatform.Android) {
+						if (Input.GetKey (KeyCode.Escape)) {
+				
+								StartCoroutine (pauseGame ());
+				
+				
+								return;
+				
+						}
+				}
 		
 		}
-
-
-
-
-
-
-
-
-
-
-
-
-
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 
 		/// <summary>

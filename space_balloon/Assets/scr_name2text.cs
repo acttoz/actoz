@@ -1,21 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class scr_logo_back : MonoBehaviour
+public class scr_name2text : MonoBehaviour
 {
-		public GameObject menu, mainCam;
+
 		// Use this for initialization
 		void Start ()
 		{
+				GetComponentInChildren<tk2dTextMesh> ().text = gameObject.transform.name;
+		}
 	
-		}
-
-		void destroy ()
-		{
-				Application.LoadLevel (1);
-
-		}
-
 		// Update is called once per frame
 		void Update ()
 		{
