@@ -139,6 +139,9 @@ public class scr_manager : MonoBehaviour
 		void gameReset ()
 		{
 				CancelInvoke ("itemCreate");
+				GameObject tempZone = GameObject.FindGameObjectWithTag ("zone");
+				if (tempZone != null)
+						Destroy (tempZone);
 				CancelInvoke ("zoneCreate");
 				gauge.transform.localScale = new Vector3 (1.75f, 0.3f, 1);
 				Instantiate (backStart, new Vector2 (0, 0), Quaternion.identity);
@@ -194,6 +197,9 @@ public class scr_manager : MonoBehaviour
 		IEnumerator timesUp ()
 		{
 				onPlay = false;
+				GameObject tempZone = GameObject.FindGameObjectWithTag ("zone");
+				if (tempZone != null)
+						Destroy (tempZone);
 				StopCoroutine ("undead");
 				CancelInvoke ("itemCreate");
 				CancelInvoke ("zoneCreate");
@@ -317,7 +323,17 @@ public class scr_manager : MonoBehaviour
 						tempZone.animation.Play ("anim_zoneOut");
 				float tempX = (Random.Range (mLeft * 100, mRight * 100)) / 100;
 				float tempY = (Random.Range (mDown * 100, mUp * 100)) / 100;
-				Instantiate (oZone, new Vector3 (tempX, tempY, 0), Quaternion.identity);
+				zonePosition = new Vector2 (tempX, tempY);
+				Instantiate (oZone, zonePosition, Quaternion.identity);
+		}
+
+		void zoneReset ()
+		{
+				CancelInvoke ("zoneCreate");
+				GameObject tempZone = GameObject.FindGameObjectWithTag ("zone");
+				if (tempZone != null)
+						tempZone.animation.Play ("anim_zoneOut");
+				InvokeRepeating ("zoneCreate", 0.1f, zoneCreateRate);
 		}
 
 		void getItem ()
@@ -439,8 +455,9 @@ public class scr_manager : MonoBehaviour
 
 				yield return new WaitForSeconds (10f);
 				itemEffectO.animation.wrapMode = WrapMode.Once;
+		itemEffectO.animation.Stop ();
+		itemEffectO.transform.localScale=new Vector2(1,1);
 				GameObject.Find ("score").GetComponent<tk2dTextMesh> ().color = new Color (1, 1, 1);
-				itemEffectO.animation.Stop ();
 				scoreText.text = ": " + score;
 				isScoreUp = false;
 		}
@@ -486,7 +503,8 @@ public class scr_manager : MonoBehaviour
 				realEnemy [2].GetComponent<SpriteRenderer> ().color = new Color (1, 1, 1, 1);
 
 				InvokeRepeating ("itemCreate", 0.1f, itemCreateRate);
-				InvokeRepeating ("zoneCreate", 0.1f, zoneCreateRate);
+				if (superLevel < 5)
+						InvokeRepeating ("zoneCreate", 0.1f, zoneCreateRate);
 				balloon.GetComponent<SphereCollider> ().enabled = true;
 		}
 
@@ -657,13 +675,13 @@ public class scr_manager : MonoBehaviour
 		/// 
 		void balloonStop ()
 		{
-				if (existBalloon && superLevel > 0 && superLevel < 5) {
+				if (existBalloon && superLevel < 5) {
 						
-						previousBalloon = currentBalloon;
+						previousBalloon = zonePosition;
 						currentBalloon = balloon.transform.position;
 						Vector2 tempVector = currentBalloon - previousBalloon;
-						Debug.Log ("" + tempVector);
-						if (-0.1f < tempVector.x && tempVector.x < 0.1f && -0.1f < tempVector.y && tempVector.y < 0.1f) {
+						float zoneLimit = 2f;
+						if (-1 * zoneLimit < tempVector.x && tempVector.x < zoneLimit && -1 * zoneLimit < tempVector.y && tempVector.y < zoneLimit) {
 								balloon.SendMessage ("stopBalloon", true);
 								oEnergy.animation.Play ();
 								if (!oStopSound.audio.isPlaying)
@@ -727,6 +745,7 @@ public class scr_manager : MonoBehaviour
 	
 		void superMode (int num)
 		{
+				zonePosition = new Vector2 (100, 100);
 				balloon.transform.localRotation = new Quaternion (0, 0, 0, 0);
 		
 				CancelInvoke ("balloonStop");
@@ -737,6 +756,7 @@ public class scr_manager : MonoBehaviour
 						superLevel = 0;
 						InvokeRepeating ("normalModeCount", 0.1f, 1f);
 				} else {
+						zoneReset ();
 						superTimer = superTime;
 						InvokeRepeating ("superModeCount", 0.1f, 0.2f);
 				}
@@ -796,6 +816,10 @@ public class scr_manager : MonoBehaviour
 						break;
 
 				case 5:
+						GameObject tempZone = GameObject.FindGameObjectWithTag ("zone");
+						if (tempZone != null)
+								Destroy (tempZone);
+						CancelInvoke ("zoneCreate");
 						StopCoroutine ("undead");
 						StartCoroutine ("undead");
 						lv.SendMessage ("levelUp");

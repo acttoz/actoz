@@ -12,6 +12,7 @@ public class scr_level : MonoBehaviour
 				GetComponentInChildren<tk2dTextMesh> ().text = level;
 
 				PlayerPrefs.SetInt ("1", 1);
+				PlayerPrefs.SetInt ("2", 1);
 
 				if (PlayerPrefs.GetInt (level, 0) == 1) {
 						//Cleared/////////////////////////////////////////

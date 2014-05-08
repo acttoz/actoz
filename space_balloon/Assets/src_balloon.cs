@@ -55,14 +55,12 @@ public class src_balloon : MonoBehaviour
 		{
 				if (myTrigger.transform.tag == "enemy" && exist) {
 						
-						Debug.Log ("onTrigger");
 						exist = false;
 						GAMEMANAGER.SendMessage ("getBalloonMSG", 1);
 			                        
 						
 				}
 				if (myTrigger.transform.tag == "item") {
-						Debug.Log ("itemGet");
 						GAMEMANAGER.SendMessage ("getItem");
 //						audio.PlayOneShot (itemSound);
 						Instantiate (item, myTrigger.gameObject.transform.position, Quaternion.identity);
