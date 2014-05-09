@@ -13,7 +13,8 @@ public class src_enemy : MonoBehaviour
 		// Use this for initialization
 		void Awake ()
 		{
-				
+				speed = Random.Range (5, 21) / 10f;
+//				Debug.Log ("" + speed);
 				if (Random.Range (0, 2) == 0) {
 						xTemp = -1;
 				}

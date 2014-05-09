@@ -8,6 +8,7 @@ public class src_balloon : MonoBehaviour
 		bool exist = false;
 		public GameObject GAMEMANAGER, pop, item;
 		public Sprite   balloon;
+		bool isUndead = false;
 		// Use this for initialization
 		void Start ()
 		{
@@ -39,6 +40,11 @@ public class src_balloon : MonoBehaviour
 				
 		}
 
+		void undead (bool mbool)
+		{
+				isUndead = mbool;
+		}
+
 		void superMode (int num)
 		{
 				anim.SetInteger ("super", num);
@@ -53,14 +59,14 @@ public class src_balloon : MonoBehaviour
 
 		void OnTriggerEnter (Collider myTrigger)
 		{
-				if (myTrigger.transform.tag == "enemy" && exist) {
+				if (myTrigger.transform.tag == "enemy" && exist && !isUndead) {
 						
 						exist = false;
 						GAMEMANAGER.SendMessage ("getBalloonMSG", 1);
 			                        
 						
 				}
-				if (myTrigger.transform.tag == "enemyBoss" && exist) {
+				if (myTrigger.transform.tag == "enemyBoss" && exist && !isUndead) {
 			
 						exist = false;
 						GAMEMANAGER.SendMessage ("getBalloonMSG", 1);

@@ -20,6 +20,24 @@ AnimatorController:
     m_IKPass: 0
     m_SyncedLayerAffectsTiming: 0
     m_Controller: {fileID: 9100000}
+--- !u!1101 &110100000
+Transition:
+  m_ObjectHideFlags: 3
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 
+  m_SrcState: {fileID: 110227802}
+  m_DstState: {fileID: 110200000}
+  m_TransitionDuration: .3125
+  m_TransitionOffset: 0
+  m_Conditions:
+  - m_ConditionMode: 5
+    m_ConditionEvent: 
+    m_EventTreshold: 0
+    m_ExitTime: .949999988
+  m_Atomic: 1
+  m_Solo: 0
+  m_Mute: 0
 --- !u!1102 &110200000
 State:
   m_ObjectHideFlags: 3
@@ -31,7 +49,22 @@ State:
   m_Motions:
   - {fileID: 7400000, guid: 9a9847e24ab9cda40bb1393491b7fd53, type: 2}
   m_ParentStateMachine: {fileID: 110700000}
-  m_Position: {x: 50, y: 50, z: 0}
+  m_Position: {x: 48, y: 108, z: 0}
+  m_IKOnFeet: 0
+  m_Mirror: 0
+  m_Tag: 
+--- !u!1102 &110227802
+State:
+  m_ObjectHideFlags: 3
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: anim_enemyCreate
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Motions:
+  - {fileID: 7400000, guid: ef8dc9f0a5b8ac14aba0c6faccc9a833, type: 2}
+  m_ParentStateMachine: {fileID: 110700000}
+  m_Position: {x: 83, y: 173, z: 0}
   m_IKOnFeet: 0
   m_Mirror: 0
   m_Tag: 
@@ -42,12 +75,17 @@ StateMachine:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Base Layer
-  m_DefaultState: {fileID: 110200000}
+  m_DefaultState: {fileID: 110227802}
   m_States:
   - {fileID: 110200000}
+  - {fileID: 110227802}
   m_ChildStateMachine: []
   m_ChildStateMachinePosition: []
   m_OrderedTransitions:
+    data:
+      first: {fileID: 110227802}
+      second:
+      - {fileID: 110100000}
     data:
       first: {fileID: 110200000}
       second: []
