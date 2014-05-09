@@ -9,17 +9,41 @@
         android:layout_height="fill_parent"
         android:orientation="vertical" >
 
+       <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0px"
+        android:layout_weight="1.5"
+        android:background="@drawable/header" >
+
         <TextView
-           android:id="@+id/call_login"
+            android:id="@+id/call_login"
             android:layout_width="fill_parent"
-            android:layout_height="0px"
-            android:layout_weight="1.5"
-            android:background="@drawable/header"
+            android:layout_height="fill_parent"
             android:gravity="center"
             android:text="Login"
             android:textColor="#ffffff"
-            android:textSize="25sp" >
-        </TextView>
+            android:textSize="25sp" />
+
+        <TextView
+            android:id="@+id/myId"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:gravity="left|center_vertical"
+            android:paddingLeft="20sp"
+            android:text="ID"
+            android:textColor="#ffffff"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/myPoint"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:gravity="right|center_vertical"
+            android:paddingRight="20sp"
+            android:text="POINT"
+            android:textColor="#ffffff"
+            android:textSize="15sp" />
+    </FrameLayout>
 
         <TextView
             android:layout_width="fill_parent"
@@ -99,11 +123,11 @@
 
     <LinearLayout
         android:id="@+id/sub_menu"
-        android:visibility="gone"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:gravity="center"
-        android:orientation="vertical" >
+        android:orientation="vertical"
+        android:visibility="gone" >
 
         <TextView
             android:layout_width="fill_parent"
@@ -227,7 +251,6 @@
                         android:layout_weight="1" >
                     </TextView>
                 </LinearLayout>
-
             </LinearLayout>
         </FrameLayout>
 
@@ -237,14 +260,14 @@
             android:layout_weight="1" >
         </TextView>
     </LinearLayout>
-    
+
     <LinearLayout
         android:id="@+id/lay_signIn"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:gravity="center"
-        android:visibility="gone"
-        android:orientation="vertical" >
+        android:orientation="vertical"
+        android:visibility="gone" >
 
         <TextView
             android:layout_width="fill_parent"
@@ -255,7 +278,7 @@
         <FrameLayout
             android:layout_width="wrap_content"
             android:layout_height="0px"
-            android:layout_weight="5"
+            android:layout_weight="10"
             android:orientation="vertical" >
 
             <ImageView
@@ -264,7 +287,7 @@
                 android:adjustViewBounds="true"
                 android:gravity="center"
                 android:scaleType="fitCenter"
-                android:src="@drawable/login_board" />
+                android:src="@drawable/sign_board" />
 
             <LinearLayout
                 android:layout_width="fill_parent"
@@ -278,22 +301,37 @@
                 </TextView>
 
                 <EditText
-                    android:id="@+id/edtid"
+                    android:id="@+id/edtid2"
                     android:layout_width="fill_parent"
                     android:layout_height="0px"
-                    android:layout_marginLeft="4dp"
+                    android:layout_marginLeft="1dp"
                     android:layout_marginTop="1dp"
                     android:layout_weight="1"
                     android:background="@null"
                     android:ems="10"
                     android:gravity="left|center_vertical"
                     android:hint="ID를 입력해주세요."
-                    android:paddingLeft="80dip"
+                    android:paddingLeft="100dip"
                     android:textColor="#ffffff"
                     android:textSize="15sp" />
 
                 <EditText
-                    android:id="@+id/etdpwd"
+                    android:id="@+id/edtid2_2"
+                    android:layout_width="fill_parent"
+                    android:layout_height="0px"
+                    android:layout_marginLeft="1dp"
+                    android:layout_marginTop="1dp"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:ems="10"
+                    android:gravity="left|center_vertical"
+                    android:hint="ID를 입력해주세요."
+                    android:paddingLeft="100dip"
+                    android:textColor="#ffffff"
+                    android:textSize="15sp" />
+
+                <EditText
+                    android:id="@+id/etdpwd2"
                     android:layout_width="fill_parent"
                     android:layout_height="0px"
                     android:layout_marginTop="1dp"
@@ -303,72 +341,31 @@
                     android:gravity="left|center_vertical"
                     android:hint="패스워드를 입력해주세요."
                     android:inputType="textPassword"
-                    android:paddingLeft="80dip"
+                    android:paddingLeft="100dip"
                     android:textColor="#ffffff"
                     android:textSize="15sp" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <EditText
+                    android:id="@+id/etdpwd2_2"
+                    android:layout_width="fill_parent"
                     android:layout_height="0px"
+                    android:layout_marginTop="1dp"
                     android:layout_weight="1"
-                    android:orientation="horizontal" >
+                    android:background="@null"
+                    android:ems="10"
+                    android:gravity="left|center_vertical"
+                    android:hint="패스워드를 입력해주세요."
+                    android:inputType="textPassword"
+                    android:paddingLeft="100dip"
+                    android:textColor="#ffffff"
+                    android:textSize="15sp" />
 
-                    <TextView
-                        android:layout_width="0px"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1" >
-                    </TextView>
-
-                    <CheckBox
-                        android:id="@+id/checkBox1"
-                        android:layout_width="0px"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="left|center_vertical"
-                        android:layout_weight="1.5"
-                        android:gravity="left|center_vertical"
-                        android:scaleX="0.7"
-                        android:scaleY="0.7"
-                        android:text="" />
-
-                    <TextView
-                        android:layout_width="0px"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="3" >
-                    </TextView>
-
-                    <ImageView
-                        android:id="@+id/button3"
-                        android:layout_width="0px"
-                        android:layout_height="match_parent"
-                        android:layout_weight="2"
-                        android:adjustViewBounds="true"
-                        android:gravity="center"
-                        android:scaleType="fitCenter"
-                        android:src="@drawable/login_btn1" />
-
-                    <TextView
-                        android:layout_width="0px"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.5" >
-                    </TextView>
-
-                    <ImageView
-                        android:id="@+id/button1"
-                        android:layout_width="0px"
-                        android:layout_height="match_parent"
-                        android:layout_weight="2"
-                        android:adjustViewBounds="true"
-                        android:gravity="center"
-                        android:scaleType="fitCenter"
-                        android:src="@drawable/login_btn2" />
-
-                    <TextView
-                        android:layout_width="0px"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1" >
-                    </TextView>
-                </LinearLayout>
-
+               <TextView
+                    android:id="@+id/sign_submit"
+                    android:layout_width="fill_parent"
+                    android:layout_height="0px"
+                    android:layout_weight="1" >
+                </TextView>
             </LinearLayout>
         </FrameLayout>
 

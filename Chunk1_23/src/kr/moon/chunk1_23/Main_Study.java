@@ -64,6 +64,8 @@ public class Main_Study extends Activity implements OnClickListener,
 	String[] answer_list = new String[] { "3번", "4번", "4번", "3번", "1번", "4번",
 			"1번", "3번", "1번", "2번", "2번" };// 2-2 생략
 	TextView instruction;
+	TextView tId;
+	TextView tPoint;
 	View tab1, tab2, tab3;
 	Drawable alpha1;
 	Drawable alpha2;
@@ -100,7 +102,8 @@ public class Main_Study extends Activity implements OnClickListener,
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main_study);
-
+		tId = (TextView) findViewById(R.id.myId);
+		tPoint = (TextView) findViewById(R.id.myPoint);
 		idPrefs = getSharedPreferences("id", MODE_PRIVATE);
 		editor = idPrefs.edit();
 		ImageView btn1, btn2, btn3, quiz_Image;
@@ -860,6 +863,8 @@ public class Main_Study extends Activity implements OnClickListener,
 				this.getPackageName());
 		this.check1.setImageResource(chunkId1);
 		this.check2.setImageResource(chunkId2);
+		tId.setText(List.myId);
+		tPoint.setText(List.pointSetter.getPoint());
 
 	}
 

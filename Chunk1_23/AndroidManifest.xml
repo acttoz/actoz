@@ -70,6 +70,7 @@
             android:clearTaskOnLaunch="true"
             android:screenOrientation="landscape" >
         </activity>
+        <activity android:name="Point"></activity>
     </application>
 
 </manifest>

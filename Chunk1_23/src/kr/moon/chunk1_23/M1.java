@@ -1,7 +1,5 @@
 package kr.moon.chunk1_23;
 
-import java.io.IOException;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -18,6 +16,7 @@ import android.view.View.OnClickListener;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 import android.widget.VideoView;
 
 public class M1 extends Activity implements SurfaceHolder.Callback,
@@ -99,7 +98,10 @@ public class M1 extends Activity implements SurfaceHolder.Callback,
 				editor.putInt(checkId, ++checkNum);
 				editor.commit();
 			}
-
+			Toast.makeText(M1.this, "ûũ 1ȸ, 10 points Up!",
+					Toast.LENGTH_SHORT).show();
+			List.pointSetter.setPoint(10);
+			Log.d("point", List.pointSetter.getPoint() + "");
 			AlertDialog.Builder dlg = new AlertDialog.Builder(M1.this);
 			dlg.setTitle("notice");
 			dlg.setMessage("Replay?");

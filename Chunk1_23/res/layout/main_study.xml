@@ -5,16 +5,41 @@
     android:background="#e2e2d7"
     android:orientation="vertical" >
 
-    <TextView
-        android:id="@+id/title"
+    <FrameLayout
         android:layout_width="fill_parent"
         android:layout_height="0px"
         android:layout_weight="1.5"
-        android:background="@drawable/header"
-        android:gravity="center"
-        android:textColor="#ffffff"
-        android:textSize="25sp" >
-    </TextView>
+        android:background="@drawable/header" >
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:gravity="center"
+            android:text="title"
+            android:textColor="#ffffff"
+            android:textSize="25sp" />
+
+        <TextView
+            android:id="@+id/myId"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:gravity="left|center_vertical"
+            android:paddingLeft="20sp"
+            android:text="ID"
+            android:textColor="#ffffff"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/myPoint"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:gravity="right|center_vertical"
+            android:paddingRight="20sp"
+            android:text="POINT"
+            android:textColor="#ffffff"
+            android:textSize="15sp" />
+    </FrameLayout>
 
     <TextView
         android:layout_width="fill_parent"
@@ -60,13 +85,13 @@
         android:orientation="horizontal" >
 
         <TextView
-            android:gravity="center"
             android:id="@+id/instruction"
             android:layout_width="0px"
             android:layout_height="fill_parent"
             android:layout_weight="1"
-            android:textColor="#6e6e6e"
-            android:text="instruction" />
+            android:gravity="center"
+            android:text="instruction"
+            android:textColor="#6e6e6e" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -99,14 +124,16 @@
                 android:adjustViewBounds="true"
                 android:gravity="left"
                 android:src="@drawable/btn3" />
-        <!--    <ImageView
+            <!--
+                <ImageView
                 android:id="@+id/btn4"
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
                 android:layout_gravity="left"
                 android:adjustViewBounds="true"
                 android:gravity="left"
-                android:src="@drawable/btn4" /> -->
+                android:src="@drawable/btn4" />
+            -->
         </LinearLayout>
     </LinearLayout>
 

@@ -6,6 +6,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
+import org.w3c.dom.Text;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -41,13 +43,22 @@ import android.widget.Toast;
 
 public class List extends Activity implements OnClickListener {
 	private ImageView login;
+	private TextView tId;
+	private TextView tPoint;
 	LinearLayout sub_menu;
 	LinearLayout lay_signIn;
 	TextView sub_back;
 	TextView call_login;
+	TextView sign_submit;
+	public static Point pointSetter;
 	private EditText edtid;
+	private EditText edtid2;
+	private EditText edtid2_2;
 	private EditText edtpass;
-	private String myId;
+	private EditText edtpass2;
+	private EditText edtpass2_2;
+	public static String myId;
+	private static Boolean wasLogin = false;
 	private ImageView mem_regi;
 	private ImageView share;
 	private static final String SERVER_ADDRESS = "http://chunk.dothome.co.kr/php";
@@ -72,151 +83,6 @@ public class List extends Activity implements OnClickListener {
 			"Chapter 3-6" };
 
 	/** Called when the activity is first created. */
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.list);
-		// TODO Auto-generated method stub
-		sub_menu = (LinearLayout) findViewById(R.id.sub_menu);
-		lay_signIn = (LinearLayout) findViewById(R.id.lay_signIn);
-		sub_menu.setDrawingCacheEnabled(true);
-		lay_signIn.setDrawingCacheEnabled(true);
-		sub_back = (TextView) findViewById(R.id.sub_back);
-		call_login = (TextView) findViewById(R.id.call_login);
-		slideInT = AnimationUtils.loadAnimation(this, R.anim.slide_in_top);
-		slideOutT = AnimationUtils.loadAnimation(this, R.anim.slide_out_top);
-		listView1 = (ListView) findViewById(R.id.listview);
-		idPrefs = getSharedPreferences("id", MODE_PRIVATE);
-		editor = idPrefs.edit();
-		popup = idPrefs.getBoolean("POPUP", true);
-		dateList1 = new ArrayList<Custom_List_Data>();
-		for (int i = 0; i < chapter_list.length; i++) {
-			data = new Custom_List_Data();
-			data.Data = chapter_list[i];
-			dateList1.add(data);
-		}
-		ImageView share = (ImageView) findViewById(R.id.sns_send);
-		ImageView book = (ImageView) findViewById(R.id.book);
-		share.setOnClickListener(this);
-		book.setOnClickListener(this);
-
-		listAdapter1 = new Custom_List_Adapter(this, R.layout.customlist,
-				dateList1);
-		listView1.setAdapter(listAdapter1);
-		listView1.setOnItemClickListener(new OnItemClickListener() {
-			// 학기
-			public void onItemClick(AdapterView<?> arg0, View arg1,
-
-			int position, long arg3) {
-
-				Intent quizIntent = new Intent(List.this, Main_Study.class);
-				quizIntent.putExtra("CHAPTER", String.valueOf(position + 1));
-				quizIntent.putExtra("TITLE", dateList1.get(position).Data);
-				startActivity(quizIntent);
-
-			}
-		});
-
-		listAdapter1.notifyDataSetChanged();
-		listView1.invalidate();
-		if (popup) {
-			showNotice();
-		} else {
-			checkNotice();
-			show_login();
-		}
-
-		// Login////////////////////////////////////////
-		mPref = getSharedPreferences("Pref1", 0);
-		mPrefEdit = mPref.edit();
-
-		login = (ImageView) findViewById(R.id.button3);
-		edtid = (EditText) findViewById(R.id.edtid);
-		edtpass = (EditText) findViewById(R.id.etdpwd);
-		mem_regi = (ImageView) findViewById(R.id.button1);
-		share = (ImageView) findViewById(R.id.ImageView01);
-
-		checkBoxID = (CheckBox) findViewById(R.id.checkBox1);
-		edtid.setText(mPref.getString("IDKEY", ""));
-		checkBoxID.setChecked(mPref.getBoolean("check", false));
-
-		login.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				if (edtid.getText().toString().equals("")
-						|| edtpass.getText().toString().equals("")) {
-					new AlertDialog.Builder(List.this).setTitle("입력 오류")
-							.setMessage("아이디와 비밀번호를 확인해주세요")
-							.setNeutralButton("OK", null).show();
-					edtid.setText("");
-					edtpass.setText("");
-				} else {
-					ConnectivityManager connect = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
-					if (connect.getNetworkInfo(ConnectivityManager.TYPE_MOBILE)
-							.getState() == NetworkInfo.State.CONNECTED
-							|| connect.getNetworkInfo(
-									ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
-						HttpBuilder hb = new HttpBuilder();
-						hb.loginResponse(edtid.getText().toString(), edtpass
-								.getText().toString(), SERVER_ADDRESS
-								+ "/check_login.php", handler);
-					} else {
-						new AlertDialog.Builder(List.this)
-								.setMessage(
-										"데이터 네트워크 차단 상태입니다. Wi-Fi를 연결해 접속하거나, 데이터 네트워크 설정을 '접속 허용'으로 변경하신 후 사용해 주십시오.")
-								.setNeutralButton("OK", null).show();
-					}
-
-				}
-			}
-		});
-		mem_regi.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				hide_login();
-				show_sign();
-			}
-		});
-		call_login.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				show_login();
-			}
-		});
-		sub_back.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				hide_login();
-				hide_sign();
-			}
-		});
-
-	}
-
-	public void show_login() {
-		sub_menu.setVisibility(View.VISIBLE);
-		sub_menu.startAnimation(slideInT);
-		sub_back.setVisibility(View.VISIBLE);
-	}
-	public void hide_login() {
-		sub_menu.startAnimation(slideOutT);
-		sub_menu.setVisibility(View.GONE);
-		sub_back.setVisibility(View.GONE);
-	}
-	public void show_sign() {
-		lay_signIn.setVisibility(View.VISIBLE);
-		lay_signIn.startAnimation(slideInT);
-		sub_back.setVisibility(View.VISIBLE);
-	}
-	public void hide_sign() {
-		lay_signIn.startAnimation(slideOutT);
-		lay_signIn.setVisibility(View.GONE);
-		sub_back.setVisibility(View.GONE);
-	}
 
 	private Handler handler = new Handler() {
 
@@ -226,7 +92,7 @@ public class List extends Activity implements OnClickListener {
 			super.handleMessage(msg);
 			switch (msg.what) {
 			case SUCESS_ADMIT:
-				myId = edtid.getText().toString();
+				List.myId = edtid.getText().toString();
 
 				if (checkBoxID.isChecked() == true) {
 					mPrefEdit.putString("IDKEY", edtid.getText().toString());
@@ -237,16 +103,54 @@ public class List extends Activity implements OnClickListener {
 				}
 				mPrefEdit.commit();
 				hide_login();
-				Toast.makeText(List.this, "로그인 성공. 10 points Up!",
+				wasLogin = true;
+				pointSetter = new Point(List.this, myId);
+				pointSetter.setPoint(5);
+				tId.setText(myId+" 님");
+				tPoint.setText(pointSetter.getPoint());
+				Toast.makeText(List.this, "로그인 성공. 5 points Up!",
 						Toast.LENGTH_SHORT).show();
+				break;
+			case FAIL_ADMIT:
+				new AlertDialog.Builder(List.this)
+						.setTitle("로그인 실패")
+						.setMessage("아이디 패스워드를 확인해주세요.")
+						.setNeutralButton(
+								"OK",
+								new android.content.DialogInterface.OnClickListener() {
+									@Override
+									public void onClick(DialogInterface dialog,
+											int which) {
+										edtid.setText("");
+										edtpass.setText("");
+									}
+								}).show();
+				break;
+			}
+		}
+	};
+
+	private Handler handler2 = new Handler() {
+
+		@Override
+		public void handleMessage(Message msg) {
+			// TODO Auto-generated method stub
+			super.handleMessage(msg);
+			switch (msg.what) {
+			case SUCESS_ADMIT:
+
+				hide_sign();
+				Toast.makeText(List.this, "회원가입 완료.", Toast.LENGTH_SHORT)
+						.show();
+				show_login();
 				// finish();
 				// Intent intent = new Intent(Login.this, Licence.class);
 				// startActivity(intent);
 				break;
 			case FAIL_ADMIT:
 				new AlertDialog.Builder(List.this)
-						.setTitle("로그인 실패")
-						.setMessage("아이디 패스워드를 확인해주세요.")
+						.setTitle("가입 실패")
+						.setMessage("이미 사용중인 아이디입니다.")
 						.setNeutralButton(
 								"OK",
 								new android.content.DialogInterface.OnClickListener() {
@@ -305,24 +209,6 @@ public class List extends Activity implements OnClickListener {
 
 						if (text.length() != idPrefs.getInt("noticeConfirm", 0)
 								&& text.length() > 0) {
-							// AlertDialog.Builder dlg = new
-							// AlertDialog.Builder(
-							// SpeedAlimActivity.this);
-							// dlg.setTitle("공지");
-							// dlg.setMessage(text);
-							// dlg.setIcon(R.drawable.search);
-							// dlg.setNegativeButton("확인",
-							// new DialogInterface.OnClickListener() {
-							// public void onClick(
-							// DialogInterface dialog,
-							// int whichButton) {
-							// editor.putInt("noticeConfirm",
-							// text.length());
-							// editor.commit();
-							// }
-							// });
-							// dlg.setCancelable(true);
-							// dlg.show();
 
 							// 다이얼로그 생성
 							final Dialog dialog = new Dialog(List.this);
@@ -422,8 +308,7 @@ public class List extends Activity implements OnClickListener {
 			msg.addCategory(Intent.CATEGORY_DEFAULT);
 
 			msg.putExtra(Intent.EXTRA_SUBJECT, "청크로 원어민 되기");
-			msg.putExtra(Intent.EXTRA_TEXT,
-					"http://m.site.naver.com/0a5iP");
+			msg.putExtra(Intent.EXTRA_TEXT, "http://m.site.naver.com/0a5iP");
 
 			msg.putExtra(Intent.EXTRA_TITLE, "제목");
 
@@ -435,6 +320,7 @@ public class List extends Activity implements OnClickListener {
 	}
 
 	public void showDialog() {
+
 		Context mContext = getApplicationContext();
 		LayoutInflater inflater = (LayoutInflater) mContext
 				.getSystemService(LAYOUT_INFLATER_SERVICE);
@@ -448,9 +334,8 @@ public class List extends Activity implements OnClickListener {
 		aDialog.setPositiveButton("책 구입하기",
 				new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int which) {
-						Intent intent = new Intent(
-								Intent.ACTION_VIEW,
-								Uri.parse(getResources().getString(R.string.link)));
+						Intent intent = new Intent(Intent.ACTION_VIEW, Uri
+								.parse(getResources().getString(R.string.link)));
 						startActivity(intent);
 					}
 				});
@@ -460,5 +345,209 @@ public class List extends Activity implements OnClickListener {
 		});
 		AlertDialog ad = aDialog.create();
 		ad.show();
+	}
+
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.list);
+		// TODO Auto-generated method stub
+		sub_menu = (LinearLayout) findViewById(R.id.sub_menu);
+		lay_signIn = (LinearLayout) findViewById(R.id.lay_signIn);
+		sub_menu.setDrawingCacheEnabled(true);
+		lay_signIn.setDrawingCacheEnabled(true);
+		sub_back = (TextView) findViewById(R.id.sub_back);
+		call_login = (TextView) findViewById(R.id.call_login);
+		slideInT = AnimationUtils.loadAnimation(this, R.anim.slide_in_top);
+		slideOutT = AnimationUtils.loadAnimation(this, R.anim.slide_out_top);
+		listView1 = (ListView) findViewById(R.id.listview);
+		idPrefs = getSharedPreferences("id", MODE_PRIVATE);
+		editor = idPrefs.edit();
+		popup = idPrefs.getBoolean("POPUP", true);
+		dateList1 = new ArrayList<Custom_List_Data>();
+		tId = (TextView) findViewById(R.id.myId);
+		tPoint = (TextView) findViewById(R.id.myPoint);
+		for (int i = 0; i < chapter_list.length; i++) {
+			data = new Custom_List_Data();
+			data.Data = chapter_list[i];
+			dateList1.add(data);
+		}
+		ImageView share = (ImageView) findViewById(R.id.sns_send);
+		ImageView book = (ImageView) findViewById(R.id.book);
+		share.setOnClickListener(this);
+		book.setOnClickListener(this);
+
+		listAdapter1 = new Custom_List_Adapter(this, R.layout.customlist,
+				dateList1);
+		listView1.setAdapter(listAdapter1);
+		listView1.setOnItemClickListener(new OnItemClickListener() {
+			// 학기
+			public void onItemClick(AdapterView<?> arg0, View arg1,
+
+			int position, long arg3) {
+
+				Intent quizIntent = new Intent(List.this, Main_Study.class);
+				quizIntent.putExtra("CHAPTER", String.valueOf(position + 1));
+				quizIntent.putExtra("TITLE", dateList1.get(position).Data);
+				startActivity(quizIntent);
+
+			}
+		});
+
+		listAdapter1.notifyDataSetChanged();
+		listView1.invalidate();
+		if (popup) {
+			showNotice();
+		} else {
+			checkNotice();
+			show_login();
+		}
+
+		// Login////////////////////////////////////////
+		mPref = getSharedPreferences("Pref1", 0);
+		mPrefEdit = mPref.edit();
+
+		login = (ImageView) findViewById(R.id.button3);
+		edtid = (EditText) findViewById(R.id.edtid);
+		edtid2 = (EditText) findViewById(R.id.edtid2);
+		edtid2_2 = (EditText) findViewById(R.id.edtid2_2);
+		edtpass = (EditText) findViewById(R.id.etdpwd);
+		edtpass2 = (EditText) findViewById(R.id.etdpwd2);
+		edtpass2_2 = (EditText) findViewById(R.id.etdpwd2_2);
+		sign_submit = (TextView) findViewById(R.id.sign_submit);
+
+		mem_regi = (ImageView) findViewById(R.id.button1);
+		share = (ImageView) findViewById(R.id.ImageView01);
+
+		checkBoxID = (CheckBox) findViewById(R.id.checkBox1);
+		edtid.setText(mPref.getString("IDKEY", ""));
+		checkBoxID.setChecked(mPref.getBoolean("check", false));
+
+		login.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				if (edtid.getText().toString().equals("")
+						|| edtpass.getText().toString().equals("")) {
+					new AlertDialog.Builder(List.this).setTitle("입력 오류")
+							.setMessage("아이디와 비밀번호를 확인해주세요")
+							.setNeutralButton("OK", null).show();
+					edtid.setText("");
+					edtpass.setText("");
+				} else {
+					ConnectivityManager connect = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
+					if (connect.getNetworkInfo(ConnectivityManager.TYPE_MOBILE)
+							.getState() == NetworkInfo.State.CONNECTED
+							|| connect.getNetworkInfo(
+									ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
+						HttpBuilder hb = new HttpBuilder();
+						hb.loginResponse(edtid.getText().toString(), edtpass
+								.getText().toString(), SERVER_ADDRESS
+								+ "/check_login.php", handler);
+					} else {
+						new AlertDialog.Builder(List.this)
+								.setMessage(
+										"데이터 네트워크 차단 상태입니다. Wi-Fi를 연결해 접속하거나, 데이터 네트워크 설정을 '접속 허용'으로 변경하신 후 사용해 주십시오.")
+								.setNeutralButton("OK", null).show();
+					}
+
+				}
+			}
+		});
+		mem_regi.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				hide_login();
+				show_sign();
+			}
+		});
+		sign_submit.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				// TODO Auto-generated method stub
+				if (edtid2.getText().toString().equals("")
+						|| edtid2_2.getText().toString().equals("")
+						|| edtpass2.getText().toString().equals("")
+						|| edtpass2_2.getText().toString().equals("")
+						|| !edtid2.getText().toString()
+								.equals(edtid2_2.getText().toString())
+						|| !edtpass2.getText().toString()
+								.equals(edtpass2_2.getText().toString())) {
+					new AlertDialog.Builder(List.this).setTitle("입력 오류")
+							.setMessage("아이디와 비밀번호를 확인해주세요")
+							.setNeutralButton("OK", null).show();
+					edtid.setText("");
+					edtpass.setText("");
+				} else {
+					ConnectivityManager connect = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
+					if (connect.getNetworkInfo(ConnectivityManager.TYPE_MOBILE)
+							.getState() == NetworkInfo.State.CONNECTED
+							|| connect.getNetworkInfo(
+									ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
+						HttpBuilder hb = new HttpBuilder();
+						hb.loginResponse(edtid2.getText().toString(), edtpass2
+								.getText().toString(), SERVER_ADDRESS
+								+ "/register.php", handler2);
+					} else {
+						new AlertDialog.Builder(List.this)
+								.setMessage(
+										"데이터 네트워크 차단 상태입니다. Wi-Fi를 연결해 접속하거나, 데이터 네트워크 설정을 '접속 허용'으로 변경하신 후 사용해 주십시오.")
+								.setNeutralButton("OK", null).show();
+					}
+
+				}
+			}
+		});
+		call_login.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				show_login();
+			}
+		});
+		sub_back.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				hide_login();
+				hide_sign();
+			}
+		});
+
+	}
+
+	public void show_login() {
+		sub_menu.setVisibility(View.VISIBLE);
+		sub_menu.startAnimation(slideInT);
+		sub_back.setVisibility(View.VISIBLE);
+	}
+
+	public void hide_login() {
+		sub_menu.startAnimation(slideOutT);
+		sub_menu.setVisibility(View.GONE);
+		sub_back.setVisibility(View.GONE);
+	}
+
+	public void show_sign() {
+		lay_signIn.setVisibility(View.VISIBLE);
+		lay_signIn.startAnimation(slideInT);
+		sub_back.setVisibility(View.VISIBLE);
+	}
+
+	public void hide_sign() {
+		lay_signIn.startAnimation(slideOutT);
+		lay_signIn.setVisibility(View.GONE);
+		sub_back.setVisibility(View.GONE);
+	}
+
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		if (wasLogin) {
+			tPoint.setText(pointSetter.getPoint());
+		}
 	}
 }
