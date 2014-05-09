@@ -60,6 +60,13 @@ public class src_balloon : MonoBehaviour
 			                        
 						
 				}
+				if (myTrigger.transform.tag == "enemyBoss" && exist) {
+			
+						exist = false;
+						GAMEMANAGER.SendMessage ("getBalloonMSG", 1);
+			
+			
+				}
 				if (myTrigger.transform.tag == "item") {
 						GAMEMANAGER.SendMessage ("getItem");
 //						audio.PlayOneShot (itemSound);
