@@ -71,6 +71,7 @@ if (G5_IS_MOBILE) {
 		<div style="position:absolute; top:0px; left:0px; z-index:1;">
 			<img  src="<?php echo G5_IMG_URL ?>/header_btn.png" width="100%" usemap="#Map"  border="0" align="middle" />
 			<map name="Map" id="Map">
+				<area shape="rect" coords="63,2,357,62" href="http://actoze.dothome.co.kr" />
 				<area shape="rect" coords="78,91,212,210" href="#" onclick="javascript:saveMenu(1)" />
 				<area shape="rect" coords="246,90,381,220" href="#" onclick="javascript:saveMenu(2)" />
 				<area shape="rect" coords="414,95,547,211" href="#" onclick="javascript:saveMenu(3)" />
@@ -140,11 +141,11 @@ if (G5_IS_MOBILE) {
 				break;
 			case 2:
 				document.getElementById("menu_title").innerHTML = "역사달력";
-				document.getElementById("menu_summary").innerHTML = "New text!";
+				document.getElementById("menu_summary").innerHTML = "3월 - 선사시대와 고조선";
 				break;
 			case 3:
 				document.getElementById("menu_title").innerHTML = "연  표";
-				document.getElementById("menu_summary").innerHTML = "New text!";
+				document.getElementById("menu_summary").innerHTML = "나만의 연표를 만들어 보세요.";
 				break;
 			case 4:
 				document.getElementById("menu_title").innerHTML = "자료실";
@@ -153,6 +154,62 @@ if (G5_IS_MOBILE) {
 			case 5:
 				document.getElementById("menu_title").innerHTML = "추천사이트";
 				document.getElementById("menu_summary").innerHTML = "New text!";
+				break;
+			case 103:
+				document.getElementById("menu_title").innerHTML = "역사달력";
+				document.getElementById("menu_summary").innerHTML = "3월 - 선사시대와 고조선";
+				break;
+			case 104:
+				document.getElementById("menu_title").innerHTML = "역사달력";
+				document.getElementById("menu_summary").innerHTML = "4월 - 삼국, 통일신라, 발해";
+				break;
+			case 105:
+				document.getElementById("menu_title").innerHTML = "역사달력";
+				document.getElementById("menu_summary").innerHTML = "5월 - 고려의 건국과 발전";
+				break;
+			case 106:
+				document.getElementById("menu_title").innerHTML = "역사달력";
+				document.getElementById("menu_summary").innerHTML = "6월 - 조선의 건국, 문화, 과학";
+				break;
+			case 107:
+				document.getElementById("menu_title").innerHTML = "역사달력";
+				document.getElementById("menu_summary").innerHTML = "7월 - 조선시대 생활, 임진왜란, 병자호란";
+				break;
+			case 109:
+				document.getElementById("menu_title").innerHTML = "역사달력";
+				document.getElementById("menu_summary").innerHTML = "9월 - 조선 후기의 달라지는 생활";
+				break;
+			case 110:
+				document.getElementById("menu_title").innerHTML = "역사달력";
+				document.getElementById("menu_summary").innerHTML = "10월 - 서양 문물과 실학";
+				break;
+			case 111:
+				document.getElementById("menu_title").innerHTML = "역사달력";
+				document.getElementById("menu_summary").innerHTML = "11월 - 대한제국과 일제강점기";
+				break;
+			case 112:
+				document.getElementById("menu_title").innerHTML = "역사달력";
+				document.getElementById("menu_summary").innerHTML = "12월 - 대한민국 정부수립";
+				break;
+			case 102:
+				document.getElementById("menu_title").innerHTML = "역사달력";
+				document.getElementById("menu_summary").innerHTML = "2월 - 대한민국 발전";
+				break;
+			case 201:
+				document.getElementById("menu_title").innerHTML = "역사달력";
+				document.getElementById("menu_summary").innerHTML = "보고 싶은 달을 클릭하세요.";
+				break;
+			case 202:
+				document.getElementById("menu_title").innerHTML = "역사달력";
+				document.getElementById("menu_summary").innerHTML = "보고 싶은 달을 클릭하세요.";
+				break;
+			case 203:
+				document.getElementById("menu_title").innerHTML = "역사달력";
+				document.getElementById("menu_summary").innerHTML = "보고 싶은 달을 클릭하세요.";
+				break;
+			case 204:
+				document.getElementById("menu_title").innerHTML = "역사달력";
+				document.getElementById("menu_summary").innerHTML = "보고 싶은 달을 클릭하세요.";
 				break;
 
 		}
