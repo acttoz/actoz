@@ -57,6 +57,16 @@ define('G5_SNS_DIR',        'sns');
 define('G5_SYNDI_DIR',      'syndi');
 define('G5_PHPMAILER_DIR',  'PHPMailer_v2.0.4');
 define('G5_SESSION_DIR',    'session');
+define('cal',    '역사 달력');
+define('cal1',   '역사달력의 메뉴를 알아보고 나만의 달력을 만들어 봅시다.');
+define('inform',    '사용안내');
+define('inform',    '사용안내');
+define('year',    '연 표');
+define('year',    '연 표');
+define('pds',    '자료실');
+define('pds',    '자료실');
+define('link',    '참고사이트');
+define('link',    '참고사이트');
 
 // URL 은 브라우저상에서의 경로 (도메인으로 부터의)
 if (G5_DOMAIN) {

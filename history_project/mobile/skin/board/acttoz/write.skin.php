@@ -159,7 +159,7 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
 
     <div class="btn_confirm">
         <input type="submit" value="작성완료" id="btn_submit" class="btn_submit" accesskey="s">
-        <a href="./board.php?bo_table=<?php echo $bo_table ?>" class="btn_cancel">취소</a>
+        <a href="./board.php?menu='<?php echo $bo_table ?>'&bo_table=<?php echo $bo_table ?>" class="btn_cancel">취소</a>
     </div>
     </form>
 </section>

@@ -42,6 +42,36 @@ include_once ('./_head3.php');
 	<body>
 		<SPAN ID=calendar STYLE="position:relative;"></SPAN>
 		<script language="JavaScript" type="text/JavaScript">
+			localStorage.setItem("menu", 2);
+			document.getElementById("menu_title").innerHTML = "역사달력";
+			document.getElementById("menu_summary").innerHTML = "New text!";
+			var tClass = localStorage.getItem("menu");
+			function menuTitle() {
+				switch (tClass) {
+					case 1:
+						document.getElementById("menu_title").innerHTML = "1";
+						document.getElementById("menu_summary").innerHTML = "New text!";
+						break;
+					case 2:
+						document.getElementById("menu_title").innerHTML = "1";
+						document.getElementById("menu_summary").innerHTML = "New text!";
+						break;
+					case 3:
+						document.getElementById("menu_title").innerHTML = "1";
+						document.getElementById("menu_summary").innerHTML = "New text!";
+						break;
+					case 4:
+						document.getElementById("menu_title").innerHTML = "1";
+						document.getElementById("menu_summary").innerHTML = "New text!";
+						break;
+					case 5:
+						document.getElementById("menu_title").innerHTML = "1";
+						document.getElementById("menu_summary").innerHTML = "New text!";
+						break;
+				}
+
+			}
+
 			if (!Array.prototype.indexOf) {
 				Array.prototype.indexOf = function(elt /*, from*/) {
 					var len = this.length >>> 0;
