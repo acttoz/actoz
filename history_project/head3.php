@@ -72,11 +72,11 @@ if (G5_IS_MOBILE) {
 			<img  src="<?php echo G5_IMG_URL ?>/header_btn.png" width="100%" usemap="#Map"  border="0" align="middle" />
 			<map name="Map" id="Map">
 				<area shape="rect" coords="63,2,357,62" href="http://actoze.dothome.co.kr" />
-				<area shape="rect" coords="78,91,212,210" href="#" onclick="javascript:saveMenu(1)" />
-				<area shape="rect" coords="246,90,381,220" href="#" onclick="javascript:saveMenu(2)" />
-				<area shape="rect" coords="414,95,547,211" href="#" onclick="javascript:saveMenu(3)" />
-				<area shape="rect" coords="571,95,720,219" href="#" onclick="javascript:saveMenu(4)"/>
-				<area shape="rect" coords="743,93,888,214" href="#" onclick="javascript:saveMenu(5)" />
+				<area shape="rect" coords="78,91,212,210" href="http://actoze.dothome.co.kr/ex.php" onclick="javascript:saveMenu(1)" />
+				<area shape="rect" coords="246,90,380,220" href="http://actoze.dothome.co.kr/month.php?month=3" onclick="javascript:saveMenu(2)" />
+				<area shape="rect" coords="410,95,540,211" href="http://actoze.dothome.co.kr/bbs/write2.php?bo_table=year" onclick="javascript:saveMenu(3)" />
+				<area shape="rect" coords="590,95,720,219" href="http://actoze.dothome.co.kr/pds.php" onclick="javascript:saveMenu(4)"/>
+				<area shape="rect" coords="740,93,880,214" href="http://actoze.dothome.co.kr/link.php" onclick="javascript:saveMenu(5)" />
 			</map>
 		</div>
 		<div style="position:absolute; top:70px; left:1000px; z-index:2; float:right">
@@ -113,23 +113,6 @@ if (G5_IS_MOBILE) {
 <script language="JavaScript" type="text/JavaScript">
 	function saveMenu(num) {
 		localStorage.setItem("menu", num);
-		switch(num) {
-			case 1:
-				document.location.href = "";
-				break;
-			case 2:
-				document.location.href = "http://actoze.dothome.co.kr/month.php?month=3";
-				break;
-			case 3:
-				document.location.href = "http://actoze.dothome.co.kr/bbs/write2.php?bo_table=year";
-				break;
-			case 4:
-				document.location.href = "http://actoze.dothome.co.kr/pds.php";
-				break;
-			case 5:
-				document.location.href = "";
-				break;
-		}
 	}
 
 	var menu = localStorage.getItem("menu");
@@ -137,7 +120,7 @@ if (G5_IS_MOBILE) {
 		switch(menu*=1) {
 			case 1:
 				document.getElementById("menu_title").innerHTML = "사용안내";
-				document.getElementById("menu_summary").innerHTML = "New text!";
+				document.getElementById("menu_summary").innerHTML = "역사달력의 메뉴를 알아보고 나만의 달력을 만들어 봅시다.";
 				break;
 			case 2:
 				document.getElementById("menu_title").innerHTML = "역사달력";
@@ -145,15 +128,15 @@ if (G5_IS_MOBILE) {
 				break;
 			case 3:
 				document.getElementById("menu_title").innerHTML = "연  표";
-				document.getElementById("menu_summary").innerHTML = "나만의 연표를 만들어 보세요.";
+				document.getElementById("menu_summary").innerHTML = "내가 정한 주제로역사연표를 만들어 보세요.";
 				break;
 			case 4:
 				document.getElementById("menu_title").innerHTML = "자료실";
-				document.getElementById("menu_summary").innerHTML = "New text!";
+				document.getElementById("menu_summary").innerHTML = "더 알고 싶은 내용을 자료실에서 찾아보세요.";
 				break;
 			case 5:
-				document.getElementById("menu_title").innerHTML = "추천사이트";
-				document.getElementById("menu_summary").innerHTML = "New text!";
+				document.getElementById("menu_title").innerHTML = "참고사이트";
+				document.getElementById("menu_summary").innerHTML = "역사공부 나누기";
 				break;
 			case 103:
 				document.getElementById("menu_title").innerHTML = "역사달력";
