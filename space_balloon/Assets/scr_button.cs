@@ -7,7 +7,7 @@ public class scr_button : MonoBehaviour
 		// Use this for initialization
 		void Start ()
 		{
-				DontDestroyOnLoad (GameObject.Find ("back"));
+//				DontDestroyOnLoad (GameObject.Find ("back"));
 				
 
 //				btn1.gameObject.GetComponent<SpriteRenderer> ().color = Color.white;

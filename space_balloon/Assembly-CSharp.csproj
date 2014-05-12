@@ -46,17 +46,6 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\FingerGestures Samples\1) Finger Events\Scripts\FingerEventsSamplePart1.cs" />
-     <Compile Include="Assets\FingerGestures Samples\1) Finger Events\Scripts\FingerEventsSamplePart2.cs" />
-     <Compile Include="Assets\FingerGestures Samples\2) Gestures\Scripts\BasicGesturesSample.cs" />
-     <Compile Include="Assets\FingerGestures Samples\2) Gestures\Scripts\PinchTwistSample.cs" />
-     <Compile Include="Assets\FingerGestures Samples\2) Gestures\Scripts\PointCloudGestureRenderer.cs" />
-     <Compile Include="Assets\FingerGestures Samples\2) Gestures\Scripts\PointCloudGestureSample.cs" />
-     <Compile Include="Assets\FingerGestures Samples\3) Toolbox\Scripts\DragTrail.cs" />
-     <Compile Include="Assets\FingerGestures Samples\3) Toolbox\Scripts\EmitParticlesOnSwipe.cs" />
-     <Compile Include="Assets\FingerGestures Samples\3) Toolbox\Scripts\ToolboxDragSample.cs" />
-     <Compile Include="Assets\FingerGestures Samples\3) Toolbox\Scripts\ToolboxFingerEventsSample.cs" />
-     <Compile Include="Assets\FingerGestures Samples\3) Toolbox\Scripts\ToolboxOneFingerGestureSample.cs" />
      <Compile Include="Assets\FingerGestures Samples\Assets\Scripts\BasicSample.cs" />
      <Compile Include="Assets\FingerGestures Samples\Assets\Scripts\EmitParticles.cs" />
      <Compile Include="Assets\FingerGestures Samples\Assets\Scripts\MaxFPS.cs" />
@@ -136,6 +125,8 @@
      <Compile Include="Assets\ToonEffect_V2\Plugins\HTSpriteSequencer.cs" />
      <Compile Include="Assets\ToonEffect_V2\Plugins\HTSpriteSheet.cs" />
      <Compile Include="Assets\scr_air.cs" />
+     <Compile Include="Assets\scr_back.cs" />
+     <Compile Include="Assets\scr_back2.cs" />
      <Compile Include="Assets\scr_backManager.cs" />
      <Compile Include="Assets\scr_bgm.cs" />
      <Compile Include="Assets\scr_button.cs" />
@@ -158,6 +149,7 @@
      <Compile Include="Assets\scr_startManager.cs" />
      <Compile Include="Assets\scr_timesup.cs" />
      <Compile Include="Assets\scr_toStart.cs" />
+     <Compile Include="Assets\scr_warn.cs" />
      <Compile Include="Assets\src_back.cs" />
      <Compile Include="Assets\src_balloon.cs" />
      <Compile Include="Assets\src_enemy.cs" />
@@ -173,17 +165,6 @@
      <Compile Include="Assets\tk2dUIExtensions\Code\Core\tk2dUIExtNavigationElement.cs" />
      <Compile Include="Assets\tk2dUIExtensions\Code\Core\tk2dUIExtNavigationManager.cs" />
      <Compile Include="Assets\tk2dUIExtensions\Code\Core\tk2dUIExtSingletonBase.cs" />
-     <Compile Include="Assets\tk2dUIExtensions\Demo\Scripts\Components\tk2dUIExtDemoLevel.cs" />
-     <Compile Include="Assets\tk2dUIExtensions\Demo\Scripts\Components\tk2dUIExtDemoMission.cs" />
-     <Compile Include="Assets\tk2dUIExtensions\Demo\Scripts\Components\tk2dUIExtDemoUpgrade.cs" />
-     <Compile Include="Assets\tk2dUIExtensions\Demo\Scripts\Dialogs\tk2dUIExtDemoDialogQuit.cs" />
-     <Compile Include="Assets\tk2dUIExtensions\Demo\Scripts\Windows\tk2dUIExtDemoWindowCompleted.cs" />
-     <Compile Include="Assets\tk2dUIExtensions\Demo\Scripts\Windows\tk2dUIExtDemoWindowGame.cs" />
-     <Compile Include="Assets\tk2dUIExtensions\Demo\Scripts\Windows\tk2dUIExtDemoWindowLevels.cs" />
-     <Compile Include="Assets\tk2dUIExtensions\Demo\Scripts\Windows\tk2dUIExtDemoWindowMenu.cs" />
-     <Compile Include="Assets\tk2dUIExtensions\Demo\Scripts\Windows\tk2dUIExtDemoWindowMissions.cs" />
-     <Compile Include="Assets\tk2dUIExtensions\Demo\Scripts\Windows\tk2dUIExtDemoWindowPaused.cs" />
-     <Compile Include="Assets\tk2dUIExtensions\Demo\Scripts\Windows\tk2dUIExtDemoWindowStore.cs" />
      <None Include="Assets\ToonEffect_V2\Documentation\03 - HTSpriteSheet.cs parameters.txt" />
      <None Include="Assets\TK2DROOT\tk2d\Shaders\LitSolidVertexColor.shader" />
      <None Include="Assets\TK2DROOT\tk2d\Goodies\TexturePacker\Exporter\2dtoolkit\exporter.xml" />

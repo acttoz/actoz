@@ -4,19 +4,21 @@ using System.Collections;
 public class scr_manager : MonoBehaviour
 {
 		public bool test;
-		public GameObject testBack, prf_enemy;
+		public GameObject backFirst,testBack, prf_enemy, backElement;
+		GameObject[] back;
+		float deadLine;
 		public float enemyCreateRate;
 		private Vector2 zonePosition;
-		public GameObject[] oAirs = new GameObject[3];
+//		public GameObject[] oAirs = new GameObject[3];
 		public GameObject oZone, oEnergy, oStopSound, btnRestart, balloon, itemBlue, itemOrange, itemPurple, monsterB, monsterO, monsterP, monsterEffect, super_back1, super_back2;
 		public Sprite bStar, oStar, pStar, eStar, superBalloon4, superBalloon5;
 		public float stopRateControl;
 		public float[] levelRate = new float[4];
 		float stopRate = 0;
 		public GameObject itemEffectO, itemEffectB, effectPoint2, effectStop, itemEffectP, itemEffectBack, walls, btn_pause, prf_pause, btn_resume;
-		int timer;
+//		int timer;
 		Vector2 previousBalloon, currentBalloon;
-		int gameTime = 3;
+//		int gameTime = 3;
 		public float itemCreateRate;
 		public float zoneCreateRate;
 		public int leftTime;
@@ -38,9 +40,9 @@ public class scr_manager : MonoBehaviour
 		tk2dTextMesh scoreText;
 		tk2dTextMesh lvText;
 		tk2dTextMesh timeText, resultText, gemText;
-		int score = 0;
+		float score = 0;
 		int gem = 0;
-		int superLevel = 0;
+		public static int superLevel = 0;
 		float mUp, mDown, mLeft, mRight;
 		// Use this for initialization
 		bool existBalloon = false;
@@ -50,12 +52,12 @@ public class scr_manager : MonoBehaviour
 		void Start ()
 		{
 				Instantiate (backStart, new Vector2 (0, 0), Quaternion.identity);
-				score = 1000;
+//				score = 1000;
 				countGem = PlayerPrefs.GetInt ("NUMGEM");
 				if (test)
 						Instantiate (testBack, new Vector2 (0, 0), Quaternion.identity);
 						
-				timer = gameTime;
+//				timer = gameTime;
 				star1 = GameObject.Find ("star1").GetComponent<SpriteRenderer> ();
 				star2 = GameObject.Find ("star2").GetComponent<SpriteRenderer> ();
 				star3 = GameObject.Find ("star3").GetComponent<SpriteRenderer> ();
@@ -68,7 +70,6 @@ public class scr_manager : MonoBehaviour
 				existBalloon = false;
 				mLeft = GameObject.Find ("lv").transform.position.x;
 				mRight = mLeft * -1;
-				
 //				Debug.Log ("screenSize=" + mUp + " " + mDown + " " + mLeft + " " + mRight + " ");
 				currentBalloon = new Vector2 (20, 20);
 		
@@ -128,6 +129,7 @@ public class scr_manager : MonoBehaviour
 				InvokeRepeating ("itemCreate", 1f, itemCreateRate);
 				InvokeRepeating ("enemyCreate", 1f, enemyCreateRate);
 				 
+				Instantiate (backFirst, new Vector2 (0, 0), Quaternion.identity);
 		}
 
 		void enemyCreate ()
@@ -155,7 +157,7 @@ public class scr_manager : MonoBehaviour
 				timeStarted = false;
 				disableTouch ();
 				resetStar ();
-				timer = gameTime;
+//				timer = gameTime;
 				///level reset
 				lvText.text = "Lv.1";
 				superTimer = superTime;
@@ -166,12 +168,12 @@ public class scr_manager : MonoBehaviour
 				balloon.transform.localScale = new Vector3 (0, 0, 0);
 				existBalloon = false;
 			 
-				oAirs [0].SetActive (true);
-				oAirs [1].SetActive (true);
-				oAirs [2].SetActive (true);
-				oAirs [0].transform.localScale = new Vector2 (0.3460798f, 0.3460798f);
-				oAirs [1].transform.localScale = new Vector2 (0.3460798f, 0.3460798f);
-				oAirs [2].transform.localScale = new Vector2 (0.3460798f, 0.3460798f);
+//				oAirs [0].SetActive (true);
+//				oAirs [1].SetActive (true);
+//				oAirs [2].SetActive (true);
+//				oAirs [0].transform.localScale = new Vector2 (0.3460798f, 0.3460798f);
+//				oAirs [1].transform.localScale = new Vector2 (0.3460798f, 0.3460798f);
+//				oAirs [2].transform.localScale = new Vector2 (0.3460798f, 0.3460798f);
 //				enemy [0].SendMessage ("superMode", 1);
 //				enemy [1].SendMessage ("superMode", 1);
 //				enemy [2].SendMessage ("superMode", 1);
@@ -238,7 +240,7 @@ public class scr_manager : MonoBehaviour
 
 						resultText.text = "" + score;
 						if (score >= 1000) {
-								gem = score / 1000;
+								gem = (int)score / 1000;
 								InvokeRepeating ("resultGemCount", 0.5f, 0.3f);
 						} else {
 								enableTouch ();
@@ -321,6 +323,17 @@ public class scr_manager : MonoBehaviour
 				existItem = Instantiate (createItem, new Vector3 (tempX, 7, 0), Quaternion.identity) as GameObject;
 		}
 
+		void backCreate ()
+		{
+				if (superLevel > 0 && superLevel < 6) {
+						float tempX = (Random.Range (mLeft * 100, mRight * 100)) / 100;
+						Instantiate (backElement, new Vector3 (tempX, 7, 0), Quaternion.identity);
+				} else if (superLevel == 6) {
+						float tempX = (Random.Range (mLeft * 100, mRight * 100)) / 100;
+						Instantiate (backElement, new Vector3 (tempX, -7, 0), Quaternion.identity);
+				}
+		}
+
 		void zoneCreate ()
 		{
 				GameObject tempZone = GameObject.FindGameObjectWithTag ("zone");
@@ -329,7 +342,7 @@ public class scr_manager : MonoBehaviour
 				float tempX = (Random.Range (mLeft * 100, mRight * 100)) / 100;
 				float tempY = (Random.Range (mDown * 100, mUp * 100)) / 100;
 				zonePosition = new Vector2 (tempX, tempY);
-				Instantiate (oZone, zonePosition, Quaternion.identity);
+				Instantiate (oZone, new Vector3 (tempX, tempY, 0), Quaternion.identity);
 		}
 
 		void zoneReset ()
@@ -355,17 +368,21 @@ public class scr_manager : MonoBehaviour
 						break;
 			
 				case 1:
-						colHave2 = colCreate;
-						numHave++;
-						StartCoroutine ("getAnim", GameObject.Find ("star2"));
+						if (colHave1 == colCreate) {
+								numHave++;
+								StartCoroutine ("getAnim", GameObject.Find ("star2"));
 						
-						audio.PlayOneShot (itemSound);
-						star2.sprite = tempStar;
+								audio.PlayOneShot (itemSound);
+								star2.sprite = tempStar;
+						} else {
+								resetStar ();
+								getItem ();
+						}
 						break;
-			
+		
 				case 2:
 						audio.PlayOneShot (itemSound);
-						if (colHave1.Equals (colHave2) && colHave2.Equals (colCreate)) {
+						if (colHave1 == colCreate) {
 								//monster
 								StartCoroutine ("getAnim", GameObject.Find ("star1"));
 								StartCoroutine ("getAnim", GameObject.Find ("star2"));
@@ -379,11 +396,8 @@ public class scr_manager : MonoBehaviour
 								
 
 						} else {
-								//score
-								star3.sprite = tempStar;
-								StartCoroutine ("getAnim", GameObject.Find ("star3"));
-								StartCoroutine ("notMonster");
-								
+								resetStar ();
+								getItem ();
 						}
 						break;
 				}
@@ -398,46 +412,21 @@ public class scr_manager : MonoBehaviour
 				star.GetComponent<Animator> ().SetInteger ("item", 0);
 		}
 
-		IEnumerator notMonster ()
-		{
-
-				yield return new WaitForSeconds (1f);
-				audio.PlayOneShot (levelUp);
-				resetStar ();
-				itemEffectO.animation.Play ();
-				Instantiate (itemEffectBack, itemEffectO.transform.position, Quaternion.identity);
-				yield return new WaitForSeconds (0.2f);
-				int i = 500;
-				if (isScoreUp) 
-						i = 1000;
-				while (i>0) {
-						yield return new WaitForSeconds (0.04f);
-						i -= 10;
-						score += 10;
-						scoreText.text = ": " + score;
-						audio.PlayOneShot (bing);
-						
-				}
-		}
-
 		void itemUse (string col)
 		{
 				if (col.Equals ("b")) {
-						timer += 10;
+//						timer += 10;
 						audio.PlayOneShot (levelUp);
-						itemEffectB.animation.Play ();
 						Instantiate (itemEffectBack, itemEffectB.transform.position, Quaternion.identity);
 				}
 				if (col.Equals ("o")) {
 						audio.PlayOneShot (levelUp);
-						itemEffectO.animation.Play ();
-						StopCoroutine ("scoreUp");
-						StartCoroutine ("scoreUp");
+//						StopCoroutine ("scoreUp");
+//						StartCoroutine ("scoreUp");
 						Instantiate (itemEffectBack, itemEffectO.transform.position, Quaternion.identity);
 				}
 				if (col.Equals ("p")) {
 						audio.PlayOneShot (levelUp);
-						itemEffectP.animation.Play ();
 						Instantiate (itemEffectBack, itemEffectP.transform.position, Quaternion.identity);
 						if (gauge.transform.localScale.y > 1.3) {
 								float temp = 1.74f - gauge.transform.localScale.y;
@@ -512,8 +501,6 @@ public class scr_manager : MonoBehaviour
 				balloon.GetComponent<SphereCollider> ().enabled = true;
 		}
 
-		 
-
 		void resetStar ()
 		{
 				star1.sprite = eStar;
@@ -541,9 +528,10 @@ public class scr_manager : MonoBehaviour
 
 		void Create (Vector3 touch)
 		{
-				timer--;
-				oAirs [timer].animation.Play ();
+//				timer--;
+//				oAirs [timer].animation.Play ();
 				
+				superLevel = 0;
 				
 				balloon.transform.localRotation = new Quaternion (0, 0, 0, 0);
 				balloon.GetComponent<SpriteRenderer> ().color = Color.red;
@@ -575,13 +563,19 @@ public class scr_manager : MonoBehaviour
 				CancelInvoke ("normalModeCount");
 				stopRate = stopRateControl;
 				oEnergy.animation.Stop ();
-				zoneReset ();		
-		
+				zoneReset ();
+				
 				switch (num) {
 				case 1:
-					
+						if (score > 30) {
+								superLevel = 6;
+						} else {
+								superLevel = 0;
+						}
+			
+						deadLine = score - 20;
 						 
-					
+						superMode (superLevel);
 						balloon.SendMessage ("cancel", 1);
 
 			//						if (audio.isPlaying)
@@ -603,7 +597,6 @@ public class scr_manager : MonoBehaviour
 						lvText.text = "Lv.1";
 						gauge.transform.localScale = new Vector3 (1.75f, 0.3f, 1);
 						superTimer = superTime;
-						superLevel = 0;
 						bgm.SendMessage ("superMode", 1);
 
 			// back & enemy reset
@@ -634,8 +627,8 @@ public class scr_manager : MonoBehaviour
 			
 						//						if (num == 1)
 						balloon.SetActive (false);
-						if (timer == 0)
-								StartCoroutine ("timesUp");
+//						if (timer == 0)
+//								StartCoroutine ("timesUp");
 			
 						
 					
@@ -656,7 +649,7 @@ public class scr_manager : MonoBehaviour
 		{
 				if (gauge.transform.localScale.y > 0.3f) {
 						gauge.transform.localScale -= new Vector3 (0, superTimer / 3000f, 0);
-			
+
 				}  
 		}
 
@@ -753,7 +746,7 @@ public class scr_manager : MonoBehaviour
 		{
 				zonePosition = new Vector2 (100, 100);
 				balloon.transform.localRotation = new Quaternion (0, 0, 0, 0);
-		
+				CancelInvoke ("backCreate");
 				CancelInvoke ("balloonStop");
 				balloon.SendMessage ("stopBalloon", false);
 				stopRate = 0;
@@ -784,10 +777,11 @@ public class scr_manager : MonoBehaviour
 				switch (num) {
 			
 				case 1:
-						InvokeRepeating ("scoreCount", 0.1f, 0.7f);
-			
+						InvokeRepeating ("scoreCount", 0.1f, levelRate [num - 1]);
+						InvokeRepeating ("backCreate", 0, levelRate [num - 1] * 8);
 						break;
 				case 2:
+						InvokeRepeating ("backCreate", 0, levelRate [num - 1] * 8);
 						StopCoroutine ("undead");
 						StartCoroutine ("undead");
 						lv.SendMessage ("levelUp");
@@ -796,9 +790,10 @@ public class scr_manager : MonoBehaviour
 						Instantiate (effectSuper2, new Vector2 (0, 0), Quaternion.identity);
 						audio.PlayOneShot (levelUp);
 						Instantiate (super_back1, new Vector2 (0, 0), Quaternion.identity);
-						InvokeRepeating ("scoreCount", 0.1f, levelRate [0] / 10);
+						InvokeRepeating ("scoreCount", 0.1f, levelRate [num - 1]);
 						break;
 				case 3:
+						InvokeRepeating ("backCreate", 0, levelRate [num - 1] * 8);
 						StopCoroutine ("undead");
 						StartCoroutine ("undead");
 						lv.SendMessage ("levelUp");
@@ -806,13 +801,14 @@ public class scr_manager : MonoBehaviour
 						audio.PlayOneShot (levelUp);
 						Instantiate (effectSuper1, new Vector2 (0, 0), Quaternion.identity);
 						Instantiate (effectSuper2, new Vector2 (0, 0), Quaternion.identity);
-						InvokeRepeating ("scoreCount", 0.1f, levelRate [1] / 10);
+						InvokeRepeating ("scoreCount", 0.1f, levelRate [num - 1]);
 						Instantiate (super_back2, new Vector2 (0, 0), Quaternion.identity);
 						break;
 			
 				 
 
 				case 4:
+						InvokeRepeating ("backCreate", 0, levelRate [num - 1] * 12);
 						StopCoroutine ("undead");
 						StartCoroutine ("undead");
 						lv.SendMessage ("levelUp");
@@ -820,12 +816,13 @@ public class scr_manager : MonoBehaviour
 						audio.PlayOneShot (levelUp);
 						Instantiate (effectSuper1, new Vector2 (0, 0), Quaternion.identity);
 						Instantiate (effectSuper2, new Vector2 (0, 0), Quaternion.identity);
-						InvokeRepeating ("scoreCount", 0.1f, levelRate [2] / 10);
+						InvokeRepeating ("scoreCount", 0.1f, levelRate [num - 1]);
 						Instantiate (super_back1, new Vector2 (0, 0), Quaternion.identity);
 						balloonSprite.sprite = superBalloon4;
 						break;
 
 				case 5:
+						InvokeRepeating ("backCreate", 0, levelRate [num - 1] * 20);
 						GameObject tempZone = GameObject.FindGameObjectWithTag ("zone");
 						if (tempZone != null)
 								Destroy (tempZone);
@@ -837,11 +834,14 @@ public class scr_manager : MonoBehaviour
 						audio.PlayOneShot (levelUp);
 						Instantiate (effectSuper1, new Vector2 (0, 0), Quaternion.identity);
 						Instantiate (effectSuper2, new Vector2 (0, 0), Quaternion.identity);
-						InvokeRepeating ("scoreCount", 0.1f, levelRate [3] / 10);
+						InvokeRepeating ("scoreCount", 0.1f, levelRate [num - 1]);
 						Instantiate (super_back2, new Vector2 (0, 0), Quaternion.identity);
 						balloonSprite.sprite = superBalloon5;
 						break;
-			
+				case 6:
+						InvokeRepeating ("scoreCount", 0.1f, 0.1f);
+						InvokeRepeating ("backCreate", 0, levelRate [1] * 8);
+						break;
 				default:
 						break;
 			
@@ -852,17 +852,18 @@ public class scr_manager : MonoBehaviour
 	
 		void scoreCount ()
 		{
-				if (isScoreUp) {
-						Instantiate (effectPoint2, balloon.transform.position, Quaternion.identity);
-						score += 10;
-						scoreText.text = ": " + score + " x2";
+				if (superLevel < 6) {
+						score += 1;
 				} else {
-						Instantiate (effectPoint, balloon.transform.position, Quaternion.identity);
-						score += 5;
-						scoreText.text = ": " + score;
+						score -= 1;
 				}
-				audio.PlayOneShot (bing);
-				Instantiate (effectPointBack, balloon.transform.position, Quaternion.identity);
+
+				scoreText.text = ": " + score / 10;
+				if (score < deadLine) {
+						CancelInvoke ("scoreCount");
+						StartCoroutine ("timesUp");
+				}
+				 
 		}
 	
 		void enableTouch ()
@@ -894,7 +895,7 @@ public class scr_manager : MonoBehaviour
 						score += 50;
 						break;
 				case 4:
-						oAirs [timer].SetActive (false);
+//						oAirs [timer].SetActive (false);
 						break;
 				default:
 						break;
