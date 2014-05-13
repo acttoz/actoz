@@ -106,7 +106,7 @@ public class List extends Activity implements OnClickListener {
 				wasLogin = true;
 				pointSetter = new Point(List.this, myId);
 				pointSetter.setPoint(5);
-				tId.setText(myId+" 님");
+				tId.setText(myId + " 님");
 				tPoint.setText(pointSetter.getPoint());
 				Toast.makeText(List.this, "로그인 성공. 5 points Up!",
 						Toast.LENGTH_SHORT).show();
@@ -279,7 +279,7 @@ public class List extends Activity implements OnClickListener {
 
 		aDialog.setPositiveButton("확인", new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int which) {
-				checkNotice();
+				show_login();
 			}
 		});
 		aDialog.setNegativeButton("다시 안보기",
@@ -287,7 +287,6 @@ public class List extends Activity implements OnClickListener {
 					public void onClick(DialogInterface dialog, int which) {
 						editor.putBoolean("POPUP", false);
 						editor.commit();
-						checkNotice();
 						show_login();
 					}
 				});
@@ -399,8 +398,8 @@ public class List extends Activity implements OnClickListener {
 		if (popup) {
 			showNotice();
 		} else {
-			checkNotice();
 			show_login();
+
 		}
 
 		// Login////////////////////////////////////////
@@ -528,6 +527,7 @@ public class List extends Activity implements OnClickListener {
 		sub_menu.startAnimation(slideOutT);
 		sub_menu.setVisibility(View.GONE);
 		sub_back.setVisibility(View.GONE);
+		checkNotice();
 	}
 
 	public void show_sign() {
