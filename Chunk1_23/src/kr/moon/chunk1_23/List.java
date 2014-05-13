@@ -6,8 +6,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
-import org.w3c.dom.Text;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -22,6 +20,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -549,5 +548,17 @@ public class List extends Activity implements OnClickListener {
 		if (wasLogin) {
 			tPoint.setText(pointSetter.getPoint());
 		}
+	}
+
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+
+		if (keyCode == KeyEvent.KEYCODE_BACK) {
+			startActivity(new Intent(List.this, MoreApp.class));
+			finish();
+			return false;
+		}
+
+		return super.onKeyDown(keyCode, event);
 	}
 }

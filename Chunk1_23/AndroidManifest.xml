@@ -73,7 +73,8 @@
         </activity>
         <activity
             android:name="MoreApp"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+            android:clearTaskOnLaunch="true"
+            android:screenOrientation="landscape" >
         </activity>
     </application>
 

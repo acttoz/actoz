@@ -863,8 +863,10 @@ public class Main_Study extends Activity implements OnClickListener,
 				this.getPackageName());
 		this.check1.setImageResource(chunkId1);
 		this.check2.setImageResource(chunkId2);
-		tId.setText(List.myId);
-		tPoint.setText(List.pointSetter.getPoint());
+		if (List.pointSetter != null) {
+			tId.setText(List.myId);
+			tPoint.setText(List.pointSetter.getPoint());
+		}
 
 	}
 
