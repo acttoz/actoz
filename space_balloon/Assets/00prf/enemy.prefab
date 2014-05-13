@@ -114,6 +114,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb544658d0e26d648a1541c09cf69731, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBoss: 0
   speed: 2
   increaseRate: .5
 --- !u!135 &13500000
@@ -126,7 +127,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: .180000007
+  m_Radius: .0799999982
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!212 &21200000
 SpriteRenderer:

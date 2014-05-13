@@ -4,6 +4,7 @@ using System.Collections;
 public class src_enemy : MonoBehaviour
 {
 //	Random.Range(1, 5);
+		public bool isBoss;
 		public float speed;
 		int xTemp = 1;
 		int yTemp = 1;
@@ -13,7 +14,8 @@ public class src_enemy : MonoBehaviour
 		// Use this for initialization
 		void Awake ()
 		{
-				speed = Random.Range (5, 21) / 10f;
+				if (!isBoss)
+						speed = Random.Range (5, 21) / 10f;
 //				Debug.Log ("" + speed);
 				if (Random.Range (0, 2) == 0) {
 						xTemp = -1;

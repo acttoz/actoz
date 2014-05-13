@@ -4,7 +4,7 @@ using System.Collections;
 public class scr_manager : MonoBehaviour
 {
 		public bool test;
-		public GameObject backFirst,testBack, prf_enemy, backElement;
+		public GameObject oBoss, backFirst, testBack, prf_enemy, backElement;
 		GameObject[] back;
 		float deadLine;
 		public float enemyCreateRate;
@@ -144,16 +144,30 @@ public class scr_manager : MonoBehaviour
 		void gameReset ()
 		{
 				CancelInvoke ("itemCreate");
+				if (existItem != null)
+						Destroy (existItem);
 				GameObject tempZone = GameObject.FindGameObjectWithTag ("zone");
 				if (tempZone != null)
 						Destroy (tempZone);
 				CancelInvoke ("zoneCreate");
+				CancelInvoke ("enemyCreate");
+				oBoss.transform.tag = "boss";
+				enemy = GameObject.FindGameObjectsWithTag ("enemy");
+				for (int i=0; i<enemy.Length; i++) {
+						Destroy (enemy [i]);
+				}
+				oBoss.transform.tag = "enemy";
+				StopCoroutine ("undead");
+				CancelInvoke ("itemCreate");
+				CancelInvoke ("zoneCreate");
+				CancelInvoke ("scoreCount");
+				CancelInvoke ("superModeCount");
+				CancelInvoke ("normalModeCount");
 				gauge.transform.localScale = new Vector3 (1.75f, 0.3f, 1);
 				Instantiate (backStart, new Vector2 (0, 0), Quaternion.identity);
 				onPlay = false;
 				score = 0;
 				scoreText.text = ": " + score;
-				walls.SetActive (true);
 				timeStarted = false;
 				disableTouch ();
 				resetStar ();
@@ -166,7 +180,6 @@ public class scr_manager : MonoBehaviour
 				existBalloon = false;
 				// back & enemy reset
 				balloon.transform.localScale = new Vector3 (0, 0, 0);
-				existBalloon = false;
 			 
 //				oAirs [0].SetActive (true);
 //				oAirs [1].SetActive (true);
@@ -200,23 +213,9 @@ public class scr_manager : MonoBehaviour
 		IEnumerator timesUp ()
 		{
 				onPlay = false;
-				CancelInvoke ("enemyCreate");
-				enemy = GameObject.FindGameObjectsWithTag ("enemy");
-				for (int i=0; i<enemy.Length; i++) {
-						Destroy (enemy [i]);
-				}
-				GameObject tempZone = GameObject.FindGameObjectWithTag ("zone");
-				if (tempZone != null)
-						Destroy (tempZone);
-				StopCoroutine ("undead");
-				CancelInvoke ("itemCreate");
-				CancelInvoke ("zoneCreate");
-				CancelInvoke ("scoreCount");
-				CancelInvoke ("superModeCount");
-				CancelInvoke ("normalModeCount");
+				
 				balloon.SetActive (false);
 				existBalloon = false;
-				walls.SetActive (false);
 				disableTouch ();
 				audio.PlayOneShot (timesup);
 				Instantiate (oTimeUp, new Vector2 (0, 0), Quaternion.identity);
