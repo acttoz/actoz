@@ -49,6 +49,8 @@ public class List extends Activity implements OnClickListener {
 	TextView sub_back;
 	TextView call_login;
 	TextView sign_submit;
+	boolean isSigning = false;
+	boolean isLogining = false;
 	public static Point pointSetter;
 	private EditText edtid;
 	private EditText edtid2;
@@ -58,6 +60,7 @@ public class List extends Activity implements OnClickListener {
 	private EditText edtpass2_2;
 	public static String myId;
 	private static Boolean wasLogin = false;
+	public static int point = 0;
 	private ImageView mem_regi;
 	private ImageView share;
 	private static final String SERVER_ADDRESS = "http://chunk.dothome.co.kr/php";
@@ -76,10 +79,12 @@ public class List extends Activity implements OnClickListener {
 	Custom_List_Data data;
 	Custom_List_Adapter listAdapter1;
 	ArrayList<Custom_List_Data> dateList1;
-	String[] chapter_list = new String[] { "Chapter 2-1", "Chapter 2-2",
-			"Chapter 2-3", "Chapter 2-4", "Chapter 2-5", "Chapter 3-1",
-			"Chapter 3-2", "Chapter 3-3", "Chapter 3-4", "Chapter 3-5",
-			"Chapter 3-6" };
+	String[] chapter_list = new String[] { "2장 1.May I Speak to..",
+			"2장 2.Let me introduce..", "2장 3.Throughout the country",
+			"2장 4.The Statue of Liberty", "2장 5.Three days off",
+			"3장 1.Can you swim?", "3장 2.Cleaning the classroom alone",
+			"3장 3.Are you free?", "3장 4.School auditorium",
+			"3장 5.See the movie", "3장 6.To study for the exam" };
 
 	/** Called when the activity is first created. */
 
@@ -311,8 +316,9 @@ public class List extends Activity implements OnClickListener {
 			msg.putExtra(Intent.EXTRA_TITLE, "제목");
 
 			msg.setType("text/plain");
-
+			point = 10;
 			startActivity(Intent.createChooser(msg, "공유"));
+
 			break;
 		}
 	}
@@ -509,14 +515,14 @@ public class List extends Activity implements OnClickListener {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				hide_login();
-				hide_sign();
+
 			}
 		});
 
 	}
 
 	public void show_login() {
+		isLogining = true;
 		sub_menu.setVisibility(View.VISIBLE);
 		sub_menu.startAnimation(slideInT);
 		sub_back.setVisibility(View.VISIBLE);
@@ -530,6 +536,7 @@ public class List extends Activity implements OnClickListener {
 	}
 
 	public void show_sign() {
+		isSigning = true;
 		lay_signIn.setVisibility(View.VISIBLE);
 		lay_signIn.startAnimation(slideInT);
 		sub_back.setVisibility(View.VISIBLE);
@@ -548,14 +555,37 @@ public class List extends Activity implements OnClickListener {
 		if (wasLogin) {
 			tPoint.setText(pointSetter.getPoint());
 		}
+
+	}
+
+	@Override
+	protected void onRestart() {
+		// TODO Auto-generated method stub
+		super.onRestart();
+		if (point > 0) {
+			point = 0;
+			pointSetter.setPoint(10);
+			tPoint.setText(pointSetter.getPoint());
+			Toast.makeText(List.this, "앱 초대하기. 10 points Up!",
+					Toast.LENGTH_SHORT).show();
+		}
 	}
 
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 
 		if (keyCode == KeyEvent.KEYCODE_BACK) {
-			startActivity(new Intent(List.this, MoreApp.class));
-			finish();
+			if (isSigning) {
+				hide_sign();
+				show_login();
+			} 
+			// else if (isLogining) {
+			//
+			// }
+			else {
+				startActivity(new Intent(List.this, MoreApp.class));
+				finish();
+			}
 			return false;
 		}
 

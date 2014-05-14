@@ -20,7 +20,7 @@
             android:layout_weight="1"
             android:gravity="left"
             android:textColor="#444443"
-            android:textSize="18sp" />
+            android:textSize="12sp" />
     </LinearLayout>
 
 </FrameLayout>

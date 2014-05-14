@@ -18,7 +18,7 @@
             android:gravity="center"
             android:text="title"
             android:textColor="#ffffff"
-            android:textSize="25sp" />
+            android:textSize="15sp" />
 
         <TextView
             android:id="@+id/myId"

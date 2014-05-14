@@ -340,6 +340,7 @@ public class Main_Study extends Activity implements OnClickListener,
 
 			intent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(file1));
 			intent.putExtra(Intent.EXTRA_TEXT, "청크 녹음 파일");
+			List.point = 10;
 			startActivity(intent);
 			Log.d("cc", "업로드끝");
 			// File file2 = new File(Environment.getExternalStorageDirectory()
@@ -868,6 +869,19 @@ public class Main_Study extends Activity implements OnClickListener,
 			tPoint.setText(List.pointSetter.getPoint());
 		}
 
+	}
+
+	@Override
+	protected void onRestart() {
+		// TODO Auto-generated method stub
+		super.onRestart();
+		if (List.point > 0) {
+			List.point = 0;
+			List.pointSetter.setPoint(10);
+			tPoint.setText(List.pointSetter.getPoint());
+			Toast.makeText(Main_Study.this, "녹음 공유하기. 20 points Up!",
+					Toast.LENGTH_SHORT).show();
+		}
 	}
 
 	@Override
