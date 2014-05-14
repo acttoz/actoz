@@ -851,6 +851,7 @@ public class Main_Study extends Activity implements OnClickListener,
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
+		List.point = 0;
 		int check1 = idPrefs.getInt("CHECK" + chapter + "1", 0);
 		Log.d("resume", "CHECK" + chapter + "1");
 		Log.d("resume", "CHECK1" + check1);

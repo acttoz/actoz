@@ -552,6 +552,7 @@ public class List extends Activity implements OnClickListener {
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
+		List.point = 0;
 		if (wasLogin) {
 			tPoint.setText(pointSetter.getPoint());
 		}
