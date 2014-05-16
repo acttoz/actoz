@@ -151,6 +151,7 @@
      <Compile Include="Assets\scr_logo_back.cs" />
      <Compile Include="Assets\scr_lv.cs" />
      <Compile Include="Assets\scr_manager.cs" />
+     <Compile Include="Assets\scr_monParent.cs" />
      <Compile Include="Assets\scr_monster.cs" />
      <Compile Include="Assets\scr_name2text.cs" />
      <Compile Include="Assets\scr_num5.cs" />

@@ -7,12 +7,16 @@ public class src_balloon : MonoBehaviour
 //		public AudioClip itemSound;
 		bool exist = false;
 		public GameObject GAMEMANAGER, pop, item;
+		public GameObject[] effects = new GameObject[3];
 		public Sprite   balloon;
 		bool isUndead = false;
+		bool isMonster = false;
+		string monster;
 		// Use this for initialization
 		void Start ()
 		{
 				anim = GetComponent<Animator> ();
+
 		}
 	
 		// Update is called once per frame
@@ -24,8 +28,8 @@ public class src_balloon : MonoBehaviour
 		void create (int num)
 		{
 				exist = true;
-				if (num < 4)
-						GetComponent<SpriteRenderer> ().sprite = balloon;
+//				if (num < 4)
+				GetComponent<SpriteRenderer> ().sprite = balloon;
 //				Debug.Log ("OnEnable()");
 				anim = GetComponent<Animator> ();
 				anim.SetBool ("balloonExist", true);
@@ -57,19 +61,38 @@ public class src_balloon : MonoBehaviour
 	
 		}
 
+		void onMonster (string temp)
+		{
+				monster = temp;
+				isMonster = true;
+		}
+
+		void offMonster ()
+		{
+				isMonster = false;
+		}
+
 		void OnTriggerEnter (Collider myTrigger)
 		{
-				if (myTrigger.transform.tag == "enemy" && exist && !isUndead) {
+				if (myTrigger.transform.tag == "enemy" && exist && !isUndead && !isMonster) {
 						
 						exist = false;
 						GAMEMANAGER.SendMessage ("getBalloonMSG", 1);
-			                        
 						
 				}
-				if (myTrigger.transform.tag == "enemyBoss" && exist && !isUndead) {
-			
-						exist = false;
-						GAMEMANAGER.SendMessage ("getBalloonMSG", 1);
+				if (myTrigger.transform.tag == "enemy" && exist && !isUndead && isMonster) {
+//						offMonster ();
+						Debug.Log (" ");
+						if (monster.Equals ("b")) {
+								Instantiate (effects [0], transform.position, Quaternion.identity);
+								Debug.Log (" ");
+								GetComponent<SpriteRenderer> ().sprite = balloon;
+								Destroy (GameObject.FindGameObjectWithTag ("monster"));
+						}
+						if (monster.Equals ("o")) {
+						}
+						if (monster.Equals ("p")) {
+						}
 			
 			
 				}

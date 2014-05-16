@@ -12,6 +12,10 @@ TagManager:
   - back
   - zone
   - boss
+  - monster
+  - bomb_b
+  - bomb_o
+  - bomb_p
   - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX
