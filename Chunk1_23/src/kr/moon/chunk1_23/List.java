@@ -577,9 +577,10 @@ public class List extends Activity implements OnClickListener {
 
 		if (keyCode == KeyEvent.KEYCODE_BACK) {
 			if (isSigning) {
+				isSigning = false;
 				hide_sign();
 				show_login();
-			} 
+			}
 			// else if (isLogining) {
 			//
 			// }

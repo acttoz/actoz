@@ -15,23 +15,15 @@
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:adjustViewBounds="true"
-            android:scaleType="fitCenter"
-            android:padding="2dp" />
+            android:padding="2dp"
+            android:scaleType="fitCenter" />
 
         <ImageView
-            android:src="@drawable/btn_play"
             android:layout_width="50dip"
             android:layout_height="50dip"
+            android:layout_gravity="right|top"
             android:adjustViewBounds="true"
-            android:layout_gravity="right|top" />
+            android:src="@drawable/btn_play" />
     </FrameLayout>
-
-    <ImageView
-        android:id="@+id/quiz"
-        android:layout_width="wrap_content"
-        android:layout_height="fill_parent"
-        android:adjustViewBounds="true"
-        android:background="#999990"
-        android:padding="2dp" />
 
 </LinearLayout>

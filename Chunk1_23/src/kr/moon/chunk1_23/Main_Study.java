@@ -33,6 +33,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.PorterDuff.Mode;
 import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
@@ -54,7 +56,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -96,6 +97,11 @@ public class Main_Study extends Activity implements OnClickListener,
 	String speak_korean;
 	String speak_koreanN;
 	int speak_img, speak_flag;
+
+	Bitmap playBitmap1;
+	Bitmap playBitmap2;
+	Bitmap myBitmap1;
+	Bitmap myBitmap2;
 
 	/** Called when the activity is first created. */
 	@Override
@@ -154,6 +160,13 @@ public class Main_Study extends Activity implements OnClickListener,
 		playBtn2 = (ImageView) findViewById(R.id.play2);
 		check1 = (ImageView) findViewById(R.id.check1);
 		check2 = (ImageView) findViewById(R.id.check2);
+
+		playBitmap1 = BitmapFactory.decodeResource(getResources(),
+				R.drawable.chunk_btn1);
+		playBtn1.setImageBitmap(playBitmap1);
+		playBitmap2 = BitmapFactory.decodeResource(getResources(),
+				R.drawable.chunk_btn2);
+		playBtn2.setImageBitmap(playBitmap2);
 
 		btn1.setOnClickListener(this);
 		btn2.setOnClickListener(this);
@@ -216,15 +229,20 @@ public class Main_Study extends Activity implements OnClickListener,
 				this.getPackageName());
 		speak_flag = 0;
 
-		speakImage.setImageResource(speak_img);
+		myBitmap1 = BitmapFactory.decodeResource(getResources(), speak_img);
+		speakImage.setImageBitmap(myBitmap1);
+		// speakImage.setImageResource(speak_img);
+
 		quiz_Image = (ImageView) findViewById(R.id.quiz);
-		quiz_Image.setImageResource(lid);
+		myBitmap2 = BitmapFactory.decodeResource(getResources(), lid);
+		quiz_Image.setImageBitmap(myBitmap2);
+		// quiz_Image.setImageResource(lid);
 		quiz_Image.setOnClickListener(this);
+
 		String tmp_Sound = "sv" + chapter + "1";
 		int lid2 = this.getResources().getIdentifier(tmp_Sound, "raw",
 				this.getPackageName());
 		mp = MediaPlayer.create(this, lid2);
-
 		initialize();
 		tab1();
 	}
@@ -465,6 +483,10 @@ public class Main_Study extends Activity implements OnClickListener,
 	protected void onDestroy() {
 		// TODO Auto-generated method stub
 		super.onDestroy();
+		playBitmap1.recycle();
+		playBitmap2.recycle();
+		myBitmap1.recycle();
+		myBitmap2.recycle();
 		mp.release();
 	}
 
