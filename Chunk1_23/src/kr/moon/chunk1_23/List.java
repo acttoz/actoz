@@ -335,11 +335,21 @@ public class List extends Activity implements OnClickListener {
 		aDialog.setTitle("아임 in 청크 리스닝");
 		aDialog.setView(layout);
 
-		aDialog.setPositiveButton("책 구입하기",
+		aDialog.setPositiveButton("책(중급) 구입하기",
 				new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int which) {
-						Intent intent = new Intent(Intent.ACTION_VIEW, Uri
-								.parse(getResources().getString(R.string.link)));
+						Intent intent = new Intent(
+								Intent.ACTION_VIEW,
+								Uri.parse("http://m.book.naver.com/bookdb/book_detail.nhn?biblio.bid=6735393"));
+						startActivity(intent);
+					}
+				});
+		aDialog.setNeutralButton("책(고급) 구입하기",
+				new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int which) {
+						Intent intent = new Intent(
+								Intent.ACTION_VIEW,
+								Uri.parse("http://m.book.naver.com/bookdb/book_detail.nhn?biblio.bid=6735394"));
 						startActivity(intent);
 					}
 				});
