@@ -79,10 +79,10 @@ public class List extends Activity implements OnClickListener {
 	Custom_List_Data data;
 	Custom_List_Adapter listAdapter1;
 	ArrayList<Custom_List_Data> dateList1;
-	String[] chapter_list = new String[] { "1. I'm Looking for...",
-			"2. Mi-na's birthday.", "3. My math homework.",
-			"4. Guess what animal it is.", "5. Class year book cover.",
-			"6. We're looking for a boy." };
+	String[] chapter_list = new String[] { "1장 1. I'm Looking for...",
+			"1장 2. Mi-na's birthday.", "1장 3. My math homework.",
+			"1장 4. Guess what animal it is.", "1장 5. Class year book cover.",
+			"1장 6. We're looking for a boy." };
 
 	/** Called when the activity is first created. */
 
@@ -333,11 +333,21 @@ public class List extends Activity implements OnClickListener {
 		aDialog.setTitle("아임 in 청크 리스닝");
 		aDialog.setView(layout);
 
-		aDialog.setPositiveButton("책 구입하기",
+		aDialog.setPositiveButton("책(중급) 구입하기",
 				new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int which) {
-						Intent intent = new Intent(Intent.ACTION_VIEW, Uri
-								.parse(getResources().getString(R.string.link)));
+						Intent intent = new Intent(
+								Intent.ACTION_VIEW,
+								Uri.parse("http://m.book.naver.com/bookdb/book_detail.nhn?biblio.bid=6735393"));
+						startActivity(intent);
+					}
+				});
+		aDialog.setNeutralButton("책(고급) 구입하기",
+				new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int which) {
+						Intent intent = new Intent(
+								Intent.ACTION_VIEW,
+								Uri.parse("http://m.book.naver.com/bookdb/book_detail.nhn?biblio.bid=6735394"));
 						startActivity(intent);
 					}
 				});
