@@ -1,0 +1,379 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#e2e2d7" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical" >
+
+       <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0px"
+        android:layout_weight="1.5"
+        android:background="@drawable/header" >
+
+        <TextView
+            android:id="@+id/call_login"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:gravity="center"
+            android:text="Login"
+            android:textColor="#ffffff"
+            android:textSize="25sp" />
+
+        <TextView
+            android:id="@+id/myId"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:gravity="left|center_vertical"
+            android:paddingLeft="20sp"
+            android:text="ID"
+            android:textColor="#ffffff"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/myPoint"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:gravity="right|center_vertical"
+            android:paddingRight="20sp"
+            android:text="POINT"
+            android:textColor="#ffffff"
+            android:textSize="20sp" />
+    </FrameLayout>
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="0px"
+            android:layout_weight="0.2" >
+        </TextView>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="0px"
+            android:layout_weight="9"
+            android:orientation="horizontal" >
+
+            <LinearLayout
+                android:layout_width="0px"
+                android:layout_height="fill_parent"
+                android:layout_weight="5"
+                android:orientation="vertical" >
+
+                <ImageView
+                    android:id="@+id/book"
+                    android:layout_width="fill_parent"
+                    android:layout_height="0px"
+                    android:layout_weight="6"
+                    android:adjustViewBounds="true"
+                    android:gravity="center"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/book" />
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="20sp"
+                    android:layout_gravity="bottom"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="청크의 세계로 친구들을 초대하세요."
+                    android:textColor="#828282"
+                    android:textSize="12sp" >
+                </TextView>
+
+                <ImageView
+                    android:id="@+id/sns_send"
+                    android:layout_width="fill_parent"
+                    android:layout_height="0px"
+                    android:layout_weight="2"
+                    android:adjustViewBounds="true"
+                    android:gravity="center"
+                    android:padding="5dip"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/sns" />
+            </LinearLayout>
+
+            <ListView
+                android:id="@+id/listview"
+                android:layout_width="0px"
+                android:layout_height="fill_parent"
+                android:layout_margin="10dp"
+                android:layout_weight="5"
+                android:background="@drawable/list"
+                android:cacheColorHint="#00000000" >
+            </ListView>
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="0px"
+            android:layout_weight="0.2" >
+        </TextView>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/sub_back"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="#aa000000"
+        android:text="" />
+
+    <LinearLayout
+        android:id="@+id/sub_menu"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone" >
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="0px"
+            android:layout_weight="1" >
+        </TextView>
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="0px"
+            android:layout_weight="5"
+            android:orientation="vertical" >
+
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:adjustViewBounds="true"
+                android:gravity="center"
+                android:scaleType="fitCenter"
+                android:src="@drawable/login_board" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="0px"
+                    android:layout_weight="1" >
+                </TextView>
+
+                <EditText
+                    android:id="@+id/edtid"
+                    android:layout_width="fill_parent"
+                    android:layout_height="0px"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="1dp"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:ems="10"
+                    android:gravity="left|center_vertical"
+                    android:hint="ID를 입력해주세요."
+                    android:paddingLeft="80dip"
+                    android:textColor="#ffffff"
+                    android:textSize="15sp" />
+
+                <EditText
+                    android:id="@+id/etdpwd"
+                    android:layout_width="fill_parent"
+                    android:layout_height="0px"
+                    android:layout_marginTop="1dp"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:ems="10"
+                    android:gravity="left|center_vertical"
+                    android:hint="패스워드를 입력해주세요."
+                    android:inputType="textPassword"
+                    android:paddingLeft="80dip"
+                    android:textColor="#ffffff"
+                    android:textSize="15sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0px"
+                    android:layout_weight="1"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:layout_width="0px"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" >
+                    </TextView>
+
+                    <CheckBox
+                        android:id="@+id/checkBox1"
+                        android:layout_width="0px"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="left|center_vertical"
+                        android:layout_weight="1.5"
+                        android:gravity="left|center_vertical"
+                        android:scaleX="0.7"
+                        android:scaleY="0.7"
+                        android:text="" />
+
+                    <TextView
+                        android:layout_width="0px"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="3" >
+                    </TextView>
+
+                    <ImageView
+                        android:id="@+id/button3"
+                        android:layout_width="0px"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2"
+                        android:adjustViewBounds="true"
+                        android:gravity="center"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/login_btn1" />
+
+                    <TextView
+                        android:layout_width="0px"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.5" >
+                    </TextView>
+
+                    <ImageView
+                        android:id="@+id/button1"
+                        android:layout_width="0px"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2"
+                        android:adjustViewBounds="true"
+                        android:gravity="center"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/login_btn2" />
+
+                    <TextView
+                        android:layout_width="0px"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" >
+                    </TextView>
+                </LinearLayout>
+            </LinearLayout>
+        </FrameLayout>
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="0px"
+            android:layout_weight="1" >
+        </TextView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/lay_signIn"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone" >
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="0px"
+            android:layout_weight="1" >
+        </TextView>
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="0px"
+            android:layout_weight="10"
+            android:orientation="vertical" >
+
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:adjustViewBounds="true"
+                android:gravity="center"
+                android:scaleType="fitCenter"
+                android:src="@drawable/sign_board" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="0px"
+                    android:layout_weight="1" >
+                </TextView>
+
+                <EditText
+                    android:id="@+id/edtid2"
+                    android:layout_width="fill_parent"
+                    android:layout_height="0px"
+                    android:layout_marginLeft="1dp"
+                    android:layout_marginTop="1dp"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:ems="10"
+                    android:gravity="left|center_vertical"
+                    android:hint="ID를 입력해주세요."
+                    android:paddingLeft="100dip"
+                    android:textColor="#ffffff"
+                    android:textSize="15sp" />
+
+                <EditText
+                    android:id="@+id/edtid2_2"
+                    android:layout_width="fill_parent"
+                    android:layout_height="0px"
+                    android:layout_marginLeft="1dp"
+                    android:layout_marginTop="1dp"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:ems="10"
+                    android:gravity="left|center_vertical"
+                    android:hint="ID를 입력해주세요."
+                    android:paddingLeft="100dip"
+                    android:textColor="#ffffff"
+                    android:textSize="15sp" />
+
+                <EditText
+                    android:id="@+id/etdpwd2"
+                    android:layout_width="fill_parent"
+                    android:layout_height="0px"
+                    android:layout_marginTop="1dp"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:ems="10"
+                    android:gravity="left|center_vertical"
+                    android:hint="패스워드를 입력해주세요."
+                    android:inputType="textPassword"
+                    android:paddingLeft="100dip"
+                    android:textColor="#ffffff"
+                    android:textSize="15sp" />
+
+                <EditText
+                    android:id="@+id/etdpwd2_2"
+                    android:layout_width="fill_parent"
+                    android:layout_height="0px"
+                    android:layout_marginTop="1dp"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:ems="10"
+                    android:gravity="left|center_vertical"
+                    android:hint="패스워드를 입력해주세요."
+                    android:inputType="textPassword"
+                    android:paddingLeft="100dip"
+                    android:textColor="#ffffff"
+                    android:textSize="15sp" />
+
+               <TextView
+                    android:id="@+id/sign_submit"
+                    android:layout_width="fill_parent"
+                    android:layout_height="0px"
+                    android:layout_weight="1" >
+                </TextView>
+            </LinearLayout>
+        </FrameLayout>
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="0px"
+            android:layout_weight="1" >
+        </TextView>
+    </LinearLayout>
+
+</FrameLayout>
