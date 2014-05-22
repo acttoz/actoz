@@ -5,6 +5,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -63,6 +64,7 @@ public class List extends Activity implements OnClickListener {
 	public static int point = 0;
 	private ImageView mem_regi;
 	private ImageView share;
+	int refreshDay;
 	private static final String SERVER_ADDRESS = "http://chunk.dothome.co.kr/php";
 	private static final int SUCESS_ADMIT = 0;
 	private static final int FAIL_ADMIT = 1;
@@ -107,11 +109,20 @@ public class List extends Activity implements OnClickListener {
 				hide_login();
 				wasLogin = true;
 				pointSetter = new Point(List.this, myId);
-				pointSetter.setPoint(5);
+				Calendar c = Calendar.getInstance();
+				final int day = c.get(Calendar.DAY_OF_MONTH);
+				Log.d("login", day + " " + refreshDay);
+				if (refreshDay != day) {
+					pointSetter.setPoint(5);
+					Toast.makeText(List.this, "로그인 성공. 5 points Up!",
+							Toast.LENGTH_SHORT).show();
+					editor.putInt("REFRESH", day);
+					editor.commit();
+					refreshDay = day;
+					Log.d("day", "" + day);
+				}
 				tId.setText(myId + " 님");
 				tPoint.setText(pointSetter.getPoint());
-				Toast.makeText(List.this, "로그인 성공. 5 points Up!",
-						Toast.LENGTH_SHORT).show();
 				break;
 			case FAIL_ADMIT:
 				new AlertDialog.Builder(List.this)
@@ -376,6 +387,7 @@ public class List extends Activity implements OnClickListener {
 		idPrefs = getSharedPreferences("id", MODE_PRIVATE);
 		editor = idPrefs.edit();
 		popup = idPrefs.getBoolean("POPUP", true);
+		refreshDay = idPrefs.getInt("REFRESH", 0);
 		dateList1 = new ArrayList<Custom_List_Data>();
 		tId = (TextView) findViewById(R.id.myId);
 		tPoint = (TextView) findViewById(R.id.myPoint);
