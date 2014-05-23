@@ -10,17 +10,19 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:orientation="vertical"
-        android:padding="10dp" >
+        android:padding="10sp" >
 
         <TextView
-            android:layout_marginLeft="5dp"
+            android:layout_marginLeft="10sp"
+            android:layout_marginTop="5sp"
+            android:layout_marginBottom="5sp"
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="0px"
             android:layout_weight="1"
             android:gravity="left"
             android:textColor="#444443"
-            android:textSize="12sp" />
+            android:textSize="18sp" />
     </LinearLayout>
 
 </FrameLayout>

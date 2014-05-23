@@ -172,7 +172,7 @@
                     android:gravity="left|center_vertical"
                     android:hint="ID를 입력해주세요."
                     android:paddingLeft="80dip"
-                    android:textColor="#ffffff"
+                    android:textColor="#000000"
                     android:textSize="15sp" />
 
                 <EditText
@@ -187,7 +187,7 @@
                     android:hint="패스워드를 입력해주세요."
                     android:inputType="textPassword"
                     android:paddingLeft="80dip"
-                    android:textColor="#ffffff"
+                    android:textColor="#000000"
                     android:textSize="15sp" />
 
                 <LinearLayout
@@ -312,7 +312,7 @@
                     android:gravity="left|center_vertical"
                     android:hint="ID를 입력해주세요."
                     android:paddingLeft="100dip"
-                    android:textColor="#ffffff"
+                    android:textColor="#000000"
                     android:textSize="15sp" />
 
                 <EditText
@@ -327,7 +327,7 @@
                     android:gravity="left|center_vertical"
                     android:hint="ID를 입력해주세요."
                     android:paddingLeft="100dip"
-                    android:textColor="#ffffff"
+                    android:textColor="#000000"
                     android:textSize="15sp" />
 
                 <EditText
@@ -342,8 +342,8 @@
                     android:hint="패스워드를 입력해주세요."
                     android:inputType="textPassword"
                     android:paddingLeft="100dip"
-                    android:textColor="#ffffff"
-                    android:textSize="15sp" />
+                    android:textColor="#000000"
+                    android:textSize="13sp" />
 
                 <EditText
                     android:id="@+id/etdpwd2_2"
@@ -357,8 +357,8 @@
                     android:hint="패스워드를 입력해주세요."
                     android:inputType="textPassword"
                     android:paddingLeft="100dip"
-                    android:textColor="#ffffff"
-                    android:textSize="15sp" />
+                    android:textColor="#000000"
+                    android:textSize="13sp" />
 
                <TextView
                     android:id="@+id/sign_submit"
