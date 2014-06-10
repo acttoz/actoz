@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <!-- 스타일 -->
+
+    <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1"
+    />
+    <link rel="stylesheet" href="framework/bootstrap.css">
+    <link rel="stylesheet" href="framework/cornerstone.css">
+    <script src="framework/jquery-1.10.2.js"></script>
+    <script src="framework/infinity.min.js"></script>
+    <script src="framework/widget-listview.js"></script>
+    <link rel="stylesheet" href="framework/jquery-ui.css" />
+    <script src="framework/jquery-ui.js"></script>
+
+    <style>
+      .fixed-dialog {
+        position: fixed;
+        top: 50px;
+        left: 50px;
+      }
+      
+      body {
+        /*-webkit-overflow-scrolling: touch;*/
+        /*position: fixed;*/
+      }
+      .stop-scrolling {
+        -webkit-overflow-scrolling: touch;
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%;
+      }
+      .ui-widget.success-dialog {
+        font-family: Verdana, Arial, sans-serif;
+        font-size: .8em;
+      }
+
+      .ui-widget-content.success-dialog {
+        background: #F9F9F9;
+        border: 1px solid #90d93f;
+        color: #222222;
+      }
+
+      .ui-dialog.success-dialog {
+        left: 0;
+        outline: 0 none;
+        padding: 0 !important;
+        position: absolute;
+        top: 0;
+      }
+
+      .ui-dialog.success-dialog .ui-dialog-content {
+        background: none repeat scroll 0 0 transparent;
+        border: 0 none;
+        overflow: auto;
+        position: relative;
+        padding: 0 !important;
+        margin: 0;
+        text-align: center;
+        vertical-align: middle
+      }
+
+      .ui-dialog.success-dialog .ui-widget-header {
+        background: #b0de78;
+        border: 0;
+        color: #fff;
+        font-weight: normal;
+      }
+
+      .ui-dialog.success-dialog .ui-dialog-titlebar {
+        padding: 0.1em .5em;
+        position: relative;
+        font-size: 1em;
+      }
+    </style>
+    <body>
+      <div id="wrap">
+        <!---------------- 예제 코드 시작 ---------------->
+
+        <div id="example" class="list-view list-group" ></div>
+
+        <!----------------  팝업 ---------------->
+
+        <div id="dialog-form" title="들어보기"style="width:100%">
+          <form>
+            <div>
+              <label style=" width:19%" for="name">이름</label>
+              <input style=" width:80%"type="text" name="name" id="name" class="text ui-widget-content ui-corner-all" />
+            </div>
+            <div>
+              <label style=" width:19%"for="comment2">댓글</label>
+              <input style=" width:80%"type="text" name="comment2" id="comment2"   class="text ui-widget-content ui-corner-all" />
+            </div>
+          </form>
+          <div id="comment" style="width:100%" class="list-view list-group" >
+            <div style="width:100%; padding:10px 0px 10px 0px">
+              <audio id="audio" style="width:100%" src="" controls="controls"></audio>
+              <h4>↓↓&nbsp;댓글&nbsp;↓↓</h4>
+            </div>
+          </div>
+        </div>
+
+        <!-- spinner -->
+        <div id="spinner" title="알림" style="vertical-align: middle;height: 100%;width:100%">
+          <div style="font-size: 200%;width:100%; middle; text-align: center;height: 100%; ">
+            로딩중...
+          </div>
+        </div>
+      </div>
+      <script src="sns.js"></script>
+
+    </body>
+</html>
