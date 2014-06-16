@@ -65,7 +65,7 @@
                     android:adjustViewBounds="true"
                     android:gravity="center"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/more_coming" />
+                    android:src="@drawable/link1_2" />
 
                 <TextView
                     android:layout_width="0px"
@@ -106,7 +106,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:gravity="center"
-                    android:text="스텝업 청크" >
+                    android:text="청크\n(스텝업)" >
                 </TextView>
 
                 <TextView
@@ -120,7 +120,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:gravity="center"
-                    android:text="Coming Soon" >
+                    android:text="청크(속독)" >
                 </TextView>
 
                 <TextView
@@ -207,7 +207,7 @@
                     android:adjustViewBounds="true"
                     android:gravity="center"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/more_coming" />
+                    android:src="@drawable/link2" />
 
                 <TextView
                     android:layout_width="0px"
@@ -260,7 +260,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:gravity="center"
-                    android:text="Coming Soon" >
+                    android:text="청크 중급 3" >
                 </TextView>
 
                 <TextView
@@ -312,14 +312,14 @@
                 </TextView>
 
                 <ImageView
-                    android:id="@+id/link1_2"
+                    android:id="@+id/link3_2"
                     android:layout_width="0px"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:adjustViewBounds="true"
                     android:gravity="center"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/more_coming" />
+                    android:src="@drawable/link3" />
 
                 <TextView
                     android:layout_width="0px"
@@ -328,14 +328,14 @@
                 </TextView>
 
                 <ImageView
-                    android:id="@+id/link1_3"
+                    android:id="@+id/link3_3"
                     android:layout_width="0px"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:adjustViewBounds="true"
                     android:gravity="center"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/more_coming" />
+                    android:src="@drawable/link3" />
 
                 <TextView
                     android:layout_width="0px"
@@ -374,7 +374,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:gravity="center"
-                    android:text="Coming Soon" >
+                    android:text="청크 고급 2" >
                 </TextView>
 
                 <TextView
@@ -388,7 +388,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:gravity="center"
-                    android:text="Coming Soon" >
+                    android:text="청크 고급 3" >
                 </TextView>
 
                 <TextView
