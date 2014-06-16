@@ -62,7 +62,8 @@ import android.widget.Toast;
 public class Main_Study extends Activity implements OnClickListener,
 		OnTouchListener {
 	String dateName, onlyName, ment, nickName;
-	String[] answer_list = new String[] { "1번", "4번", "2번", "4번", "2번", "3번" };// 2-2 생략
+	String[] answer_list = new String[] { "1번", "4번", "2번", "4번", "2번", "3번" };// 2-2
+																				// 생략
 	TextView instruction;
 	TextView tId;
 	TextView tPoint;
@@ -83,7 +84,8 @@ public class Main_Study extends Activity implements OnClickListener,
 	private MediaPlayer mediaPlayer = null;
 	private Uri uri = null;
 	private AlertDialog mDialog = null;
-	private ImageButton recordImageButton, playImageButton, btn_share;
+	private ImageButton changeBtn, recordImageButton, playImageButton,
+			btn_share;
 	int appVer, newVer;
 	String APPNAME;
 	// upload
@@ -128,7 +130,8 @@ public class Main_Study extends Activity implements OnClickListener,
 		Log.d("packageName:", APPNAME);
 		editor.putString("APP", APPNAME);
 		editor.commit();
-
+		changeBtn = (ImageButton) findViewById(R.id.ib_change);
+		changeBtn.setOnClickListener(this);
 		try {
 			PackageInfo pInfo;
 			pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
@@ -727,7 +730,21 @@ public class Main_Study extends Activity implements OnClickListener,
 		// MainActivity.class);
 		// startActivity(activityIntent3);
 		// break;
+		case R.id.ib_change:
+			// showDialog();
+			if (speak_flag == 0) {
+				speak_img = this.getResources().getIdentifier(speak_korean,
+						"drawable", this.getPackageName());
+				speak_flag = 1;
 
+			} else {
+				speak_img = this.getResources().getIdentifier(speak_eng,
+						"drawable", this.getPackageName());
+				speak_flag = 0;
+			}
+
+			speakImage.setImageResource(speak_img);
+			break;
 		case R.id.ib_record:
 
 			if (!isRecording) {
