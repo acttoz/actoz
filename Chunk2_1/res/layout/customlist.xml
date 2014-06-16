@@ -13,16 +13,14 @@
         android:padding="10sp" >
 
         <TextView
-            android:layout_marginLeft="10sp"
-            android:layout_marginTop="5sp"
-            android:layout_marginBottom="5sp"
+            android:layout_marginLeft="5sp"
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="0px"
             android:layout_weight="1"
             android:gravity="left"
             android:textColor="#444443"
-            android:textSize="18sp" />
+            android:textSize="12sp" />
     </LinearLayout>
 
 </FrameLayout>
