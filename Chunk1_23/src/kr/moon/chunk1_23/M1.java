@@ -32,6 +32,7 @@ public class M1 extends Activity implements SurfaceHolder.Callback,
 	SharedPreferences.Editor editor;
 	String checkId;
 	int checkNum;
+	String chapter;
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -41,9 +42,7 @@ public class M1 extends Activity implements SurfaceHolder.Callback,
 		editor = idPrefs.edit();
 		Intent intent = getIntent();
 		String chunk = intent.getStringExtra("CHUNK");
-		String chapter = intent.getStringExtra("CHAPTER");
-		ImageView back = (ImageView) findViewById(R.id.back);
-		back.setOnClickListener(this);
+		chapter = intent.getStringExtra("CHAPTER");
 		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
 		checkId = "CHECK" + chapter + chunk;
@@ -58,6 +57,10 @@ public class M1 extends Activity implements SurfaceHolder.Callback,
 		mHolder = mPreview.getHolder();
 		mHolder.addCallback(this);
 		mHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
+
+		playbtn = (ImageView) findViewById(R.id.playbtn);
+		mPlayBtn = (Button) findViewById(R.id.play);
+		mPlayBtn.setOnClickListener(this);
 
 	}
 
@@ -98,8 +101,8 @@ public class M1 extends Activity implements SurfaceHolder.Callback,
 				editor.putInt(checkId, ++checkNum);
 				editor.commit();
 			}
-			Toast.makeText(M1.this, "청크 1회, 10 points Up!",
-					Toast.LENGTH_SHORT).show();
+			Toast.makeText(M1.this, "청크 1회, 10 points Up!", Toast.LENGTH_SHORT)
+					.show();
 			List.pointSetter.setPoint(10);
 			Log.d("point", List.pointSetter.getPoint() + "");
 			AlertDialog.Builder dlg = new AlertDialog.Builder(M1.this);
@@ -125,6 +128,16 @@ public class M1 extends Activity implements SurfaceHolder.Callback,
 					finish();
 				}
 			});
+
+//			dlg.setNeutralButton("원문보기", new DialogInterface.OnClickListener() {
+//				public void onClick(DialogInterface dialog, int whichButton) {
+//					Intent activityIntent3 = new Intent(M1.this,
+//							Intonation.class);
+//					activityIntent3.putExtra("CHAPTER", chapter);
+//					finish();
+//					startActivity(activityIntent3);
+//				}
+//			});
 
 			dlg.setCancelable(true);
 			dlg.show();
@@ -158,7 +171,21 @@ public class M1 extends Activity implements SurfaceHolder.Callback,
 
 	public void onClick(View arg0) {
 		// TODO Auto-generated method stub
-		if (arg0.getId() == R.id.back) {
+
+		switch (arg0.getId()) {
+		case R.id.play:
+
+			if (mPlayer.isPlaying() == false) {
+				mPlayer.start();
+				playbtn.setImageResource(R.drawable.btn_pause);
+			} else {
+				mPlayer.pause();
+				playbtn.setImageResource(R.drawable.btn_play);
+			}
+
+			break;
+
+		case R.id.button1:
 			mPlayer.release();
 			finish();
 		}
