@@ -84,9 +84,9 @@ public class List extends Activity implements OnClickListener {
 	String[] chapter_list = new String[] { "4장 1.There are many things",
 			"4장 2.be looking for", "4장 3.Can I see you again?",
 			"4장 4.for a minute", "4장 5.Do you have any plans?",
-			"4장 6.How may I help you?", "5장 1.looks nice",
-			"5장 2.Can you send?", "5장 3.Can I borrow", "5장 4.look at",
-			"5장 5.borrow these books", "5장 6.How much longer" };
+			"4장 6.How may I help you?", "5장 1.That looks nice",
+			"5장 2.Can you send someone to", "5장 3.Can I borrow", "5장 4.How about this one?",
+			"5장 5. I’d like to borrow these books", "5장 6.How much longer" };
 
 	/** Called when the activity is first created. */
 
