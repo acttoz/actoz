@@ -81,11 +81,11 @@ public class List extends Activity implements OnClickListener {
 	Custom_List_Data data;
 	Custom_List_Adapter listAdapter1;
 	ArrayList<Custom_List_Data> dateList1;
-	String[] chapter_list = new String[] { "2장 1.plan to",
-			"2장 2.very short time", "2장 3.mixed feelings",
-			"2장 4.what about me?", "2장 5.look nice",
+	String[] chapter_list = new String[] { "2장 1.Have you thought about your future?",
+			"2장 2.It was for a very short time", "2장 3. I have mixed feelings",
+			"2장 4.what about me?", "2장 5.Would you have a look at this?",
 			"3장 1.admission requirements", "3장 2.introduce a new policy",
-			"3장 3.non-recyclable", "3장 4.about fifty minutes",
+			"3장 3.Friday for non-recyclable ones", "3장 4.about fifty minutes",
 			"3장 5.more than seven days" };
 
 	/** Called when the activity is first created. */
