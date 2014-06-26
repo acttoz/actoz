@@ -26,6 +26,8 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 
 import android.app.Activity;
+import android.app.ActivityManager;
+import android.app.ActivityManager.MemoryInfo;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -522,6 +524,15 @@ public class Main_Study extends Activity implements OnClickListener,
 		}
 	}
 
+	// memory
+	private long getMem() {
+		MemoryInfo mi = new MemoryInfo();
+		ActivityManager activityManager = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
+		activityManager.getMemoryInfo(mi);
+		long availableMegs = mi.availMem / 1048576L;
+		return availableMegs;
+	}
+
 	private void pause() {
 		isPlayed = false;
 		mediaPlayer.reset();
@@ -680,6 +691,7 @@ public class Main_Study extends Activity implements OnClickListener,
 
 	@Override
 	public void onClick(View arg0) {
+		Log.d("memory", getMem()+"");
 		// TODO Auto-generated method stub
 		switch (arg0.getId()) {
 
@@ -748,7 +760,10 @@ public class Main_Study extends Activity implements OnClickListener,
 						"drawable", this.getPackageName());
 				speak_flag = 0;
 			}
-			speakImage.setImageResource(speak_img);
+			myBitmap1 = BitmapFactory.decodeResource(getResources(), speak_img);
+			speakImage.setImageBitmap(myBitmap1);
+			
+//			speakImage.setImageResource(speak_img);
 			break;
 
 		case R.id.ib_record:
@@ -902,7 +917,7 @@ public class Main_Study extends Activity implements OnClickListener,
 			List.point = 0;
 			List.pointSetter.setPoint(10);
 			tPoint.setText(List.pointSetter.getPoint());
-			Toast.makeText(Main_Study.this, "녹음 공유하기. 20 points Up!",
+			Toast.makeText(Main_Study.this, "녹음 공유하기. 10 points Up!",
 					Toast.LENGTH_SHORT).show();
 		}
 	}

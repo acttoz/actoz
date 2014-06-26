@@ -748,7 +748,10 @@ public class Main_Study extends Activity implements OnClickListener,
 						"drawable", this.getPackageName());
 				speak_flag = 0;
 			}
-			speakImage.setImageResource(speak_img);
+			myBitmap1 = BitmapFactory.decodeResource(getResources(), speak_img);
+			speakImage.setImageBitmap(myBitmap1);
+			
+//			speakImage.setImageResource(speak_img);
 			break;
 
 		case R.id.ib_record:
@@ -902,7 +905,7 @@ public class Main_Study extends Activity implements OnClickListener,
 			List.point = 0;
 			List.pointSetter.setPoint(10);
 			tPoint.setText(List.pointSetter.getPoint());
-			Toast.makeText(Main_Study.this, "녹음 공유하기. 20 points Up!",
+			Toast.makeText(Main_Study.this, "녹음 공유하기. 10 points Up!",
 					Toast.LENGTH_SHORT).show();
 		}
 	}
