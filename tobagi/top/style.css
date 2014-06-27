@@ -1,0 +1,17 @@
+#topmenu {height:73px;background:url(./bg_topmenu.jpg) repeat-x 0 0; text-align:center;}
+#topmenu .wrap {position:relative;height:73px;overflow:hidden; width:980px; margin:0 auto;}
+#topmenu .wrap ul{position:relative;list-style:none;margin:0;padding:0;} 
+#topmenu .wrap ul:after{content:""; display:block; float:none; clear:both;}
+#topmenu .wrap ul li{float:left;list-style:none;margin:0;padding:0;height:43px;}
+#topmenu .wrap ul li.active{color:#000;border-radius:3px 3px 3px 3px;}
+#topmenu .wrap ul li a{height:37px; display:block;cursor:pointer;text-decoration:none;padding:0 25px 5px 20px;color:#ffffff;font:normal 14px nanumgothic, dotum;letter-spacing:0px;display:inline-block;line-height:43px; font-weight:bold;} /* 1차메뉴 진하게 */
+#topmenu .wrap ul li a:hover{color:#fff;}
+#topmenu .wrap ul li.active a {color:#fff;} 
+
+#topmenu .wrap div.subMenuBox{display:none;position:absolute;left:0;top:43px; height:30px;margin:0;padding:0;filter:alpha(opacity=70);opacity:0.7;background:#000000;border-radius:0 0 5px 5px;-webkit-border-radius:0 0 5px 5px;-moz-border-radius:0 0 5px 5px;}
+#topmenu .wrap div.subMenuBox ul,#topmenu .wrap div.subMenuBox ul li{margin:0;padding:0;background:none}
+#topmenu .wrap div.subMenuBox ul li {height:30px;}
+#topmenu .wrap div.subMenuBox ul li a{margin:0;padding:0 12px;font:normal 11px dotum, dotum;letter-spacing:-1px;color:#e2ebe2;height:30px;line-height:32px;display:inline-block}
+#topmenu .wrap div.subMenuBox ul li a:hover{color:#fff;}
+#topmenu .wrap div.subMenuBox ul li a.active,#topmenu .wrap div.subMenuBox ul li a:active{color:#fff;}
+#topmenu .wrap div.subMenuBox ul li.on a{text-decoration:underline;}
