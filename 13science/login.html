@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+
+<html lang="ko">
+	<head>
+
+		<!-- BOOTSCROLLER premium Bootstrap html5 template v 1.0.0.
+		ArtLabs 2013 - http://www.sitediscount.ru
+		####### Released under GNU GENERAL PUBLIC LICENSE
+		Version 2 ############ -->
+
+		<meta charset="utf-8">
+		<title>과학평가</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densitydpi=medium-dpi" />
+
+		<meta
+		name="description"
+		content="responsive parallax Bootstrap template"
+		>
+		<meta
+		name="author"
+		content="ArtLabs"
+		>
+
+		<!-- ######################## Styles ######################
+		=======================================================-->
+		<link
+		href="assets/css/animate.min.css"
+		rel="stylesheet"
+		>
+		<link
+		href="assets/css/bootstrap.css"
+		rel="stylesheet"
+		>
+		<link
+		href="assets/css/bootstrap-responsive.css"
+		rel="stylesheet"
+		>
+		<script src='./dist/lib/jquery-1.10.2.min.js'></script>
+		<script src='./dist/ui/widget-scrollview.js'></script>
+		<!--<link href="assets/css/flat-ui.css" rel="stylesheet">
+		-->
+		<!-- ####################################################################
+		!important THIS FILE -= style.css =- ON BOTTOM OF BOOTSTRAP STYLEs  LIST
+		It override bootstrap def. style
+		===================================================-->
+		<link
+		href="assets/css/style.css"
+		rel="stylesheet"
+		>
+
+		<!-- FontAwesome styles (iconic font)-->
+		<link
+		href="assets/css/font-awesome.min.css"
+		rel="stylesheet"
+		>
+		<!-- prettyPhoto styles -->
+		<!-- Gallery inlarge script styles-->
+		<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+		<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
+		<!-- Google web fonts -->
+		<!-- Le fav and touch icons -->
+	</head>
+
+	<body
+	data-spy="scroll"
+	data-target=".scroller-spy"
+	>
+
+		<!--################# START MAIN-WRAPPER ####################
+		============================================================ -->
+		<div class="main-wrapper">
+
+			<div class="nav-top">
+				<!-- navbar-fixed-top -->
+				<div
+				class="navbar  navbar-inverse"
+				id="top-nav"
+				>
+					<!-- INNER-->
+					<div class="navbar-inner">
+						<div class="container">
+
+							<!-- LOGO -->
+							<div
+							class="brand"
+							style="text-align: center; margin: 0 auto;"
+							>
+								<span> <i class="fa-icon-edit"></i> 학반 선택 </span>
+								<!--<img src="assets/img/logo.png" alt="Logo">-->
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- ############################ END TOP MENU ###############
+			========================================================== -->
+			<!-- ######################## FEATURES SECTION ##################
+			============================================================== -->
+			<!-- FEATURES HEADER-->
+			<!--<div class="row-fluid">
+			<header class="page-header span12" >
+			<h3>
+			Introducing
+			<small class="visible-desktop">// Hello! We are BOOTSCROLLER!</small>
+			</h3>
+			</header>
+			</div>
+			-->
+			<!-- / FEATURES HEADER-->
+			<!-- FEATURES ITEMS-->
+			<!-- FEATURE ITEM-->
+
+			<form
+			name="form"
+			style="padding: 0px 10px 10px 10px"
+			>
+				<div
+				id="container"
+				style="width: 100%"
+				>
+					<div style="width: 30%; float: left;">
+						<h4 style="text-align: center">학급 아이디</h4>
+					</div>
+					<div style="width: 70%; float: left;">
+						<input
+						class="input-block-level"
+						name="mClass"
+						type="text"
+						>
+					</div>
+				</div>
+				<div
+				id="container"
+				style="width: 100%"
+				>
+					<div style="width: 30%; float: left;">
+						<h4 style="text-align: center">반</h4>
+					</div>
+					<div style="width: 70%; float: left;">
+						<input
+						class="input-block-level"
+						name="ban"
+						type="number"
+						>
+					</div>
+				</div>
+				<div
+				id="container"
+				style="width: 100%"
+				>
+					<div style="width: 30%; float: left;">
+						<h4 style="text-align: center">번 호</h4>
+					</div>
+					<div style="width: 70%; float: left;">
+						<input
+						class="input-block-level"
+						name="num"
+						type="number"
+						>
+					</div>
+				</div>
+				<div
+				id="container"
+				style="width: 100%"
+				>
+					<div style="width: 30%; float: left;">
+						<h4 style="text-align: center">이 름</h4>
+					</div>
+					<div style="width: 70%; float: left;">
+						<input
+						class="input-block-level"
+						name="name"
+						type="text"
+						>
+					</div>
+				</div>
+
+				<input
+				type="button"
+				class="btn btn-primary btn-large btn-block"
+				value="로그인"
+				onclick=fnLogin()
+				>
+
+			</form>
+
+			<!-- / ROW-->
+			<!-- / ##################### FEATURES section ###########
+			====================================================== -->
+
+		</div>
+		<!-- END: MAIN-WRAPPER-->
+
+		<script type="text/javascript">
+			/*****
+			 *    로그인 함수 예제
+			 *****/
+			function fnLogin() {
+
+				var mClass = form.mClass.value;
+				var mBan = form.ban.value;
+				var mNum = form.num.value;
+				var mName = form.name.value;
+
+				if (!mClass) {
+					alert("학급 아이디를 입력하세요..!!");
+					return;
+				} else if (!mBan) {
+					alert("반을 입력하세요..!!");
+					return;
+				} else if (!mNum) {
+					alert("번호를 입력하세요..!!");
+					return;
+				} else if (!mName) {
+					alert("이름을 입력하세요..!!");
+					return;
+				} else {
+
+					localStorage.setItem("class", mClass);
+					localStorage.setItem("ban", mBan);
+					localStorage.setItem("num", mNum);
+					localStorage.setItem("name", mName);
+					console.log(localStorage);
+					window.location = "quiz.html"
+
+				}
+				//서버에서 정상적으로 로그인 되었다는 응답이 왔을 경우
+				// document.getElementById("areaLogin").style.display = "none";
+
+				// var objLoginInfo = document.getElementById("loginInfo");
+				// 	objLoginInfo.innerHTML = objLogin.value + "님 로그인 되었습니다..!!";
+
+				// 	document.getElementById("areaLogout").style.display = "";
+
+			} // end function fnLogin()
+		</script>
+
+	</body>
+</html>

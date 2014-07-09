@@ -1,0 +1,265 @@
+﻿<!DOCTYPE html>
+
+<html lang="ko">
+	<head>
+
+		<!-- BOOTSCROLLER premium Bootstrap html5 template v 1.0.0.
+		ArtLabs 2013 - http://www.sitediscount.ru
+		####### Released under GNU GENERAL PUBLIC LICENSE
+		Version 2 ############ -->
+
+		<meta charset="utf-8">
+		<title>과학평가</title>
+		<meta
+		name="viewport"
+		content="width=device-width, initial-scale=1.0,  user-scalable=no, maximum-scale=1"
+		/>
+		<meta
+		name="description"
+		content="responsive parallax Bootstrap template"
+		>
+		<meta
+		name="author"
+		content="ArtLabs"
+		>
+
+		<!-- ######################## Styles ######################
+		=======================================================-->
+		<link
+		href="assets/css/animate.min.css"
+		rel="stylesheet"
+		>
+		<link
+		href="assets/css/bootstrap.css"
+		rel="stylesheet"
+		>
+		<link
+		href="assets/css/bootstrap-responsive.css"
+		rel="stylesheet"
+		>
+		<script src='./dist/lib/jquery-1.10.2.min.js'></script>
+		<script src='./dist/ui/widget-scrollview.js'></script>
+		<!--<link href="assets/css/flat-ui.css" rel="stylesheet">
+		-->
+		<!-- ####################################################################
+		!important THIS FILE -= style.css =- ON BOTTOM OF BOOTSTRAP STYLEs  LIST
+		It override bootstrap def. style
+		===================================================-->
+		<link
+		href="assets/css/style.css"
+		rel="stylesheet"
+		>
+
+		<!-- FontAwesome styles (iconic font)-->
+		<link
+		href="assets/css/font-awesome.min.css"
+		rel="stylesheet"
+		>
+		<!-- prettyPhoto styles -->
+		<!-- Gallery inlarge script styles-->
+		<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+		<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
+		<!-- Google web fonts -->
+		<!-- Le fav and touch icons -->
+	</head>
+
+	<body
+	data-spy="scroll"
+	data-target=".scroller-spy"
+	>
+
+		<!--################# START MAIN-WRAPPER ####################
+		============================================================ -->
+		<div class="main-wrapper">
+
+			<div class="nav-top">
+				<!-- navbar-fixed-top -->
+				<div
+				class="navbar  navbar-inverse"
+				id="top-nav"
+				>
+					<!-- INNER-->
+					<div class="navbar-inner">
+						<div class="container">
+
+							<!-- LOGO -->
+							<div
+							class="brand"
+							style="text-align: center; margin: 0 auto;"
+							>
+								<span> <i class="fa-icon-edit"></i> 학급 생성 </span>
+								<!--<img src="assets/img/logo.png" alt="Logo">-->
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- ############################ END TOP MENU ###############
+			========================================================== -->
+			<!-- ######################## FEATURES SECTION ##################
+			============================================================== -->
+			<!-- FEATURES HEADER-->
+			<!--<div class="row-fluid">
+			<header class="page-header span12" >
+			<h3>
+			Introducing
+			<small class="visible-desktop">// Hello! We are BOOTSCROLLER!</small>
+			</h3>
+			</header>
+			</div>
+			-->
+			<!-- / FEATURES HEADER-->
+			<!-- FEATURES ITEMS-->
+			<!-- FEATURE ITEM-->
+
+			<form
+			name="form"
+			style="padding: 0px 10px 10px 10px"
+			>
+				<div
+				id="container"
+				style="width: 100%"
+				>
+					<div style="width: 50%; float: left;">
+						<h4 style="text-align: center">학급 아이디</h4>
+					</div>
+					<div style="width: 50%; float: left;">
+						<input
+						class="input-block-level"
+						name="mClass"
+						type="text"
+						>
+					</div>
+				</div>
+				<div
+				id="container"
+				style="width: 100%"
+				>
+					<div style="width: 50%; float: left;">
+						<h4 style="text-align: center">학급 아이디 확인</h4>
+					</div>
+					<div style="width: 50%; float: left;">
+						<input
+						class="input-block-level"
+						name="class_confirm"
+						type="text"
+						>
+					</div>
+				</div>
+				<div
+				id="container"
+				style="width: 100%"
+				>
+					<div style="width: 50%; float: left;">
+						<h4 style="text-align: center">비밀번호</h4>
+					</div>
+					<div style="width: 50%; float: left;">
+						<input
+						class="input-block-level"
+						name="password"
+						type="password"
+						>
+					</div>
+				</div>
+				<div
+				id="container"
+				style="width: 100%"
+				>
+					<div style="width: 50%; float: left;">
+						<h4 style="text-align: center">비밀번호 확인</h4>
+					</div>
+					<div style="width: 50%; float: left;">
+						<input
+						class="input-block-level"
+						name="password_confirm"
+						type="password"
+						>
+					</div>
+				</div>
+
+				<input
+				type="button"
+				class="btn btn-primary btn-large btn-block"
+				value="학급 생성"
+				onclick=fnLogin()
+				>
+
+			</form>
+
+			<!-- / ROW-->
+			<!-- / ##################### FEATURES section ###########
+			====================================================== -->
+
+		</div>
+		<!-- END: MAIN-WRAPPER-->
+
+		<script type="text/javascript">
+			/*****
+			 *    로그인 함수 예제
+			 *****/
+			var console = console || {
+				log : function() {
+				},
+				warn : function() {
+				},
+				error : function() {
+				}
+			};
+			function fnLogin() {
+
+				var mClass = form.mClass.value;
+				var mClass_Confirm = form.class_confirm.value;
+				var mPassword = form.password.value;
+				var mPassword_Confirm = form.password_confirm.value;
+
+				if (!mClass) {
+					alert("학급 아이디를 입력하세요..!!");
+					return;
+				} else if (!mClass_Confirm) {
+					alert("학급 아이디 확인을 입력하세요..!!");
+					return;
+				} else if (!mPassword) {
+					alert("비밀번호를 입력하세요..!!");
+					return;
+				} else if (!mPassword_Confirm) {
+					alert("비밀번호 확인을 입력하세요..!!");
+					return;
+				} else if (document.form.password.value != document.form.password_confirm.value) {
+					alert("비밀번호가 일치하지 않습니다.");
+					document.form.password_confirm.focus();
+					return;
+				} else if (document.form.mClass.value != document.form.class_confirm.value) {
+					alert("학급 아이디가 일치하지 않습니다.");
+					document.form.class_confirm.focus();
+					return;
+				} else {
+
+					$.ajax({
+						url : "db.php",
+						type : 'POST',
+						cache : false,
+						data : {
+							select : "signin",
+							mClass : mClass,
+							password : mPassword
+						},
+						success : function(args) {
+							if (args == 'success') {
+								alert("학급이 생성 되었습니다.");
+								document.location.href = "teacher_login.html";
+							} else {
+								alert("이미 존재하는 학급아이디입니다.");
+							}
+						}
+					});
+
+				}
+
+			} // end function fnLogin()
+		</script>
+
+	</body>
+</html>

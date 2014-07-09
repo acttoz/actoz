@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<!-- saved from url=(0039)http://bookjam.co.kr/quizbell/Admin.php -->
+<html class="ui-mobile">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<!--<base href="http://bookjam.co.kr/quizbell/Admin.php">-->
+		<base href=".">
+		<title>❑ 정답 결과 by Bookjam ❑</title>
+		<meta charset="utf-8">
+		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css">
+		<link rel="stylesheet" href="http://bookjam.co.kr/quizbell/my.css">
+		<script src="./❑ 정답 결과 by Bookjam ❑_files/jquery-1.7.2.min.js"></script>
+		<script src="./❑ 정답 결과 by Bookjam ❑_files/jquery.mobile-1.2.0.min.js"></script>
+		<script src="./❑ 정답 결과 by Bookjam ❑_files/my.js"></script>
+		<style>
+			.hover {
+				background: #00f !important;
+				color: #fff;
+			}
+		</style>
+		<script type="text/javascript">
+			$(document).ready(function() {
+				$('tr:contains(ID)').css('background', '#dff');
+				$('table').css('background', 'white');
+				$('table').css('border', '2px double green');
+				$('tr,th,td').css('border', '1px dotted black');
+				$('td:contains(객관식 번호)').css('background', '#dfd');
+				$('td:contains(선택한 사람 수)').css('background', '#dfd');
+				// mouse hover
+				$('tbody tr').hover(function() {
+					$(this).find('td').addClass('hover');
+				}, function() {
+					$(this).find('td').removeClass('hover');
+				});
+
+			});
+			//ready
+			function stat_clear() {
+				var frm = document.action;
+				if (confirm("결과를 초기화 하시겠습니까?")) {
+					frm.action = "clear.php";
+					frm.submit();
+				}
+			}
+
+			function Next_Question() {
+				var frm = document.action;
+				if (confirm("다음문제로 가시겠습니까?")) {
+					frm.action = "next.php";
+					frm.submit();
+				}
+			}
+
+			function stat_excel_export() {
+				var frm = document.action;
+				if (confirm("결과를 엑셀로 저장하시겠습니까?")) {
+					frm.action = "export.php";
+					frm.submit();
+				}
+			}
+
+		</script>
+		<script type="text/javascript">
+			function a() {
+				document.addEventListener('keydown', function(e) {/*console.log('keydown');*/
+					var keys = [];
+					if (e.ctrlKey || e.shiftKey || e.altKey || e.metaKey) {
+						if (e.metaKey) {
+							keys.push('Cmd');
+						}
+						if (e.shiftKey) {
+							keys.push('Shift');
+						}
+						if (e.ctrlKey) {
+							keys.push('Ctrl');
+						}
+						if (e.altKey) {
+							keys.push('Alt');
+						}
+					}
+					if (e.which) {/*console.log(e.which);*/
+						keys.push(String.fromCharCode(e.which));
+					}/*console.log(keys.join('+'));*/
+					if (keys.length >= 2 && keys[keys.length - 1] != '') {
+						window.postMessage({
+							type : 'dolphin_shortcuts',
+							keys : keys
+						}, '*');
+					}
+				});
+			}a();
+		</script>
+		<script type="text/javascript">
+			window.oncontextmenu = function(event) {
+				var target = event.target.getAttribute('obj_url');
+				window.postMessage({
+					type : 'dolphin_clickTarget',
+					target : target
+				}, '*');
+			};
+		</script>
+		<style>
+			[touch-action="none"] {
+				-ms-touch-action: none;
+				touch-action: none;
+			}
+			[touch-action="pan-x"] {
+				-ms-touch-action: pan-x;
+				touch-action: pan-x;
+			}
+			[touch-action="pan-y"] {
+				-ms-touch-action: pan-y;
+				touch-action: pan-y;
+			}
+			[touch-action="scroll"], [touch-action="pan-x pan-y"], [touch-action="pan-y pan-x"] {
+				-ms-touch-action: pan-x pan-y;
+				touch-action: pan-x pan-y;
+			}
+		</style>
+	</head>
+	<body class="ui-mobile-viewport ui-overlay-c">
+		<div data-role="page" data-url="/quizbell/Admin.php" tabindex="0" class="ui-page ui-body-c ui-page-active" style="min-height: 898px;">
+			<br>
+			<div id="QNumber">
+				<table align="left" style="background-color: white; border: 2px double green; background-position: initial initial; background-repeat: initial initial;">
+					<tbody>
+						<tr style="border: 1px dotted black;">
+							<td style="border: 1px dotted black;">오늘 날짜</td>
+							<td style="border: 1px dotted black;">2013-12-12</td>
+						</tr>
+						<tr style="border: 1px dotted black;">
+							<td bgcolor="#FAE0D0" style="border: 1px dotted black;">현재문제번호</td>
+							<td align="center" bgcolor="#FAE0D4" style="border: 1px dotted black;"><font size="6.0em">1</font></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<div align="center" id="QNumber2">
+				<table align="center" style="background-color: white; border: 2px double green; background-position: initial initial; background-repeat: initial initial;">
+					<tbody>
+						<tr style="border: 1px dotted black;">
+							<td align="center" bgcolor="#EAEAEA" style="border: 1px dotted black;"><font size="4.0em">&nbsp;&nbsp;문제번호&nbsp;&nbsp;</font></td>
+							<td width="50" align="center" bgcolor="#EAEAEA" style="border: 1px dotted black;"><font size="4.0em">1</font></td>
+						</tr>
+						<tr style="border: 1px dotted black;">
+							<td align="center" bgcolor="#EAEAEA" style="border: 1px dotted black;"><font size="4.0em">&nbsp;&nbsp;객관식 문항&nbsp;&nbsp;</font></td>
+							<td width="50" align="center" bgcolor="#EAEAEA" style="border: 1px dotted black;"><font size="4.0em"></font></td>
+						</tr>
+						<tr style="border: 1px dotted black;">
+							<td align="center" bgcolor="#EAEAEA" style="border: 1px dotted black;"><font size="4.0em">&nbsp;&nbsp;주관식 문항&nbsp;&nbsp;</font></td>
+							<td width="50" align="center" bgcolor="#EAEAEA" style="border: 1px dotted black;"><font size="4.0em"></font></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div id="tables">
+				<table border="0" cellpadding="2" id="viewTb" align="center" style="background-color: white; border: 2px double green; background-position: initial initial; background-repeat: initial initial;">
+					<tbody>
+						<tr style="background-color: rgb(221, 255, 255); border: 1px dotted black; background-position: initial initial; background-repeat: initial initial;">
+							<td align="center" style="border: 1px dotted black;">&nbsp;ID&nbsp;</td>
+							<td align="center" width="80" style="border: 1px dotted black;">객관식</td>
+							<td align="center" style="border: 1px dotted black;">&nbsp;주관식&nbsp;</td>
+						</tr>
+						<tr style="border: 1px dotted black;">
+							<td align="center" style="border: 1px dotted black;">&nbsp;&nbsp;&nbsp;&nbsp;</td>
+							<td align="center" style="border: 1px dotted black;">&nbsp;&nbsp;0&nbsp;&nbsp;</td>
+							<td align="center" style="border: 1px dotted black;">&nbsp;&nbsp;Ã¬â„¢Â¸Ã­ËœÂ¸Ã­ÂÂ¡ÃªÂ³Â¼ Ã«â€šÂ´Ã­ËœÂ¸Ã­ÂÂ¡
+							Ã«â€šËœÃ«Å&nbsp;â€ Ã¬ËœÂÃ¬â€“â€˜Ã¬â€&nbsp;Å’
+							Ã«â€¹Â¹Ã¬â€¹Â&nbsp;Ã¬Ââ‚¬ Ã¬â€šÂ°Ã¬â€&nbsp;Å’
+
+							Ã«â€¹Â¹Ã¬â€¹Â&nbsp;Ã¬Ââ‚¬Ã«â€šËœÃ«Å¾â€˜ÃªÂ²Â°Ã­â€¢Â©Ã­â€¢Â©Ã«â€¹Ë†Ã«â€¹Â¤
+							Ã¬Å¡Â°Ã«Â¦Â°Ã¬â€žÂ¸Ã­ÂÂ¬Ã­ËœÂ¸Ã­ÂÂ¡Ã¬Ââ€žÃ­â€¢Â©Ã«â€¹Ë†&nbsp;&nbsp;</td>
+						</tr>
+					</tbody>
+				</table>
+				<br>
+				<table border="0" cellpadding="1" id="viewTb" align="center" style="background-color: white; border: 2px double green; background-position: initial initial; background-repeat: initial initial;">
+					<tbody>
+						<tr style="border: 1px dotted black;">
+							<td align="center" width="120" style="border: 1px dotted black; background-color: rgb(221, 255, 221); background-position: initial initial; background-repeat: initial initial;">객관식 번호</td>
+							<td align="center" width="120" style="border: 1px dotted black; background-color: rgb(221, 255, 221); background-position: initial initial; background-repeat: initial initial;">선택한 사람 수</td>
+						</tr>
+						<tr style="border: 1px dotted black;">
+							<td align="center" style="border: 1px dotted black;">0</td>
+							<td align="center" style="border: 1px dotted black;">1(100%)</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<br>
+			<br>
+
+			<form action="" target="ActionFrame" name="action">
+
+			</form>
+
+			<div align="center">
+				<div data-role="controlgroup" data-type="horizontal" class="ui-corner-all ui-controlgroup ui-controlgroup-horizontal">
+					<div class="ui-controlgroup-controls">
+						<a href="http://bookjam.co.kr/quizbell/Admin.php#" data-role="button" data-icon="arrow-r" data-iconpos="top" data-theme="b" onclick="javascript:Next_Question();" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" class="ui-btn ui-btn-up-b ui-btn-icon-top ui-corner-left"><span class="ui-btn-inner ui-corner-left"><span class="ui-btn-text">다음문제</span><span class="ui-icon ui-icon-arrow-r ui-icon-shadow">&nbsp;</span></span></a>
+						<a href="http://bookjam.co.kr/quizbell/Admin.php#" data-role="button" data-icon="delete" data-iconpos="top" data-theme="a" onclick="javascript:stat_clear();" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" class="ui-btn ui-btn-up-a ui-btn-icon-top"><span class="ui-btn-inner"><span class="ui-btn-text">결과 초기화</span><span class="ui-icon ui-icon-delete ui-icon-shadow">&nbsp;</span></span></a>
+						<a href="http://bookjam.co.kr/quizbell/Admin.php#" data-role="button" data-icon="grid" data-iconpos="top" data-theme="b" onclick="javascript:stat_excel_export();" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" class="ui-btn ui-btn-up-b ui-btn-icon-top ui-corner-right ui-controlgroup-last"><span class="ui-btn-inner ui-corner-right ui-controlgroup-last"><span class="ui-btn-text">엑셀 출력</span><span class="ui-icon ui-icon-grid ui-icon-shadow">&nbsp;</span></span></a>
+					</div>
+				</div>
+			</div>
+
+			<!-- <iframe width="500px" id="ActionFrame"></iframe> -->
+			<iframe id="ActionFrame" style="display:none;"></iframe>
+
+		</div>
+		<div class="ui-loader ui-corner-all ui-body-a ui-loader-default">
+			<span class="ui-icon ui-icon-loading"></span><h1>loading</h1>
+		</div><script id="hiddenlpsubmitdiv" style="display: none;"></script>
+		<script>
+			try {
+				for (var lastpass_iter = 0; lastpass_iter < document.forms.length; lastpass_iter++) {
+					var lastpass_f = document.forms[lastpass_iter];
+					if ( typeof (lastpass_f.lpsubmitorig2) == "undefined") {
+						lastpass_f.lpsubmitorig2 = lastpass_f.submit;
+						lastpass_f.submit = function() {
+							var form = this;
+							var customEvent = document.createEvent("Event");
+							customEvent.initEvent("lpCustomEvent", true, true);
+							var d = document.getElementById("hiddenlpsubmitdiv");
+							if (d) {
+								for (var i = 0; i < document.forms.length; i++) {
+									if (document.forms[i] == form) {
+										d.innerText = i;
+									}
+								}
+								d.dispatchEvent(customEvent);
+							}
+							form.lpsubmitorig2();
+						}
+					}
+				}
+			} catch(e) {
+			}
+		</script>
+	</body>
+</html>
