@@ -198,6 +198,15 @@ function excel() {
 
 }
 
+function view() {
+ var obj = document.getElementById('ctlGrid');
+
+ if (obj.style.display=="")
+  obj.style.display="none";
+ else
+  obj.style.display="";
+}
+
 // setInterval(function() {
 	// getItem();
 	// drawChart();
