@@ -23,6 +23,6 @@ include("common.php");
     for($i = 0; $i < $num_results; $i++)
     {
          $row = mysql_fetch_array($result);
-         echo $row['name'] . "\t - \t " . $row['score'] . "\n";
+         echo $row['name'] . "\t,\t " . $row['score'] . "\n";
     }
 ?>

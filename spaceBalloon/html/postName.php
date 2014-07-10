@@ -9,7 +9,7 @@ include("common.php");
     $real_hash = md5($name . $score . $secretKey); 
     if($real_hash == $hash) 
 	{
-		$query = "INSERT INTO $dbName .`scores` (`id`, `name`, `score`) VALUES (NULL, '$name', '$score') on duplicate key update 'score'=$score"; 
+		$query = "INSERT INTO $dbName .`scores` (`id`, `name`, `score`) VALUES (NULL, '$name', '$score')"; 
 		$result = mysql_query($query);    
 		$my_err = mysql_error();
 		if($result === false || $my_err != '')

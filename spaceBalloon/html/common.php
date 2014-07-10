@@ -1,23 +1,23 @@
 <?php
 
-$dbName = 'Databasename';
-$secretKey = "12345";
+$dbName = 'actoze';
+$secretKey = "0453";
 
 function dbConnect()
 {
 	global  $dbName;
 	global  $secretKey;
 
-	$link = mysql_connect('Host', 'User', 'Pass');
+	$link = mysql_connect('localhost', 'actoze', '0453acac');
 	
 	if(!$link)
 	{
-		fail("Couldn´t connect to database server");
+		fail("Couldnï¿½t connect to database server");
 	}
 	
 	if(!@mysql_select_db($dbName))
 	{
-		fail("Couldn´t find database $dbName");
+		fail("Couldnï¿½t find database $dbName");
 	}
 	
 	return $link;
