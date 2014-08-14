@@ -21,8 +21,8 @@ public class M1 extends Activity implements SurfaceHolder.Callback,
 	private SurfaceView mPreview;
 	private SurfaceHolder mHolder;
 	MediaPlayer mPlayer;
-	Button mPlayBtn;
 	VideoView video;
+	Button mPlayBtn;
 	ImageView playbtn;
 	int bool;
 	int btnId;
@@ -66,7 +66,7 @@ public class M1 extends Activity implements SurfaceHolder.Callback,
 
 		String tmpSign = "m" + btnId;
 
-		lid = this.getResources().getIdentifier("m33", "raw",
+		lid = this.getResources().getIdentifier(tmpSign, "raw",
 				this.getPackageName());
 
 		mPreview = (SurfaceView) findViewById(R.id.surface);
