@@ -6,7 +6,7 @@
 .ol h2 {margin:0;padding:0;width:1px;height:1px;font-size:0;line-height:0;overflow:hidden}
 .ol ul {margin:0;padding:0;list-style:none}
 
-.ol a.btn_admin {display:inline-block;padding:0 10px;height:23px;border:1px solid #e8180c;background:#e8180c;color:#fff;text-decoration:none;line-height:2.15em;vertical-align:middle} /* 관리자 전용 버튼 */
+.ol a.btn_admin {display:inline-block;padding:0 10px;height:23px;border:1px solid #336699;background:#6699CC;color:#fff;text-decoration:none;line-height:2.15em;vertical-align:middle} /* 관리자 전용 버튼 */
 .ol a.btn_admin:focus, .ol a.btn_admin:hover {text-decoration:none}
 
 #ol_before {}
@@ -17,7 +17,7 @@
 .ol_pwlabel {position:absolute;top:35px;left:5px;color:#333;font-size:0.95em}
 #auto_login {}
 #auto_login_label {letter-spacing:-0.1em}
-#ol_submit {display:inline-block;width:60px;height:24px;border:0;background:#333;color:#fff;font-size:0.9em;font-weight:bold;vertical-align:top}
+#ol_submit {display:inline-block;width:60px;height:24px;border:0;background:#888888;color:#fff;font-size:0.9em;font-weight:bold;vertical-align:top}
 #ol_before a {letter-spacing:-0.15em}
 #ol_svc {float:left;margin:5px 0 0}
 #ol_password_lost {display:inline-block;margin:0 0 0 5px}
@@ -41,5 +41,5 @@
 #ol_after_pt {width:80px;margin-right:1px}
 #ol_after_scrap {width:48px;line-height:2.6em !important}
 #ol_after_ft {text-align:justify}
-#ol_after_ft a {display:inline-block;width:88px;height:25px;background:#333;color:#fff;text-align:center;line-height:2.2em}
+#ol_after_ft a {display:inline-block;width:88px;height:25px;background:#888888;color:#fff;text-align:center;line-height:2.2em}
 #ol_after_ft a:focus, #ol_after_ft a:hover {text-decoration:none !important}
