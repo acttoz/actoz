@@ -746,6 +746,7 @@ public class Main_Study extends Activity implements OnClickListener,
 
 		case R.id.ib_change:
 			// showDialog();
+			myBitmap1.recycle();
 			if (speak_flag == 0) {
 				speak_img = this.getResources().getIdentifier(speak_korean,
 						"drawable", this.getPackageName());
@@ -852,6 +853,11 @@ public class Main_Study extends Activity implements OnClickListener,
 	}
 
 	private void tab1() {
+//		playBitmap1.recycle();
+//		playBitmap2.recycle();
+//		myBitmap1.recycle();
+//		myBitmap2.recycle();
+		
 		instruction.setText("정답 확인");
 		tab2.setVisibility(View.GONE);
 		tab1.setVisibility(View.VISIBLE);
@@ -863,6 +869,11 @@ public class Main_Study extends Activity implements OnClickListener,
 	}
 
 	private void tab2() {
+//		playBitmap1.recycle();
+//		playBitmap2.recycle();
+//		myBitmap1.recycle();
+//		myBitmap2.recycle();
+		
 		instruction.setText("동영상을 보고 청크듣기\n말하기를 해보세요.");
 		tab1.setVisibility(View.GONE);
 		tab2.setVisibility(View.VISIBLE);
@@ -874,6 +885,15 @@ public class Main_Study extends Activity implements OnClickListener,
 	}
 
 	private void tab3() {
+//		playBitmap1.recycle();
+//		playBitmap2.recycle();
+//		myBitmap1.recycle();
+//		myBitmap2.recycle();
+//		speak_img = this.getResources().getIdentifier(speak_eng,
+//				"drawable", this.getPackageName());
+//		myBitmap1 = BitmapFactory.decodeResource(getResources(), speak_img);
+//		speakImage.setImageBitmap(myBitmap1);
+		
 		instruction.setText("다이얼로그를 누르면\n듣기가 가능합니다.");
 		tab2.setVisibility(View.GONE);
 		tab3.setVisibility(View.VISIBLE);
