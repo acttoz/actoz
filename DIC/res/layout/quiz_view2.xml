@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/poiLinearLayout"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#5ac4bd"
+    android:orientation="vertical"
+    android:padding="10dip" >
+
+    <FrameLayout
+        android:id="@+id/poiViewLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="5dp" >
+
+            <!-- 탑 메뉴 -->
+
+            <RelativeLayout
+                android:id="@+id/includeLayout"
+                android:layout_width="fill_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="#519594" >
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:background="#4c7e7f"
+                    android:orientation="vertical"
+                    android:padding="10dp" >
+
+                    <ListView
+                        android:id="@+id/listview3"
+                        android:layout_width="fill_parent"
+                        android:layout_height="0px"
+                        android:layout_weight="13"
+                        android:cacheColorHint="#00000000"
+                        android:divider="#cdcdcd"
+                        android:dividerHeight="1dip"
+                        android:drawSelectorOnTop="false"
+                        android:listSelector="#cdcdcd"
+                        android:padding="20dip" />
+                </LinearLayout>
+            </RelativeLayout>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tempNum"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:gravity="left|top"
+            android:textSize="50dp" />
+    </FrameLayout>
+
+</LinearLayout>
