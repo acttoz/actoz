@@ -13,7 +13,7 @@
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="0px"
-            android:layout_weight="4.5" />
+            android:layout_weight="1.5" />
 
         <LinearLayout
             android:layout_width="fill_parent"
@@ -24,7 +24,19 @@
             android:orientation="vertical" >
 
             <ImageButton
-                android:id="@+id/find"
+                android:id="@+id/findK"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dip"
+                android:background="@drawable/teacher" />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="0px"
+                android:layout_weight="1.5" />
+
+            <ImageButton
+                android:id="@+id/findT"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="20dip"

@@ -1,6 +1,7 @@
 package com.moon.korean.dic;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 import android.app.Service;
 import android.content.Context;
@@ -21,6 +22,7 @@ import android.widget.TextView;
 public class Adapter_QuizView extends BaseAdapter {
 
 	private ArrayList<Custom_List_Data> mItems;
+	private ArrayList<Custom_List_Data> oldItems;
 	private Context mContext;
 	String word;
 	int mLayout;
@@ -31,6 +33,7 @@ public class Adapter_QuizView extends BaseAdapter {
 		// TODO Auto-generated constructor stub
 		mContext = context;
 		mLayout = layout;
+		oldItems = items;
 		mItems = items;
 		mInflater = (LayoutInflater) mContext
 				.getSystemService(Service.LAYOUT_INFLATER_SERVICE);
@@ -73,7 +76,7 @@ public class Adapter_QuizView extends BaseAdapter {
 				LinearLayout lscore = (LinearLayout) v
 						.findViewById(R.id.lscore);
 				LinearLayout sum = (LinearLayout) v.findViewById(R.id.sum);
-				word = Find.word;
+				word = FindK.word;
 				if (word != null) {
 					String str2 = mItems.get(position).Data;
 					int start = str2.indexOf(word);
@@ -94,6 +97,26 @@ public class Adapter_QuizView extends BaseAdapter {
 		}
 		return v;
 
+	}
+
+	// Filter Class
+	public void filter(String charText) {
+		Log.d("filter", "onchanged");
+		charText = charText.toLowerCase(Locale.getDefault());
+		mItems.clear();
+		if (charText.length() == 0) {
+			Log.d("filter", "0");
+			mItems.addAll(oldItems);
+		} else {
+			for (Custom_List_Data data : oldItems) {
+				if (data.Data.toLowerCase(Locale.getDefault()).contains(
+						charText)) {
+					Log.d("filter", "searching");
+					mItems.add(data);
+				}
+			}
+		}
+		notifyDataSetChanged();
 	}
 
 	public static int dipToPixels(Context context, int dipValue) {

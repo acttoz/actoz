@@ -28,10 +28,11 @@ public class MainActivity extends Activity implements OnClickListener {
 	static String grade = "null";
 	static String ban = "null";
 	static String mSchool;
-	ImageButton bFind;
+	ImageButton bFindK;
+	ImageButton bFindT;
 	ImageButton bInput;
 	boolean dbCopied;
-	Drawable alpha1, alpha2;
+	Drawable alpha1, alpha2, alpha3;
 
 	/** Called when the activity is first created. */
 	@Override
@@ -39,9 +40,11 @@ public class MainActivity extends Activity implements OnClickListener {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.math_main);
 		// TODO Auto-generated method stub
-		bFind = (ImageButton) findViewById(R.id.find);
+		bFindK = (ImageButton) findViewById(R.id.findK);
+		bFindT = (ImageButton) findViewById(R.id.findT);
 		bInput = (ImageButton) findViewById(R.id.input);
-		bFind.setOnClickListener(this);
+		bFindK.setOnClickListener(this);
+		bFindT.setOnClickListener(this);
 		bInput.setOnClickListener(this);
 
 		idPrefs = getSharedPreferences("id", MODE_PRIVATE);
@@ -54,36 +57,33 @@ public class MainActivity extends Activity implements OnClickListener {
 		DayHelper mHelper = new DayHelper(MainActivity.this);
 		SQLiteDatabase db = mHelper.getReadableDatabase();
 		db.close();
-		if (!dbCopied)
-			copySQLiteDB(this);
+//		if (!dbCopied)
+//			copySQLiteDB(this);
 
-		if (grade.equals("null") | ban.equals("null") | mSchool.equals("null")) {
-			// C2dm_BroadcastReceiver.c2dmIdCreate(this);
-
-			// Intent firstLogin = new Intent(this, FirstLogin.class);
-			// startActivity(firstLogin);
-			// finish();
-		}
-		// '
-		// onClick(bInput);
 	}
 
 	@Override
 	public void onClick(View arg0) {
 		// TODO Auto-generated method stub
 		switch (arg0.getId()) {
-		case R.id.find:
-			alpha1 = bFind.getBackground();
-
+		case R.id.findK:
+			alpha1 = bFindK.getBackground();
 			alpha1.setColorFilter(0x88FF0000, Mode.SRC_ATOP);
-			Intent teacherIntent = new Intent(this, Find.class);
+			Intent teacherIntent = new Intent(this, FindK.class);
 			// firstLoginIntent.putExtra("BAN", ban);
 			startActivity(teacherIntent);
 			break;
-		case R.id.input:
-			alpha2 = bInput.getBackground();
+		case R.id.findT:
+			alpha2 = bFindT.getBackground();
 			alpha2.setColorFilter(0x88FF0000, Mode.SRC_ATOP);
-			Intent gradeIntent = new Intent(this, Find.class);
+			Intent tobak = new Intent(this, FindK.class);
+			// firstLoginIntent.putExtra("BAN", ban);
+			startActivity(tobak);
+			break;
+		case R.id.input:
+			alpha3 = bInput.getBackground();
+			alpha3.setColorFilter(0x88FF0000, Mode.SRC_ATOP);
+			Intent gradeIntent = new Intent(this, FindK.class);
 			// firstLoginIntent.putExtra("BAN", ban);
 			startActivity(gradeIntent);
 			break;
@@ -99,8 +99,8 @@ public class MainActivity extends Activity implements OnClickListener {
 		Log.d("math", "dbº¹»ç");
 
 		AssetManager manager = context.getAssets();
-		String filePath = "/data/data/" + "com.moon.korean.dic"
-				+ "/databases/" + "dic.db";
+		String filePath = "/data/data/" + "com.moon.korean.dic" + "/databases/"
+				+ "dic.db";
 		File file = new File(filePath);
 
 		FileOutputStream fos = null;
@@ -139,9 +139,11 @@ public class MainActivity extends Activity implements OnClickListener {
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
-		alpha1 = bFind.getBackground();
-		alpha2 = bInput.getBackground();
+		alpha1 = bFindK.getBackground();
+		alpha2 = bFindT.getBackground();
+		alpha3 = bInput.getBackground();
 		alpha1.setColorFilter(0xffffffff, Mode.MULTIPLY);
 		alpha2.setColorFilter(0xffffffff, Mode.MULTIPLY);
+		alpha3.setColorFilter(0xffffffff, Mode.MULTIPLY);
 	}
 }
