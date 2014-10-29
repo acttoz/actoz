@@ -57,8 +57,8 @@ public class MainActivity extends Activity implements OnClickListener {
 		DayHelper mHelper = new DayHelper(MainActivity.this);
 		SQLiteDatabase db = mHelper.getReadableDatabase();
 		db.close();
-//		if (!dbCopied)
-//			copySQLiteDB(this);
+		// if (!dbCopied)
+		// copySQLiteDB(this);
 
 	}
 
@@ -70,14 +70,14 @@ public class MainActivity extends Activity implements OnClickListener {
 			alpha1 = bFindK.getBackground();
 			alpha1.setColorFilter(0x88FF0000, Mode.SRC_ATOP);
 			Intent teacherIntent = new Intent(this, FindK.class);
-			// firstLoginIntent.putExtra("BAN", ban);
+			teacherIntent.putExtra("SELECT", "KOREAN");
 			startActivity(teacherIntent);
 			break;
 		case R.id.findT:
 			alpha2 = bFindT.getBackground();
 			alpha2.setColorFilter(0x88FF0000, Mode.SRC_ATOP);
 			Intent tobak = new Intent(this, FindK.class);
-			// firstLoginIntent.putExtra("BAN", ban);
+			tobak.putExtra("SELECT", "TOBAK");
 			startActivity(tobak);
 			break;
 		case R.id.input:

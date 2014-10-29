@@ -1,8 +1,13 @@
 package com.moon.korean.dic;
 
 public class Custom_List_Data {
-	String Data;
-	int score = 0;
-	int sum = 0;
+	private String Data;
 
+	public Custom_List_Data(String data) {
+		this.Data = data;
+	}
+
+	public String getData() {
+		return this.Data;
+	}
 }

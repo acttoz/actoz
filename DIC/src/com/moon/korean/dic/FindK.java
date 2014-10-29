@@ -10,10 +10,8 @@ import org.json.JSONObject;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
@@ -24,9 +22,6 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -40,12 +35,13 @@ public class FindK extends Activity implements OnClickListener {
 	TextView email1;
 	Button Btngetdata;
 	// URL to get JSON Array
-	private static String url = "http://actoze.dothome.co.kr/dic/math.php?select=korean";
+	private static String url;
 	// JSON Node Names
 	private static final String TAG_DIC = "dic";
 	private static final String TAG_KOREAN = "korean";
 	private static final String TAG_TOBAK = "tobak";
 	private static final String TAG_MEAN = "mean";
+	private static String TAG;
 	JSONArray jsonResult = null;
 	ListView listView;
 	DayHelper mHelper;
@@ -86,12 +82,26 @@ public class FindK extends Activity implements OnClickListener {
 	EditText input;
 	public static String word;
 	int textlength = 0;
+	String SELECT;
 
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.quiz_view);
+		Intent i = getIntent();
+		// Get the results of rank
+		SELECT = i.getStringExtra("SELECT");
+		if (SELECT.equals("KOREAN")) {
+			Log.d("select", "korean");
+			url = "http://actoze.dothome.co.kr/dic/math.php?select=korean";
+			TAG = TAG_KOREAN;
+		} else {
+			Log.d("select", "tobak");
+			url = "http://actoze.dothome.co.kr/dic/math.php?select=tobak";
+			TAG = TAG_TOBAK;
+		}
+
 		word = null;
 		syncTime = 10000;
 		idPrefs = getSharedPreferences("id", MODE_PRIVATE);
@@ -133,18 +143,13 @@ public class FindK extends Activity implements OnClickListener {
 		// });
 
 		// 상단 버튼 등록
-		searchBtn = (Button) findViewById(R.id.search_btn);
-		searchBtn.setOnClickListener(this);
+//		searchBtn = (Button) findViewById(R.id.search_btn);
+//		searchBtn.setOnClickListener(this);
 
 		listView = (ListView) findViewById(R.id.listview3);
 
 		dateList = new ArrayList<Custom_List_Data>();
 
-		listAdapter = new Adapter_QuizView(this, R.layout.customlist, dateList);
-		// dateListView.setCacheColorHint(Color.rgb(255,2555,255));
-		listView.setAdapter(listAdapter);
-
-		listAdapter.notifyDataSetChanged();
 		input = (EditText) findViewById(R.id.input);
 		input.addTextChangedListener(new TextWatcher() {
 
@@ -153,7 +158,7 @@ public class FindK extends Activity implements OnClickListener {
 				// TODO Auto-generated method stub
 				String text = input.getText().toString()
 						.toLowerCase(Locale.getDefault());
-				
+
 				listAdapter.filter(text);
 			}
 
@@ -208,14 +213,20 @@ public class FindK extends Activity implements OnClickListener {
 					for (int i = 0; i < jsonResult.length(); i++) {
 						jsonobject = jsonResult.getJSONObject(i);
 						// Retrive JSON Objects
-						data = new Custom_List_Data();
-						data.Data = jsonobject.getString(TAG_KOREAN);
-						dateList.add(data);
+						if (!jsonobject.getString(TAG).equals("")) {
+							data = new Custom_List_Data(
+									jsonobject.getString(TAG));
+							dateList.add(data);
+						}
 
-						Log.d("json", data.Data);
+						Log.d("json", data.getData());
 
 					}
-
+					listAdapter = new Adapter_QuizView(FindK.this,
+							R.layout.customlist, dateList);
+					// dateListView.setCacheColorHint(Color.rgb(255,2555,255));
+					listView.setAdapter(listAdapter);
+					listAdapter.notifyDataSetChanged();
 				}
 			} catch (JSONException e) {
 				e.printStackTrace();
@@ -223,77 +234,83 @@ public class FindK extends Activity implements OnClickListener {
 		}
 	}
 
-	public void initTime(String word) {
-		// openDb();
-		Log.d("word", word);
-		openDb();
-		Cursor cursor = db.rawQuery(
-				"SELECT DISTINCT col_4 FROM math_test WHERE col_4 LIKE '%"
-						+ word + "%'", null);
-		dateList.clear();
-		if (cursor.moveToFirst()) {
-			if (cursor.getString(0).equals("")) {
-				data = new Custom_List_Data();
-				data.Data = "일치하는 단어가 없습니다.";
-				dateList.add(data);
-			} else {
-				do {
-					data = new Custom_List_Data();
-					data.Data = cursor.getString(0);
-					dateList.add(data);
+	// public void initTime(String word) {
+	// // openDb();
+	// Log.d("word", word);
+	// openDb();
+	// Cursor cursor = db.rawQuery(
+	// "SELECT DISTINCT col_4 FROM math_test WHERE col_4 LIKE '%"
+	// + word + "%'", null);
+	// dateList.clear();
+	// if (cursor.moveToFirst()) {
+	// if (cursor.getString(0).equals("")) {
+	// data = new Custom_List_Data();
+	// data.Data = "일치하는 단어가 없습니다.";
+	// dateList.add(data);
+	// } else {
+	// do {
+	// data = new Custom_List_Data();
+	// data.Data = cursor.getString(0);
+	// dateList.add(data);
+	//
+	// } while (cursor.moveToNext());
+	// }
+	// }
+	// cursor.close();
+	// db.close();
+	// listAdapter.notifyDataSetChanged();
+	// listView.invalidate();
+	// }
 
-				} while (cursor.moveToNext());
-			}
-		}
-		cursor.close();
-		db.close();
-		listAdapter.notifyDataSetChanged();
-		listView.invalidate();
-	}
+	// public void setClickItem() {
+	// listView.setOnItemClickListener(new OnItemClickListener() {
+	// // 차시
+	// public void onItemClick(AdapterView<?> arg0, View arg1,
+	//
+	// int position, long arg3) {
+	// openDb();
+	// Cursor cursor = db.rawQuery(
+	// "SELECT DISTINCT col_0,col_1,col_2,col_3 FROM math_test WHERE col_4 LIKE '%"
+	// + dateList.get(position).Data + "%'", null);
+	// if (cursor.moveToFirst()) {
+	//
+	// }
+	// cursor.close();
+	// db.close();
+	// }
+	// });
+	// }
 
-	public void setClickItem() {
-		listView.setOnItemClickListener(new OnItemClickListener() {
-			// 차시
-			public void onItemClick(AdapterView<?> arg0, View arg1,
-
-			int position, long arg3) {
-				openDb();
-				Cursor cursor = db.rawQuery(
-						"SELECT DISTINCT col_0,col_1,col_2,col_3 FROM math_test WHERE col_4 LIKE '%"
-								+ dateList.get(position).Data + "%'", null);
-				if (cursor.moveToFirst()) {
-
-				}
-				cursor.close();
-				db.close();
-			}
-		});
-	}
-
-	@Override
-	public void onClick(View v) {
-
-		switch (v.getId()) {
-
-		case R.id.search_btn:
-
-			word = input.getText().toString();
-			initTime(word);
-			editor.putString("SEARCH", word);
-			editor.commit();
-			InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-			imm.hideSoftInputFromWindow(input.getWindowToken(), 0);
-			break;
-
-		}
-
-	}
+//	@Override
+//	public void onClick(View v) {
+//
+//		switch (v.getId()) {
+//
+//		case R.id.search_btn:
+//
+//			word = input.getText().toString();
+//			// initTime(word);
+//			editor.putString("SEARCH", word);
+//			editor.commit();
+//			InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+//			imm.hideSoftInputFromWindow(input.getWindowToken(), 0);
+//			break;
+//
+//		}
+//
+//	}
 
 	public void openDb() {
 
 		mHelper = new DayHelper(FindK.this);
 		db = mHelper.getReadableDatabase();
 		dbWrite = mHelper.getWritableDatabase();
+	}
+
+	@Override
+	public void onClick(View arg0) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

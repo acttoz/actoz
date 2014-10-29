@@ -5,18 +5,12 @@ import java.util.Locale;
 
 import android.app.Service;
 import android.content.Context;
-import android.graphics.Color;
-import android.text.Spannable;
-import android.text.SpannableStringBuilder;
-import android.text.style.ForegroundColorSpan;
-import android.util.DisplayMetrics;
 import android.util.Log;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class Adapter_QuizView extends BaseAdapter {
@@ -33,11 +27,18 @@ public class Adapter_QuizView extends BaseAdapter {
 		// TODO Auto-generated constructor stub
 		mContext = context;
 		mLayout = layout;
-		oldItems = items;
 		mItems = items;
+		this.oldItems = new ArrayList<Custom_List_Data>();
+		oldItems.addAll(items);
 		mInflater = (LayoutInflater) mContext
 				.getSystemService(Service.LAYOUT_INFLATER_SERVICE);
+		Log.d("filter_size", oldItems.size() + "");
+		Log.d("filter_size", mItems.size() + "");
 
+	}
+
+	public class PersonViewHolder {
+		public TextView text;
 	}
 
 	@Override
@@ -59,58 +60,53 @@ public class Adapter_QuizView extends BaseAdapter {
 	}
 
 	@Override
-	public View getView(int position, View convertView, ViewGroup parent) {
-
+	public View getView(final int position, View convertView, ViewGroup parent) {
+		PersonViewHolder viewHolder;
 		View v = convertView;
 		if (v == null) {
 
 			v = mInflater.inflate(R.layout.customlist, null);
+			viewHolder = new PersonViewHolder();
+			viewHolder.text = (TextView) v.findViewById(R.id.textView);
+			v.setTag(viewHolder);
+		} else {
+			viewHolder = (PersonViewHolder) v.getTag();
 		}
-		Custom_List_Data Custom_List_Data = mItems.get(position);
+		// Custom_List_Data Custom_List_Data = mItems.get(position);
 
-		if (Custom_List_Data != null) {
-			if (mItems.get(position).Data != null) {
+		// if (Custom_List_Data != null) {
+		if (mItems.get(position).getData() != null) {
 
-				TextView textView = (TextView) v.findViewById(R.id.textView);
-				LinearLayout score = (LinearLayout) v.findViewById(R.id.score);
-				LinearLayout lscore = (LinearLayout) v
-						.findViewById(R.id.lscore);
-				LinearLayout sum = (LinearLayout) v.findViewById(R.id.sum);
-				word = FindK.word;
-				if (word != null) {
-					String str2 = mItems.get(position).Data;
-					int start = str2.indexOf(word);
-					int end = str2.indexOf(word) + word.length();
-					Log.d("≈ÿΩ∫∆Æ∫‰", str2);
-					Log.d("word", word);
-					final SpannableStringBuilder sp = new SpannableStringBuilder(
-							str2);
-					sp.setSpan(
-							new ForegroundColorSpan(Color.parseColor("#dae124")),
-							start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-					textView.setText("");
-					textView.append(sp);
-				} else {
-					textView.setText(mItems.get(position).Data);
-				}
+			viewHolder.text.setText(mItems.get(position).getData());
+		}
+		
+		v.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View arg0) {
+				// Send single item click data to SingleItemView Class
+				Log.d("onclick", mItems.get(position).getData());
 			}
-		}
+		});
 		return v;
 
 	}
 
 	// Filter Class
 	public void filter(String charText) {
-		Log.d("filter", "onchanged");
 		charText = charText.toLowerCase(Locale.getDefault());
 		mItems.clear();
 		if (charText.length() == 0) {
 			Log.d("filter", "0");
+			// mItems.addAll(oldItems);
+			// mItems.add(oldItems.);
 			mItems.addAll(oldItems);
+			Log.d("filter_size", oldItems.size() + "");
+			// Log.d("filter", oldItems.get(0).Data);
 		} else {
 			for (Custom_List_Data data : oldItems) {
-				if (data.Data.toLowerCase(Locale.getDefault()).contains(
-						charText)) {
+				if (data.getData().toLowerCase(Locale.getDefault())
+						.contains(charText)) {
 					Log.d("filter", "searching");
 					mItems.add(data);
 				}
@@ -119,9 +115,4 @@ public class Adapter_QuizView extends BaseAdapter {
 		notifyDataSetChanged();
 	}
 
-	public static int dipToPixels(Context context, int dipValue) {
-		DisplayMetrics metrics = context.getResources().getDisplayMetrics();
-		return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
-				dipValue, metrics);
-	}
 }
