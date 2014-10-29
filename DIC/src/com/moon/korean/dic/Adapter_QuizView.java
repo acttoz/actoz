@@ -5,6 +5,7 @@ import java.util.Locale;
 
 import android.app.Service;
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,17 +18,19 @@ public class Adapter_QuizView extends BaseAdapter {
 
 	private ArrayList<Custom_List_Data> mItems;
 	private ArrayList<Custom_List_Data> oldItems;
+	String SELECT;
 	private Context mContext;
 	String word;
 	int mLayout;
 	LayoutInflater mInflater;
 
 	public Adapter_QuizView(Context context, int layout,
-			ArrayList<Custom_List_Data> items) {
+			ArrayList<Custom_List_Data> items, String temp) {
 		// TODO Auto-generated constructor stub
 		mContext = context;
 		mLayout = layout;
 		mItems = items;
+		this.SELECT = temp;
 		this.oldItems = new ArrayList<Custom_List_Data>();
 		oldItems.addAll(items);
 		mInflater = (LayoutInflater) mContext
@@ -79,13 +82,17 @@ public class Adapter_QuizView extends BaseAdapter {
 
 			viewHolder.text.setText(mItems.get(position).getData());
 		}
-		
+
 		v.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View arg0) {
 				// Send single item click data to SingleItemView Class
 				Log.d("onclick", mItems.get(position).getData());
+				Intent teacherIntent = new Intent(mContext, Result.class);
+				teacherIntent.putExtra("WORD", mItems.get(position).getData());
+				teacherIntent.putExtra("SELECT", SELECT);
+				mContext.startActivity(teacherIntent);
 			}
 		});
 		return v;

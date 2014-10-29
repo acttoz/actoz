@@ -30,10 +30,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class FindK extends Activity implements OnClickListener {
-	TextView uid;
-	TextView name1;
-	TextView email1;
-	Button Btngetdata;
 	// URL to get JSON Array
 	private static String url;
 	// JSON Node Names
@@ -44,44 +40,16 @@ public class FindK extends Activity implements OnClickListener {
 	private static String TAG;
 	JSONArray jsonResult = null;
 	ListView listView;
-	DayHelper mHelper;
-	Handler mHandler;
 	Toast finishToast;
-	SQLiteDatabase db;
-	SQLiteDatabase dbWrite;
-	SharedPreferences idPrefs;
-	SharedPreferences firstRun = null;
-	SharedPreferences.Editor editor;
 	Adapter_QuizView listAdapter;
 	Custom_List_Data data;
-	Custom_List_Data data2;
-	Custom_List_Data data3;
-	Custom_List_Data data4;
 	ArrayList<Custom_List_Data> dateList;
-	Intent intent, popIntent;
 	Drawable alpha1;
 	Drawable alpha2;
 	Drawable alpha3;
-	public static String viewFlag;
 	ProgressDialog mProgressDialog;
-	String tempPrd;
-	String tempCht;
-	String tempTim;
-	String tableName = "";
-	Button searchBtn;
-	Boolean isTeacher;
-	int syncTime;
-	String jsonUrl;
-	static ArrayAdapter<String> schoolAdapter;
 	JSONObject jsonobject = null;
-	JSONArray jsonarray = null;
-	ArrayList<HashMap<String, String>> arraylist;
-	TextView temp;
-	int tempNum = 0;
-	boolean stop = false;
 	EditText input;
-	public static String word;
-	int textlength = 0;
 	String SELECT;
 
 	/** Called when the activity is first created. */
@@ -102,18 +70,8 @@ public class FindK extends Activity implements OnClickListener {
 			TAG = TAG_TOBAK;
 		}
 
-		word = null;
-		syncTime = 10000;
-		idPrefs = getSharedPreferences("id", MODE_PRIVATE);
-		editor = idPrefs.edit();
-		isTeacher = idPrefs.getBoolean("ISTEACHER", false);
 		finishToast = Toast.makeText(FindK.this, "'뒤로'버튼을 한번 더 누르시면 종료됩니다.",
 				Toast.LENGTH_SHORT);
-		if (isTeacher) {
-			tableName = "result_class";
-		} else {
-			tableName = "result";
-		}
 		// input.setOnEditorActionListener(new OnEditorActionListener() {
 		//
 		// @Override
@@ -143,8 +101,8 @@ public class FindK extends Activity implements OnClickListener {
 		// });
 
 		// 상단 버튼 등록
-//		searchBtn = (Button) findViewById(R.id.search_btn);
-//		searchBtn.setOnClickListener(this);
+		// searchBtn = (Button) findViewById(R.id.search_btn);
+		// searchBtn.setOnClickListener(this);
 
 		listView = (ListView) findViewById(R.id.listview3);
 
@@ -223,7 +181,7 @@ public class FindK extends Activity implements OnClickListener {
 
 					}
 					listAdapter = new Adapter_QuizView(FindK.this,
-							R.layout.customlist, dateList);
+							R.layout.customlist, dateList, SELECT);
 					// dateListView.setCacheColorHint(Color.rgb(255,2555,255));
 					listView.setAdapter(listAdapter);
 					listAdapter.notifyDataSetChanged();
@@ -281,36 +239,37 @@ public class FindK extends Activity implements OnClickListener {
 	// });
 	// }
 
-//	@Override
-//	public void onClick(View v) {
-//
-//		switch (v.getId()) {
-//
-//		case R.id.search_btn:
-//
-//			word = input.getText().toString();
-//			// initTime(word);
-//			editor.putString("SEARCH", word);
-//			editor.commit();
-//			InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-//			imm.hideSoftInputFromWindow(input.getWindowToken(), 0);
-//			break;
-//
-//		}
-//
-//	}
+	// @Override
+	// public void onClick(View v) {
+	//
+	// switch (v.getId()) {
+	//
+	// case R.id.search_btn:
+	//
+	// word = input.getText().toString();
+	// // initTime(word);
+	// editor.putString("SEARCH", word);
+	// editor.commit();
+	// InputMethodManager imm = (InputMethodManager)
+	// getSystemService(Context.INPUT_METHOD_SERVICE);
+	// imm.hideSoftInputFromWindow(input.getWindowToken(), 0);
+	// break;
+	//
+	// }
+	//
+	// }
 
-	public void openDb() {
-
-		mHelper = new DayHelper(FindK.this);
-		db = mHelper.getReadableDatabase();
-		dbWrite = mHelper.getWritableDatabase();
-	}
+	// public void openDb() {
+	//
+	// mHelper = new DayHelper(FindK.this);
+	// db = mHelper.getReadableDatabase();
+	// dbWrite = mHelper.getWritableDatabase();
+	// }
 
 	@Override
 	public void onClick(View arg0) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }
