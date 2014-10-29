@@ -29,7 +29,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class Result extends Activity implements OnClickListener {
+public class Input extends Activity implements OnClickListener {
 	// URL to get JSON Array
 	private static String url;
 	// JSON Node Names
@@ -53,15 +53,15 @@ public class Result extends Activity implements OnClickListener {
 	EditText input;
 	String WORD;
 	String SELECT;
-	TextView text_tobak;
-	TextView text_korean;
-	TextView text_mean;
+	EditText text_tobak;
+	EditText text_korean;
+	EditText text_mean;
 
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.result);
+		setContentView(R.layout.input);
 		Intent i = getIntent();
 		// Get the results of rank
 		SELECT = i.getStringExtra("SELECT");
@@ -76,9 +76,9 @@ public class Result extends Activity implements OnClickListener {
 		}
 		url = "http://actoze.dothome.co.kr/dic/math.php?select=" + SELECT
 				+ "_result&word=" + WORD;
-		text_korean = (TextView) findViewById(R.id.korean);
-		text_tobak = (TextView) findViewById(R.id.tobak);
-		text_mean = (TextView) findViewById(R.id.mean);
+		text_korean = (EditText) findViewById(R.id.korean);
+		text_tobak = (EditText) findViewById(R.id.tobak);
+		text_mean = (EditText) findViewById(R.id.mean);
 
 		new JSONParse().execute();
 	}
@@ -90,7 +90,7 @@ public class Result extends Activity implements OnClickListener {
 		protected void onPreExecute() {
 			super.onPreExecute();
 
-			pDialog = new ProgressDialog(Result.this);
+			pDialog = new ProgressDialog(Input.this);
 			pDialog.setMessage("Getting Data ...");
 			pDialog.setIndeterminate(false);
 			pDialog.setCancelable(true);
@@ -135,9 +135,7 @@ public class Result extends Activity implements OnClickListener {
 	@Override
 	public void onClick(View arg0) {
 		// TODO Auto-generated method stub
-//send to Input tobak,korean,mean
-		//here
-		
+
 	}
 
 }

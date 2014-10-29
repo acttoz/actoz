@@ -60,15 +60,12 @@ public class FindK extends Activity implements OnClickListener {
 		Intent i = getIntent();
 		// Get the results of rank
 		SELECT = i.getStringExtra("SELECT");
-		if (SELECT.equals("KOREAN")) {
-			Log.d("select", "korean");
-			url = "http://actoze.dothome.co.kr/dic/math.php?select=korean";
+		if (SELECT.equals("korean")) {
 			TAG = TAG_KOREAN;
 		} else {
-			Log.d("select", "tobak");
-			url = "http://actoze.dothome.co.kr/dic/math.php?select=tobak";
 			TAG = TAG_TOBAK;
 		}
+		url = "http://actoze.dothome.co.kr/dic/math.php?select=" + SELECT;
 
 		finishToast = Toast.makeText(FindK.this, "'뒤로'버튼을 한번 더 누르시면 종료됩니다.",
 				Toast.LENGTH_SHORT);

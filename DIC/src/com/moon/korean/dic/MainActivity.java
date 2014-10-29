@@ -70,14 +70,14 @@ public class MainActivity extends Activity implements OnClickListener {
 			alpha1 = bFindK.getBackground();
 			alpha1.setColorFilter(0x88FF0000, Mode.SRC_ATOP);
 			Intent teacherIntent = new Intent(this, FindK.class);
-			teacherIntent.putExtra("SELECT", "KOREAN");
+			teacherIntent.putExtra("SELECT", "korean");
 			startActivity(teacherIntent);
 			break;
 		case R.id.findT:
 			alpha2 = bFindT.getBackground();
 			alpha2.setColorFilter(0x88FF0000, Mode.SRC_ATOP);
 			Intent tobak = new Intent(this, FindK.class);
-			tobak.putExtra("SELECT", "TOBAK");
+			tobak.putExtra("SELECT", "tobak");
 			startActivity(tobak);
 			break;
 		case R.id.input:
