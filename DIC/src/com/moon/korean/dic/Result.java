@@ -56,6 +56,7 @@ public class Result extends Activity implements OnClickListener {
 	TextView text_tobak;
 	TextView text_korean;
 	TextView text_mean;
+	Button btn_input;
 
 	/** Called when the activity is first created. */
 	@Override
@@ -79,6 +80,8 @@ public class Result extends Activity implements OnClickListener {
 		text_korean = (TextView) findViewById(R.id.korean);
 		text_tobak = (TextView) findViewById(R.id.tobak);
 		text_mean = (TextView) findViewById(R.id.mean);
+		btn_input = (Button) findViewById(R.id.btn_input);
+		btn_input.setOnClickListener(this);
 
 		new JSONParse().execute();
 	}
@@ -134,10 +137,14 @@ public class Result extends Activity implements OnClickListener {
 
 	@Override
 	public void onClick(View arg0) {
-		// TODO Auto-generated method stub
-//send to Input tobak,korean,mean
-		//here
-		
+		switch (arg0.getId()) {
+
+		case R.id.btn_input:
+			Intent teacherIntent = new Intent(this, Input.class);
+			startActivity(teacherIntent);
+			break;
+
+		}
 	}
 
 }

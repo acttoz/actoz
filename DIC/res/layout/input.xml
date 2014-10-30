@@ -13,6 +13,7 @@
         android:orientation="vertical" >
 
         <Button
+            android:id="@+id/btn_save"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="저장하기" />
@@ -22,7 +23,7 @@
             style="@style/q"
             android:gravity="left"
             android:text="불러오는 중.."
-            android:textColor="#ffffff" />
+            android:textColor="#616161" />
 
         <TextView
             android:layout_width="fill_parent"
@@ -33,7 +34,7 @@
             style="@style/q"
             android:gravity="left"
             android:text="불러오는 중.."
-            android:textColor="#ffffff" />
+            android:textColor="#616161" />
 
         <TextView
             android:layout_width="fill_parent"
@@ -44,7 +45,7 @@
             style="@style/q"
             android:gravity="left"
             android:text="불러오는 중.."
-            android:textColor="#ffffff" />
+            android:textColor="#616161" />
     </LinearLayout>
 
 </ScrollView>
