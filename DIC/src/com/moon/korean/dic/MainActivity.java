@@ -47,16 +47,6 @@ public class MainActivity extends Activity implements OnClickListener {
 		bFindT.setOnClickListener(this);
 		bInput.setOnClickListener(this);
 
-		idPrefs = getSharedPreferences("id", MODE_PRIVATE);
-		editor = idPrefs.edit();
-
-		dbCopied = idPrefs.getBoolean("DBCOPY", false);
-		grade = idPrefs.getString("NAME", "null");
-		ban = idPrefs.getString("BAN", "null");
-		mSchool = idPrefs.getString("SCHOOL", "null");
-		DayHelper mHelper = new DayHelper(MainActivity.this);
-		SQLiteDatabase db = mHelper.getReadableDatabase();
-		db.close();
 		// if (!dbCopied)
 		// copySQLiteDB(this);
 
@@ -83,8 +73,8 @@ public class MainActivity extends Activity implements OnClickListener {
 		case R.id.input:
 			alpha3 = bInput.getBackground();
 			alpha3.setColorFilter(0x88FF0000, Mode.SRC_ATOP);
-			Intent gradeIntent = new Intent(this, FindK.class);
-			// firstLoginIntent.putExtra("BAN", ban);
+			Intent gradeIntent = new Intent(this, Input.class);
+			 gradeIntent.putExtra("SELECT", "insert");
 			startActivity(gradeIntent);
 			break;
 

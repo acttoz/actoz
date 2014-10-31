@@ -120,6 +120,7 @@ public class Result extends Activity implements OnClickListener {
 
 					jsonobject = jsonResult.getJSONObject(0);
 					// Retrive JSON Objects
+					Temp.id = jsonobject.getString("id");
 					Temp.tobak = jsonobject.getString(TAG_TOBAK);
 					Temp.korean = jsonobject.getString(TAG_KOREAN);
 					Temp.mean = jsonobject.getString(TAG_MEAN);
@@ -141,10 +142,20 @@ public class Result extends Activity implements OnClickListener {
 
 		case R.id.btn_input:
 			Intent teacherIntent = new Intent(this, Input.class);
+			teacherIntent.putExtra("SELECT", "update");
 			startActivity(teacherIntent);
+			Temp.saved = false;
 			break;
 
 		}
+	}
+
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		if (Temp.saved)
+			new JSONParse().execute();
 	}
 
 }

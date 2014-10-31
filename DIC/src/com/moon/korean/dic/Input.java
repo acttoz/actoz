@@ -22,6 +22,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -70,30 +71,20 @@ public class Input extends Activity implements OnClickListener {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.input);
-		// Intent i = getIntent();
-		// // Get the results of rank
-		// SELECT = i.getStringExtra("SELECT");
-		// SELECT = SELECT.replaceAll(" ", "%20");
-		// WORD = i.getStringExtra("WORD");
-		// WORD = WORD.replaceAll(" ", "%20");
-		//
-		// if (SELECT.equals("korean")) {
-		// TAG = TAG_KOREAN;
-		// } else {
-		// TAG = TAG_TOBAK;
-		// }
-		url = "http://actoze.dothome.co.kr/dic/math.php?select=" + SELECT
-				+ "_result&word=" + WORD;
+		Intent i = getIntent();
+		// Get the results of rank
+		SELECT = i.getStringExtra("SELECT");
 		text_korean = (EditText) findViewById(R.id.korean);
 		text_tobak = (EditText) findViewById(R.id.tobak);
 		text_mean = (EditText) findViewById(R.id.mean);
 		btn_save = (Button) findViewById(R.id.btn_save);
 		btn_save.setOnClickListener(this);
 
-		text_korean.setText(Temp.korean);
-		text_tobak.setText(Temp.tobak);
-		text_mean.setText(Temp.mean);
-
+		if (SELECT.equals("update")) {
+			text_korean.setText(Temp.korean);
+			text_tobak.setText(Temp.tobak);
+			text_mean.setText(Temp.mean);
+		}
 	}
 
 	private class Submit extends AsyncTask<String, String, String> {
@@ -115,7 +106,7 @@ public class Input extends Activity implements OnClickListener {
 			// Create a new HttpClient and Post Header
 			HttpClient httpclient = new DefaultHttpClient();
 			HttpPost httppost = new HttpPost(
-					"http://actoze.dothome.co.kr/dic/math.php?select=input");
+					"http://actoze.dothome.co.kr/dic/math.php?select=" + SELECT);
 			String response;
 			// This is the data to send
 
@@ -123,18 +114,18 @@ public class Input extends Activity implements OnClickListener {
 				// Add your data
 				List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(
 						1);
+				nameValuePairs.add(new BasicNameValuePair("id", Temp.id));
 				nameValuePairs.add(new BasicNameValuePair("tobak", Temp.tobak));
 				nameValuePairs
 						.add(new BasicNameValuePair("korean", Temp.korean));
 				nameValuePairs.add(new BasicNameValuePair("mean", Temp.mean));
 
-				httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
-
+				httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs,
+						"UTF-8"));
 				// Execute HTTP Post Request
 
 				ResponseHandler<String> responseHandler = new BasicResponseHandler();
 				response = httpclient.execute(httppost, responseHandler);
-
 				// This is the response from a php application
 
 			} catch (ClientProtocolException e) {
@@ -148,13 +139,14 @@ public class Input extends Activity implements OnClickListener {
 		@Override
 		protected void onPostExecute(String reverseString) {
 			pDialog.dismiss();
-
-			if (!reverseString.equals("error"))
+			if (reverseString.equals("success")) {
 				Toast.makeText(Input.this, "저장이 완료되었습니다.", Toast.LENGTH_LONG)
 						.show();
-			else
+				Temp.saved = true;
+			} else {
 				Toast.makeText(Input.this, "저장이 실패하였습니다.", Toast.LENGTH_LONG)
 						.show();
+			}
 		}
 	}
 

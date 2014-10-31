@@ -174,7 +174,6 @@ public class FindK extends Activity implements OnClickListener {
 							dateList.add(data);
 						}
 
-						Log.d("json", data.getData());
 
 					}
 					listAdapter = new Adapter_QuizView(FindK.this,

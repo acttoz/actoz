@@ -22,7 +22,7 @@
             android:id="@+id/tobak"
             style="@style/q"
             android:gravity="left"
-            android:text="불러오는 중.."
+            android:text=""
             android:textColor="#616161" />
 
         <TextView
@@ -33,7 +33,7 @@
             android:id="@+id/korean"
             style="@style/q"
             android:gravity="left"
-            android:text="불러오는 중.."
+            android:text=""
             android:textColor="#616161" />
 
         <TextView
@@ -44,7 +44,7 @@
             android:id="@+id/mean"
             style="@style/q"
             android:gravity="left"
-            android:text="불러오는 중.."
+            android:text=""
             android:textColor="#616161" />
     </LinearLayout>
 
