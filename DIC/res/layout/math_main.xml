@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res/a.com.kr.moon.math.phone"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    android:background="#5ac4bd"
     android:orientation="vertical" >
 
     <LinearLayout
@@ -13,22 +14,22 @@
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="0px"
-            android:layout_weight="1.5" />
+            android:layout_weight="1" />
 
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="0px"
             android:layout_gravity="center"
-            android:layout_weight="2"
+            android:layout_weight="5"
             android:gravity="center"
             android:orientation="vertical" >
 
             <ImageButton
-                android:id="@+id/findK"
+                android:id="@+id/findT"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="20dip"
-                android:background="@drawable/teacher" />
+                android:background="@drawable/tobak" />
 
             <TextView
                 android:layout_width="fill_parent"
@@ -36,11 +37,11 @@
                 android:layout_weight="1.5" />
 
             <ImageButton
-                android:id="@+id/findT"
+                android:id="@+id/findK"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="20dip"
-                android:background="@drawable/teacher" />
+                android:background="@drawable/korean" />
 
             <TextView
                 android:layout_width="fill_parent"
@@ -52,13 +53,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="20dip"
-                android:background="@drawable/student" />
+                android:background="@drawable/mean" />
         </LinearLayout>
 
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="0px"
-            android:layout_weight="1.5" />
+            android:layout_weight="1" />
     </LinearLayout>
 
 </FrameLayout>
