@@ -25,7 +25,7 @@
         android:layout_weight="1" />
 
     <ImageView
-        android:id="@+id/btn0"
+        android:id="@+id/content_image"
         android:layout_width="fill_parent"
         android:layout_height="0px"
         android:layout_weight="35"
@@ -52,6 +52,7 @@
             android:scaleType="centerInside" />
 
         <Button
+            android:id="@+id/btn1"
             android:layout_width="0px"
             android:layout_height="fill_parent"
             android:layout_gravity="center"
@@ -62,6 +63,7 @@
             android:text="소고춤이란" />
 
         <Button
+            android:id="@+id/btn2"
             android:layout_width="0px"
             android:layout_height="fill_parent"
             android:layout_gravity="center"
@@ -71,6 +73,7 @@
             android:text="소고에 대해" />
 
         <Button
+            android:id="@+id/btn3"
             android:layout_width="0px"
             android:layout_height="fill_parent"
             android:layout_gravity="center"

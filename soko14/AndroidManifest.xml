@@ -41,7 +41,10 @@
             android:name="FirstMenu"
             android:screenOrientation="landscape" >
         </activity>
-        <activity android:name="Info"></activity>
+        <activity
+            android:name="Info"
+            android:screenOrientation="landscape" >
+        </activity>
     </application>
 
 </manifest>
