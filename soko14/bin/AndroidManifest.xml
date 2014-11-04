@@ -42,7 +42,11 @@
             android:screenOrientation="landscape" >
         </activity>
         <activity
-            android:name="Info"
+            android:name="Menu1"
+            android:screenOrientation="landscape" >
+        </activity>
+        <activity
+            android:name="Menu2"
             android:screenOrientation="landscape" >
         </activity>
     </application>

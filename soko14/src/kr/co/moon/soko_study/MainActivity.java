@@ -30,7 +30,7 @@ public class MainActivity extends Activity implements OnClickListener {
 		// TODO Auto-generated method stub
 		switch (v.getId()) {
 		case R.id.btn0:
-			startActivity(new Intent(this, Info.class));
+			startActivity(new Intent(this, Menu1.class));
 			break;
 		case R.id.btn1:
 			startActivity(new Intent(this, FirstMenu.class));
