@@ -19,12 +19,6 @@ public class Menu1 extends Activity implements OnClickListener {
 	Bitmap content_bitmap;
 	Bitmap content_bitmap2;
 	Bitmap content_bitmap3;
-	Drawable alpha1;
-	Drawable alpha2;
-	Drawable alpha3;
-	Drawable alpha4;
-	Drawable alpha5;
-	Drawable alpha6;
 
 	/** Called when the activity is first created. */
 	@Override
@@ -41,7 +35,6 @@ public class Menu1 extends Activity implements OnClickListener {
 		content_btn1.setOnClickListener(this);
 		content_btn2.setOnClickListener(this);
 		content_btn3.setOnClickListener(this);
-		alpha1 = content_btn1.getBackground();
 	}
 
 	 

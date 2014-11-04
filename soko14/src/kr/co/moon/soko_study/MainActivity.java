@@ -33,7 +33,7 @@ public class MainActivity extends Activity implements OnClickListener {
 			startActivity(new Intent(this, Menu1.class));
 			break;
 		case R.id.btn1:
-			startActivity(new Intent(this, FirstMenu.class));
+			startActivity(new Intent(this, Menu2.class));
 			break;
 		case R.id.btn2:
 			startActivity(new Intent(this, SubMenu1.class));
