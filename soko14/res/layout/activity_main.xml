@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/title_bg"
+    
+    android:orientation="vertical" >
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="0px"
+        android:layout_weight="3" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0px"
+        android:layout_weight="4"
+        android:gravity="center"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="0px"
+            android:layout_height="fill_parent"
+            android:layout_weight="1" />
+
+        <LinearLayout
+            android:layout_width="0px"
+            android:layout_height="fill_parent"
+            android:layout_weight="4"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+            <ImageView
+                android:id="@+id/btn0"
+                android:layout_width="fill_parent"
+                android:layout_height="0px"
+                android:layout_weight="20"
+                android:scaleType="fitCenter"
+                android:src="@drawable/menu1" />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="0px"
+                android:layout_weight="1" />
+
+            <ImageView
+                android:id="@+id/btn1"
+                android:layout_width="fill_parent"
+                android:layout_height="0px"
+                android:layout_weight="20"
+                android:src="@drawable/menu2" />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="0px"
+                android:layout_weight="1" />
+
+            <ImageView
+                android:id="@+id/btn2"
+                android:layout_width="fill_parent"
+                android:layout_height="0px"
+                android:layout_weight="20"
+                android:src="@drawable/menu3" />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="0px"
+                android:layout_weight="1" />
+
+            <ImageView
+                android:id="@+id/btn3"
+                android:layout_width="fill_parent"
+                android:layout_height="0px"
+                android:layout_weight="20"
+                android:src="@drawable/menu4" />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="0px"
+                android:layout_weight="1" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="0px"
+            android:layout_height="fill_parent"
+            android:layout_weight="4" />
+    </LinearLayout>
+
+</LinearLayout>

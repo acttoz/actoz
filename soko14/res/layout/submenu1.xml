@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/back"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0px"
+        android:layout_weight="3"
+        android:background="@drawable/ribborn"
+        android:orientation="vertical" >
+
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:scaleType="centerInside"
+            android:src="@drawable/menu3" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="0px"
+        android:layout_weight="1" />
+     - 
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0px"
+        android:layout_weight="3" >
+
+        <TextView
+            android:layout_width="0px"
+            android:layout_height="fill_parent"
+            android:layout_weight="0.5" />
+
+        <ImageButton
+            android:id="@+id/imageButton1"
+            android:layout_width="0px"
+            android:layout_height="fill_parent"
+            android:layout_weight="3"
+            android:background="@drawable/b1" />
+
+        <ImageButton
+            android:id="@+id/imageButton2"
+            android:layout_width="0px"
+            android:layout_height="fill_parent"
+            android:layout_weight="3"
+            android:background="@drawable/b2" />
+
+        <ImageButton
+            android:id="@+id/imageButton3"
+            android:layout_width="0px"
+            android:layout_height="fill_parent"
+            android:layout_weight="3"
+            android:background="@drawable/b3" />
+
+        <ImageButton
+            android:id="@+id/imageButton4"
+            android:layout_width="0px"
+            android:layout_height="fill_parent"
+            android:layout_weight="3"
+            android:background="@drawable/b4" />
+
+        <ImageButton
+            android:id="@+id/imageButton5"
+            android:layout_width="0px"
+            android:layout_height="fill_parent"
+            android:layout_weight="3"
+            android:background="@drawable/b5" />
+
+        <TextView
+            android:layout_width="0px"
+            android:layout_height="fill_parent"
+            android:layout_weight="0.5" />
+    </LinearLayout>
+- 
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0px"
+        android:layout_weight="3" >
+
+        <TextView
+            android:layout_width="0px"
+            android:layout_height="fill_parent"
+            android:layout_weight="0.5" />
+
+        <ImageButton
+            android:id="@+id/imageButton6"
+            android:layout_width="0px"
+            android:layout_height="fill_parent"
+            android:layout_weight="3"
+            android:background="@drawable/b6" />
+
+        <ImageButton
+            android:id="@+id/imageButton7"
+            android:layout_width="0px"
+            android:layout_height="fill_parent"
+            android:layout_weight="3"
+            android:background="@drawable/b7" />
+
+        <ImageButton
+            android:id="@+id/imageButton8"
+            android:layout_width="0px"
+            android:layout_height="fill_parent"
+            android:layout_weight="3"
+            android:background="@drawable/b8" />
+
+        <ImageButton
+            android:id="@+id/imageButton9"
+            android:layout_width="0px"
+            android:layout_height="fill_parent"
+            android:layout_weight="3"
+            android:background="@drawable/b9" />
+
+        <ImageButton
+            android:id="@+id/imageButton10"
+            android:layout_width="0px"
+            android:layout_height="fill_parent"
+            android:layout_weight="3"
+            android:background="@drawable/b10" />
+
+        <TextView
+            android:layout_width="0px"
+            android:layout_height="fill_parent"
+            android:layout_weight="0.5" />
+    </LinearLayout>
+- 
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0px"
+        android:layout_weight="3" >
+
+        <TextView
+            android:layout_width="0px"
+            android:layout_height="fill_parent"
+            android:layout_weight="0.5" />
+
+        <ImageButton
+            android:id="@+id/imageButton11"
+            android:layout_width="0px"
+            android:layout_height="fill_parent"
+            android:layout_weight="3"
+            android:background="@drawable/b11" />
+
+        <ImageButton
+            android:id="@+id/imageButton12"
+            android:layout_width="0px"
+            android:layout_height="fill_parent"
+            android:layout_weight="3"
+            android:background="@drawable/b12" />
+
+        <ImageButton
+            android:id="@+id/imageButton13"
+            android:layout_width="0px"
+            android:layout_height="fill_parent"
+            android:layout_weight="3"
+            android:background="@drawable/b13" />
+
+        <ImageButton
+            android:id="@+id/imageButton14"
+            android:layout_width="0px"
+            android:layout_height="fill_parent"
+            android:layout_weight="3"
+            android:background="@drawable/b14" />
+
+        <ImageButton
+            android:id="@+id/imageButton15"
+            android:layout_width="0px"
+            android:layout_height="fill_parent"
+            android:layout_weight="3"
+            android:background="@drawable/b15" />
+
+        <TextView
+            android:layout_width="0px"
+            android:layout_height="fill_parent"
+            android:layout_weight="0.5" />
+    </LinearLayout>
+- 
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0px"
+        android:layout_weight="3" >
+
+        <TextView
+            android:layout_width="0px"
+            android:layout_height="fill_parent"
+            android:layout_weight="0.5" />
+
+        <ImageButton
+            android:id="@+id/imageButton16"
+            android:layout_width="0px"
+            android:layout_height="fill_parent"
+            android:layout_weight="3"
+            android:background="@drawable/b16" />
+
+        <ImageButton
+            android:id="@+id/imageButton17"
+            android:layout_width="0px"
+            android:layout_height="fill_parent"
+            android:layout_weight="3"
+            android:background="@drawable/b17" />
+
+        <ImageButton
+            android:id="@+id/imageButton18"
+            android:layout_width="0px"
+            android:layout_height="fill_parent"
+            android:layout_weight="3"
+            android:background="@drawable/b18" />
+
+         <Button
+            android:id="@+id/btn_back"
+            android:layout_width="0px"
+            android:layout_height="fill_parent"
+            android:layout_weight="3"
+            android:background="@drawable/content_btn"
+            android:text="←" />
+
+        <Button
+            android:id="@+id/btn_movie"
+            android:layout_width="0px"
+            android:layout_height="fill_parent"
+            android:layout_weight="3"
+            android:background="@drawable/content_btn"
+            android:text="영상보기" />
+
+        <TextView
+            android:layout_width="0px"
+            android:layout_height="fill_parent"
+            android:layout_weight="0.5" />
+    </LinearLayout>
+- 
+
+    
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="0px"
+        android:layout_weight="1" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0px"
+        android:layout_weight="2.5"
+        android:background="@drawable/ribborn"
+        android:gravity="center"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/playlist"
+            android:layout_width="0px"
+            android:layout_height="fill_parent"
+            android:layout_weight="5"
+            android:gravity="center_vertical|left"
+            android:paddingLeft="10dip"
+            android:text=""
+            android:textColor="#ffffff" />
+
+       
+    </LinearLayout>
+
+</LinearLayout>
