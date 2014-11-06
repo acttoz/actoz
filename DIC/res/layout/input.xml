@@ -1,51 +1,118 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/poiLinearLayout"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="#5ac4bd"
-    android:orientation="vertical"
-    android:padding="10dip" >
+    android:background="@drawable/bg"
+    android:orientation="vertical" >
 
-    <LinearLayout
+    <FrameLayout
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_height="0px"
+        android:layout_weight="5"
+        android:background="@drawable/base"
         android:orientation="vertical" >
 
-        <Button
-            android:id="@+id/btn_save"
+        <ImageView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_gravity="center"
+            android:padding="10dip"
+            android:scaleType="centerInside"
+            android:src="@drawable/title3" />
+    </FrameLayout>
+
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="0px"
+        android:layout_weight="1"
+        android:scaleType="fitXY"
+        android:src="@drawable/cloth" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="0px"
+        android:layout_weight="1" />
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="0px"
+        android:layout_weight="32" >
+
+        <LinearLayout
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="저장하기" />
+            android:layout_height="fill_parent"
+            android:orientation="vertical" >
 
-        <EditText
-            android:id="@+id/tobak"
-            style="@style/q"
-            android:gravity="left"
-            android:text=""
-            android:textColor="#616161" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="50dip"
+                android:layout_gravity="left"
+                android:padding="5dip"
+                android:scaleType="fitStart"
+                android:src="@drawable/input_tobak" />
 
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="5dip" />
+            <EditText
+                android:id="@+id/tobak"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dip"
+                android:ems="10"
+                android:gravity="center"
+                android:textColor="#3b3b3b"
+                android:textSize="15sp" />
 
-        <EditText
-            android:id="@+id/korean"
-            style="@style/q"
-            android:gravity="left"
-            android:text=""
-            android:textColor="#616161" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="50dip"
+                android:layout_gravity="left"
+                android:padding="5dip"
+                android:scaleType="fitStart"
+                android:src="@drawable/input_kroean" />
 
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="5dip" />
+            <EditText
+                android:id="@+id/korean"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dip"
+                android:ems="10"
+                android:gravity="center"
+                android:textColor="#3b3b3b"
+                android:textSize="15sp" />
 
-        <EditText
-            android:id="@+id/mean"
-            style="@style/q"
-            android:gravity="left"
-            android:text=""
-            android:textColor="#616161" />
-    </LinearLayout>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="50dip"
+                android:layout_gravity="left"
+                android:padding="5dip"
+                android:scaleType="fitStart"
+                android:src="@drawable/input_mean" />
 
-</ScrollView>
+            <EditText
+                android:id="@+id/mean"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dip"
+                android:ems="10"
+                android:gravity="center"
+                android:textColor="#3b3b3b"
+                android:textSize="15sp" />
+        </LinearLayout>
+    </ScrollView>
+
+    <ImageView
+        android:id="@+id/btn_save"
+        android:layout_width="wrap_content"
+        android:layout_height="0px"
+        android:layout_gravity="left"
+        android:layout_weight="5"
+        android:padding="1dip"
+        android:scaleType="fitCenter"
+        android:src="@drawable/btn_save" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="0px"
+        android:layout_weight="1" />
+
+</LinearLayout>

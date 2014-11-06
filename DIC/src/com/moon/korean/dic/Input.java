@@ -32,6 +32,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -64,7 +65,8 @@ public class Input extends Activity implements OnClickListener {
 	EditText text_tobak;
 	EditText text_korean;
 	EditText text_mean;
-	Button btn_save;
+	ImageView title;
+	ImageView btn_save;
 
 	/** Called when the activity is first created. */
 	@Override
@@ -73,14 +75,16 @@ public class Input extends Activity implements OnClickListener {
 		setContentView(R.layout.input);
 		Intent i = getIntent();
 		// Get the results of rank
+		ImageView title = (ImageView) findViewById(R.id.title);
 		SELECT = i.getStringExtra("SELECT");
 		text_korean = (EditText) findViewById(R.id.korean);
 		text_tobak = (EditText) findViewById(R.id.tobak);
 		text_mean = (EditText) findViewById(R.id.mean);
-		btn_save = (Button) findViewById(R.id.btn_save);
+		btn_save = (ImageView) findViewById(R.id.btn_save);
 		btn_save.setOnClickListener(this);
 
 		if (SELECT.equals("update")) {
+			title.setImageResource(R.drawable.title_update);
 			text_korean.setText(Temp.korean);
 			text_tobak.setText(Temp.tobak);
 			text_mean.setText(Temp.mean);
@@ -155,13 +159,19 @@ public class Input extends Activity implements OnClickListener {
 		// TODO Auto-generated method stub
 		switch (arg0.getId()) {
 		case R.id.btn_save:
-			mDialog = createDialog();
-			mDialog.show();
-			mDialog.getWindow().getAttributes();
-			TextView textView = (TextView) mDialog
-					.findViewById(android.R.id.message);
-			textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
-
+			if (text_korean.getText().toString().equals("")
+					|| text_tobak.getText().toString().equals("")
+					|| text_mean.getText().toString().equals("")) {
+				Toast.makeText(Input.this, "∫Ûƒ≠¿Ã ¿÷Ω¿¥œ¥Ÿ.",
+						Toast.LENGTH_SHORT).show();
+			} else {
+				mDialog = createDialog();
+				mDialog.show();
+				mDialog.getWindow().getAttributes();
+				TextView textView = (TextView) mDialog
+						.findViewById(android.R.id.message);
+				textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+			}
 			break;
 		}
 	}

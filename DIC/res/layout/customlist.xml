@@ -16,7 +16,7 @@
             android:id="@+id/textView"
             style="@style/q"
             android:gravity="left"
-            android:textColor="#ffffff" />
+            android:textColor="#3b3b3b" />
  
     </LinearLayout>
 

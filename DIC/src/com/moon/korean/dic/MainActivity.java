@@ -12,14 +12,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.AssetManager;
-import android.database.sqlite.SQLiteDatabase;
 import android.graphics.PorterDuff.Mode;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.ImageButton;
+import android.widget.ImageView;
 
 public class MainActivity extends Activity implements OnClickListener {
 	SharedPreferences idPrefs;
@@ -28,9 +27,11 @@ public class MainActivity extends Activity implements OnClickListener {
 	static String grade = "null";
 	static String ban = "null";
 	static String mSchool;
-	ImageButton bFindK;
-	ImageButton bFindT;
-	ImageButton bInput;
+	ImageView bBack;
+	ImageView bHome;
+	ImageView bFindK;
+	ImageView bFindT;
+	ImageView bInput;
 	boolean dbCopied;
 	Drawable alpha1, alpha2, alpha3;
 
@@ -40,9 +41,9 @@ public class MainActivity extends Activity implements OnClickListener {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.math_main);
 		// TODO Auto-generated method stub
-		bFindK = (ImageButton) findViewById(R.id.findK);
-		bFindT = (ImageButton) findViewById(R.id.findT);
-		bInput = (ImageButton) findViewById(R.id.input);
+		bFindK = (ImageView) findViewById(R.id.findK);
+		bFindT = (ImageView) findViewById(R.id.findT);
+		bInput = (ImageView) findViewById(R.id.input);
 		bFindK.setOnClickListener(this);
 		bFindT.setOnClickListener(this);
 		bInput.setOnClickListener(this);
@@ -57,24 +58,24 @@ public class MainActivity extends Activity implements OnClickListener {
 		// TODO Auto-generated method stub
 		switch (arg0.getId()) {
 		case R.id.findK:
-			alpha1 = bFindK.getBackground();
+			alpha1 = bFindK.getDrawable();
 			alpha1.setColorFilter(0x88FF0000, Mode.SRC_ATOP);
 			Intent teacherIntent = new Intent(this, FindK.class);
 			teacherIntent.putExtra("SELECT", "korean");
 			startActivity(teacherIntent);
 			break;
 		case R.id.findT:
-			alpha2 = bFindT.getBackground();
+			alpha2 = bFindT.getDrawable();
 			alpha2.setColorFilter(0x88FF0000, Mode.SRC_ATOP);
 			Intent tobak = new Intent(this, FindK.class);
 			tobak.putExtra("SELECT", "tobak");
 			startActivity(tobak);
 			break;
 		case R.id.input:
-			alpha3 = bInput.getBackground();
+			alpha3 = bInput.getDrawable();
 			alpha3.setColorFilter(0x88FF0000, Mode.SRC_ATOP);
 			Intent gradeIntent = new Intent(this, Input.class);
-			 gradeIntent.putExtra("SELECT", "insert");
+			gradeIntent.putExtra("SELECT", "insert");
 			startActivity(gradeIntent);
 			break;
 
@@ -129,9 +130,9 @@ public class MainActivity extends Activity implements OnClickListener {
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
-		alpha1 = bFindK.getBackground();
-		alpha2 = bFindT.getBackground();
-		alpha3 = bInput.getBackground();
+		alpha1 = bFindK.getDrawable();
+		alpha2 = bFindT.getDrawable();
+		alpha3 = bInput.getDrawable();
 		alpha1.setColorFilter(0xffffffff, Mode.MULTIPLY);
 		alpha2.setColorFilter(0xffffffff, Mode.MULTIPLY);
 		alpha3.setColorFilter(0xffffffff, Mode.MULTIPLY);

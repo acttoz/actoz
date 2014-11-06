@@ -25,6 +25,7 @@ import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -56,13 +57,16 @@ public class FindK extends Activity implements OnClickListener {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.quiz_view);
+		setContentView(R.layout.find);
 		Intent i = getIntent();
 		// Get the results of rank
+		ImageView title = (ImageView) findViewById(R.id.title);
 		SELECT = i.getStringExtra("SELECT");
 		if (SELECT.equals("korean")) {
+			title.setImageResource(R.drawable.title2);
 			TAG = TAG_KOREAN;
 		} else {
+			title.setImageResource(R.drawable.title1);
 			TAG = TAG_TOBAK;
 		}
 		url = "http://actoze.dothome.co.kr/dic/math.php?select=" + SELECT;
@@ -173,7 +177,6 @@ public class FindK extends Activity implements OnClickListener {
 									jsonobject.getString(TAG));
 							dateList.add(data);
 						}
-
 
 					}
 					listAdapter = new Adapter_QuizView(FindK.this,

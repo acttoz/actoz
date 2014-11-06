@@ -1,8 +1,6 @@
 package com.moon.korean.dic;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Locale;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -11,20 +9,14 @@ import org.json.JSONObject;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.database.sqlite.SQLiteDatabase;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -56,7 +48,7 @@ public class Result extends Activity implements OnClickListener {
 	TextView text_tobak;
 	TextView text_korean;
 	TextView text_mean;
-	Button btn_input;
+	ImageView btn_input;
 
 	/** Called when the activity is first created. */
 	@Override
@@ -80,7 +72,7 @@ public class Result extends Activity implements OnClickListener {
 		text_korean = (TextView) findViewById(R.id.korean);
 		text_tobak = (TextView) findViewById(R.id.tobak);
 		text_mean = (TextView) findViewById(R.id.mean);
-		btn_input = (Button) findViewById(R.id.btn_input);
+		btn_input = (ImageView) findViewById(R.id.btn_input);
 		btn_input.setOnClickListener(this);
 
 		new JSONParse().execute();
