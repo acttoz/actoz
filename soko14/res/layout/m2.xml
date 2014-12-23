@@ -3,13 +3,13 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="@drawable/back"
+    android:paddingLeft="50dip"
     android:orientation="vertical" >
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="0px"
         android:layout_weight="5"
-        android:background="@drawable/ribborn"
         android:orientation="vertical" >
 
         <ImageView
@@ -71,7 +71,6 @@
         android:layout_width="fill_parent"
         android:layout_height="0px"
         android:layout_weight="5"
-        android:background="@drawable/ribborn"
         android:gravity="center"
         android:orientation="horizontal" >
 
