@@ -1,35 +1,41 @@
 /* All Device */
-@media all {
-	.title {
-		margin: 0px auto;
-		display: inline-block;
-		position: absolute;
-	}
-	.ci {
-		margin: 0px auto;
-		display: inline-block;
-		position: absolute;
-	}
-	.bar {
-		width: 100%;
-		position: absolute;
-		top: 0px;
-		left: 0px;
-		z-index: 1;
-	}
-}
-/* Mobile Device */
-@media (max-width: 767px) {
-	.title {
-		width: 240px;
-		padding-top: 10px;
-	}
-	.bar {
-		height: 54px;
-		width: 100%;
-	}
+.app_name {
+	font-weight: bold;
+	color: #ffffff;
 }
 
+.title {
+	left: -50%;
+	display: block;
+	position: relative;
+}
+.ci {
+	display: block;
+	position: relative;
+}
+
+/* Mobile Device */
+.title {
+	width: 180px;
+	padding-top: 13px;
+}
+.bar {
+	height: 54px;
+	width: 100%;
+}
+.ci {
+	padding-top: 14px;
+	width: 24px;
+}
+.paddin_v {
+	top: 50px;
+}
+.icon {
+	width: 100px;
+}
+.paddin_v {
+	top: 70px;
+}
 /* Tablet & Desktop Device */
 @media (min-width: 768px) {
 	.title {
@@ -38,5 +44,15 @@
 	}
 	.bar {
 		height: 108px;
+	}
+	.ci {
+		padding-top: 20px;
+		width: 68px;
+	}
+	.icon {
+		width: 200px;
+	}
+	.paddin_v {
+		top: 200px;
 	}
 }
