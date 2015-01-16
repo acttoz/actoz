@@ -27,13 +27,17 @@
 	padding-top: 14px;
 	width: 24px;
 }
-.paddin_v {
-	top: 50px;
-}
+
 .icon {
 	width: 100px;
 }
-.paddin_v {
+.icon2 {
+	width: 150px;
+}
+.btn {
+	width: 200px;
+}
+.padding_v {
 	top: 70px;
 }
 /* Tablet & Desktop Device */
@@ -52,7 +56,13 @@
 	.icon {
 		width: 150px;
 	}
-	.paddin_v {
+	.icon2 {
+		width: 200px;
+	}
+	.padding_v {
 		top: 150px;
+	}
+	.btn {
+		width: 300px;
 	}
 }

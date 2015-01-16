@@ -3,11 +3,11 @@
 	<head>
 		<title> 경남교육청 앱스토어</title >
 		<meta http-equiv='Content-Type' content='text/html' charset='utf-8'>
-		<meta name= "viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, user-scalable=no" />
+		<meta name= "viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
 		<style type= "text/css">
 			body {
 				background-image: url("img/back.png");
-				background-size: 50%;
+				background-size: 100%;
 			}
 		</style>
 		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
@@ -18,23 +18,46 @@
 		<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 	</head>
 	<body>
-		<header style="width: 100%;left: 0;top: 0;">
-			<div style="position: relative">
-				<img class="bar" src="img/bar.png" style="width: 100%;position: absolute;top: 0px;left: 0px;z-index: 1;"/>
-				<div style="width: 100%;position:absolute; top: 0px; left: 0px; z-index: 3;">
-					<div style="position: relative;width: 100%;">
-						<div style="position: absolute; left: 50%;">
-							<img class="title"src="img/title1.png"/>
-						</div>
-						<div style="position: absolute; right: 5%;">
-							<img class="ci" src="img/ci.png"/>
+		<div style="position:static; width: 100%;left: 0;top: 0;">
+			<div>
+				<div style="position: relative">
+					<img class="bar" src="img/bar.png" style="width: 100%;position: absolute;top: 0px;left: 0px;z-index: 1;"/>
+					<div style="width: 100%;position:absolute; top: 0px; left: 0px; z-index: 3;">
+						<div style="position: relative;width: 100%;">
+							<div style="position: absolute; left: 50%;">
+								<img class="title"src="img/title1.png"/>
+							</div>
+							<div style="position: absolute; right: 5%;">
+								<img class="ci" src="img/ci.png"/>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		</header>
+		</div>
 
-		
+		<div class="padding_v" style="position: relative;">
+			<div>
+				<table align="center"  style="width:100%;">
+					<tr>
+						<td rowspan="3" style="width:50%;" align="center"><img class="icon2" src="img/icon/1.png"/></td>
+						<td align="center"><h3 style="font-weight: bold;color: #ffffff;">전래동화와 함께 떠나는 수학나라</h3></td>
+					</tr>
+					<tr>
+						<td align="center"><img class="btn" src="img/down_app.png"/></td></td>
+
+					</tr>
+					<tr>
+						<td align="center"><img class="btn" src="img/down_ppt.png"/></td>
+					</tr>
+				</table>
+			</div>
+			<br>
+			<div>
+				<img id="content" style="width: 100%;" src="img/content/1.jpg"/>
+			</div>
+		</div>
+
 		<script src="app.js"></script>
 	</body>
 </html>
