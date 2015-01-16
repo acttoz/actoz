@@ -1,0 +1,42 @@
+/* All Device */
+@media all {
+	.title {
+		margin: 0px auto;
+		display: inline-block;
+		position: absolute;
+	}
+	.ci {
+		margin: 0px auto;
+		display: inline-block;
+		position: absolute;
+	}
+	.bar {
+		width: 100%;
+		position: absolute;
+		top: 0px;
+		left: 0px;
+		z-index: 1;
+	}
+}
+/* Mobile Device */
+@media (max-width: 767px) {
+	.title {
+		width: 240px;
+		padding-top: 10px;
+	}
+	.bar {
+		height: 54px;
+		width: 100%;
+	}
+}
+
+/* Tablet & Desktop Device */
+@media (min-width: 768px) {
+	.title {
+		padding-top: 20px;
+		width: 480px;
+	}
+	.bar {
+		height: 108px;
+	}
+}
