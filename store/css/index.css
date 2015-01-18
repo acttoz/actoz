@@ -1,5 +1,12 @@
-/* All Device */
-.app_name {
+.top-buffer {
+	margin-top: 20px;
+}
+h7 {
+	font-weight: bold;
+	color: #ffffff;
+}
+.h8 {
+	display: block;
 	font-weight: bold;
 	color: #ffffff;
 }
@@ -15,43 +22,69 @@
 }
 
 /* Mobile Device */
+.h8 {
+	font-size: 80%;
+}
 .title {
-	width: 180px;
-	padding-top: 13px;
+	width: 140px;
+	padding-top: 17px;
 }
 .bar {
 	height: 54px;
 	width: 100%;
 }
 .ci {
-	padding-top: 14px;
-	width: 24px;
+	padding-top: 16px;
+	width: 22px;
+}
+.btn_back {
+	padding-top: 16px;
+	width: 27px;
 }
 
 .icon {
 	width: 100px;
 }
 .icon2 {
-	width: 150px;
+	width: 90%;
 }
-.btn {
-	width: 200px;
+.btn_down {
+	width: 80%;
+}
+.padding_i {
+	top: 70px;
+	width: 280px;
 }
 .padding_v {
 	top: 70px;
+	width: 300px;
+}
+
+.app_content {
+	width: 300px;
 }
 /* Tablet & Desktop Device */
 @media (min-width: 768px) {
+	h7 {
+		font-size: 200%;
+	}
+	.h8 {
+		font-size: 150%;
+	}
 	.title {
-		padding-top: 20px;
-		width: 480px;
+		padding-top: 25px;
+		width: 380px;
 	}
 	.bar {
 		height: 108px;
 	}
 	.ci {
-		padding-top: 20px;
-		width: 68px;
+		padding-top: 30px;
+		width: 48px;
+	}
+	.btn_back {
+		padding-top: 30px;
+		width: 58px;
 	}
 	.icon {
 		width: 150px;
@@ -60,9 +93,30 @@
 		width: 200px;
 	}
 	.padding_v {
+		width: 700px;
 		top: 150px;
 	}
-	.btn {
-		width: 300px;
+	.padding_i {
+		width: 700px;
+		top: 150px;
+	}
+	.btn_down {
+		width: 60%;
+	}
+	.app_content {
+		width: 700px;
+	}
+}
+@media (min-width: 992px) {
+	.padding_v {
+		width: 894px;
+		top: 150px;
+	}
+	.app_content {
+		width: 894px;
+	}
+	.padding_i {
+		width: 894px;
+		top: 150px;
 	}
 }

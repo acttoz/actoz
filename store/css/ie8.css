@@ -1,0 +1,74 @@
+.table_cell {
+	vertical-align: top;
+	width: 150px;
+}
+
+.table_row {
+	height: 250px;
+}
+
+.top-buffer {
+	margin-top: 20px;
+}
+.h7 {
+	font-weight: bold;
+	color: #ffffff;
+}
+.h8 {
+	display: block;
+	font-weight: bold;
+	color: #ffffff;
+}
+
+.title {
+	left: -50%;
+	display: block;
+	position: relative;
+}
+.ci {
+	display: block;
+	position: relative;
+}
+
+.h7 {
+	font-size: 200%;
+}
+.h8 {
+	font-size: 100%;
+}
+.title {
+	padding-top: 25px;
+	width: 380px;
+}
+.bar {
+	height: 108px;
+}
+.ci {
+	padding-top: 30px;
+	width: 48px;
+}
+.btn_back {
+	padding-top: 30px;
+	width: 58px;
+}
+.icon {
+	width: 150px;
+}
+.icon2 {
+	width: 200px;
+}
+.padding_v {
+	width: 900px;
+	top: 150px;
+}
+.padding_i {
+	width: 1024px;
+	top: 150px;
+}
+.btn_down {
+	width: 60%;
+}
+.app_content {
+	width: 900px;
+}
+
