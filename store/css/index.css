@@ -26,8 +26,8 @@ h7 {
 	font-size: 80%;
 }
 .title {
-	width: 170px;
-	padding-top: 17px;
+	width: 150px;
+	padding-top: 11px;
 }
 .bar {
 	height: 54px;
@@ -63,16 +63,20 @@ h7 {
 .app_content {
 	width: 300px;
 }
+
+.store_icon {
+	width: 14px;
+}
 /* Tablet & Desktop Device */
 @media (min-width: 768px) {
 	h7 {
-		font-size: 200%;
-	}
-	.h8 {
 		font-size: 150%;
 	}
+	.h8 {
+		font-size: 130%;
+	}
 	.title {
-		padding-top: 25px;
+		padding-top: 13px;
 		width: 380px;
 	}
 	.bar {
@@ -106,6 +110,9 @@ h7 {
 	.app_content {
 		width: 700px;
 	}
+	.store_icon {
+		width: 24px;
+	}
 }
 @media (min-width: 992px) {
 	.padding_v {
@@ -118,5 +125,8 @@ h7 {
 	.padding_i {
 		width: 894px;
 		top: 150px;
+	}
+	.store_icon {
+		width: 24px;
 	}
 }

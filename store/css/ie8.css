@@ -37,7 +37,7 @@
 	font-size: 100%;
 }
 .title {
-	padding-top: 25px;
+	padding-top: 13px;
 	width: 380px;
 }
 .bar {
@@ -48,8 +48,8 @@
 	width: 48px;
 }
 .btn_back {
-	padding-top: 30px;
-	width: 58px;
+	padding-top: 12px;
+	width: 100px;
 }
 .icon {
 	width: 150px;
