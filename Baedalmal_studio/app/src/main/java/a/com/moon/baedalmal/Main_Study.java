@@ -529,9 +529,9 @@ public class Main_Study extends Activity implements OnClickListener {
 
                 } else if (MotionEvent.ACTION_UP == event.getAction()) {
                     game3.setColorFilter(0xffffff55, Mode.MULTIPLY);
-                    Intent activityIntent = new Intent(Main_Study.this,
-                            Act3.class);
-                    startActivity(activityIntent);
+                    Intent intent = new Intent(Intent.ACTION_VIEW);
+                    intent.setData(Uri.parse("market://details?id=com.moon.tobak.jump"));
+                    startActivity(intent);
                 }
 
                 return true;

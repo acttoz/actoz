@@ -2,6 +2,13 @@
 <items version="2" >
 
     <item
+        jar="D:\work\baedal2\app\libs\httpclient-4.3.1.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="0171c67fa04952e76bc9ee1e578fe629db35d769">
+        <dex dex="D:\work\baedal2\app\build\intermediates\pre-dexed\debug\httpclient-4.3.1-d35c4f83a94aafaabba76575c06663fd7fdb0667.jar" />
+    </item>
+    <item
         jar="D:\work\Baedalmal\app\libs\httpmime-4.3.1.jar"
         jumboMode="false"
         revision="21.1.2"
@@ -16,6 +23,20 @@
         <dex dex="D:\work\Baedalmal\app\build\intermediates\pre-dexed\debug\httpcore-4.3-7331538728fbc0558718a067f545b8279aa6b419.jar" />
     </item>
     <item
+        jar="D:\work\Baedalmal\app\libs\httpclient-4.3.1.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="0171c67fa04952e76bc9ee1e578fe629db35d769">
+        <dex dex="D:\work\Baedalmal\app\build\intermediates\pre-dexed\debug\httpclient-4.3.1-dd735859d5319e66087256cf78b565dfef977770.jar" />
+    </item>
+    <item
+        jar="D:\work\baedal2\app\libs\httpmime-4.3.1.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="f49e2348b768a7199e021a97e951df25cd5fb714">
+        <dex dex="D:\work\baedal2\app\build\intermediates\pre-dexed\debug\httpmime-4.3.1-c1a54c853c91c81de99f6ee40d51c706e7972394.jar" />
+    </item>
+    <item
         jar="C:\sdk\extras\android\m2repository\com\android\support\support-v4\18.0.0\support-v4-18.0.0.jar"
         jumboMode="false"
         revision="21.1.2"
@@ -23,11 +44,11 @@
         <dex dex="D:\work\Baedalmal\app\build\intermediates\pre-dexed\debug\support-v4-18.0.0-18eaeb0b76a869cebc7f24db8a4a07da16c5ae09.jar" />
     </item>
     <item
-        jar="D:\work\Baedalmal\app\libs\httpclient-4.3.1.jar"
+        jar="D:\work\baedal2\app\libs\httpcore-4.3.jar"
         jumboMode="false"
         revision="21.1.2"
-        sha1="0171c67fa04952e76bc9ee1e578fe629db35d769">
-        <dex dex="D:\work\Baedalmal\app\build\intermediates\pre-dexed\debug\httpclient-4.3.1-dd735859d5319e66087256cf78b565dfef977770.jar" />
+        sha1="8dfd6286d04ad9dbf26cdf7d4ef5c8fad430cf30">
+        <dex dex="D:\work\baedal2\app\build\intermediates\pre-dexed\debug\httpcore-4.3-d5cb3c42f0fbbe9749c2f95b45390f5bd970a292.jar" />
     </item>
 
 </items>
