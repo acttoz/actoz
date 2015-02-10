@@ -1,0 +1,5 @@
+D:\work\Baedalmal\app\build\intermediates\classes\debug
+D:\work\Baedalmal\app\build\intermediates\pre-dexed\debug\httpmime-4.3.1-3448c0fa60df7732052d69f15ac8e34f3aa55b70.jar
+D:\work\Baedalmal\app\build\intermediates\pre-dexed\debug\httpcore-4.3-7331538728fbc0558718a067f545b8279aa6b419.jar
+D:\work\Baedalmal\app\build\intermediates\pre-dexed\debug\httpclient-4.3.1-dd735859d5319e66087256cf78b565dfef977770.jar
+D:\work\Baedalmal\app\build\intermediates\pre-dexed\debug\support-v4-18.0.0-18eaeb0b76a869cebc7f24db8a4a07da16c5ae09.jar

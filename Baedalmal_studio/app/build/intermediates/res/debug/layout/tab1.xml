@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:gravity="center"
+    android:orientation="vertical" >
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter"
+            android:src="@drawable/tab1_content" />
+    </ScrollView>
+
+    <ImageView
+        android:id="@+id/help"
+        android:layout_width="60dip"
+        android:layout_height="60dip"
+        android:layout_gravity="right|bottom"
+        android:scaleType="fitCenter"
+        android:src="@drawable/help_btn" />
+
+</FrameLayout><!-- From: file:/D:/work/Baedalmal/app/src/main/res/layout/tab1.xml -->

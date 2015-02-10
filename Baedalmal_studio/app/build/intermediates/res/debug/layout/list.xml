@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#e2e2d7"
+    android:orientation="vertical" >
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="0px"
+        android:layout_weight="1.5"
+        android:background="@drawable/header"
+        android:text="Chapter List"
+        android:gravity="center"
+        android:textColor="#ffffff"
+        android:textSize="25sp" >
+    </TextView>
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="0px"
+        android:layout_weight="0.2" >
+    </TextView>
+
+    <ListView
+        android:id="@+id/listview"
+        android:layout_margin="10dp"
+        android:layout_width="fill_parent"
+        android:layout_height="0px"
+        android:layout_weight="9"
+        android:background="@drawable/list" >
+    </ListView>
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="0px"
+        android:layout_weight="0.2" >
+    </TextView>
+
+</LinearLayout><!-- From: file:/D:/work/Baedalmal/app/src/main/res/layout/list.xml -->

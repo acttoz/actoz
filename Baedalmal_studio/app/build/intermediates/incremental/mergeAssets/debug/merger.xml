@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merger version="3"><dataSet config="main"><source path="D:\work\Baedalmal\app\src\main\assets"><file name="quiz.db" path="D:\work\Baedalmal\app\src\main\assets\quiz.db"/></source></dataSet><dataSet config="debug"><source path="D:\work\Baedalmal\app\src\debug\assets"/></dataSet></merger>

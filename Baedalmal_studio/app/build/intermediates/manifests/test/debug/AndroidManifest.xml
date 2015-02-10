@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="a.com.moon.baedalmal.test">
+
+    <uses-sdk android:minSdkVersion="7" android:targetSdkVersion="15" />
+
+    <application>
+        <uses-library android:name="android.test.runner" />
+    </application>
+
+    <instrumentation android:name="android.test.InstrumentationTestRunner"
+                     android:targetPackage="a.com.moon.baedalmal"
+                     android:handleProfiling="false"
+                     android:functionalTest="false"
+                     android:label="Tests for a.com.moon.baedalmal"/>
+</manifest>

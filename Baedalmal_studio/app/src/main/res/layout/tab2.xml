@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical" >
+
+        <WebView
+            android:id="@+id/webview"
+            android:layout_width="fill_parent"
+            android:layout_height="0px"
+            android:layout_weight="1" />
+
+        <ImageView
+            android:id="@+id/share"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:adjustViewBounds="true"
+            android:background="#ffffff"
+            android:src="@drawable/share" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/sub_back"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" />
+
+    <LinearLayout
+        android:id="@+id/sub_menu"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_gravity="left"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/sub1"
+            android:layout_width="wrap_content"
+            android:layout_height="0px"
+            android:layout_weight="1"
+            android:adjustViewBounds="true"
+            android:background="@drawable/sub_back"
+            android:gravity="center"
+            android:paddingRight="30dip"
+            android:scaleType="centerInside"
+            android:text="움직그림"
+            android:textColor="#ffffff" />
+
+        <TextView
+            android:id="@+id/sub2"
+            android:layout_width="wrap_content"
+            android:layout_height="0px"
+            android:layout_weight="1"
+            android:adjustViewBounds="true"
+            android:background="@drawable/sub_back"
+            android:gravity="center"
+            android:paddingRight="30dip"
+            android:scaleType="centerInside"
+            android:text="맛보기"
+            android:textColor="#ffffff" />
+
+        <TextView
+            android:id="@+id/sub3"
+            android:layout_width="wrap_content"
+            android:layout_height="0px"
+            android:layout_weight="1"
+            android:adjustViewBounds="true"
+            android:background="@drawable/sub_back"
+            android:gravity="center"
+            android:paddingRight="30dip"
+            android:scaleType="centerInside"
+            android:text="되새김"
+            android:textColor="#ffffff" />
+
+        <TextView
+            android:id="@+id/sub4"
+            android:layout_width="wrap_content"
+            android:layout_height="0px"
+            android:layout_weight="1"
+            android:adjustViewBounds="true"
+            android:background="@drawable/sub_back"
+            android:gravity="center"
+            android:paddingRight="30dip"
+            android:scaleType="centerInside"
+            android:text="이름들"
+            android:textColor="#ffffff" />
+
+        <TextView
+            android:id="@+id/sub5"
+            android:layout_width="wrap_content"
+            android:layout_height="0px"
+            android:layout_weight="1"
+            android:adjustViewBounds="true"
+            android:background="@drawable/sub_back"
+            android:gravity="center"
+            android:paddingRight="30dip"
+            android:scaleType="centerInside"
+            android:text="노래들"
+            android:textColor="#ffffff" />
+
+        <TextView
+            android:id="@+id/sub6"
+            android:layout_width="wrap_content"
+            android:layout_height="0px"
+            android:layout_weight="1"
+            android:adjustViewBounds="true"
+            android:background="@drawable/sub_back"
+            android:gravity="center"
+            android:paddingRight="30dip"
+            android:scaleType="centerInside"
+            android:text="말 꽃"
+            android:textColor="#ffffff" />
+
+        <TextView
+            android:id="@+id/sub7"
+            android:layout_width="wrap_content"
+            android:layout_height="0px"
+            android:layout_weight="1"
+            android:adjustViewBounds="true"
+            android:background="@drawable/sub_back"
+            android:gravity="center"
+            android:paddingRight="30dip"
+            android:scaleType="centerInside"
+            android:text=""
+            android:textColor="#ffffff" />
+    </LinearLayout>
+
+</FrameLayout>

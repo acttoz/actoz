@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="horizontal" >
+
+    <Button
+        android:id="@+id/play1"
+        android:layout_weight="1"
+        android:layout_width="0px"
+        android:layout_height="fill_parent"
+        android:gravity="center"
+        android:text="Play Chunk" />
+
+    <Button
+        android:id="@+id/play2"
+        android:layout_weight="1"
+        android:layout_width="0px"
+        android:layout_height="fill_parent"
+        android:gravity="center"
+        android:text="Play Chunk with 의미" />
+
+</LinearLayout><!-- From: file:/D:/work/Baedalmal/app/src/main/res/layout/tab22.xml -->

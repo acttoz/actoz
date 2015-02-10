@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout_root"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:padding="10dp" >
+
+    <EditText
+        android:id="@+id/inputText"
+        android:layout_width="fill_parent"
+        android:layout_height="80dip"
+        android:layout_gravity="center"
+        android:textSize="50dip" />
+
+</LinearLayout><!-- From: file:/D:/work/Baedalmal/app/src/main/res/layout/custom_dialog.xml -->

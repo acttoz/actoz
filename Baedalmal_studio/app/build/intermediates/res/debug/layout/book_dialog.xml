@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout_root"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:padding="5dp" >
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="교육부 지정 초등학생이 알아야할 필수 800단어" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="3dip"
+        android:layout_gravity="center" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="잠금화면을 해제하기만 해도 800단어가 쏙쏙" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="3dip"
+        android:layout_gravity="center" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="급할때는 홈버튼으로 잠금해제도 가능해요." />
+    
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="3dip"
+        android:layout_gravity="center" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="잠금화면의 레벨은 총 8단계" />
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="3dip"
+        android:layout_gravity="center" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="게임을 플레이해서 Level.8의 고수가 되어보세요." />
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="3dip"
+        android:layout_gravity="center" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="PC에서도 게임이 가능합니다. PC에서 'words800.com'에 접속해 보세요!" />
+    
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="5dip"
+        android:layout_gravity="center" />
+
+</LinearLayout><!-- From: file:/D:/work/Baedalmal/app/src/main/res/layout/book_dialog.xml -->
