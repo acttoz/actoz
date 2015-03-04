@@ -18,15 +18,20 @@ import org.xmlpull.v1.XmlPullParserFactory;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class SchoolPicker extends Activity {
 	private static final String LOGTAG = "BannerTypeXML1";
@@ -38,6 +43,7 @@ public class SchoolPicker extends Activity {
 	TextView title;
 	ArrayList<String> schoolID;
 	static ArrayAdapter<String> schoolAdapter;
+	Button btn_help;
 
 	ListView schoolListView;
 
@@ -46,10 +52,19 @@ public class SchoolPicker extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.school_list);
-		initAdam();
 		title = (TextView) findViewById(R.id.textView1);
 		schoolPrefs = getSharedPreferences("id", MODE_PRIVATE);
 		editor = schoolPrefs.edit();
+		btn_help = (Button) findViewById(R.id.btn_help);
+		btn_help.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				Toast.makeText(SchoolPicker.this, "우리 학교가 보이지 않는 이유는\n알림장 개설이 되지 않았기 때문입니다.\n담임선생님께 '스피드 알림장'을 추천해보세요.",
+						Toast.LENGTH_LONG).show();
+			}
+		});
 
 		schoolList = new ArrayList<String>();
 		schoolID = new ArrayList<String>();
@@ -178,57 +193,6 @@ public class SchoolPicker extends Activity {
 		}.start();
 
 	}// 파서 스레드
-
-	private void initAdam() {
-		// Ad@m sdk 초기화 시작
-		adView = (AdView) findViewById(R.id.adview);
-		// 광고 리스너 설정
-		// 1. 광고 클릭시 실행할 리스너
-		adView.setOnAdClickedListener(new OnAdClickedListener() {
-			@Override
-			public void OnAdClicked() {
-				Log.i(LOGTAG, "광고를 클릭했습니다.");
-			}
-		});
-		// 2. 광고 내려받기 실패했을 경우에 실행할 리스너
-		adView.setOnAdFailedListener(new OnAdFailedListener() {
-			@Override
-			public void OnAdFailed(AdError error, String message) {
-				Log.w(LOGTAG, message);
-			}
-		});
-		// 3. 광고를 정상적으로 내려받았을 경우에 실행할 리스너
-		adView.setOnAdLoadedListener(new OnAdLoadedListener() {
-			@Override
-			public void OnAdLoaded() {
-				Log.i(LOGTAG, "광고가 정상적으로 로딩되었습니다.");
-			}
-		});
-		// 4. 광고를 불러올때 실행할 리스너
-		adView.setOnAdWillLoadListener(new OnAdWillLoadListener() {
-			@Override
-			public void OnAdWillLoad(String url) {
-				Log.i(LOGTAG, "광고를 불러옵니다. : " + url);
-			}
-		});
-		// 5. 전면형 광고를 닫았을때 실행할 리스너
-		adView.setOnAdClosedListener(new OnAdClosedListener() {
-			@Override
-			public void OnAdClosed() {
-				Log.i(LOGTAG, "광고를 닫았습니다.");
-			}
-		});
-		// 할당 받은 clientId 설정
-		// adView.setClientId(“TestClientId”);
-
-		// 광고 갱신 주기를 12초로 설정
-		// adView.setRequestInterval(12);
-		// 광고 영역에 캐시 사용 여부 : 기본 값은 true
-		adView.setAdCache(false);
-		// Animation 효과 : 기본 값은 AnimationType.NONE
-		adView.setAnimationType(AnimationType.FLIP_HORIZONTAL);
-		adView.setVisibility(View.VISIBLE);
-	}
 
 	@Override
 	public void onDestroy() {

@@ -24,25 +24,16 @@
         <ListView
             android:id="@+id/listView1"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
+            android:layout_height="0px"
+            android:layout_weight="1" >
         </ListView>
+
+        <Button
+            android:id="@+id/btn_help"
+            android:layout_width="match_parent"
+            android:layout_height="50dip"
+            android:textSize="20dip"
+            android:text="우리반이 없어요." />
     </LinearLayout>
-
-    <FrameLayout
-        android:id="@+id/layout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="0" >
-
-        <net.daum.adam.publisher.AdView
-            android:id="@+id/adview"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            clientId="4a00Z0LT13de76a2366"
-            requestInterval="60"
-            android:gravity="bottom|center"
-            android:visibility="invisible" />
-    </FrameLayout>
 
 </LinearLayout>
