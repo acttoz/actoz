@@ -1,0 +1,6 @@
+D:\work\Alim3\app\build\intermediates\classes\debug
+D:\work\Alim3\app\build\intermediates\pre-dexed\debug\support-annotations-21.0.0-f500cf159a2adbaca00fcdf7f0be9b17c031921e.jar
+D:\work\Alim3\app\build\intermediates\pre-dexed\debug\Ad@mPublisherSDK-2.1.3.0-80cd93241f6866e582532094330a7ad6c9ceff85.jar
+D:\work\Alim3\app\build\intermediates\pre-dexed\debug\internal_impl-21.0.0-e51b91020cb3462ccbc856a91c27b0a8895375df.jar
+D:\work\Alim3\app\build\intermediates\pre-dexed\debug\classes-439663adb65c44ccd65a2c8e5fe224edd7cbbd5b.jar
+D:\work\Alim3\app\build\intermediates\pre-dexed\debug\classes-a151b253f97ea78b61ebd54cfda7fac6a74676d7.jar

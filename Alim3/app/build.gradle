@@ -1,0 +1,24 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 9
+    buildToolsVersion "21.1.2"
+
+    defaultConfig {
+        applicationId "kr.co.moon.speedalim"
+        minSdkVersion 9
+        targetSdkVersion 9
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+        }
+    }
+}
+
+dependencies {
+    compile 'com.google.android.gms:play-services:+'
+    compile files('libs/Ad@mPublisherSDK-2.1.3.0.jar')
+}

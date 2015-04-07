@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res/kr.co.moon.speedalim"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:background="#ffffff"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <ImageView
+                android:id="@+id/imageView1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:layout_weight="2"
+                android:src="@drawable/input_title" />
+
+            <TextView
+                android:id="@+id/title1"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_margin="5dp"
+                android:layout_weight="8"
+                android:gravity="center|left"
+                android:text="학급 설정"
+                android:textColor="#625548"
+                android:textSize="30dip" />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/schoolBtn"
+            android:layout_width="fill_parent"
+            android:layout_height="0px"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginTop="5dp"
+            android:layout_weight="2"
+            android:background="@drawable/school_btn"
+            android:text="학교"
+            android:textSize="15dip" />
+
+        <Button
+            android:id="@+id/gradeBtn"
+            android:layout_width="fill_parent"
+            android:layout_height="0px"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginTop="5dp"
+            android:layout_weight="2"
+            android:background="@drawable/class_btn"
+            android:text="몇학년??"
+            android:textSize="30dip" />
+
+        <Button
+            android:id="@+id/banBtn"
+            android:layout_width="fill_parent"
+            android:layout_height="0px"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginTop="5dp"
+            android:layout_weight="2"
+            android:background="@drawable/class_btn"
+            android:text="몇반??"
+            android:textSize="30dip" />
+
+        <Button
+            android:id="@+id/idSaveBtn"
+            android:layout_width="fill_parent"
+            android:layout_height="0px"
+            android:layout_marginBottom="25dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginTop="5dp"
+            android:layout_weight="2"
+            android:background="@drawable/save_btn"
+            android:text="저장하기"
+            android:textColor="#ffffff"
+            android:textSize="30dip" />
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="0" >
+
+        <net.daum.adam.publisher.AdView
+            android:id="@+id/adview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            clientId="4a00Z0LT13de76a2366"
+            requestInterval="60"
+            android:gravity="bottom|center"
+            android:visibility="invisible" />
+    </FrameLayout>
+
+</LinearLayout><!-- From: file:/D:/work/Alim3/app/src/main/res/layout/firstlogin.xml -->
