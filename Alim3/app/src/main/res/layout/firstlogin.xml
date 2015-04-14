@@ -1,97 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res/kr.co.moon.speedalim"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical" >
+    android:background="#cfebf2"
+
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="fill_parent"
+        android:src="@drawable/first_back"
+        android:scaleType="fitCenter"
+        android:adjustViewBounds="true"
+        android:layout_height="fill_parent" />
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_weight="1"
-        android:background="#ffffff"
-        android:orientation="vertical" >
+        android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="0px"
+            android:layout_weight="17" />
 
-            <ImageView
-                android:id="@+id/imageView1"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="20dp"
-                android:layout_weight="2"
-                android:src="@drawable/input_title" />
+        <EditText
+            android:id="@+id/edtid"
+            android:layout_width="300dip"
+            android:layout_gravity="center"
+            android:layout_height="0px"
+            android:layout_weight="3"
+            android:ems="10"
+            android:textSize="12sp"
+            android:gravity="center"
+            android:hint="ID를 입력해주세요." />
 
-            <TextView
-                android:id="@+id/title1"
-                android:layout_width="0dp"
-                android:layout_height="fill_parent"
-                android:layout_margin="5dp"
-                android:layout_weight="8"
-                android:gravity="center|left"
-                android:text="학급 설정"
-                android:textColor="#625548"
-                android:textSize="30dip" />
-
-        </LinearLayout>
-
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.1" />
         <Button
             android:id="@+id/schoolBtn"
-            android:layout_width="fill_parent"
+            android:layout_width="300dip"
+            android:layout_gravity="center"
             android:layout_height="0px"
-            android:layout_marginBottom="5dp"
-            android:layout_marginLeft="25dp"
-            android:layout_marginRight="25dp"
-            android:layout_marginTop="5dp"
-            android:layout_weight="2"
-            android:background="@drawable/school_btn"
-            android:text="학교"
-            android:textSize="15dip" />
-
-        <Button
-            android:id="@+id/gradeBtn"
-            android:layout_width="fill_parent"
-            android:layout_height="0px"
-            android:layout_marginBottom="5dp"
-            android:layout_marginLeft="25dp"
-            android:layout_marginRight="25dp"
-            android:layout_marginTop="5dp"
-            android:layout_weight="2"
-            android:background="@drawable/class_btn"
-            android:text="몇학년??"
-            android:textSize="30dip" />
-
-        <Button
-            android:id="@+id/banBtn"
-            android:layout_width="fill_parent"
-            android:layout_height="0px"
-            android:layout_marginBottom="5dp"
-            android:layout_marginLeft="25dp"
-            android:layout_marginRight="25dp"
-            android:layout_marginTop="5dp"
-            android:layout_weight="2"
-            android:background="@drawable/class_btn"
-            android:text="몇반??"
-            android:textSize="30dip" />
-
-        <Button
-            android:id="@+id/idSaveBtn"
-            android:layout_width="fill_parent"
-            android:layout_height="0px"
-            android:layout_marginBottom="25dp"
-            android:layout_marginLeft="25dp"
-            android:layout_marginRight="25dp"
-            android:layout_marginTop="5dp"
-            android:layout_weight="2"
-            android:background="@drawable/save_btn"
-            android:text="저장하기"
+            android:layout_weight="3"
+            android:background="@drawable/class_search_btn"
+            android:text="학교 검색"
             android:textColor="#ffffff"
-            android:textSize="30dip" />
+            android:textSize="25dip" />
 
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.5" />
     </LinearLayout>
 
 
-
-</LinearLayout>
+</FrameLayout>
