@@ -92,21 +92,6 @@
 
     </LinearLayout>
 
-    <FrameLayout
-        android:id="@+id/layout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="0" >
 
-        <net.daum.adam.publisher.AdView
-            android:id="@+id/adview"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            clientId="4a00Z0LT13de76a2366"
-            requestInterval="60"
-            android:gravity="bottom|center"
-            android:visibility="invisible" />
-    </FrameLayout>
 
 </LinearLayout>

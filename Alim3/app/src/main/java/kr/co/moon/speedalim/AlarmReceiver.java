@@ -25,10 +25,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class AlarmReceiver extends BroadcastReceiver {
-	// static String grade = "null";
-	// static String ban = "null";
-	// static String mSchool;
-	// static String mNull = null;
+
 	String URL = "content://kr.co.moon.speedalim/db";
 	ContentValues row;
 	String mSchool;
