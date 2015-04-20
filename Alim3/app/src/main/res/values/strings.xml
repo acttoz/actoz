@@ -3,5 +3,9 @@
 
     <string name="hello"></string>
     <string name="app_name">스피드알림장3</string>
+    <string name="title_activity_content">Content</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
 
 </resources>

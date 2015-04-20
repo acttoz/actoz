@@ -50,7 +50,7 @@
                 android:layout_weight="12"
                 android:autoLink="web|phone"
                 android:focusable="false"
-                android:textColor="#625548"
+                android:textColor="#515151"
                 android:textSize="20dip" />
         </LinearLayout>
     </LinearLayout>
