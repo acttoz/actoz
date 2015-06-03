@@ -36,12 +36,12 @@
 
                 <TextView
                     android:id="@+id/title1"
-                    android:text="덕정4학년6반"
+                    android:text="덕정4학년6반(4/30)"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center"
                     android:textColor="#515151"
-                    android:textSize="24dip" />
+                    android:textSize="20dip" />
 
 
             </FrameLayout>
@@ -64,6 +64,7 @@
         android:layout_height="0px"
         android:layout_weight="2"
         android:layout_marginTop="10dip"
+        android:paddingTop="10dip"
         android:layout_marginLeft="20dip"
         android:layout_marginRight="20dip"
         android:background="#E3F3F7"

@@ -36,7 +36,7 @@
 
                 <TextView
                     android:id="@+id/title1"
-                    android:text="덕정4학년6반(4/30)"
+                    android:text="학급 설정"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center"
@@ -95,4 +95,4 @@
             android:src="@drawable/btn_share" />
 
     </LinearLayout>
-</LinearLayout><!-- From: file:/D:/workspace/Alim3/app/src/main/res/layout/dailylist.xml -->
+</LinearLayout>

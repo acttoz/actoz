@@ -7,4 +7,4 @@
     <item android:drawable="@drawable/timepicker_input_disabled" android:state_enabled="false" android:state_focused="false" android:state_pressed="false"/>
     <item android:drawable="@drawable/timepicker_input_normal" android:state_enabled="false" android:state_focused="true" android:state_pressed="false"/>
 
-</selector><!-- From: file:/D:/work/Alim3/app/src/main/res/drawable/timepicker_input.xml -->
+</selector><!-- From: file:/D:/workspace/Alim3/app/src/main/res/drawable/timepicker_input.xml -->
