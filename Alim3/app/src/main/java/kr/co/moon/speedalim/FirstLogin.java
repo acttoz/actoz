@@ -10,10 +10,13 @@ import android.database.sqlite.SQLiteDatabase;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import net.daum.adam.publisher.AdView;
 
@@ -23,9 +26,9 @@ public class FirstLogin extends Activity implements OnClickListener {
 	String ban = null;
 	String grade = null;
 	String school = null;
-	Button gradeEdit;
-	Button banEdit;
-	Button idSaveBtn;
+	EditText gradeEdit;
+	EditText banEdit;
+	Button startBtn;
 	Button schoolBtn;
 	TextView title1, title2;
 	SharedPreferences idPrefs;
@@ -46,9 +49,13 @@ public class FirstLogin extends Activity implements OnClickListener {
 
 
 
-		schoolBtn = (Button) findViewById(R.id.schoolBtn);
+		schoolBtn = (Button) findViewById(R.id.btnSchool);
 		schoolBtn.setOnClickListener(this);
+		startBtn = (Button) findViewById(R.id.btnStart);
+		startBtn.setOnClickListener(this);
 
+		gradeEdit=(EditText)findViewById(R.id.grade);
+		banEdit=(EditText)findViewById(R.id.ban);
 
 
 //		schoolBtn.setTypeface(SpeedAlimActivity.mTypeface);
@@ -94,7 +101,7 @@ public class FirstLogin extends Activity implements OnClickListener {
 		switch (v.getId()) {
 
 
-		case R.id.schoolBtn:
+		case R.id.btnSchool:
 			// firstLoginIntent.putExtra("BAN", ban);
 			Intent schoolIntent = new Intent(this, SchoolPicker.class);
 			startActivity(schoolIntent);
@@ -102,25 +109,25 @@ public class FirstLogin extends Activity implements OnClickListener {
 
 
 
-//		case R.id.idSaveBtn:
-//
-//			if (idPrefs.getString("GRADE", "") == ""
-//					| idPrefs.getString("BAN", "") == ""
-//					| idPrefs.getString("SCHOOL", "학교") == "학교") {
-//				Toast toast = Toast.makeText(this, "학교와 학반을 정확히 입력해주세요!!",
-//						Toast.LENGTH_SHORT);
-//				toast.setGravity(Gravity.CENTER, 0, 0);
-//				toast.show();
-//				break;
-//
-//			} else {
-//				Intent firstLoginIntent = new Intent(this,
-//						SpeedAlimActivity.class);
-//				startActivity(firstLoginIntent);
-//				finish();
-//				break;
-//			}
-//
+		case R.id.btnStart:
+
+			if (gradeEdit.getText().toString().equals("")
+					| gradeEdit.getText().toString().equals("")
+					| idPrefs.getString("SCHOOL", "").equals("")) {
+				Toast toast = Toast.makeText(this, "학교와 학반을 정확히 입력해주세요!!",
+						Toast.LENGTH_SHORT);
+				toast.setGravity(Gravity.CENTER, 0, 0);
+				toast.show();
+				break;
+
+			} else {
+				Intent firstLoginIntent = new Intent(this,
+						SpeedAlimActivity.class);
+				startActivity(firstLoginIntent);
+				finish();
+				break;
+			}
+
 		}
 
 	}
