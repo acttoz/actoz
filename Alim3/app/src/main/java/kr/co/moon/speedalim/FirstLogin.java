@@ -121,11 +121,15 @@ public class FirstLogin extends Activity implements OnClickListener {
 				break;
 
 			} else {
-				Intent firstLoginIntent = new Intent(this,
-						SpeedAlimActivity.class);
-				startActivity(firstLoginIntent);
-				finish();
-				break;
+
+//				editor.putString("SCHOOLID",
+//						schoolID.get(position));
+//				editor.commit();
+//				Intent firstLoginIntent = new Intent(this,
+//						SpeedAlimActivity.class);
+//				startActivity(firstLoginIntent);
+//				finish();
+//				break;
 			}
 
 		}

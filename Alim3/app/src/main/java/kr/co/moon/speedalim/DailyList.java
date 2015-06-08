@@ -1,6 +1,7 @@
 package kr.co.moon.speedalim;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -9,6 +10,7 @@ import android.graphics.Bitmap;
 import android.media.AudioManager;
 import android.media.SoundPool;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
@@ -24,6 +26,10 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -34,7 +40,7 @@ public class DailyList extends Activity {
     /**
      * Called when the activity is first created.
      */
-    private ArrayList<DailyNoticeData> arrayList;
+    private ArrayList<DailyNoticeData> dateList;
     // private boolean isCheck[];
     DailyNoticeAdapter adapter;
     private DailyNoticeData data;
@@ -51,6 +57,12 @@ public class DailyList extends Activity {
     SharedPreferences firstRun = null;
     SharedPreferences.Editor editor;
     ImageView btnMenu;
+    Toast finishToast;
+    private static String url;
+    public static int schoolCode;
+    JSONObject jsonobject = null;
+    JSONArray jsonResult = null;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -76,7 +88,13 @@ public class DailyList extends Activity {
         container = (LinearLayout) findViewById(R.id.linear);
         // dayTag = String.format("a%s", mDay);
 
-        arrayList = new ArrayList<DailyNoticeData>();
+        url = "http://actoze.dothome.co.kr/dic/math.php?select=" + schoolCode;
+
+        finishToast = Toast.makeText(this, "'뒤로'버튼을 한번 더 누르시면 종료됩니다.",
+                Toast.LENGTH_SHORT);
+
+
+        dateList = new ArrayList<DailyNoticeData>();
 
         // threadParse();
 
@@ -84,31 +102,78 @@ public class DailyList extends Activity {
         lv_dailynotice.setClickable(false);
         lv_dailynotice.setFocusable(false);
 
-        adapter = new DailyNoticeAdapter(this, R.layout.itemstyle, arrayList);
-        lv_dailynotice.setAdapter(adapter);
-
-        lv_dailynotice
-                .setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> arg0, View view,
-                                            int position, long arg3) {
-                        arrayList.get(position).changeBoolean();
-                        adapter.notifyDataSetChanged();
-                    }
-                });
-
 
 
 //        loadDailyDB();
 
         //////////////////////////////
-        for (int i = 0; i < 10; i++) {
-            data = new DailyNoticeData("test" + i);
-            arrayList.add(data);
-        }
+//        for (int i = 0; i < 10; i++) {
+//            data = new DailyNoticeData("test" + i);
+//            dateList.add(data);
+//        }
 
     }
 
+    private class JSONParse extends AsyncTask<String, String, JSONObject> {
+        private ProgressDialog pDialog;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+            pDialog = new ProgressDialog(DailyList.this);
+            pDialog.setMessage("Getting Data ...");
+            pDialog.setIndeterminate(false);
+            pDialog.setCancelable(true);
+            pDialog.show();
+        }
+
+        @Override
+        protected JSONObject doInBackground(String... args) {
+            JSONfunctions jParser = new JSONfunctions();
+            // Getting JSON from URL
+            JSONObject json = jParser.getJSONfromURL(url);
+            return json;
+        }
+
+        @Override
+        protected void onPostExecute(JSONObject json) {
+            pDialog.dismiss();
+            try {
+                // Getting JSON Array
+                Log.d("json", "before");
+                if (json != null) {
+                    jsonResult = json.getJSONArray("TAG");
+                    // Locate the array name
+                    dateList.clear();
+
+                    for (int i = 0; i < jsonResult.length(); i++) {
+                        jsonobject = jsonResult.getJSONObject(i);
+                        // Retrive JSON Objects
+                        data = new DailyNoticeData(
+                                jsonobject.getString("TAG"));
+                        dateList.add(data);
+
+                    }
+                    adapter = new DailyNoticeAdapter(DailyList.this, R.layout.itemstyle, dateList);
+                    lv_dailynotice.setAdapter(adapter);
+
+                    lv_dailynotice
+                            .setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                @Override
+                                public void onItemClick(AdapterView<?> arg0, View view,
+                                                        int position, long arg3) {
+                                    dateList.get(position).changeBoolean();
+                                    adapter.notifyDataSetChanged();
+                                }
+                            });
+
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

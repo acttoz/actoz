@@ -7,6 +7,10 @@ public class Custom_List_Data {
 		this.Data = data;
 	}
 
+	public Custom_List_Data() {
+
+	}
+
 	public String getData() {
 		return this.Data;
 	}
