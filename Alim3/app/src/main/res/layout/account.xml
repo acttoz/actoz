@@ -6,149 +6,208 @@
     android:background="#E3F3F7"
     android:orientation="vertical">
 
+
     <FrameLayout
-        android:id="@+id/shot_back"
         android:layout_width="fill_parent"
         android:layout_height="0px"
-        android:layout_weight="15"
-        android:background="#E3F3F7">
-
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:orientation="vertical">
-
-            <FrameLayout
-                android:layout_width="fill_parent"
-                android:layout_height="0px"
-                android:layout_gravity="center"
-                android:layout_weight="2"
-                android:background="#ffffff"
-                android:gravity="center"
-                android:orientation="horizontal">
+        android:layout_gravity="center"
+        android:layout_weight="2"
+        android:background="#ffffff"
+        android:gravity="center"
+        android:orientation="horizontal">
 
 
-                <TextView
-                    android:id="@+id/title1"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:text="학급 추가 삭제하기"
-                    android:textColor="#515151"
-                    android:textSize="20dip" />
+        <TextView
+            android:id="@+id/title1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="학급 추가 삭제하기"
+            android:textColor="#515151"
+            android:textSize="20dip" />
 
-
-            </FrameLayout>
-
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="0px"
-                android:layout_weight="13"
-                android:orientation="vertical"
-
-                android:padding="20dip">
-
-                <LinearLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="20dip"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="100dip"
-                        android:layout_height="50dip"
-                        android:src="@drawable/account" />
-
-                    <TextView
-                        android:id="@+id/account1"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:text="덕정4학년6반(4/30)"
-                        android:textColor="#515151"
-                        android:textSize="20dip" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="20dip"
-
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="100dip"
-                        android:layout_height="50dip"
-                        android:src="@drawable/account" />
-
-                    <TextView
-                        android:id="@+id/account2"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:text="덕정4학년6반(4/30)"
-                        android:textColor="#515151"
-                        android:textSize="20dip" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="100dip"
-                        android:layout_height="50dip"
-                        android:src="@drawable/account" />
-
-                    <TextView
-                        android:id="@+id/account3"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:text="덕정4학년6반(4/30)"
-                        android:textColor="#515151"
-                        android:textSize="20dip" />
-                </LinearLayout>
-            </LinearLayout>
-        </LinearLayout>
 
     </FrameLayout>
 
-    <LinearLayout
-        android:layout_width="fill_parent"
+    <ScrollView
+        android:layout_width="match_parent"
         android:layout_height="0px"
-        android:layout_marginLeft="20dip"
-        android:layout_marginRight="20dip"
-        android:layout_marginTop="10dip"
+        android:layout_weight="13"
+        android:background="#cfebf2">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+
+            android:padding="10dip">
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dip"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="60dip"
+                    android:layout_height="50dip"
+                    android:src="@drawable/account" />
+
+                <TextView
+                    android:id="@+id/account1"
+                    android:layout_width="0px"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="덕정4학년6반(4/30)"
+                    android:textColor="#515151"
+                    android:textSize="20dip" />
+
+                <ImageView
+                    android:id="@+id/btnRemove1"
+                    android:layout_width="40dip"
+                    android:layout_height="40dip"
+                    android:layout_gravity="center"
+                    android:src="@drawable/remove" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dip"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="60dip"
+                    android:layout_height="50dip"
+                    android:src="@drawable/account" />
+
+                <TextView
+                    android:id="@+id/account2"
+                    android:layout_width="0px"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="덕정4학년6반(4/30)"
+                    android:textColor="#515151"
+                    android:textSize="20dip" />
+
+                <ImageView
+                    android:id="@+id/btnRemove2"
+                    android:layout_width="40dip"
+                    android:layout_height="40dip"
+                    android:layout_gravity="center"
+                    android:src="@drawable/remove" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dip"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="60dip"
+                    android:layout_height="50dip"
+                    android:src="@drawable/account" />
+
+                <TextView
+                    android:id="@+id/account3"
+                    android:layout_width="0px"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="덕정4학년6반(4/30)"
+                    android:textColor="#515151"
+                    android:textSize="20dip" />
+
+                <ImageView
+                    android:id="@+id/btnRemove3"
+                    android:layout_width="40dip"
+                    android:layout_height="40dip"
+                    android:layout_gravity="center"
+                    android:src="@drawable/remove" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dip"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="60dip"
+                    android:layout_height="50dip"
+                    android:src="@drawable/account" />
+
+                <TextView
+                    android:id="@+id/account4"
+                    android:layout_width="0px"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="비어있음"
+                    android:textColor="#515151"
+                    android:textSize="20dip" />
+
+                <ImageView
+                    android:id="@+id/btnRemove4"
+                    android:layout_width="40dip"
+                    android:layout_height="40dip"
+                    android:layout_gravity="center"
+                    android:src="@drawable/remove" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dip"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="60dip"
+                    android:layout_height="50dip"
+                    android:src="@drawable/account" />
+
+                <TextView
+                    android:id="@+id/account5"
+                    android:layout_width="0px"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="비어있음"
+                    android:textColor="#515151"
+                    android:textSize="20dip" />
+
+                <ImageView
+                    android:id="@+id/btnRemove5"
+                    android:layout_width="40dip"
+                    android:layout_height="40dip"
+                    android:layout_gravity="center"
+                    android:src="@drawable/remove" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0px"
         android:layout_weight="2"
         android:background="#E3F3F7"
-        android:orientation="horizontal"
-        android:paddingTop="10dip">
+        android:orientation="horizontal">
 
-        <ImageView
-            android:id="@+id/btn_edit"
+        <Button
+            android:id="@+id/btnAdd"
             android:layout_width="0px"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:scaleType="centerInside"
-            android:src="@drawable/btn_edit" />
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="10dip"
+            android:layout_weight="3"
+            android:background="@drawable/class_search_btn"
+            android:text="추가"
+            android:textColor="#ffffff"
+            android:textSize="25dip" />
 
-        <ImageView
-            android:id="@+id/btn_review"
-            android:layout_width="0px"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:scaleType="centerInside"
-            android:src="@drawable/btn_review" />
-
-        <ImageView
-            android:id="@+id/btn_share"
-            android:layout_width="0px"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:scaleType="centerInside"
-            android:src="@drawable/btn_share" />
 
     </LinearLayout>
 </LinearLayout>

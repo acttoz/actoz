@@ -20,19 +20,19 @@
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="0px"
-            android:layout_weight="5" />
-        <ImageView
+            android:layout_weight="3" />
+        <TextView
             android:layout_width="fill_parent"
-            android:src="@drawable/logo"
+            android:text="학급 추가하기"
+            android:textColor="#515151"
+            android:gravity="center"
+            android:textSize="40dip"
             android:layout_height="0px"
-            android:layout_weight="15"
-            android:scaleType="centerInside"
-            android:adjustViewBounds="true"
-             />
+            android:layout_weight="5" />
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="0px"
-            android:layout_weight="3" />
+            android:layout_weight="1" />
         <Button
             android:id="@+id/btnSchool"
             android:layout_width="300dip"
@@ -115,7 +115,7 @@
             android:layout_height="0px"
             android:layout_weight="3"
             android:background="@drawable/class_search_btn"
-            android:text="시작"
+            android:text="추가"
             android:textColor="#ffffff"
             android:textSize="25dip" />
         <TextView
@@ -125,4 +125,4 @@
     </LinearLayout>
 
 
-</FrameLayout><!-- From: file:/D:/workspace/Alim3/app/src/main/res/layout/firstlogin.xml -->
+</FrameLayout>

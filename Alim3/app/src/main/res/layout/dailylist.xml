@@ -52,6 +52,7 @@
                 android:layout_height="0px"
                 android:layout_weight="13"
                 android:cacheColorHint="#00000000"
+                android:background="#cfebf2"
                 android:divider="#59c2d8"
                 android:dividerHeight="0.5dip"
                 android:listSelector="#cdcdcd" />
