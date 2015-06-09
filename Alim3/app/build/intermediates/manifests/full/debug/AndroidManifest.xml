@@ -92,6 +92,10 @@
             android:name="kr.co.moon.speedalim.ClassEdit"
             android:label="@string/title_activity_class_edit" >
         </activity>
+        <activity
+            android:name="kr.co.moon.speedalim.Account"
+            android:label="@string/title_activity_account" >
+        </activity>
 
         <meta-data
             android:name="com.google.android.gms.version"

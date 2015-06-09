@@ -27,12 +27,12 @@
                 android:gravity="center"
                 android:orientation="horizontal">
 
-                <ImageView
-                    android:id="@+id/btn_menu"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/btn_menu"
-                    android:layout_gravity="left|center_vertical" />
+                <!--<ImageView-->
+                    <!--android:id="@+id/btn_menu"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:src="@drawable/btn_menu"-->
+                    <!--android:layout_gravity="left|center_vertical" />-->
 
                 <TextView
                     android:id="@+id/title1"
@@ -95,4 +95,4 @@
             android:src="@drawable/btn_share" />
 
     </LinearLayout>
-</LinearLayout><!-- From: file:/D:/workspace/Alim3/app/src/main/res/layout/dailylist.xml -->
+</LinearLayout><!-- From: file:/C:/work/Alim3/app/src/main/res/layout/dailylist.xml -->
