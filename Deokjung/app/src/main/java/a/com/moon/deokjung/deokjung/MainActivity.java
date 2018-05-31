@@ -28,14 +28,13 @@ import java.net.URL;
 
 public class MainActivity extends ActionBarActivity {
     Button btn_login;
-    int password;
     EditText edit_password;
     boolean dbCopied;
     SharedPreferences idPrefs;
     SharedPreferences.Editor editor;
     DayHelper mHelper;
     SQLiteDatabase db;
-
+    EditText editText;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,9 +46,13 @@ public class MainActivity extends ActionBarActivity {
             }
         });
         idPrefs = getSharedPreferences("id", MODE_PRIVATE);
+        editText = (EditText) findViewById(R.id.password);
+
         editor = idPrefs.edit();
-        if (!dbCopied)
+        if (!idPrefs.getBoolean("DBCOPY2018",false))
             copySQLiteDB(this);
+
+        editText.setText(idPrefs.getString("PASS",""));
     }
 
     public void checkVer() {
@@ -99,9 +102,12 @@ public class MainActivity extends ActionBarActivity {
                                 String inputText = editText.getText()
                                         .toString();
                                 if (inputText.equals((text.toString()))) {
+                                    editor.putString("PASS",text.toString());
+                                    editor.commit();
                                     Intent firstLoginIntent = new Intent(
                                             MainActivity.this, Contact.class);
                                     startActivity(firstLoginIntent);
+                                    finish();
                                 } else {
                                     Toast.makeText(MainActivity.this, "인증번호가 맞지 않습니다.",
                                             Toast.LENGTH_SHORT).show();
@@ -160,7 +166,7 @@ public class MainActivity extends ActionBarActivity {
             fos.close();
             bis.close();
             is.close();
-            editor.putBoolean("DBCOPY", true);
+            editor.putBoolean("DBCOPY2018", true);
             editor.commit();
 
         } catch (IOException e) {

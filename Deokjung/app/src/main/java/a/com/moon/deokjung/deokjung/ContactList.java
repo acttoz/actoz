@@ -49,7 +49,7 @@ public class ContactList extends ActionBarActivity {
         Log.d("GRADE", str);
 
         Cursor cursor = db.rawQuery(
-                "SELECT * FROM a where grade=" + str + " order by position asc", null);
+                "SELECT * FROM a where grade='" + str + "' order by position asc", null);
         cursor.moveToFirst();
         do {
             Log.d("이름", cursor.getString(1) + "  " + cursor.getString(2) + " \n  " + cursor.getString(3));
